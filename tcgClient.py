@@ -2,13 +2,13 @@ import os
 import requests
 import tgcUser
 
-base_url="https://www.thegamecrafter.com/api"
+baseUrl = "https://www.thegamecrafter.com/api"
 
 def post(sessionId, endpoint, files=None, **kwargs):
     if sessionId is None or not sessionId:
         raise Exception('Session id is None.')
 
-    url = base_url
+    url = baseUrl
     if not endpoint.startswith('/'):
         url += '/'
     url += endpoint
@@ -29,7 +29,7 @@ def get(sessionId, endpoint, **kwargs):
     if sessionId is None or not sessionId:
         raise Exception('Session id is None.')
 
-    url = base_url
+    url = baseUrl
     if not endpoint.startswith('/'):
         url += '/'
     url += endpoint
@@ -62,7 +62,7 @@ def login():
         'username' : userName,
         'password': userPassword,
     }
-    loginResponse = requests.post(base_url + "/session", params=loginParameters)
+    loginResponse = requests.post(baseUrl + "/session", params=loginParameters)
 
     if loginResponse.status_code == 200:
         result = loginResponse.json()['result']
