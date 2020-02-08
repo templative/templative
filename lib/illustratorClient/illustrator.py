@@ -2,6 +2,7 @@
 
 from appscript import *
 
+
 illustrator = app('/Applications/Adobe Illustrator CC 2020/Adobe Illustrator CC 2020.app')
 illustrator.open(mactypes.Alias(file_name))
 docRef = illustrator.Documents.Add()

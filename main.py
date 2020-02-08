@@ -1,6 +1,7 @@
 import click
-import tcgClient
 from lib.gameCrafterClient import operations as gameCrafterOperations
+from lib.illustratorClient import illustrator
+from lib.sheetsClient import sheets
 
 @click.group()
 def tyrus():
