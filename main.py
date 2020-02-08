@@ -8,8 +8,38 @@ def tyrus():
     pass
 
 @tyrus.group()
+def pipeline():
+    """Utilize data entry to production pipelines"""
+    pass
+
+@tyrus.group()
+def template():
+    """Manage row templates to art assets"""
+    pass
+
+@pipeline.command()
+def sheetIllCraft():
+    """Sheet through Illustrator to Game Crafter"""
+    pass
+
+@tyrus.group()
+def sheets():
+    """Manage Google Sheets"""
+    pass
+
+@sheets.command()
+def download():
+    """Download a sheet"""
+    pass
+
+@tyrus.group()
+def illustrator():
+    """Utilize Illustrator"""
+    pass
+
+@tyrus.group()
 def gamecrafter():
-    """Manages game crafter assets"""
+    """Manage game crafter assets"""
     pass
 
 @gamecrafter.group()
