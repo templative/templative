@@ -1,11 +1,13 @@
 import click
-from lib.gameCrafterClient import operations as gameCrafterOperations
-from lib.illustratorClient import illustrator
-from lib.sheetsClient import sheets
+from lib.gameCrafterClient import operations as gameCrafterClient
+from lib.illustratorClient import illustrator as illustratorClient
+from lib.sheetsClient import sheets as sheetsClient
+from lib.templateManagement import templates as templatesClient
+from lib.pipelines import pipeline as pipelineClient
 
 @click.group()
 def tyrus():
-    """Main application portal"""
+    """The Tyrus Pipeline CLI"""
     pass
 
 @tyrus.group()
@@ -15,7 +17,7 @@ def pipeline():
 
 @tyrus.group()
 def template():
-    """Manage row templates to art assets"""
+    """Convert row templates to art assets"""
     pass
 
 @pipeline.command()
@@ -27,6 +29,11 @@ def sheetIllCraft():
 def sheets():
     """Manage Google Sheets"""
     pass
+
+@sheets.command()
+def sample():
+    """Get sample sheet value"""
+    sheetsClient.getSample()
 
 @sheets.command()
 def download():
@@ -51,7 +58,7 @@ def games():
 @games.command()
 def ls():
     """List all games"""
-    gameCrafterOperations.getGames()
+    gameCrafterClient.getGames()
 
 if __name__ == '__main__':
     tyrus()
