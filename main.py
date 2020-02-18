@@ -1,9 +1,8 @@
 import click
 from lib.gameCrafterClient import operations as gameCrafterClient
-from lib.illustratorClient import illustrator as illustratorClient
-from lib.sheetsClient import sheets as sheetsClient
-from lib.templateManagement import templates as templatesClient
+import lib.sheets as sheetsClient
 from lib.pipelines import pipeline as pipelineClient
+from lib.svgmanipulation import operations as svg
 
 @click.group()
 def tyrus():
@@ -15,15 +14,11 @@ def pipeline():
     """Utilize data entry to production pipelines"""
     pass
 
-@tyrus.group()
-def template():
-    """Convert row templates to art assets"""
+@pipeline.command()
+def magickCraft():
+    """ImageMagick to Game Crafter"""
     pass
 
-@pipeline.command()
-def sheetIllCraft():
-    """Sheet through Illustrator to Game Crafter"""
-    pass
 
 @tyrus.group()
 def sheets():
@@ -31,18 +26,13 @@ def sheets():
     pass
 
 @sheets.command()
-def sample():
+def sheetsSample():
     """Get sample sheet value"""
     sheetsClient.getSample()
 
 @sheets.command()
 def download():
     """Download a sheet"""
-    pass
-
-@tyrus.group()
-def illustrator():
-    """Utilize Illustrator"""
     pass
 
 @tyrus.group()
@@ -59,6 +49,16 @@ def games():
 def ls():
     """List all games"""
     gameCrafterClient.getGames()
+
+@tyrus.group()
+def svgmanip():
+    """Utilize SVG Manipulation"""
+    pass
+
+@svgmanip.command()
+def createDemoCard():
+    """Create a demo card"""
+    demoCard = svg.createDemoCard()
 
 if __name__ == '__main__':
     tyrus()
