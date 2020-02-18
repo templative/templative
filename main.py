@@ -19,7 +19,6 @@ def magickCraft():
     """ImageMagick to Game Crafter"""
     pass
 
-
 @tyrus.group()
 def sheets():
     """Manage Google Sheets"""

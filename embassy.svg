@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210.00177mm"
+   height="286.36636mm"
+   viewBox="0 0 69.861291 95.265495"
+   version="1.1"
+   id="embassyImage"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="embassy.svg">
+  <defs
+     id="defs5441" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="174.7583"
+     inkscape:cy="369.54003"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer"
+     showgrid="false"
+     viewbox-width="69.86"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="2510"
+     inkscape:window-height="1395"
+     inkscape:window-x="50"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1" />
+  <g
+     inkscape:label="layer"
+     inkscape:groupmode="layer"
+     id="layer"
+     transform="translate(-95.093162,-0.65892089)">
+    <rect
+       style="fill:none;fill-opacity:1;stroke-width:0.28222224"
+       id="backdrop"
+       height="95.265495"
+       width="69.86129"
+       y="0.65892088"
+       x="95.093163" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#eaeaea;fill-opacity:1;stroke:none;stroke-width:0.08728441;stroke-opacity:1"
+       d="m 141.91029,12.97718 a 4.4129367,4.4129367 0 0 0 -4.35115,3.70986 h -0.80977 v 1.48362 h -0.99271 v -1.26555 -0.36019 h -0.79633 v 0.36019 h -2.49856 v -3.44785 h 0.16899 v -0.47853 h -5.40071 v 0.47853 h 0.16898 v 3.44785 h -2.49855 v -0.36019 h -0.79634 v 0.36019 2.00763 13.48548 h 15.27504 v -6.50916 c 0,0 -0.0421,-3.71163 2.61845,-3.92431 2.66064,0.21268 2.61844,3.92431 2.61844,3.92431 v 6.50916 h 15.10037 V 18.17066 16.90511 16.54492 h -0.79685 v 0.36019 h -2.49804 v -3.44785 h 0.16898 v -0.47853 h -5.4007 v 0.47853 h 0.16898 v 3.44785 h -2.49855 v -0.36019 h -0.79634 v 0.36019 1.26555 h -0.9927 v -1.48362 h -0.80667 a 4.4129367,4.4129367 0 0 0 -4.35426,-3.70986 z m -24.39593,2.44378 V 17.734 h 3.75326 v 14.66422 h 0.61082 V 15.42096 h -0.61082 z"
+       id="embassy" />
+  </g>
+</svg>
