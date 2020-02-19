@@ -22,6 +22,9 @@ def createDemoCard():
     replaceKeyWithValueInFile("output.svg", "{passiveDescription}", "Diplomats here are worth two power.")
     changeStyleById("output.svg", "background", "fill:#70a7da")
 
+def processComponent(gamedataRow, artMetaData):
+    pass
+
 def replaceKeyWithValueInFile(filePath, key, value):
     with open(filePath, 'r') as f:
         res = f.read().replace(key, value)

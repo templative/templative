@@ -25,6 +25,10 @@ def processGameComponent(gameRootDirectoryPath, component):
     # operations.processComponent()
 
 def getComponentGamedata(gameRootDirectoryPath, gamedataFileName):
+    filepath = '%s/%s.csv' % (gameRootDirectoryPath, gamedataFileName)
+    with open(, newline='') as gamedataFile:
+        gamedata = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+        print (gamedata)
     return {}
 
 def getArtMetadata(gameRootDirectoryPath, artMetadataFileName):
