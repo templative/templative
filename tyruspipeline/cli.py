@@ -1,15 +1,14 @@
 import click
 from lib.gameCrafterClient import operations as gameCrafterClient
-import lib.sheets as sheetsClient
 from lib.pipelines import pipeline as pipelineClient
 from lib.svgmanipulation import operations as svg
 
 @click.group()
-def tyrus():
+def main():
     """The Tyrus Pipeline CLI"""
     pass
 
-@tyrus.group()
+@main.group()
 def pipeline():
     """Utilize data entry to production pipelines"""
     pass
@@ -19,7 +18,7 @@ def gameToGameCrafter():
     """ImageMagick to Game Crafter"""
     pass
 
-@tyrus.group()
+@main.group()
 def gamecrafter():
     """Manage game crafter assets"""
     pass
@@ -34,7 +33,7 @@ def ls():
     """List all games"""
     gameCrafterClient.getGames()
 
-@tyrus.group()
+@main.group()
 def gameManager():
     """Manage game defines"""
     pass
@@ -50,5 +49,8 @@ def createDemoCard():
     """Create a demo card"""
     demoCard = svg.createDemoCard()
 
+def start():
+    main(obj={})
+
 if __name__ == '__main__':
-    tyrus()
+    start()
