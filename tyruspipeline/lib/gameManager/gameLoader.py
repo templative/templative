@@ -25,7 +25,12 @@ def loadComponentGamedata(gameRootDirectoryPath, gamedataFilename):
 
     filepath = '%s/componentData/%s.csv' % (gameRootDirectoryPath, gamedataFilename)
     with open(filepath) as gamedataFile:
-        return csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
+        reader = csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
+
+        gamedata = []
+        for row in reader:
+            gamedata.append(row)
+        return gamedata
 
 def loadArtMetadata(gameRootDirectoryPath, artMetadataFilename):
     if not gameRootDirectoryPath:

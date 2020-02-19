@@ -18,22 +18,24 @@ def createArtFilesForComponent(component, artMetaData, componentGamedata, output
         artFile = Element("%s/%s.svg" % (templateFilesDirectory, artMetaData["templateFilename"])) 
         
         for overlay in artMetaData["svgOverlaysSource"]:
-            graphicsInsert = Element("%s.svg" % componentGamedataRow[overlay])
-            artFile.placeat(graphicsInsert, 0.0, 0.0)
+            overlayName = componentGamedataRow[overlay]
+            if overlayName:
+                graphicsInsert = Element("%s.svg" % overlayName)
+                artFile.placeat(graphicsInsert, 0.0, 0.0)
 
-        artFileOutputNamen = "%s-%s" % (component["name"], componentGamedataRow["name"])
-        artFileOutputFilename = "%s.svg" % artFileOutputFilename
+        artFileOutputName = ("%s-%s" % (component["name"], componentGamedataRow["name"])).replace(" ", "")
+        artFileOutputFilePath = "%s/%s.svg" % (outputDirectory, artFileOutputName)
 
-        artFile.dump(artFileOutputFilename)
+        artFile.dump(artFileOutputFilePath)
         
         for textReplacement in artMetaData["textReplacementSources"]:
-            replaceKeyWithValueInFile(artFileOutputFilename, "{power}", "3")
+            replaceKeyWithValueInFile(artFileOutputFilePath, "{power}", "3")
         
         for styleUpdate in artMetaData["styleUpdateSources"]:
             findById = styleUpdate["id"]
             styleValue = componentGamedataRow[styleUpdate["source"]]
             replaceStyleWith = "#%s" % styleValue
-            changeStyleById(artFileOutputFilename, findById, replaceStyleWith)
+            changeStyleById(artFileOutputFilePath, findById, replaceStyleWith)
 
 def processComponent(gamedataRow, artMetaData):
     pass

@@ -1,6 +1,7 @@
 import gameLoader
 import uuid
 import os
+from datetime import datetime
 
 from ..svgmanipulation import artProcessor   
 
@@ -10,11 +11,14 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
 
     game = gameLoader.loadGame(gameRootDirectoryPath)
     identifier = uuid.uuid1()
-    uniqueGameName = "%s %s %s %s" % (game["name"], game["versionName"], game["version"], identifier)
+    uniqueGameName = "%s %s" % (game["name"], game["versionName"])
     print("Producing %s ..." % uniqueGameName)
 
-    gameFolderName = "%s_%s_%s_%s" % (game["name"], game["versionName"], game["version"], identifier)
+
+    timestamp = datetime.now().strftime("%m-%d-%Y_%H-%M-%S")
+    gameFolderName = ("%s_%s_%s_%s" % (game["name"], game["versionName"], game["version"], timestamp)).replace(" ", "")
     gameFolderPath = "%s/%s" % (outputDirectory, gameFolderName)
+    print(gameFolderPath)
     os.mkdir(gameFolderPath)
 
     components = gameLoader.loadGameComponents(gameRootDirectoryPath)
