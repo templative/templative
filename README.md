@@ -4,11 +4,11 @@ Define the cards you’d like created, use the CLI, and purchase the game off of
 
 ## Install
 
+### To Keep
 `pip install .`
+
+### To Develop
 `python setup.py develop`
 
-### ApiKeys
+## ApiKeys
 - (The Game Crafter)[https://www.thegamecrafter.com/account/apikeys]
-
-`python setup.py sdist bdist_wheel`
-
