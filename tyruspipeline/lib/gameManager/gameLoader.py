@@ -2,34 +2,38 @@ import os
 import json
 import csv
 
-from ..svgmanipulation import operations
-
 def loadGame(gameRootDirectoryPath):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
     with open("%s/game.json" % gameRootDirectoryPath) as gameFile:
         return json.load(gameFile)
 
 def loadGameComponents(gameRootDirectoryPath):
-    with open("%s/components.json" % gameRootDirectoryPath) as gameFile:
-        return json.load(gameFile)'
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
 
-def processGameComponent(gameRootDirectoryPath, component):
-    gamedata = getComponentGamedata(gameRootDirectoryPath, component["gamedata"])
-    if not gamedata:
-        return
-    
-    artMetadata = getArtMetadata(gameRootDirectoryPath, component["artMetadata"])
-    if not artMetadata:
-        return
+    with open("%s/components.json" % gameRootDirectoryPath) as componentFile:
+        return json.load(componentFile)
 
-    # For every item in game data process component using art metadata
-    # operations.processComponent()
+def loadComponentGamedata(gameRootDirectoryPath, gamedataFilename):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
 
-def getComponentGamedata(gameRootDirectoryPath, gamedataFileName):
-    filepath = '%s/%s.csv' % (gameRootDirectoryPath, gamedataFileName)
-    with open(, newline='') as gamedataFile:
-        gamedata = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-        print (gamedata)
-    return {}
+    if not gamedataFilename:
+        return {}
 
-def getArtMetadata(gameRootDirectoryPath, artMetadataFileName):
-    return {}
+    filepath = '%s/componentData/%s.csv' % (gameRootDirectoryPath, gamedataFilename)
+    with open(filepath) as gamedataFile:
+        return csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
+
+def loadArtMetadata(gameRootDirectoryPath, artMetadataFilename):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    if not artMetadataFilename:
+        return {}
+
+    filepath = '%s/componentArtMetadata/%s.json' % (gameRootDirectoryPath, artMetadataFilename)
+    with open(filepath) as metadataFile:
+        return json.load(metadataFile)

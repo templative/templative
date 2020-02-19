@@ -1,0 +1,1 @@
+from .artProcessor import createArtFilesForComponent
