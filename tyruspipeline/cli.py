@@ -1,21 +1,10 @@
 import click
-from lib.gameCrafterClient import operations as gameCrafterClient
-from lib.pipelines import pipeline as pipelineClient
-from lib.svgmanipulation import operations as svg
+# from lib.gameCrafterClient import operations as gameCrafterClient
+import lib.gameManager as gameManagerClient
 
 @click.group()
 def cli():
     """The Tyrus Pipeline CLI"""
-    pass
-
-@cli.group()
-def pipeline():
-    """Utilize data entry to production pipelines"""
-    pass
-
-@pipeline.command()
-def gameToGameCrafter():
-    """ImageMagick to Game Crafter"""
     pass
 
 @cli.group()
@@ -31,7 +20,7 @@ def games():
 @games.command()
 def ls():
     """List all games"""
-    gameCrafterClient.getGames()
+    pass
 
 @cli.group()
 def gameManager():
@@ -41,4 +30,4 @@ def gameManager():
 @gameManager.command()
 def produce():
     """Produce a game based on a directory"""
-    pass
+    gameManagerClient.produceGame(".", "./output")
