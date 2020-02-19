@@ -14,7 +14,7 @@ setuptools.setup(
     url = "",
     packages = ["tyruspipeline"],
     entry_points = {
-        'console_scripts': ['tyruspipeline=tyruspipeline.cli:start']
+        'console_scripts': ['tyruspipeline=tyruspipeline.cli:cli']
     },
     install_requires=[
         "click", "svgutils", "requests"
