@@ -15,23 +15,8 @@ def pipeline():
     pass
 
 @pipeline.command()
-def magickCraft():
+def gameToGameCrafter():
     """ImageMagick to Game Crafter"""
-    pass
-
-@tyrus.group()
-def sheets():
-    """Manage Google Sheets"""
-    pass
-
-@sheets.command()
-def sheetsSample():
-    """Get sample sheet value"""
-    sheetsClient.getSample()
-
-@sheets.command()
-def download():
-    """Download a sheet"""
     pass
 
 @tyrus.group()
@@ -50,8 +35,14 @@ def ls():
     gameCrafterClient.getGames()
 
 @tyrus.group()
-def svgmanip():
-    """Utilize SVG Manipulation"""
+def gameManager():
+    """Manage game defines"""
+    pass
+
+@gameManager.command()
+@click.option()
+def produce():
+    """Produce a game based on a directory"""
     pass
 
 @svgmanip.command()
