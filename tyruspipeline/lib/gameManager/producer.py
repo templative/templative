@@ -14,7 +14,6 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
     uniqueGameName = "%s %s" % (game["name"], game["versionName"])
     print("Producing %s ..." % uniqueGameName)
 
-
     timestamp = datetime.now().strftime("%m-%d-%Y_%H-%M-%S")
     gameFolderName = ("%s_%s_%s_%s" % (game["name"], game["versionName"], game["version"], timestamp)).replace(" ", "")
     gameFolderPath = "%s/%s" % (outputDirectory, gameFolderName)
@@ -23,9 +22,9 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
 
     components = gameLoader.loadGameComponents(gameRootDirectoryPath)
     for component in components["components"]:
-        produceGameComponent(gameRootDirectoryPath, component, gameFolderPath)
+        produceGameComponent(gameRootDirectoryPath, game, component, gameFolderPath)
 
-def produceGameComponent(gameRootDirectoryPath, component, outputDirectory):
+def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
@@ -41,6 +40,6 @@ def produceGameComponent(gameRootDirectoryPath, component, outputDirectory):
         print("Skipping %s component due to missing art metadata." % componentName)
         return
 
-    artProcessor.createArtFilesForComponent(component, componentArtMetadata, componentGamedata, outputDirectory)
+    artProcessor.createArtFilesForComponent(game, component, componentArtMetadata, componentGamedata, outputDirectory)
 
     
