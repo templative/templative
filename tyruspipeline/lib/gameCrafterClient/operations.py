@@ -3,7 +3,6 @@ import os
 from uuid import uuid1
 from tabulate import tabulate
 
-
 baseUrl = "https://www.thegamecrafter.com"
 
 def createGame(session, name):
@@ -18,7 +17,26 @@ def createGame(session, name):
 
     return game
 
-def getUser(session):
+def createFolderAtRoot(session, name):
+    user = client.getUser(session)
+    return client.postFolder(session, name, user['root_folder_id'])
+
+def createFolderAtParent(session, name, folderId):
+    return client.postFolder(session, name, folderId)
+
+def uploadFile(session, filePath, folderId):
+    if not os.path.isfile(filepath):
+        return ('Not a file: %s' % filepath)
+    
+    fileToUpload = file(filepath)
+    filename = os.path.basename(filepath)
+
+    return client.postFile(session, fileToUpload, filename, folderId)
+
+def createPokerCard(session, name, imageFileId, deckId, quantity):
+    return client.post(session, name, imageFileId, deckId, quantity)
+
+def printUser(session):
     print(client.getUser(session))
 
 def listGames(session):
@@ -47,9 +65,6 @@ def printGames(games):
         data.append([gameName, gameId, gameLink])
 
     print(tabulate(data, headers=headers, tablefmt='orgtbl'))
-
-def createComponent(session, game, component):
-    pass
 
 def listDesigners(session):
     designersResponse = client.getDesigners(session)
