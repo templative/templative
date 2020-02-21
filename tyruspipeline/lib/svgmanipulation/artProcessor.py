@@ -1,9 +1,10 @@
 from element import Element
+import os
 import svgutils.transform as sg
 import xml.etree.ElementTree as ET
 from wand.image import Image
 
-def createArtFilesForComponent(game, component, artMetaData, componentGamedata, outputDirectory):
+def createArtFilesForComponent(game, component, frontMetaData, backMetaData, componentGamedata, outputDirectory):
     if game == None:
         print("game cannot be None.")
         return
@@ -12,7 +13,7 @@ def createArtFilesForComponent(game, component, artMetaData, componentGamedata, 
         print("component cannot be None.")
         return
 
-    if artMetaData == None:
+    if frontMetaData == None:
         print("artMetaData cannot be None.")
         return
 
@@ -23,9 +24,16 @@ def createArtFilesForComponent(game, component, artMetaData, componentGamedata, 
     if outputDirectory == None: 
         print("outputDirectory cannot be None.")
         return
+
+    componentName = component["name"]
+    componentDirectory = "%s/%s" % (outputDirectory, componentName)
+    os.mkdir(componentDirectory)
     
     for pieceGamedata in componentGamedata:
-        createArtFileOfPiece(game, component, pieceGamedata, artMetaData, outputDirectory)
+        createArtFileOfPiece(game, component, pieceGamedata, frontMetaData, componentDirectory)
+    
+    createArtFileOfPiece(game, component, {"name":"Back"}, backMetaData, componentDirectory)
+
         
 def createArtFileOfPiece(game, component, pieceGamedata, artMetaData, outputDirectory):
     if game == None:

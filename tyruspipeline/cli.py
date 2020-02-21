@@ -30,4 +30,4 @@ def gameManager():
 @gameManager.command()
 def produce():
     """Produce a game based on a directory"""
-    gameManagerClient.produceGame(".", "./output")
+    producedGame = gameManagerClient.produceGame(".", "./output")

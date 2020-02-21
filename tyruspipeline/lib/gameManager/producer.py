@@ -24,6 +24,8 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
     for component in components["components"]:
         produceGameComponent(gameRootDirectoryPath, game, component, gameFolderPath)
 
+    return gameFolderPath
+
 def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
@@ -37,9 +39,14 @@ def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory
 
     componentArtMetadata = gameLoader.loadArtMetadata(gameRootDirectoryPath, component["artMetadataFilename"])
     if not componentArtMetadata or componentArtMetadata == {}:
-        print("Skipping %s component due to missing art metadata." % componentName)
+        print("Skipping %s component due to missing front art metadata." % componentName)
         return
 
-    artProcessor.createArtFilesForComponent(game, component, componentArtMetadata, componentGamedata, outputDirectory)
+    componentBackArtMetadata = gameLoader.loadArtMetadata(gameRootDirectoryPath, component["backArtMetadataFilename"])
+    if not componentBackArtMetadata or componentBackArtMetadata == {}:
+        print("Skipping %s component due to missing back art metadata." % componentName)
+        return
+
+    artProcessor.createArtFilesForComponent(game, component, componentArtMetadata, componentBackArtMetadata,  componentGamedata, outputDirectory)
 
     
