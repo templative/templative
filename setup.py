@@ -17,7 +17,7 @@ setuptools.setup(
         'console_scripts': ['tyruspipeline=tyruspipeline.cli:cli']
     },
     install_requires=[
-        "click", "svgutils", "requests"
+        "click", "svgutils", "requests", "tabulate"
     ],
     python_requires='>=2.7',
 )

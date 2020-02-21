@@ -12,6 +12,31 @@ def login(publicApiKey, userName, userPassword):
         password = userPassword
     )
 
+def getUser(session):
+    url = "%s/user/%s" % (gameCrafterBaseUrl, session["user_id"])
+    
+    return httpClient.get(url, 
+        session_id = session["id"]
+    )
+
+def getDesigners(session):
+    url = "%s/designer" % gameCrafterBaseUrl
+    return httpClient.get(url,
+        session_id = session["id"]
+    )
+
+def getGamesForDesignerId(session, designerId):
+    url = "%s/designer/%s/games" % (gameCrafterBaseUrl, designerId)
+    return httpClient.get(url,
+        session_id = session["id"]
+    )
+
+def getGamesForUser(session):
+    url = "%s/user/%s/games" % (gameCrafterBaseUrl, session["user_id"])
+    return httpClient.get(url,
+        session_id = session["id"]
+    )
+
 def postGame(session, name, designerId):
     url = "%s/game" % gameCrafterBaseUrl
     return httpClient.post(url,

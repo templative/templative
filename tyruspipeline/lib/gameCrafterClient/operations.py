@@ -1,9 +1,57 @@
 import client
 import os
+from uuid import uuid1
+from tabulate import tabulate
 
-def createGame(name):
-    session = login()
-    client.postGame(session, name, "AA9F2900-5B68-11E5-8112-B32D36CD926D")
+
+baseUrl = "https://www.thegamecrafter.com"
+
+def createGame(session, name):
+    gameName = "%s-%s" % (name, uuid1())
+    designerId = "AA9F2900-5B68-11E5-8112-B32D36CD926D"
+    game = client.postGame(session, gameName, designerId)
+    
+    gameName = game["name"]
+    gameId = game["id"]
+    editUrl = "%s/publish/editor/%s" % (baseUrl, gameId)
+    print("Created %s. Edit it here %s" % (gameName, editUrl))
+
+    return game
+
+def getUser(session):
+    print(client.getUser(session))
+
+def listGames(session):
+    gamesResponse = client.getGamesForUser(session)
+
+    headers = ["name", "id"]
+    data = []
+
+    for game in gamesResponse["items"]:
+        data.append([game["name"], game["id"]])
+
+    print(tabulate(data, headers=headers, tablefmt='orgtbl'))
+
+def listGamesForUserDesigners(session):
+    designersResponse = client.getDesigners(session)
+    designers = designersResponse["items"]
+
+    headers = ["name", "id"]
+    data = []
+    for designer in designers:
+        gamesResponse = client.getGamesForDesignerId(session, designer["id"])
+        for game in gamesResponse["items"]:
+            data.append([game["name"], game["id"]])
+
+    print(tabulate(data, headers=headers, tablefmt='orgtbl'))    
+
+def createComponent(session, game, component):
+    pass
+
+def listDesignerIds(session):
+    designersResponse = client.getDesigners(session)
+    for designer in designersResponse["items"]:
+        print(designer["id"])
 
 def login():
     publicApiKey = os.environ.get('THEGAMECRAFTER_PUBLIC_KEY')

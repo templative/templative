@@ -12,15 +12,35 @@ def gamecrafter():
     """Manage game crafter assets"""
     pass
 
-@gamecrafter.command()
-def ls():
-    """List all games"""
+@gamecrafter.group()
+def designers():
+    """Manage designer"""
     pass
 
-@gamecrafter.command()
+@designers.command(name="ls")
+def listDesigners():
+    """List designers"""
+    session = gameCrafterClient.login()
+    gameCrafterClient.listDesignerIds(session)
+
+@gamecrafter.group()
+def games():
+    """Manage games"""
+    pass
+
+@games.command(name="ls")
+def listGames():
+    """List games"""
+    session = gameCrafterClient.login()
+    gameCrafterClient.listGames(session)
+
+@games.command()
 def create():
     """Create a game"""
-    gameCrafterClient.createGame("Gamerino")
+    session = gameCrafterClient.login()
+    gameCrafterClient.createGame(session, "Gamerino")
+
+
 
 @cli.command()
 def produce():
