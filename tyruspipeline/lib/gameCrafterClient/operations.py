@@ -23,27 +23,30 @@ def getUser(session):
 
 def listGames(session):
     gamesResponse = client.getGamesForUser(session)
-
-    headers = ["name", "id"]
-    data = []
-
-    for game in gamesResponse["items"]:
-        data.append([game["name"], game["id"]])
-
-    print(tabulate(data, headers=headers, tablefmt='orgtbl'))
+    printGames(gamesResponse["items"])
 
 def listGamesForUserDesigners(session):
     designersResponse = client.getDesigners(session)
     designers = designersResponse["items"]
 
-    headers = ["name", "id"]
-    data = []
+    games = []
     for designer in designers:
         gamesResponse = client.getGamesForDesignerId(session, designer["id"])
-        for game in gamesResponse["items"]:
-            data.append([game["name"], game["id"]])
+        games.extend(gamesResponse["items"])
 
-    print(tabulate(data, headers=headers, tablefmt='orgtbl'))    
+    printGames(games)   
+
+def printGames(games):
+    headers = ["name", "id", "link"]
+    data = []
+
+    for game in games:
+        gameName = game["name"]
+        gameId = game["id"]
+        gameLink = "%s/%s" %(baseUrl, game["edit_uri"])
+        data.append([gameName, gameId, gameLink])
+
+    print(tabulate(data, headers=headers, tablefmt='orgtbl'))
 
 def createComponent(session, game, component):
     pass
