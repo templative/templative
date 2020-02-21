@@ -68,6 +68,21 @@ def file(filepath, folderId):
     uploadedFile = gameCrafterClient.uploadFile(session, filepath, folderId)
     print("Uploaded file %s under %s" % (uploadedFile["id"], folderId))  
 
+@upload.command(name="ls")
+@click.option('--folderId', default=-1, prompt='Parent id', help='The id of the folder. A default of -1 searches from the user root.')
+@click.option('--recursive', default=False, prompt='Recursive', help='Whether to list recursively.')
+@click.option('--includeFiles', default=False, prompt='Include files', help='Whether to include files in the list.')
+def listFolderChildren(folderId, recursive, includeFiles):
+    """List the folder's contents"""
+    print("listFolderChildren not implemented.")
+    return
+    session = gameCrafterClient.login()
+    folder = None
+    if id > 0:
+        pass
+    else:
+        pass
+
 @cli.command()
 def produce():
     """Produce a game based on a directory"""
