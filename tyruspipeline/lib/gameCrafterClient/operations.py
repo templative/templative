@@ -51,10 +51,18 @@ def printGames(games):
 def createComponent(session, game, component):
     pass
 
-def listDesignerIds(session):
+def listDesigners(session):
     designersResponse = client.getDesigners(session)
+
+    headers = ["name", "id"]
+    data = []
     for designer in designersResponse["items"]:
-        print(designer["id"])
+        print(designer)
+        name = designer["name"]
+        designerId = designer["id"]
+        data.append([name, designerId])
+
+    print(tabulate(data, headers=headers, tablefmt='orgtbl'))
 
 def login():
     publicApiKey = os.environ.get('THEGAMECRAFTER_PUBLIC_KEY')

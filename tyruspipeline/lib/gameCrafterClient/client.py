@@ -20,7 +20,7 @@ def getUser(session):
     )
 
 def getDesigners(session):
-    url = "%s/designer" % gameCrafterBaseUrl
+    url = "%s/user/%s/designers" % (gameCrafterBaseUrl, session["user_id"])
     return httpClient.get(url,
         session_id = session["id"]
     )

@@ -14,14 +14,14 @@ def gamecrafter():
 
 @gamecrafter.group()
 def designers():
-    """Manage designer"""
+    """Manage designers"""
     pass
 
 @designers.command(name="ls")
 def listDesigners():
     """List designers"""
     session = gameCrafterClient.login()
-    gameCrafterClient.listDesignerIds(session)
+    gameCrafterClient.listDesigners(session)
 
 @gamecrafter.group()
 def games():
@@ -39,8 +39,6 @@ def create():
     """Create a game"""
     session = gameCrafterClient.login()
     gameCrafterClient.createGame(session, "Gamerino")
-
-
 
 @cli.command()
 def produce():
