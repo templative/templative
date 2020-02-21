@@ -1,5 +1,5 @@
 import click
-# from lib.gameCrafterClient import operations as gameCrafterClient
+from lib.gameCrafterClient import operations as gameCrafterClient
 import lib.gameManager as gameManagerClient
 
 @click.group()
@@ -12,22 +12,17 @@ def gamecrafter():
     """Manage game crafter assets"""
     pass
 
-@gamecrafter.group()
-def games():
-    """Manage games"""
-    pass
-
-@games.command()
+@gamecrafter.command()
 def ls():
     """List all games"""
     pass
 
-@cli.group()
-def gameManager():
-    """Manage game defines"""
-    pass
+@gamecrafter.command()
+def create():
+    """Create a game"""
+    gameCrafterClient.createGame("Gamerino")
 
-@gameManager.command()
+@cli.command()
 def produce():
     """Produce a game based on a directory"""
     producedGame = gameManagerClient.produceGame(".", "./output")
