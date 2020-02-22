@@ -1,6 +1,7 @@
 import click
 from lib.gameCrafterClient import operations as gameCrafterClient
-import lib.gameManager as gameManagerClient
+from lib.gameManager import operations as gameManagerClient
+from lib.gameCrafterUpload import operations as gameManagerClient
 
 @click.group()
 def cli():
@@ -85,5 +86,11 @@ def listFolderChildren(folderId, recursive, includeFiles):
 
 @cli.command()
 def produce():
-    """Produce a game based on a directory"""
+    """Produce the game in the current directory"""
     producedGame = gameManagerClient.produceGame(".", "./output")
+
+@cli.command()
+@click.option('--directory', prompt='directory', help='The directory of the produced game.')
+def upload(directory):
+    """Upload a produced game in a directory"""
+    producedGame = gameManagerClient.uploadGame(directory)

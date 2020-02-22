@@ -1,67 +1,58 @@
-import manager
-import uuid
 import os
-from datetime import datetime
+import json
+import csv
 
-from ..svgmanipulation import artProcessor   
-
-def produceGame(gameRootDirectoryPath, outputDirectory):
-    if not gameRootDirectoryPath:
-        raise Exception("Game root directory path is invalid.")
-
-    game = manager.loadGame(gameRootDirectoryPath)
-    identifier = uuid.uuid1()
-    uniqueGameName = "%s %s" % (game["name"], game["versionName"])
-    print("Producing %s ..." % uniqueGameName)
-
-    timestamp = datetime.now().strftime("%m-%d-%Y_%H-%M-%S")
-    gameFolderName = ("%s_%s_%s_%s" % (game["name"], game["versionName"], game["version"], timestamp)).replace(" ", "")
-    gameFolderPath = "%s/%s" % (outputDirectory, gameFolderName)
-    print(gameFolderPath)
-    os.mkdir(gameFolderPath)
-
-    company = manager.loadCompany(gameRootDirectoryPath)
-    companyFilepath = "%s/company.json" % (gameFolderPath)
-    manager.dumpInstructions(companyFilepath, company)
-
-    gameFilepath = "%s/game.json" % (gameFolderPath)
-    manager.dumpInstructions(gameFilepath, game)
-
-    components = manager.loadGameComponents(gameRootDirectoryPath)
-    for component in components["components"]:
-
-        componentName = component["name"].replace(" ", "")
-        componentDirectory = "%s/%s" % (gameFolderPath, componentName)
-        os.mkdir(componentDirectory)
-
-        componentInstructionFilepath = "%s/%s.json" % (componentDirectory, componentName)
-        manager.dumpInstructions(componentInstructionFilepath, component)
-
-        produceGameComponent(gameRootDirectoryPath, game, component, componentDirectory)
-
-    return gameFolderPath
-
-def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory):
+def loadCompany(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    componentName = component["name"]
+    with open("%s/company.json" % gameRootDirectoryPath) as gameFile:
+        return json.load(gameFile)
+
+def loadGame(gameRootDirectoryPath):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    with open("%s/game.json" % gameRootDirectoryPath) as gameFile:
+        return json.load(gameFile)
+
+def loadGameComponents(gameRootDirectoryPath):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    with open("%s/components.json" % gameRootDirectoryPath) as componentFile:
+        return json.load(componentFile)
+
+def loadComponentGamedata(gameRootDirectoryPath, gamedataFilename):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    if not gamedataFilename:
+        return {}
+
+    filepath = '%s/componentData/%s.csv' % (gameRootDirectoryPath, gamedataFilename)
+    with open(filepath) as gamedataFile:
+        reader = csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
+
+        gamedata = []
+        for row in reader:
+            gamedata.append(row)
+        return gamedata
+
+def loadArtMetadata(gameRootDirectoryPath, artMetadataFilename):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    if not artMetadataFilename:
+        return {}
+
+    filepath = '%s/componentArtMetadata/%s.json' % (gameRootDirectoryPath, artMetadataFilename)
+    with open(filepath) as metadataFile:
+        return json.load(metadataFile)
+
+def dumpInstructions(filepath, data):
+    if not filepath:
+        raise Exception("Instructions filepath cannot be None")
     
-    componentGamedata = manager.loadComponentGamedata(gameRootDirectoryPath, component["gamedataFilename"])
-    if not componentGamedata or componentGamedata == {}:
-        print("Skipping %s component due to missing game data." % componentName)
-        return
-
-    componentArtMetadata = manager.loadArtMetadata(gameRootDirectoryPath, component["artMetadataFilename"])
-    if not componentArtMetadata or componentArtMetadata == {}:
-        print("Skipping %s component due to missing front art metadata." % componentName)
-        return
-
-    componentBackArtMetadata = manager.loadArtMetadata(gameRootDirectoryPath, component["backArtMetadataFilename"])
-    if not componentBackArtMetadata or componentBackArtMetadata == {}:
-        print("Skipping %s component due to missing back art metadata." % componentName)
-        return
-
-    print("Creating art assets for %s component." % (component["name"]))
-    artProcessor.createArtFilesForComponent(game, component, componentArtMetadata, componentBackArtMetadata,  componentGamedata, outputDirectory)
-        
+    with open(filepath, 'w') as outfile:
+        json.dump(data, outfile)

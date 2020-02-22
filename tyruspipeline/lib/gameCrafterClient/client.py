@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
-from ..http import httpClient
+
+from ..http import httpClient as httpClient
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com/api"
 
