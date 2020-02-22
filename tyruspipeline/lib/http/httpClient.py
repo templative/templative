@@ -2,7 +2,7 @@ import os
 import requests
 
 def post(url, files=None, **kwargs):
-    print(url)
+    # print(url)
     response = requests.post(url, params=kwargs, files=files)
 
     if not str(response.status_code).startswith('2'):
@@ -13,7 +13,7 @@ def post(url, files=None, **kwargs):
     return response.json()['result']
 
 def get(url, **kwargs):
-    print(url)
+    # print(url)
     response = requests.get(url, params=kwargs)
     
     if not str(response.status_code).startswith('2'):
