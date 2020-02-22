@@ -1,16 +1,62 @@
+import os
+import json
+from os.path import isfile, join
+import sys
+
 def loadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open("%s/game.json" % gameRootDirectoryPath) as gameFile:
-        return json.load(gameFile)
+    with open("%s/game.json" % gameRootDirectoryPath) as game:
+        return json.load(game)
 
 def loadCompany(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open("%s/company.json" % gameRootDirectoryPath) as gameFile:
-        return json.load(gameFile)
+    with open("%s/company.json" % gameRootDirectoryPath) as company:
+        return json.load(company)
+
+def loadComponentFile(componentDirectoryPath):
+    if not componentDirectoryPath:
+        raise Exception("componentDirectoryPath cannot be None")
+
+    with open("%s/component.json" % componentDirectoryPath) as componentFile:
+        return json.load(componentFile)
+
+def uploadComponents(session, outputDirectory, cloudGame, cloudGameFolder):
+    if not outputDirectory:
+        raise Exception("outputDirectory cannot be None")
+
+    for directoryPath in next(os.walk(outputDirectory))[1]:
+        componentDirectoryPath = "%s/%s" % (outputDirectory, directoryPath)
+        uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolder)
+
+def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolder):
+    if not componentDirectoryPath:
+        raise Exception("componentDirectoryPath cannot be None")
+
+    componentFile = loadComponentFile(componentDirectoryPath)
+    componentType = componentFile["type"]
+    componentName = componentFile["name"]
+
+    if componentType != "pokerDeck":
+        print("Skipping %s. The %s component type is not currently supported." % (componentName, componentType))
+        return
+    
+    print("Uploading %s %s" % (componentType, componentName))
+    pieceFilepaths = []
+    for f in os.listdir(componentDirectoryPath):
+        filePath = join(componentDirectoryPath, f)
+        
+        if (isfile(filePath) and filePath.endswith(".jpg")):
+            pieceFilepaths.append(filePath)
+    
+    for pieceFilepath in pieceFilepaths:
+        uploadPiece(session, pieceFilepath)
+
+def uploadPiece(session, pieceFilepath):
+    print("Uploading %s" % (pieceFilepath))
 
 def makePokerDeck(session, dirpath):
     asset = '%s-pdeck-%s' % (self['name'], len(self.parts))

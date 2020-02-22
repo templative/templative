@@ -2,19 +2,19 @@ import os
 import json
 import csv
 
-def loadCompany(gameRootDirectoryPath):
-    if not gameRootDirectoryPath:
-        raise Exception("Game root directory path cannot be None")
-
-    with open("%s/company.json" % gameRootDirectoryPath) as gameFile:
-        return json.load(gameFile)
-
 def loadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open("%s/game.json" % gameRootDirectoryPath) as gameFile:
-        return json.load(gameFile)
+    with open("%s/game.json" % gameRootDirectoryPath) as game:
+        return json.load(game)
+
+def loadCompany(gameRootDirectoryPath):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    with open("%s/company.json" % gameRootDirectoryPath) as company:
+        return json.load(company)
 
 def loadGameComponents(gameRootDirectoryPath):
     if not gameRootDirectoryPath:

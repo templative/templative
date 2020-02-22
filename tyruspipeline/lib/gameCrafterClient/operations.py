@@ -5,9 +5,9 @@ from tabulate import tabulate
 
 baseUrl = "https://www.thegamecrafter.com"
 
-def createGame(session, name):
+def createGame(session, name, designerId):
     gameName = "%s-%s" % (name, uuid1())
-    designerId = "AA9F2900-5B68-11E5-8112-B32D36CD926D"
+    designerId = designerId
     game = client.postGame(session, gameName, designerId)
     
     gameName = game["name"]
@@ -33,8 +33,11 @@ def uploadFile(session, filepath, folderId):
 
     return client.postFile(session, fileToUpload, filename, folderId)
 
-def createPokerCard(session, name, imageFileId, deckId, quantity):
-    return client.post(session, name, imageFileId, deckId, quantity)
+def createPokerDeck(session, name, gameId, imageFileId):
+    return client.post(session, name, gameId, imageFileId)
+
+def createPokerCard(session, name, deckId, quantity, imageFileId):
+    return client.post(session, name, deckId, quantity, imageFileId)
 
 def printUser(session):
     print(client.getUser(session))

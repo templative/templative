@@ -47,11 +47,22 @@ def postGame(session, name, designerId):
         description='Automatically created (%s)' % name,
     )
 
-def postPokerCard(session, name, imageFileId, deckId, quantity):
+def postPokerDeck(session, name, gameId, backImageFileId):
+    url = "%s/pokerdeck" % gameCrafterBaseUrl
+    return httpClient.post(url,
+        session_id = session["id"],
+        name = name,
+        game_id = gameId,
+        quantity = 1,
+        back_id = backImageFileId,
+        has_proofed_back = true
+    )
+
+def postPokerCard(session, name, deckId, quantity, imageFileId):
     url = "%s/pokercard" % gameCrafterBaseUrl
     return httpClient.post(url,
         session_id = session["id"],
-        name = deckName,
+        name = name,
         deck_id = deckId,
         quantity = quantity,
         face_id = imageFileId,

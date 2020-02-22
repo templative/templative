@@ -1,7 +1,7 @@
 import click
 from lib.gameCrafterClient import operations as gameCrafterClient
 from lib.gameManager import operations as gameManagerClient
-from lib.gameCrafterUpload import operations as gameManagerClient
+from lib.gameCrafterUpload import operations as gameCrafterUpload
 
 @click.group()
 def cli():
@@ -36,10 +36,12 @@ def listGames():
     gameCrafterClient.listGames(session)
 
 @games.command()
-def create():
+@click.option('--gameName', required=True, prompt='Game name', help='The name of the new game.')
+@click.option('--designerId', default=-1, prompt='Designer id', help='The id of the game crafter designer creating the game.')
+def create(gameName, designerId):
     """Create a game"""
     session = gameCrafterClient.login()
-    gameCrafterClient.createGame(session, "Gamerino")
+    gameCrafterClient.createGame(session, gameName, designerId)
 
 @gamecrafter.group()
 def upload():
@@ -93,4 +95,4 @@ def produce():
 @click.option('--directory', prompt='directory', help='The directory of the produced game.')
 def upload(directory):
     """Upload a produced game in a directory"""
-    producedGame = gameManagerClient.uploadGame(directory)
+    producedGame = gameCrafterUpload.uploadGame(directory)

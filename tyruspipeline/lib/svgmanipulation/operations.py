@@ -1,3 +1,5 @@
+from client import createArtFileOfPiece
+
 def createArtFilesForComponent(game, component, frontMetaData, backMetaData, componentGamedata, outputDirectory):
     if game == None:
         print("game cannot be None.")
