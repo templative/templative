@@ -2,6 +2,13 @@ import os
 import json
 import csv
 
+def loadCompany(gameRootDirectoryPath):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    with open("%s/company.json" % gameRootDirectoryPath) as gameFile:
+        return json.load(gameFile)
+
 def loadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
@@ -42,3 +49,10 @@ def loadArtMetadata(gameRootDirectoryPath, artMetadataFilename):
     filepath = '%s/componentArtMetadata/%s.json' % (gameRootDirectoryPath, artMetadataFilename)
     with open(filepath) as metadataFile:
         return json.load(metadataFile)
+
+def dumpInstructions(filepath, data):
+    if not filepath:
+        raise Exception("Instructions filepath cannot be None")
+    
+    with open(filepath, 'w') as outfile:
+        json.dump(data, outfile)

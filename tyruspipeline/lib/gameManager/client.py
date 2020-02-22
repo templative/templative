@@ -1,4 +1,4 @@
-import gameLoader
+import manager
 import uuid
 import os
 from datetime import datetime
@@ -9,7 +9,7 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
 
-    game = gameLoader.loadGame(gameRootDirectoryPath)
+    game = manager.loadGame(gameRootDirectoryPath)
     identifier = uuid.uuid1()
     uniqueGameName = "%s %s" % (game["name"], game["versionName"])
     print("Producing %s ..." % uniqueGameName)
@@ -20,9 +20,24 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
     print(gameFolderPath)
     os.mkdir(gameFolderPath)
 
-    components = gameLoader.loadGameComponents(gameRootDirectoryPath)
+    company = manager.loadCompany(gameRootDirectoryPath)
+    companyFilepath = "%s/company.json" % (gameFolderPath)
+    manager.dumpInstructions(companyFilepath, company)
+
+    gameFilepath = "%s/game.json" % (gameFolderPath)
+    manager.dumpInstructions(gameFilepath, game)
+
+    components = manager.loadGameComponents(gameRootDirectoryPath)
     for component in components["components"]:
-        produceGameComponent(gameRootDirectoryPath, game, component, gameFolderPath)
+
+        componentName = component["name"].replace(" ", "")
+        componentDirectory = "%s/%s" % (gameFolderPath, componentName)
+        os.mkdir(componentDirectory)
+
+        componentInstructionFilepath = "%s/%s.json" % (componentDirectory, componentName)
+        manager.dumpInstructions(componentInstructionFilepath, component)
+
+        produceGameComponent(gameRootDirectoryPath, game, component, componentDirectory)
 
     return gameFolderPath
 
@@ -32,21 +47,21 @@ def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory
 
     componentName = component["name"]
     
-    componentGamedata = gameLoader.loadComponentGamedata(gameRootDirectoryPath, component["gamedataFilename"])
+    componentGamedata = manager.loadComponentGamedata(gameRootDirectoryPath, component["gamedataFilename"])
     if not componentGamedata or componentGamedata == {}:
         print("Skipping %s component due to missing game data." % componentName)
         return
 
-    componentArtMetadata = gameLoader.loadArtMetadata(gameRootDirectoryPath, component["artMetadataFilename"])
+    componentArtMetadata = manager.loadArtMetadata(gameRootDirectoryPath, component["artMetadataFilename"])
     if not componentArtMetadata or componentArtMetadata == {}:
         print("Skipping %s component due to missing front art metadata." % componentName)
         return
 
-    componentBackArtMetadata = gameLoader.loadArtMetadata(gameRootDirectoryPath, component["backArtMetadataFilename"])
+    componentBackArtMetadata = manager.loadArtMetadata(gameRootDirectoryPath, component["backArtMetadataFilename"])
     if not componentBackArtMetadata or componentBackArtMetadata == {}:
         print("Skipping %s component due to missing back art metadata." % componentName)
         return
 
+    print("Creating art assets for %s component." % (component["name"]))
     artProcessor.createArtFilesForComponent(game, component, componentArtMetadata, componentBackArtMetadata,  componentGamedata, outputDirectory)
-
-    
+        

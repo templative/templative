@@ -24,15 +24,11 @@ def createArtFilesForComponent(game, component, frontMetaData, backMetaData, com
     if outputDirectory == None: 
         print("outputDirectory cannot be None.")
         return
-
-    componentName = component["name"]
-    componentDirectory = "%s/%s" % (outputDirectory, componentName)
-    os.mkdir(componentDirectory)
     
     for pieceGamedata in componentGamedata:
-        createArtFileOfPiece(game, component, pieceGamedata, frontMetaData, componentDirectory)
+        createArtFileOfPiece(game, component, pieceGamedata, frontMetaData, outputDirectory)
     
-    createArtFileOfPiece(game, component, {"name":"Back"}, backMetaData, componentDirectory)
+    createArtFileOfPiece(game, component, {"name":"Back"}, backMetaData, outputDirectory)
 
         
 def createArtFileOfPiece(game, component, pieceGamedata, artMetaData, outputDirectory):
@@ -62,13 +58,13 @@ def createArtFileOfPiece(game, component, pieceGamedata, artMetaData, outputDire
     addOverlays(artFile, artMetaData["overlays"], game, component, pieceGamedata)
 
     artFileOutputName = ("%s-%s" % (component["name"], pieceGamedata["name"])).replace(" ", "")
-    artFileOutputFilePath = "%s/%s.svg" % (outputDirectory, artFileOutputName)
-    artFile.dump(artFileOutputFilePath)
+    artFileOutputFilepath = "%s/%s.svg" % (outputDirectory, artFileOutputName)
+    artFile.dump(artFileOutputFilepath)
     
-    textReplaceInFile(artFileOutputFilePath, artMetaData["textReplacements"], game, component, pieceGamedata)
-    updateStylesInFile(artFileOutputFilePath, artMetaData["styleUpdates"], game, component, pieceGamedata)
+    textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, component, pieceGamedata)
+    updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, component, pieceGamedata)
 
-    exportSvgToJpg(artFileOutputFilePath, artFileOutputName, outputDirectory)
+    exportSvgToJpg(artFileOutputFilepath, artFileOutputName, outputDirectory)
 
 def addOverlays(artFile, overlays, game, component, pieceGamedata):
     if artFile == None:
@@ -98,9 +94,9 @@ def addOverlays(artFile, overlays, game, component, pieceGamedata):
             graphicsInsert = Element("%s/%s.svg" % (overlayFilesDirectory, overlayName))
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 
-def textReplaceInFile(filePath, textReplacements, game, component, pieceGamedata):
-    if filePath == None:
-        print("filePath cannot be None.")
+def textReplaceInFile(filepath, textReplacements, game, component, pieceGamedata):
+    if filepath == None:
+        print("filepath cannot be None.")
         return
 
     if textReplacements == None: 
@@ -120,19 +116,19 @@ def textReplaceInFile(filePath, textReplacements, game, component, pieceGamedata
         return
     
     contents = ""
-    with open(filePath, 'r') as f:
+    with open(filepath, 'r') as f:
         contents = f.read()
         for textReplacement in textReplacements:
             key = "{%s}" % textReplacement["key"]
             value = getScopedValue(textReplacement, game, component, pieceGamedata)
             contents = contents.replace(key, value)
 
-    with open(filePath,'w') as f:
+    with open(filepath,'w') as f:
         f.write(contents)
 
-def updateStylesInFile(filePath, styleUpdates, game, component, pieceGamedata):
-    if filePath == None:
-        print("filePath cannot be None.")
+def updateStylesInFile(filepath, styleUpdates, game, component, pieceGamedata):
+    if filepath == None:
+        print("filepath cannot be None.")
         return
 
     if styleUpdates == None: 
@@ -151,7 +147,7 @@ def updateStylesInFile(filePath, styleUpdates, game, component, pieceGamedata):
         print("pieceGamedata cannot be None.")
         return
     
-    tree = ET.parse(filePath).getroot()
+    tree = ET.parse(filepath).getroot()
     
     for styleUpdate in styleUpdates:
         findById = styleUpdate["id"]
@@ -163,7 +159,7 @@ def updateStylesInFile(filePath, styleUpdates, game, component, pieceGamedata):
         replaceStyleWith = "%s:%s" % (cssKey, value)
         sh.set('style', replaceStyleWith)
 
-    with open(filePath,'w') as f:
+    with open(filepath,'w') as f:
         f.write(ET.tostring(tree))
 
 def getScopedValue(scopedValue, game, component, pieceGamedata):
@@ -194,7 +190,7 @@ def getScopedValue(scopedValue, game, component, pieceGamedata):
 
     return pieceGamedata[source]
 
-def exportSvgToJpg(filePath, name, outputDirectory):
-    with Image(filename=filePath, resolution=1148, colorspace="rgb") as image:
+def exportSvgToJpg(filepath, name, outputDirectory):
+    with Image(filename=filepath, resolution=1148, colorspace="rgb") as image:
         image.resize(825,1125)
         image.save(filename='%s/%s.jpg' % (outputDirectory, name))

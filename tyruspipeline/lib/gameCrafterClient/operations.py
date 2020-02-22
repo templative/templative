@@ -24,7 +24,7 @@ def createFolderAtRoot(session, name):
 def createFolderAtParent(session, name, folderId):
     return client.postFolder(session, name, folderId)
 
-def uploadFile(session, filePath, folderId):
+def uploadFile(session, filepath, folderId):
     if not os.path.isfile(filepath):
         return ('Not a file: %s' % filepath)
     
