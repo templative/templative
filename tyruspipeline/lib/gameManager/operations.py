@@ -10,15 +10,16 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
         raise Exception("Game root directory path is invalid.")
 
     game = client.loadGame(gameRootDirectoryPath)
-    identifier = uuid.uuid1()
-    uniqueGameName = "%s %s" % (game["name"], game["versionName"])
-    print("Producing %s ..." % uniqueGameName)
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    uniqueGameName = ("%s_%s_%s_%s" % (game["name"], game["version"], game["versionName"], timestamp)).replace(" ", "")
+    game["name"] = uniqueGameName
+    
 
-    gameFolderPath = createGameFolder(game["name"], game["version"], game["versionName"], outputDirectory)
-    print(gameFolderPath)
+    gameFolderPath = createGameFolder(game["name"], outputDirectory)
+    print("Producing %s" % gameFolderPath)
 
     copyCompanyFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath)
-    copyGameFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath)
+    copyGameFromGameFolderToOutput(game, gameFolderPath)
     
     components = client.loadGameComponents(gameRootDirectoryPath)
     for component in components["components"]:
@@ -26,10 +27,8 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
 
     return gameFolderPath
 
-def createGameFolder(name, version, versionName, outputDirectory):
-    timestamp = datetime.now().strftime("%m-%d-%Y_%H-%M-%S")
-    gameFolderName = ("%s_%s_%s_%s" % (name, version, versionName, timestamp)).replace(" ", "")
-    gameFolderPath = "%s/%s" % (outputDirectory, gameFolderName)
+def createGameFolder(name, outputDirectory):    
+    gameFolderPath = "%s/%s" % (outputDirectory, name)
     os.mkdir(gameFolderPath)
     return gameFolderPath
 
@@ -38,9 +37,9 @@ def copyCompanyFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath):
     companyFilepath = "%s/company.json" % (gameFolderPath)
     client.dumpInstructions(companyFilepath, company)
 
-def copyGameFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath):
+def copyGameFromGameFolderToOutput(game, gameFolderPath):
     gameFilepath = "%s/game.json" % (gameFolderPath)
-    client.dumpInstructions(gameFilepath, {"name": uniqueGameName})
+    client.dumpInstructions(gameFilepath, game)
 
 def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory):
     if not gameRootDirectoryPath:
@@ -70,9 +69,13 @@ def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory
     os.mkdir(componentDirectory)
 
     componentInstructionFilepath = "%s/component.json" % (componentDirectory)
+
+    fileInstructionSets = processor.getInstructionSetsForFiles(game, component, componentGamedata, componentDirectory)
+
     componentInstructions = {
         "name": componentName, 
-        "type": component["type"]
+        "type": component["type"],
+        "fileInstructions": fileInstructionSets
     }
     client.dumpInstructions(componentInstructionFilepath, componentInstructions)
 

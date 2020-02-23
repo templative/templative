@@ -26,7 +26,7 @@ def createFolderAtParent(session, name, folderId):
 
 def uploadFile(session, filepath, folderId):
     if not os.path.isfile(filepath):
-        return ('Not a file: %s' % filepath)
+        raise Exception ('Not a file: %s' % filepath)
     
     fileToUpload = file(filepath)
     filename = os.path.basename(filepath)
@@ -34,10 +34,10 @@ def uploadFile(session, filepath, folderId):
     return client.postFile(session, fileToUpload, filename, folderId)
 
 def createPokerDeck(session, name, gameId, imageFileId):
-    return client.post(session, name, gameId, imageFileId)
+    return client.postPokerDeck(session, name, gameId, imageFileId)
 
 def createPokerCard(session, name, deckId, quantity, imageFileId):
-    return client.post(session, name, deckId, quantity, imageFileId)
+    return client.postPokerCard(session, name, deckId, quantity, imageFileId)
 
 def printUser(session):
     print(client.getUser(session))
@@ -64,7 +64,7 @@ def printGames(games):
     for game in games:
         gameName = game["name"]
         gameId = game["id"]
-        gameLink = "%s/%s" %(baseUrl, game["edit_uri"])
+        gameLink = "%s/%s" % (baseUrl, game["edit_uri"])
         data.append([gameName, gameId, gameLink])
 
     print(tabulate(data, headers=headers, tablefmt='orgtbl'))

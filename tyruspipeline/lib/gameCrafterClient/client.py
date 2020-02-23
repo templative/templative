@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from ..http import httpClient as httpClient
+import httpClient as httpClient
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com/api"
 
@@ -55,7 +55,7 @@ def postPokerDeck(session, name, gameId, backImageFileId):
         game_id = gameId,
         quantity = 1,
         back_id = backImageFileId,
-        has_proofed_back = true
+        has_proofed_back = 1
     )
 
 def postPokerCard(session, name, deckId, quantity, imageFileId):
@@ -66,9 +66,9 @@ def postPokerCard(session, name, deckId, quantity, imageFileId):
         deck_id = deckId,
         quantity = quantity,
         face_id = imageFileId,
-        back_from = "deck",
-        has_proofed_face = true,
-        has_proofed_back = true
+        back_from = "Deck",
+        has_proofed_face = 1,
+        has_proofed_back = 1
     )
 
 def postFolder(session, name, folderParentId):
@@ -81,7 +81,10 @@ def postFolder(session, name, folderParentId):
     )
 
 def postFile(session, file, filename, folderId):
-    return httpClient.post('file', files={'file':file}, 
+    url = "%s/file" % gameCrafterBaseUrl
+    return httpClient.post(url,
+        session_id = session["id"],
+        files={"file":file}, 
         name=filename, 
         folder_id=folderId)
 

@@ -36,8 +36,8 @@ def listGames():
     gameCrafterClient.listGames(session)
 
 @games.command()
-@click.option('--gameName', required=True, prompt='Game name', help='The name of the new game.')
-@click.option('--designerId', default=-1, prompt='Designer id', help='The id of the game crafter designer creating the game.')
+@click.option('-n', '--gameName', required=True, prompt='Game name', help='The name of the new game.')
+@click.option('-d', '--designerId', default=-1, prompt='Designer id', help='The id of the game crafter designer creating the game.')
 def create(gameName, designerId):
     """Create a game"""
     session = gameCrafterClient.login()
@@ -49,8 +49,8 @@ def upload():
     pass
 
 @upload.command()
-@click.option('--name', required=True, prompt='Folder name', help='The name of the new folder.')
-@click.option('--id', default=-1, prompt='Parent id', help='The id of the parent folder. A default of -1 creates it at the user root.')
+@click.option('-n', '--name', required=True, prompt='Folder name', help='The name of the new folder.')
+@click.option('-f', '--id', default=-1, prompt='Parent id', help='The id of the parent folder. A default of -1 creates it at the user root.')
 def folder(name, id):
     """Upload a folder"""
     session = gameCrafterClient.login()
@@ -63,8 +63,8 @@ def folder(name, id):
         print("Created folder %s under users root directory %s" % (folder["id"], folder["parent_id"]))
 
 @upload.command()
-@click.option('--name', required=True, prompt='Folder name', help='The name of the new folder.')
-@click.option('--folderId', required=True, prompt='Parent id', help='The id of the parent folder.')
+@click.option('-n', '--name', required=True, prompt='Folder name', help='The name of the new folder.')
+@click.option('-f', '--folderId', required=True, prompt='Parent id', help='The id of the parent folder.')
 def file(filepath, folderId):
     """Upload a file"""
     session = gameCrafterClient.login()
@@ -72,8 +72,8 @@ def file(filepath, folderId):
     print("Uploaded file %s under %s" % (uploadedFile["id"], folderId))  
 
 @upload.command(name="ls")
-@click.option('--folderId', default=-1, prompt='Parent id', help='The id of the folder. A default of -1 searches from the user root.')
-@click.option('--recursive', default=False, prompt='Recursive', help='Whether to list recursively.')
+@click.option('-f', '--folderId', default=-1, prompt='Parent id', help='The id of the folder. A default of -1 searches from the user root.')
+@click.option('r', '--recursive', default=False, prompt='Recursive', help='Whether to list recursively.')
 @click.option('--includeFiles', default=False, prompt='Include files', help='Whether to include files in the list.')
 def listFolderChildren(folderId, recursive, includeFiles):
     """List the folder's contents"""
@@ -92,7 +92,7 @@ def produce():
     producedGame = gameManagerClient.produceGame(".", "./output")
 
 @cli.command()
-@click.option('--directory', prompt='directory', help='The directory of the produced game.')
-def upload(directory):
+@click.option('-i', '--input', prompt='Input directory', help='The directory of the produced game.')
+def upload(input):
     """Upload a produced game in a directory"""
-    producedGame = gameCrafterUpload.uploadGame(directory)
+    producedGame = gameCrafterUpload.uploadGame(input)

@@ -26,3 +26,22 @@ def createArtFilesForComponent(game, component, frontMetaData, backMetaData, com
     
     createArtFileOfPiece(game, component, {"name":"Back"}, backMetaData, outputDirectory)
 
+def getInstructionSetsForFiles(game, component, componentGamedata, componentFilepath):
+    if game == None:
+        print("game cannot be None.")
+        return
+    
+    if component == None:
+        print("component cannot be None.")
+        return
+
+    if componentGamedata == None:
+        print("componentGamedata cannot be None.")
+        return
+
+    instructionSets = []
+    for pieceGamedata in componentGamedata:
+        artFilepath = ("%s/%s-%s.jpg" % (componentFilepath, component["name"], pieceGamedata["name"])).replace(" ","")
+        instructionSets.append({"name": pieceGamedata["name"], "filepath": artFilepath, "quantity": pieceGamedata["quantity"]})
+
+    return instructionSets

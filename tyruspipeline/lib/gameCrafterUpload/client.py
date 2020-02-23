@@ -3,6 +3,8 @@ import json
 from os.path import isfile, join
 import sys
 
+from ..gameCrafterClient import operations as gamecrafter
+
 def loadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
@@ -24,94 +26,56 @@ def loadComponentFile(componentDirectoryPath):
     with open("%s/component.json" % componentDirectoryPath) as componentFile:
         return json.load(componentFile)
 
-def uploadComponents(session, outputDirectory, cloudGame, cloudGameFolder):
+def uploadGame(gameRootDirectoryPath):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    session = gamecrafter.login()
+
+    game = loadGame(gameRootDirectoryPath)
+    company = loadCompany(gameRootDirectoryPath)
+
+    print("Uploading %s for %s." % (game["name"], company["name"]))
+
+    cloudGame = gamecrafter.createGame(session, game["name"], company["gameCrafterDesignerId"])
+    cloudGameFolder = gamecrafter.createFolderAtRoot(session, game["name"])
+
+    uploadComponents(session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])
+
+def uploadComponents(session, outputDirectory, cloudGame, cloudGameFolderId):
     if not outputDirectory:
         raise Exception("outputDirectory cannot be None")
 
     for directoryPath in next(os.walk(outputDirectory))[1]:
         componentDirectoryPath = "%s/%s" % (outputDirectory, directoryPath)
-        uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolder)
+        uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderId)
 
-def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolder):
+def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderId):
     if not componentDirectoryPath:
         raise Exception("componentDirectoryPath cannot be None")
 
     componentFile = loadComponentFile(componentDirectoryPath)
     componentType = componentFile["type"]
     componentName = componentFile["name"]
+    fileInstructions = componentFile["fileInstructions"]
+
+    cloudComponentFolder = gamecrafter.createFolderAtParent(session, componentName, cloudGameFolderId)
+    cloudPokerDeck = gamecrafter.createPokerDeck(session, componentName, cloudGame["id"], None)
 
     if componentType != "pokerDeck":
         print("Skipping %s. The %s component type is not currently supported." % (componentName, componentType))
         return
     
     print("Uploading %s %s" % (componentType, componentName))
-    pieceFilepaths = []
-    for f in os.listdir(componentDirectoryPath):
-        filePath = join(componentDirectoryPath, f)
-        
-        if (isfile(filePath) and filePath.endswith(".jpg")):
-            pieceFilepaths.append(filePath)
     
-    for pieceFilepath in pieceFilepaths:
-        uploadPiece(session, pieceFilepath)
+    for instructions in fileInstructions:
+        uploadPiece(session, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])
 
-def uploadPiece(session, pieceFilepath):
-    print("Uploading %s" % (pieceFilepath))
+def uploadPiece(session, instructions, deckId, cloudComponentFolderId):
+    name = instructions["name"]
+    filepath = instructions["filepath"]
+    quantity = instructions["quantity"]
+    print("Uploading %s" % (filepath))
 
-def makePokerDeck(session, dirpath):
-    asset = '%s-pdeck-%s' % (self['name'], len(self.parts))
-
-    def face_card_test(filename):
-        return filename.startswith('face') and filename.endswith('.jpg')
-
-    return makeDeck('pokerdeck', 'pokercard', asset, dirpath, face_card_test)
-
-def makeDeck(session, deck_kind, card_kind, asset, dirpath, face_card_test):
-    folder = core.new_folder(session, asset, self.folder['id'])
-
-    back_filepath = dirpath + '/back.jpg'
-    file_result = core.new_file(back_filepath, folder['id'])
-
-    deck = new_deck(
-        deck_kind, asset, self.id, back_file_id=file_result['id']
-    )
-
-    print 'Deck'
-    print deck
-
-    self.parts.append(deck)
-
-    file_list = [dirpath + '/' + x
-                    for x in os.listdir(dirpath)
-                    if face_card_test(x)]
-    for filepath in file_list:
-        file_result = core.new_file(filepath, folder['id'])
-        card = new_card(
-            card_kind,
-            os.path.basename(filepath),
-            deck_id=deck['id'],
-            file_id=file_result['id']
-        )
-
-def makeBooklet(session, dirpath):
-    asset = '%s-booklet-%s' % (self['name'], len(self.parts))
-    folder = core.new_folder(self.user, asset, self.folder['id'])
-
-    booklet = new_booklet('smallbooklet', asset, self.id)
-
-    print 'Booklet'
-    print booklet
-
-    self.parts.append(booklet)
-
-    file_list = [dirpath + '/' + x
-                    for x in os.listdir(dirpath)
-                    if x.endswith('.png')]
-    for filepath in file_list:
-        file_result = core.new_file(filepath, folder['id'])
-        card = new_booklet_page(
-            'smallbookletpage',
-            os.path.basename(filepath),
-            booklet_id=booklet['id'],
-            image_id=file_result['id']
-        )
+    cloudFile = gamecrafter.uploadFile(session, filepath, cloudComponentFolderId)
+    pokerCard = gamecrafter.createPokerCard(session, name, deckId, quantity, cloudFile["id"])
