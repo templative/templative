@@ -13,7 +13,6 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     uniqueGameName = ("%s_%s_%s_%s" % (game["name"], game["version"], game["versionName"], timestamp)).replace(" ", "")
     game["name"] = uniqueGameName
-    
 
     gameFolderPath = createGameFolder(game["name"], outputDirectory)
     print("Producing %s" % gameFolderPath)
