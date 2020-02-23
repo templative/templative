@@ -21,3 +21,9 @@ Define the cards you’d like created, use the CLI, and purchase the game off of
 - `tyruspipeline produce -u` to create a version of the game and upload it. Remove `-u` to simple produce the game without uploading it.
 
 Use `tyruspipeline --help` for more info.
+
+## Todo
+
+- Parallelize art creation and upload
+- Allow replacing of a specific layer of svg
+- Allow for back data defining at gamedata/artMetadata level to enable cards with similar gamedata but different backs to live in the same component
