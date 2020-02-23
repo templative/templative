@@ -12,8 +12,8 @@ Define the cards you’d like created, use the CLI, and purchase the game off of
 
 ## Usage
 
-- Create an account on the [Game Crafter]("https://www.thegamecrafter.com)
-- Get an api key from the [Game Crafter](https://www.thegamecrafter.com/account/apikeys)
+- Create an account on the [Game Crafter](https://www.thegamecrafter.com)
+- Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
 - Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your env vars
 - Clone and cd into `tyrus-pipeline-cli`
 - `pip install .` to add `tyruspipeline` to your path.
