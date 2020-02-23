@@ -92,10 +92,10 @@ def produce(u):
     """Produce the game in the current directory"""
     producedGame = gameManagerClient.produceGame(".", "./output")
     if(u):
-        gameCrafterUpload.uploadGame(producedGame)
+        gameUploadUrl = gameCrafterUpload.uploadGame(producedGame)
 
 @cli.command()
 @click.option('-i', '--input', prompt='Input directory', help='The directory of the produced game.')
 def upload(input):
     """Upload a produced game in a directory"""
-    uploadedGame = gameCrafterUpload.uploadGame(input)
+    gameUploadUrl = gameCrafterUpload.uploadGame(input)

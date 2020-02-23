@@ -7,5 +7,5 @@ def uploadGame(gameRootDirectoryPath):
         print("gameRootDirectoryPath cannot be None")
         return
 
-    client.uploadGame(gameRootDirectoryPath)
+    return client.uploadGame(gameRootDirectoryPath)
 

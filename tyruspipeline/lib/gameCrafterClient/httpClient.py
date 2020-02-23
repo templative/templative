@@ -7,7 +7,6 @@ def post(url, files=None, **kwargs):
     return handleResponse(url, response)
 
 def get(url, **kwargs):
-    # print(url)
     response = requests.get(url, params=kwargs)
     return handleResponse(url, response)
 
@@ -16,6 +15,6 @@ def handleResponse(url, response):
     if not statusCode.startswith('2'):
         print 'FAIL', response
         print 'FAIL', response.json()
-        raise Exception('%s Returned %s. %s' % (url, statusCode, response.message))
+        raise Exception('%s Returned %s.' % (url, statusCode))
     
     return response.json()['result']

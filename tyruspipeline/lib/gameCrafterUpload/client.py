@@ -3,6 +3,8 @@ import json
 from os.path import isfile, join
 import sys
 
+gameCrafterBaseUrl = "https://www.thegamecrafter.com"
+
 from ..gameCrafterClient import operations as gamecrafter
 
 def loadGame(gameRootDirectoryPath):
@@ -41,6 +43,10 @@ def uploadGame(gameRootDirectoryPath):
     cloudGameFolder = gamecrafter.createFolderAtRoot(session, game["name"])
 
     uploadComponents(session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])
+
+    gameUrl = "%s/publish/editor/%s" % (gameCrafterBaseUrl, cloudGame["id"])
+    print("Uploads finished for %s, visit %s" %(cloudGame["name"], gameUrl))
+    return gameUrl
 
 def uploadComponents(session, outputDirectory, cloudGame, cloudGameFolderId):
     if not outputDirectory:

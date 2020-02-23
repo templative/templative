@@ -6,9 +6,7 @@ from tabulate import tabulate
 baseUrl = "https://www.thegamecrafter.com"
 
 def createGame(session, name, designerId):
-    gameName = "%s-%s" % (name, uuid1())
-    designerId = designerId
-    game = client.postGame(session, gameName, designerId)
+    game = client.postGame(session, name, designerId)
     
     gameName = game["name"]
     gameId = game["id"]
