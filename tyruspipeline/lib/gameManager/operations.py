@@ -24,6 +24,8 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
     for component in components["components"]:
         produceGameComponent(gameRootDirectoryPath, game, component, gameFolderPath)
 
+    print("Done producing %s" % gameFolderPath)
+
     return gameFolderPath
 
 def createGameFolder(name, outputDirectory):    
@@ -70,11 +72,12 @@ def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory
     componentInstructionFilepath = "%s/component.json" % (componentDirectory)
 
     fileInstructionSets = processor.getInstructionSetsForFiles(game, component, componentGamedata, componentDirectory)
-
+    backInstructionSet = processor.getBackInstructionSet(component, componentDirectory)
     componentInstructions = {
         "name": componentName, 
         "type": component["type"],
-        "fileInstructions": fileInstructionSets
+        "fileInstructions": fileInstructionSets,
+        "backInstructions": backInstructionSet
     }
     client.dumpInstructions(componentInstructionFilepath, componentInstructions)
 

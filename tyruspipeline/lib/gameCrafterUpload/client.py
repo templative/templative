@@ -64,18 +64,28 @@ def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderI
     componentType = componentFile["type"]
     componentName = componentFile["name"]
     fileInstructions = componentFile["fileInstructions"]
-
-    cloudComponentFolder = gamecrafter.createFolderAtParent(session, componentName, cloudGameFolderId)
-    cloudPokerDeck = gamecrafter.createPokerDeck(session, componentName, cloudGame["id"], None)
+    backInstructions = componentFile["backInstructions"]
 
     if componentType != "pokerDeck":
         print("Skipping %s. The %s component type is not currently supported." % (componentName, componentType))
         return
-    
+
     print("Uploading %s %s" % (componentType, componentName))
-    
+
+    cloudComponentFolder = gamecrafter.createFolderAtParent(session, componentName, cloudGameFolderId)
+    backImageId = uploadBack(session, backInstructions, cloudComponentFolder["id"])
+    cloudPokerDeck = gamecrafter.createPokerDeck(session, componentName, cloudGame["id"], backImageId)
+
     for instructions in fileInstructions:
         uploadPiece(session, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])
+
+def uploadBack(session, instructions, cloudComponentFolderId):
+    name = instructions["name"]
+    filepath = instructions["filepath"]
+    print("Uploading Back %s" % (filepath))
+
+    cloudFile = gamecrafter.uploadFile(session, filepath, cloudComponentFolderId)
+    return cloudFile["id"]
 
 def uploadPiece(session, instructions, deckId, cloudComponentFolderId):
     name = instructions["name"]

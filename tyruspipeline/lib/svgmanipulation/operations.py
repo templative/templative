@@ -45,3 +45,8 @@ def getInstructionSetsForFiles(game, component, componentGamedata, componentFile
         instructionSets.append({"name": pieceGamedata["name"], "filepath": artFilepath, "quantity": pieceGamedata["quantity"]})
 
     return instructionSets
+
+def getBackInstructionSet(component, componentFilepath):
+    filename = "%s-Back" % component["name"]
+    backFilepath = ("%s/%s.jpg" % (componentFilepath, filename)).replace(" ","")
+    return {"name": filename, "filepath": backFilepath}
