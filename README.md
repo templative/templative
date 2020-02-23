@@ -24,6 +24,6 @@ Use `tyruspipeline --help` for more info.
 
 ## Todo
 
-- Parallelize art creation and upload
-- Allow replacing of a specific layer of svg
-- Allow for back data defining at gamedata/artMetadata level to enable cards with similar gamedata but different backs to live in the same component
+- Parallelize art creation and upload.
+- Allow replacing of a specific layer of svg to enable underlays of backgrounds. Otherwise define templates with underlays baked in.
+- Allow for back data defining at gamedata/artMetadata level to enable cards with similar gamedata but different backs to live in the same component.
