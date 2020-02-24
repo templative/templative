@@ -22,8 +22,11 @@ def createArtFilesForComponent(game, component, frontMetaData, backMetaData, com
         return
     
     for pieceGamedata in componentGamedata:
+        # print("%s " % pieceGamedata["name"]),
         createArtFileOfPiece(game, component, pieceGamedata, frontMetaData, outputDirectory)
     
+    # print("")
+
     createArtFileOfPiece(game, component, {"name":"Back"}, backMetaData, outputDirectory)
 
 def getInstructionSetsForFiles(game, component, componentGamedata, componentFilepath):
