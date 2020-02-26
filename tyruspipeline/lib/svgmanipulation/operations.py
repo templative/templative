@@ -27,7 +27,7 @@ def createArtFilesForComponent(game, component, frontMetaData, backMetaData, com
     
     # print("")
 
-    createArtFileOfPiece(game, component, {"name":"Back"}, backMetaData, outputDirectory)
+    createArtFileOfPiece(game, component, {"name":"back"}, backMetaData, outputDirectory)
 
 def getInstructionSetsForFiles(game, component, componentGamedata, componentFilepath):
     if game == None:
@@ -50,6 +50,6 @@ def getInstructionSetsForFiles(game, component, componentGamedata, componentFile
     return instructionSets
 
 def getBackInstructionSet(component, componentFilepath):
-    filename = "%s-Back" % component["name"]
+    filename = "%s-back" % component["name"]
     backFilepath = ("%s/%s.jpg" % (componentFilepath, filename))
     return {"name": filename, "filepath": backFilepath}
