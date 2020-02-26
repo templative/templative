@@ -94,10 +94,18 @@ def textReplaceInFile(filepath, textReplacements, game, component, pieceGamedata
         for textReplacement in textReplacements:
             key = "{%s}" % textReplacement["key"]
             value = getScopedValue(textReplacement, game, component, pieceGamedata)
+            value = processValueFilters(value, textReplacement)
             contents = contents.replace(key, value)
 
     with open(filepath,'w') as f:
         f.write(contents)
+
+def processValueFilters(value, textReplacement):
+    if "filters" in textReplacement:
+        for filter in textReplacement["filters"]:
+            if filter == "toUpper":
+                value = value.upper()
+    return value
 
 def updateStylesInFile(filepath, styleUpdates, game, component, pieceGamedata):
     if filepath == None:
