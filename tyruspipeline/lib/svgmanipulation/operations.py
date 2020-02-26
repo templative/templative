@@ -1,6 +1,6 @@
 from client import createArtFileOfPiece
 
-def createArtFilesForComponent(game, component, frontMetaData, backMetaData, componentGamedata, outputDirectory):
+def createArtFilesForComponent(game, gameCompose, component, frontMetaData, backMetaData, componentGamedata, outputDirectory):
     if game == None:
         print("game cannot be None.")
         return
@@ -22,12 +22,9 @@ def createArtFilesForComponent(game, component, frontMetaData, backMetaData, com
         return
     
     for pieceGamedata in componentGamedata:
-        # print("%s " % pieceGamedata["name"]),
-        createArtFileOfPiece(game, component, pieceGamedata, frontMetaData, outputDirectory)
-    
-    # print("")
+        createArtFileOfPiece(game, gameCompose, component, pieceGamedata, frontMetaData, outputDirectory)
 
-    createArtFileOfPiece(game, component, {"name":"back"}, backMetaData, outputDirectory)
+    createArtFileOfPiece(game, gameCompose, component, {"name":"back"}, backMetaData, outputDirectory)
 
 def getInstructionSetsForFiles(game, component, componentGamedata, componentFilepath):
     if game == None:

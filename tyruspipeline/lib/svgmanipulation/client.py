@@ -4,7 +4,7 @@ import svgutils.transform as sg
 import xml.etree.ElementTree as ET
 from wand.image import Image
        
-def createArtFileOfPiece(game, component, pieceGamedata, artMetaData, outputDirectory):
+def createArtFileOfPiece(game, gameCompose, component, pieceGamedata, artMetaData, outputDirectory):
     if game == None:
         print("game cannot be None.")
         return
@@ -25,10 +25,10 @@ def createArtFileOfPiece(game, component, pieceGamedata, artMetaData, outputDire
         print("outputDirectory cannot be None.")
         return
 
-    templateFilesDirectory = "artComponents/templates"
+    templateFilesDirectory = gameCompose["artTemplatesDirectory"]
     artFile = Element("%s/%s.svg" % (templateFilesDirectory, artMetaData["templateFilename"])) 
 
-    addOverlays(artFile, artMetaData["overlays"], game, component, pieceGamedata)
+    addOverlays(artFile, artMetaData["overlays"], game, gameCompose, component, pieceGamedata)
 
     artFileOutputName = ("%s-%s" % (component["name"], pieceGamedata["name"]))
     artFileOutputFilepath = "%s/%s.svg" % (outputDirectory, artFileOutputName)
@@ -39,7 +39,7 @@ def createArtFileOfPiece(game, component, pieceGamedata, artMetaData, outputDire
 
     exportSvgToJpg(artFileOutputFilepath, artFileOutputName, outputDirectory)
 
-def addOverlays(artFile, overlays, game, component, pieceGamedata):
+def addOverlays(artFile, overlays, game, gameCompose, component, pieceGamedata):
     if artFile == None:
         print("artFile cannot be None.")
         return
@@ -60,10 +60,11 @@ def addOverlays(artFile, overlays, game, component, pieceGamedata):
         print("pieceGamedata cannot be None.")
         return
 
+    overlayFilesDirectory = gameCompose["artInsertsDirectory"]
+
     for overlay in overlays:
         overlayName = getScopedValue(overlay, game, component, pieceGamedata)
         if overlayName != None and overlayName != "":
-            overlayFilesDirectory = "artComponents/graphicalInserts"
             graphicsInsert = Element("%s/%s.svg" % (overlayFilesDirectory, overlayName))
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 

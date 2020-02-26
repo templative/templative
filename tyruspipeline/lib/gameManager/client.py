@@ -16,6 +16,13 @@ def loadCompany(gameRootDirectoryPath):
     with open("%s/company.json" % gameRootDirectoryPath) as company:
         return json.load(company)
 
+def loadGameCompose(gameRootDirectoryPath):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    with open("%s/game-compose.json" % gameRootDirectoryPath) as gameCompose:
+        return json.load(gameCompose)
+
 def loadGameComponents(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
@@ -23,14 +30,16 @@ def loadGameComponents(gameRootDirectoryPath):
     with open("%s/components.json" % gameRootDirectoryPath) as componentFile:
         return json.load(componentFile)
 
-def loadComponentGamedata(gameRootDirectoryPath, gamedataFilename):
+def loadComponentGamedata(gameRootDirectoryPath, gameCompose, gamedataFilename):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
     if not gamedataFilename:
         return {}
 
-    filepath = '%s/componentData/%s.csv' % (gameRootDirectoryPath, gamedataFilename)
+    componentDataDirectory = gameCompose["componentDataDirectory"]
+
+    filepath = '%s/%s/%s.csv' % (gameRootDirectoryPath, componentDataDirectory, gamedataFilename)
     with open(filepath) as gamedataFile:
         reader = csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
 
@@ -39,14 +48,16 @@ def loadComponentGamedata(gameRootDirectoryPath, gamedataFilename):
             gamedata.append(row)
         return gamedata
 
-def loadArtMetadata(gameRootDirectoryPath, artMetadataFilename):
+def loadArtMetadata(gameRootDirectoryPath, gameCompose, artMetadataFilename):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
     if not artMetadataFilename:
         return {}
 
-    filepath = '%s/componentArtMetadata/%s.json' % (gameRootDirectoryPath, artMetadataFilename)
+    artMetadataDirectory = gameCompose["artMetadataDirectory"]
+
+    filepath = '%s/%s/%s.json' % (gameRootDirectoryPath, artMetadataDirectory, artMetadataFilename)
     with open(filepath) as metadataFile:
         return json.load(metadataFile)
 

@@ -5,7 +5,7 @@ from datetime import datetime
 import client as client
 from ..svgmanipulation import operations as processor
 
-def produceGame(gameRootDirectoryPath, outputDirectory):
+def produceGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
 
@@ -14,7 +14,9 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
     uniqueGameName = ("%s_%s_%s_%s" % (game["name"], game["version"], game["versionName"], timestamp)).replace(" ", "")
     game["name"] = uniqueGameName
 
-    gameFolderPath = createGameFolder(game["name"], outputDirectory)
+    gameCompose = client.loadGameCompose(gameRootDirectoryPath)
+
+    gameFolderPath = createGameFolder(game["name"], gameCompose["outputDirectory"])
     print("Producing %s" % gameFolderPath)
 
     copyCompanyFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath)
@@ -22,7 +24,7 @@ def produceGame(gameRootDirectoryPath, outputDirectory):
     
     components = client.loadGameComponents(gameRootDirectoryPath)
     for component in components["components"]:
-        produceGameComponent(gameRootDirectoryPath, game, component, gameFolderPath)
+        produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
 
     print("Done producing %s" % gameFolderPath)
 
@@ -42,23 +44,23 @@ def copyGameFromGameFolderToOutput(game, gameFolderPath):
     gameFilepath = "%s/game.json" % (gameFolderPath)
     client.dumpInstructions(gameFilepath, game)
 
-def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory):
+def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, outputDirectory):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
     componentDisplayName = component["displayName"]
-    
-    componentGamedata = client.loadComponentGamedata(gameRootDirectoryPath, component["gamedataFilename"])
+
+    componentGamedata = client.loadComponentGamedata(gameRootDirectoryPath, gameCompose, component["gamedataFilename"])
     if not componentGamedata or componentGamedata == {}:
         print("Skipping %s component due to missing game data." % componentDisplayName)
         return
 
-    componentArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, component["artMetadataFilename"])
+    componentArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, gameCompose, component["artMetadataFilename"])
     if not componentArtMetadata or componentArtMetadata == {}:
         print("Skipping %s component due to missing front art metadata." % componentDisplayName)
         return
 
-    componentBackArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, component["backArtMetadataFilename"])
+    componentBackArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, gameCompose, component["backArtMetadataFilename"])
     if not componentBackArtMetadata or componentBackArtMetadata == {}:
         print("Skipping %s component due to missing back art metadata." % componentDisplayName)
         return
@@ -81,5 +83,5 @@ def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory
     }
     client.dumpInstructions(componentInstructionFilepath, componentInstructions)
 
-    processor.createArtFilesForComponent(game, component, componentArtMetadata, componentBackArtMetadata,  componentGamedata, componentDirectory)
+    processor.createArtFilesForComponent(game, gameCompose, component, componentArtMetadata, componentBackArtMetadata,  componentGamedata, componentDirectory)
         
