@@ -46,26 +46,26 @@ def produceGameComponent(gameRootDirectoryPath, game, component, outputDirectory
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    componentName = component["name"]
+    componentDisplayName = component["displayName"]
     
     componentGamedata = client.loadComponentGamedata(gameRootDirectoryPath, component["gamedataFilename"])
     if not componentGamedata or componentGamedata == {}:
-        print("Skipping %s component due to missing game data." % componentName)
+        print("Skipping %s component due to missing game data." % componentDisplayName)
         return
 
     componentArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, component["artMetadataFilename"])
     if not componentArtMetadata or componentArtMetadata == {}:
-        print("Skipping %s component due to missing front art metadata." % componentName)
+        print("Skipping %s component due to missing front art metadata." % componentDisplayName)
         return
 
     componentBackArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, component["backArtMetadataFilename"])
     if not componentBackArtMetadata or componentBackArtMetadata == {}:
-        print("Skipping %s component due to missing back art metadata." % componentName)
+        print("Skipping %s component due to missing back art metadata." % componentDisplayName)
         return
 
-    print("Creating art assets for %s component." % (component["name"]))
+    print("Creating art assets for %s component." % (componentDisplayName))
 
-    componentName = component["name"].replace(" ", "")
+    componentName = component["name"]
     componentDirectory = "%s/%s" % (outputDirectory, componentName)
     os.mkdir(componentDirectory)
 

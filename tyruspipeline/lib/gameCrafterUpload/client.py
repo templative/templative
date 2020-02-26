@@ -37,7 +37,7 @@ def uploadGame(gameRootDirectoryPath):
     game = loadGame(gameRootDirectoryPath)
     company = loadCompany(gameRootDirectoryPath)
 
-    print("Uploading %s for %s." % (game["name"], company["name"]))
+    print("Uploading %s for %s." % (game["displayName"], company["displayName"]))
 
     cloudGame = gamecrafter.createGame(session, game["name"], company["gameCrafterDesignerId"])
     cloudGameFolder = gamecrafter.createFolderAtRoot(session, game["name"])
@@ -63,14 +63,15 @@ def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderI
     componentFile = loadComponentFile(componentDirectoryPath)
     componentType = componentFile["type"]
     componentName = componentFile["name"]
+    componentDisplayName = componentFile["name"]
     fileInstructions = componentFile["fileInstructions"]
     backInstructions = componentFile["backInstructions"]
 
     if componentType != "pokerDeck":
-        print("Skipping %s. The %s component type is not currently supported." % (componentName, componentType))
+        print("Skipping %s. The %s component type is not currently supported." % (componentDisplayName, componentType))
         return
 
-    print("Uploading %s %s" % (componentType, componentName))
+    print("Uploading %s %s" % (componentType, componentDisplayName))
 
     cloudComponentFolder = gamecrafter.createFolderAtParent(session, componentName, cloudGameFolderId)
     backImageId = uploadBack(session, backInstructions, cloudComponentFolder["id"])

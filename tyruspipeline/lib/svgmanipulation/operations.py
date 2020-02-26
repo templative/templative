@@ -44,12 +44,12 @@ def getInstructionSetsForFiles(game, component, componentGamedata, componentFile
 
     instructionSets = []
     for pieceGamedata in componentGamedata:
-        artFilepath = ("%s/%s-%s.jpg" % (componentFilepath, component["name"], pieceGamedata["name"])).replace(" ","")
+        artFilepath = ("%s/%s-%s.jpg" % (componentFilepath, component["name"], pieceGamedata["name"]))
         instructionSets.append({"name": pieceGamedata["name"], "filepath": artFilepath, "quantity": pieceGamedata["quantity"]})
 
     return instructionSets
 
 def getBackInstructionSet(component, componentFilepath):
     filename = "%s-Back" % component["name"]
-    backFilepath = ("%s/%s.jpg" % (componentFilepath, filename)).replace(" ","")
+    backFilepath = ("%s/%s.jpg" % (componentFilepath, filename))
     return {"name": filename, "filepath": backFilepath}

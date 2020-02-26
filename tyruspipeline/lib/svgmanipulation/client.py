@@ -30,7 +30,7 @@ def createArtFileOfPiece(game, component, pieceGamedata, artMetaData, outputDire
 
     addOverlays(artFile, artMetaData["overlays"], game, component, pieceGamedata)
 
-    artFileOutputName = ("%s-%s" % (component["name"], pieceGamedata["name"])).replace(" ", "")
+    artFileOutputName = ("%s-%s" % (component["name"], pieceGamedata["name"]))
     artFileOutputFilepath = "%s/%s.svg" % (outputDirectory, artFileOutputName)
     artFile.dump(artFileOutputFilepath)
     
