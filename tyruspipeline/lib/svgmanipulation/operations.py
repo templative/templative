@@ -1,3 +1,4 @@
+import os
 from client import createArtFileOfPiece
 
 def createArtFilesForComponent(game, gameCompose, component, frontMetaData, backMetaData, componentGamedata, outputDirectory):
@@ -41,12 +42,13 @@ def getInstructionSetsForFiles(game, component, componentGamedata, componentFile
 
     instructionSets = []
     for pieceGamedata in componentGamedata:
-        artFilepath = ("%s/%s-%s.jpg" % (componentFilepath, component["name"], pieceGamedata["name"]))
+        filename = "%s-%s.jpg" % (component["name"], pieceGamedata["name"])
+        artFilepath = os.path.join(componentFilepath, filename)
         instructionSets.append({"name": pieceGamedata["name"], "filepath": artFilepath, "quantity": pieceGamedata["quantity"]})
 
     return instructionSets
 
 def getBackInstructionSet(component, componentFilepath):
-    filename = "%s-back" % component["name"]
-    backFilepath = ("%s/%s.jpg" % (componentFilepath, filename))
+    filename = "%s-back.jpg" % component["name"]
+    backFilepath = os.path.join(componentFilepath, filename)
     return {"name": filename, "filepath": backFilepath}

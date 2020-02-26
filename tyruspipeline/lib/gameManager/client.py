@@ -6,28 +6,28 @@ def loadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open("%s/game.json" % gameRootDirectoryPath) as game:
+    with open(os.path.join(gameRootDirectoryPath, "game.json")) as game:
         return json.load(game)
 
 def loadCompany(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open("%s/company.json" % gameRootDirectoryPath) as company:
+    with open(os.path.join(gameRootDirectoryPath, "company.json")) as company:
         return json.load(company)
 
 def loadGameCompose(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open("%s/game-compose.json" % gameRootDirectoryPath) as gameCompose:
+    with open(os.path.join(gameRootDirectoryPath, "game-compose.json")) as gameCompose:
         return json.load(gameCompose)
 
 def loadGameComponents(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open("%s/components.json" % gameRootDirectoryPath) as componentFile:
+    with open(os.path.join(gameRootDirectoryPath, "components.json")) as componentFile:
         return json.load(componentFile)
 
 def loadComponentGamedata(gameRootDirectoryPath, gameCompose, gamedataFilename):
@@ -38,8 +38,8 @@ def loadComponentGamedata(gameRootDirectoryPath, gameCompose, gamedataFilename):
         return {}
 
     componentDataDirectory = gameCompose["componentDataDirectory"]
-
-    filepath = '%s/%s/%s.csv' % (gameRootDirectoryPath, componentDataDirectory, gamedataFilename)
+    gamedataFilenameWithExtension = "%s.csv" % (gamedataFilename)
+    filepath = os.path.join(gameRootDirectoryPath, componentDataDirectory, gamedataFilenameWithExtension)
     with open(filepath) as gamedataFile:
         reader = csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
 
@@ -56,8 +56,8 @@ def loadArtMetadata(gameRootDirectoryPath, gameCompose, artMetadataFilename):
         return {}
 
     artMetadataDirectory = gameCompose["artMetadataDirectory"]
-
-    filepath = '%s/%s/%s.json' % (gameRootDirectoryPath, artMetadataDirectory, artMetadataFilename)
+    artMetadataFilenameWithExtension = "%s.json" % (artMetadataFilename)
+    filepath = os.path.join(gameRootDirectoryPath, artMetadataDirectory, artMetadataFilenameWithExtension)
     with open(filepath) as metadataFile:
         return json.load(metadataFile)
 

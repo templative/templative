@@ -26,12 +26,14 @@ def createArtFileOfPiece(game, gameCompose, component, pieceGamedata, artMetaDat
         return
 
     templateFilesDirectory = gameCompose["artTemplatesDirectory"]
-    artFile = Element("%s/%s.svg" % (templateFilesDirectory, artMetaData["templateFilename"])) 
+    artFilename = "%s.svg" % (artMetaData["templateFilename"])
+    artFile = Element(os.path.join(templateFilesDirectory, artFilename)) 
 
     addOverlays(artFile, artMetaData["overlays"], game, gameCompose, component, pieceGamedata)
 
     artFileOutputName = ("%s-%s" % (component["name"], pieceGamedata["name"]))
-    artFileOutputFilepath = "%s/%s.svg" % (outputDirectory, artFileOutputName)
+    artFileOutputFileName = "%s.svg" % (artFileOutputName)
+    artFileOutputFilepath = os.path.join(outputDirectory, artFileOutputFileName)
     artFile.dump(artFileOutputFilepath)
     
     textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, component, pieceGamedata)
@@ -65,7 +67,9 @@ def addOverlays(artFile, overlays, game, gameCompose, component, pieceGamedata):
     for overlay in overlays:
         overlayName = getScopedValue(overlay, game, component, pieceGamedata)
         if overlayName != None and overlayName != "":
-            graphicsInsert = Element("%s/%s.svg" % (overlayFilesDirectory, overlayName))
+            overlayFilename = "%s.svg" % (overlayName)
+            overlayFilepath = os.path.join(overlayFilesDirectory, overlayFilename)
+            graphicsInsert = Element(overlayFilepath)
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 
 def textReplaceInFile(filepath, textReplacements, game, component, pieceGamedata):
@@ -173,6 +177,8 @@ def getScopedValue(scopedValue, game, component, pieceGamedata):
     return pieceGamedata[source]
 
 def exportSvgToJpg(filepath, name, outputDirectory):
+    outputFilename = "%s.jpg" % (name)
+    outputFilepath = os.path.join(outputDirectory, outputFilename)
     with Image(filename=filepath, resolution=1148, colorspace="rgb") as image:
         image.resize(825,1125)
-        image.save(filename='%s/%s.jpg' % (outputDirectory, name))
+        image.save(filename=outputFilepath)

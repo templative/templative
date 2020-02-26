@@ -11,21 +11,21 @@ def loadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open("%s/game.json" % gameRootDirectoryPath) as game:
+    with open(os.path.join(gameRootDirectoryPath, "game.json")) as game:
         return json.load(game)
 
 def loadCompany(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open("%s/company.json" % gameRootDirectoryPath) as company:
+    with open(os.path.join(gameRootDirectoryPath, "company.json")) as company:
         return json.load(company)
 
 def loadComponentFile(componentDirectoryPath):
     if not componentDirectoryPath:
         raise Exception("componentDirectoryPath cannot be None")
 
-    with open("%s/component.json" % componentDirectoryPath) as componentFile:
+    with open(os.path.join(componentDirectoryPath, "component.json")) as componentFile:
         return json.load(componentFile)
 
 def uploadGame(gameRootDirectoryPath):

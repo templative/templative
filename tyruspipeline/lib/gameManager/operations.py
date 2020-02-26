@@ -31,18 +31,18 @@ def produceGame(gameRootDirectoryPath):
     return gameFolderPath
 
 def createGameFolder(name, outputDirectory):    
-    gameFolderPath = "%s/%s" % (outputDirectory, name)
+    gameFolderPath = os.path.join(outputDirectory, name)
     os.mkdir(gameFolderPath)
     return gameFolderPath
 
 def copyCompanyFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath):
     company = client.loadCompany(gameRootDirectoryPath)
-    companyFilepath = "%s/company.json" % (gameFolderPath)
+    companyFilepath = os.path.join(gameFolderPath, "company.json")
     client.dumpInstructions(companyFilepath, company)
 
 def copyGameFromGameFolderToOutput(game, gameFolderPath):
-    gameFilepath = "%s/game.json" % (gameFolderPath)
-    client.dumpInstructions(gameFilepath, game)
+    companyFilepath = os.path.join(gameFolderPath, "game.json")
+    client.dumpInstructions(companyFilepath, game)
 
 def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, outputDirectory):
     if not gameRootDirectoryPath:
@@ -68,10 +68,10 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, ou
     print("Creating art assets for %s component." % (componentDisplayName))
 
     componentName = component["name"]
-    componentDirectory = "%s/%s" % (outputDirectory, componentName)
+    componentDirectory = os.path.join(outputDirectory, componentName)
     os.mkdir(componentDirectory)
 
-    componentInstructionFilepath = "%s/component.json" % (componentDirectory)
+    componentInstructionFilepath = os.path.join(componentDirectory, "component.json")
 
     fileInstructionSets = processor.getInstructionSetsForFiles(game, component, componentGamedata, componentDirectory)
     backInstructionSet = processor.getBackInstructionSet(component, componentDirectory)
