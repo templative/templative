@@ -2,6 +2,8 @@ import os
 import json
 from os.path import isfile, join
 import sys
+import inflect
+p = inflect.engine()
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
@@ -64,6 +66,7 @@ def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderI
     componentType = componentFile["type"]
     componentName = componentFile["name"]
     componentDisplayName = componentFile["name"]
+    quantity = componentFile["quantity"]
     fileInstructions = componentFile["fileInstructions"]
     backInstructions = componentFile["backInstructions"]
 
@@ -71,11 +74,12 @@ def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderI
         print("Skipping %s. The %s component type is not currently supported." % (componentDisplayName, componentType))
         return
 
-    print("Uploading %s %s" % (componentType, componentDisplayName))
+    inflectedNumber = p.number_to_words(quantity)
+    print("Uploading %s %s %s(s)" % (inflectedNumber, componentDisplayName, componentType))
 
     cloudComponentFolder = gamecrafter.createFolderAtParent(session, componentName, cloudGameFolderId)
     backImageId = uploadBack(session, backInstructions, cloudComponentFolder["id"])
-    cloudPokerDeck = gamecrafter.createPokerDeck(session, componentName, cloudGame["id"], backImageId)
+    cloudPokerDeck = gamecrafter.createPokerDeck(session, componentName, quantity, cloudGame["id"], backImageId)
 
     for instructions in fileInstructions:
         uploadPiece(session, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])

@@ -31,8 +31,8 @@ def uploadFile(session, filepath, folderId):
 
     return client.postFile(session, fileToUpload, filename, folderId)
 
-def createPokerDeck(session, name, gameId, imageFileId):
-    return client.postPokerDeck(session, name, gameId, imageFileId)
+def createPokerDeck(session, name, quantity, gameId, imageFileId):
+    return client.postPokerDeck(session, name, quantity, gameId, imageFileId)
 
 def createPokerCard(session, name, deckId, quantity, imageFileId):
     return client.postPokerCard(session, name, deckId, quantity, imageFileId)

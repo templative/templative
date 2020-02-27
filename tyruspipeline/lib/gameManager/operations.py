@@ -4,7 +4,6 @@ from datetime import datetime
 from distutils.dir_util import copy_tree
 
 import client as client
-from ..svgmanipulation import operations as processor
 
 def produceGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
@@ -35,7 +34,7 @@ def createTemplate():
     if(os.path.exists(".game-compose")):
         print("Existing game compose here. Exiting.")
         return
-        
+
     fromDirectory = os.path.join(os.path.dirname(os.path.realpath(__file__)), "template")
     copy_tree(fromDirectory, "./")
         

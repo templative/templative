@@ -1,6 +1,7 @@
 import os
 import json
 import csv
+from ..svgmanipulation import operations as processor
 
 def loadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
@@ -74,13 +75,13 @@ def createGameFolder(name, outputDirectory):
     return gameFolderPath
 
 def copyCompanyFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath):
-    company = client.loadCompany(gameRootDirectoryPath)
+    company = loadCompany(gameRootDirectoryPath)
     companyFilepath = os.path.join(gameFolderPath, "company.json")
-    client.dumpInstructions(companyFilepath, company)
+    dumpInstructions(companyFilepath, company)
 
 def copyGameFromGameFolderToOutput(game, gameFolderPath):
     companyFilepath = os.path.join(gameFolderPath, "game.json")
-    client.dumpInstructions(companyFilepath, game)
+    dumpInstructions(companyFilepath, game)
 
 def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, outputDirectory):
     if not gameRootDirectoryPath:
@@ -88,17 +89,17 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, ou
 
     componentDisplayName = component["displayName"]
 
-    componentGamedata = client.loadComponentGamedata(gameRootDirectoryPath, gameCompose, component["gamedataFilename"])
+    componentGamedata = loadComponentGamedata(gameRootDirectoryPath, gameCompose, component["gamedataFilename"])
     if not componentGamedata or componentGamedata == {}:
         print("Skipping %s component due to missing game data." % componentDisplayName)
         return
 
-    componentArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, gameCompose, component["artMetadataFilename"])
+    componentArtMetadata = loadArtMetadata(gameRootDirectoryPath, gameCompose, component["artMetadataFilename"])
     if not componentArtMetadata or componentArtMetadata == {}:
         print("Skipping %s component due to missing front art metadata." % componentDisplayName)
         return
 
-    componentBackArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, gameCompose, component["backArtMetadataFilename"])
+    componentBackArtMetadata = loadArtMetadata(gameRootDirectoryPath, gameCompose, component["backArtMetadataFilename"])
     if not componentBackArtMetadata or componentBackArtMetadata == {}:
         print("Skipping %s component due to missing back art metadata." % componentDisplayName)
         return
@@ -116,9 +117,10 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, ou
     componentInstructions = {
         "name": componentName, 
         "type": component["type"],
+        "quantity": component["quantity"],
         "fileInstructions": fileInstructionSets,
         "backInstructions": backInstructionSet
     }
-    client.dumpInstructions(componentInstructionFilepath, componentInstructions)
+    dumpInstructions(componentInstructionFilepath, componentInstructions)
 
     processor.createArtFilesForComponent(game, gameCompose, component, componentArtMetadata, componentBackArtMetadata,  componentGamedata, componentDirectory)
