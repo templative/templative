@@ -99,3 +99,8 @@ def produce(u):
 def upload(input):
     """Upload a produced game in a directory"""
     gameUploadUrl = gameCrafterUpload.uploadGame(input)
+
+@cli.command()
+def init():
+    """Create the default game project here"""
+    gameManagerClient.createTemplate()

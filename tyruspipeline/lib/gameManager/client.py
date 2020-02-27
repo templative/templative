@@ -67,3 +67,58 @@ def dumpInstructions(filepath, data):
     
     with open(filepath, 'w') as outfile:
         json.dump(data, outfile)
+
+def createGameFolder(name, outputDirectory):    
+    gameFolderPath = os.path.join(outputDirectory, name)
+    os.mkdir(gameFolderPath)
+    return gameFolderPath
+
+def copyCompanyFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath):
+    company = client.loadCompany(gameRootDirectoryPath)
+    companyFilepath = os.path.join(gameFolderPath, "company.json")
+    client.dumpInstructions(companyFilepath, company)
+
+def copyGameFromGameFolderToOutput(game, gameFolderPath):
+    companyFilepath = os.path.join(gameFolderPath, "game.json")
+    client.dumpInstructions(companyFilepath, game)
+
+def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, outputDirectory):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    componentDisplayName = component["displayName"]
+
+    componentGamedata = client.loadComponentGamedata(gameRootDirectoryPath, gameCompose, component["gamedataFilename"])
+    if not componentGamedata or componentGamedata == {}:
+        print("Skipping %s component due to missing game data." % componentDisplayName)
+        return
+
+    componentArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, gameCompose, component["artMetadataFilename"])
+    if not componentArtMetadata or componentArtMetadata == {}:
+        print("Skipping %s component due to missing front art metadata." % componentDisplayName)
+        return
+
+    componentBackArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, gameCompose, component["backArtMetadataFilename"])
+    if not componentBackArtMetadata or componentBackArtMetadata == {}:
+        print("Skipping %s component due to missing back art metadata." % componentDisplayName)
+        return
+
+    print("Creating art assets for %s component." % (componentDisplayName))
+
+    componentName = component["name"]
+    componentDirectory = os.path.join(outputDirectory, componentName)
+    os.mkdir(componentDirectory)
+
+    componentInstructionFilepath = os.path.join(componentDirectory, "component.json")
+
+    fileInstructionSets = processor.getInstructionSetsForFiles(game, component, componentGamedata, componentDirectory)
+    backInstructionSet = processor.getBackInstructionSet(component, componentDirectory)
+    componentInstructions = {
+        "name": componentName, 
+        "type": component["type"],
+        "fileInstructions": fileInstructionSets,
+        "backInstructions": backInstructionSet
+    }
+    client.dumpInstructions(componentInstructionFilepath, componentInstructions)
+
+    processor.createArtFilesForComponent(game, gameCompose, component, componentArtMetadata, componentBackArtMetadata,  componentGamedata, componentDirectory)

@@ -1,6 +1,7 @@
 import uuid
 import os
 from datetime import datetime
+from distutils.dir_util import copy_tree
 
 import client as client
 from ..svgmanipulation import operations as processor
@@ -16,72 +17,25 @@ def produceGame(gameRootDirectoryPath):
 
     gameCompose = client.loadGameCompose(gameRootDirectoryPath)
 
-    gameFolderPath = createGameFolder(game["name"], gameCompose["outputDirectory"])
+    gameFolderPath = client.createGameFolder(game["name"], gameCompose["outputDirectory"])
     print("Producing %s" % gameFolderPath)
 
-    copyCompanyFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath)
-    copyGameFromGameFolderToOutput(game, gameFolderPath)
+    client.copyCompanyFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath)
+    client.copyGameFromGameFolderToOutput(game, gameFolderPath)
     
     components = client.loadGameComponents(gameRootDirectoryPath)
     for component in components["components"]:
-        produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
+        client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
 
     print("Done producing %s" % gameFolderPath)
 
     return gameFolderPath
 
-def createGameFolder(name, outputDirectory):    
-    gameFolderPath = os.path.join(outputDirectory, name)
-    os.mkdir(gameFolderPath)
-    return gameFolderPath
-
-def copyCompanyFromGameFolderToOutput(gameRootDirectoryPath, gameFolderPath):
-    company = client.loadCompany(gameRootDirectoryPath)
-    companyFilepath = os.path.join(gameFolderPath, "company.json")
-    client.dumpInstructions(companyFilepath, company)
-
-def copyGameFromGameFolderToOutput(game, gameFolderPath):
-    companyFilepath = os.path.join(gameFolderPath, "game.json")
-    client.dumpInstructions(companyFilepath, game)
-
-def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, outputDirectory):
-    if not gameRootDirectoryPath:
-        raise Exception("Game root directory path cannot be None")
-
-    componentDisplayName = component["displayName"]
-
-    componentGamedata = client.loadComponentGamedata(gameRootDirectoryPath, gameCompose, component["gamedataFilename"])
-    if not componentGamedata or componentGamedata == {}:
-        print("Skipping %s component due to missing game data." % componentDisplayName)
+def createTemplate():
+    if(os.path.exists(".game-compose")):
+        print("Existing game compose here. Exiting.")
         return
-
-    componentArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, gameCompose, component["artMetadataFilename"])
-    if not componentArtMetadata or componentArtMetadata == {}:
-        print("Skipping %s component due to missing front art metadata." % componentDisplayName)
-        return
-
-    componentBackArtMetadata = client.loadArtMetadata(gameRootDirectoryPath, gameCompose, component["backArtMetadataFilename"])
-    if not componentBackArtMetadata or componentBackArtMetadata == {}:
-        print("Skipping %s component due to missing back art metadata." % componentDisplayName)
-        return
-
-    print("Creating art assets for %s component." % (componentDisplayName))
-
-    componentName = component["name"]
-    componentDirectory = os.path.join(outputDirectory, componentName)
-    os.mkdir(componentDirectory)
-
-    componentInstructionFilepath = os.path.join(componentDirectory, "component.json")
-
-    fileInstructionSets = processor.getInstructionSetsForFiles(game, component, componentGamedata, componentDirectory)
-    backInstructionSet = processor.getBackInstructionSet(component, componentDirectory)
-    componentInstructions = {
-        "name": componentName, 
-        "type": component["type"],
-        "fileInstructions": fileInstructionSets,
-        "backInstructions": backInstructionSet
-    }
-    client.dumpInstructions(componentInstructionFilepath, componentInstructions)
-
-    processor.createArtFilesForComponent(game, gameCompose, component, componentArtMetadata, componentBackArtMetadata,  componentGamedata, componentDirectory)
+        
+    fromDirectory = os.path.join(os.path.dirname(os.path.realpath(__file__)), "template")
+    copy_tree(fromDirectory, "./")
         
