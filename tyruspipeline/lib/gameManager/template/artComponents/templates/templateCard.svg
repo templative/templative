@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="69.86129mm"
+   height="95.265602mm"
+   viewBox="0 0 69.86129 95.265602"
+   version="1.1"
+   id="svg3328"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="actionCardTemplate.svg">
+  <defs
+     id="defs3322" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="-39.175378"
+     inkscape:cy="172.74957"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="2510"
+     inkscape:window-height="1395"
+     inkscape:window-x="839"
+     inkscape:window-y="273"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3325">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Image"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-61.075315,-55.087384)">
+    <rect
+       style="fill:#e06666;fill-opacity:1;stroke-width:0.28222224"
+       x="61.075314"
+       y="55.087383"
+       width="69.86129"
+       height="95.265511"
+       id="background"
+       inkscape:label="Background" />
+    <g
+       id="g3939">
+      <rect
+         id="rect9171-8-7-3-8-9-9-1-6-6-1-9-5-6-4-4-1-6-0"
+         height="1.6473105"
+         width="69.86129"
+         y="86.8265"
+         x="61.075314"
+         style="fill:#eaeaea;fill-opacity:1;stroke-width:0.28222224" />
+      <polygon
+         id="polygon9173-2-4-1-4-3-2-1-2-9-2-1-7-6-3-8-4-7-8"
+         points="2535,-4622.543 2535,-4599.899 3359.965,-4599.899 3359.965,-4622.543 3359.965,-5321.666 2535,-5321.666 "
+         style="fill:#eaeaea;fill-opacity:1"
+         transform="matrix(0.08468034,0,0,0.08467286,-153.58928,539.83959)" />
+    </g>
+    <text
+       transform="scale(1.0000441,0.99995589)"
+       id="power"
+       y="77.372551"
+       x="71.476204"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.38666677px;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#eaeaea;fill-opacity:1;stroke:none;stroke-width:0.28222224"
+       xml:space="preserve"
+       inkscape:label="Power"><tspan
+         style="font-size:17.9638958px;line-height:1.25;text-align:start;text-anchor:start;stroke-width:0.28222224"
+         y="77.372551"
+         x="71.476204"
+         id="tspan15400-4-6-9-7-0-5-9-5-1-1-2-4-5-8-9-7"
+         sodipodi:role="line">{power}</tspan></text>
+    <text
+       id="title"
+       y="98.379692"
+       x="67.542793"
+       style="font-style:normal;font-weight:bold;font-size:3.38666677px;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#454545;fill-opacity:1;stroke:none;stroke-width:0.28222224"
+       xml:space="preserve"
+       inkscape:label="Title"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.72298145px;line-height:100%;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#454545;fill-opacity:1;stroke-width:0.28222224"
+         id="tspan5966-1-5-3-22-3-9-0-1-9-9-3-9-2-9"
+         y="98.379692"
+         x="67.542793"
+         sodipodi:role="line">{displayName}</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.72298145px;line-height:100%;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#454545;fill-opacity:1;stroke-width:0.28222224"
+         y="101.21552"
+         x="67.542793"
+         sodipodi:role="line"
+         id="tspan3943" /></text>
+    <flowRoot
+       xml:space="preserve"
+       id="description"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#494949;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.28222223,0,0,0.28222223,355.71451,105.8639)"
+       inkscape:label="Description"><flowRegion
+         id="flowRegion4865-3-3-3-7"><rect
+           id="rect4867-0-2-9-3"
+           width="201.87898"
+           height="153.44217"
+           x="-1021.0622"
+           y="-18.904541"
+           style="font-size:12.39309883px;fill:#494949;fill-opacity:1" /></flowRegion><flowPara
+         id="active"
+         style="font-style:italic;font-weight:bold;font-size:12.39309883px;line-height:1.25;text-align:start;text-anchor:start;fill:#494949;fill-opacity:1">{active}</flowPara><flowPara
+         style="font-size:12.39309883px;line-height:1.25;text-align:start;text-anchor:start;fill:#494949;fill-opacity:1"
+         id="activeDescription">{activeDescription}</flowPara><flowPara
+         style="font-size:12.39309883px;line-height:1.25;text-align:start;text-anchor:start;fill:#494949;fill-opacity:1"
+         id="flowPara5116-5-1-4"> </flowPara><flowPara
+         style="font-style:italic;font-weight:bold;font-size:12.39309883px;line-height:1.25;text-align:start;text-anchor:start;fill:#494949;fill-opacity:1"
+         id="passive">{passive}</flowPara><flowPara
+         style="font-size:12.39309883px;line-height:1.25;text-align:start;text-anchor:start;fill:#494949;fill-opacity:1"
+         id="passiveDescription">{passiveDescription}</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:3.52777791px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#494949;fill-opacity:1;stroke:none;stroke-width:0.26458335"
+       x="124.12222"
+       y="142.91321"
+       id="text5926-4-7"
+       inkscape:label="DevText"><tspan
+         sodipodi:role="line"
+         id="devText"
+         x="124.12222"
+         y="142.91321"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:ARIAL;-inkscape-font-specification:ARIAL;text-align:end;text-anchor:end;fill:#494949;fill-opacity:1;stroke-width:0.26458335">({quantity}q/{version}v)</tspan></text>
+  </g>
+</svg>

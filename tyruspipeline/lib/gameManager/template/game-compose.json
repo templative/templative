@@ -1,0 +1,8 @@
+{
+    "componentDataDirectory": "./componentData",
+    "outputDirectory": "./output",
+    
+    "artMetadataDirectory": "./componentArtMetadata",
+    "artTemplatesDirectory": "./artComponents/templates",
+    "artInsertsDirectory": "./artComponents/graphicalInserts"
+}

@@ -1,0 +1,14 @@
+{
+    "components": [
+        {
+            "name": "templateCards",
+            "displayName": "Template Card",
+            "pieceDisplayName": "Template",
+            "type": "pokerDeck",
+            "quantity": 1,
+            "gamedataFilename": "templates",
+            "artMetadataFilename": "templateCard",
+            "backArtMetadataFilename": "templateCardBack"
+        }
+    ]
+}
