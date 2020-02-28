@@ -178,9 +178,7 @@ def getScopedValue(scopedValue, game, component, pieceGamedata):
 
 
 def exportSvgToJpg(filepath, name, outputDirectory):
-    with Image(filename=filepath, resolution=300, colorspace="rgb", width=825, height=1125) as image:
-        image.resize(825, 1125)
-        
+    with Image(filename=filepath) as image:
         outputFilename = "%s.jpg" % (name)
         outputFilepath = os.path.join(outputDirectory, outputFilename)
         image.save(filename=outputFilepath)
