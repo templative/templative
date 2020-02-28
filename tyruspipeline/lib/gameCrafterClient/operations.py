@@ -10,7 +10,7 @@ def createGame(session, name, designerId):
     
     gameName = game["name"]
     gameId = game["id"]
-    editUrl = "%s/publish/editor/%s" % (baseUrl, gameId)
+    editUrl = os.path.join(baseUrl, "/publish/editor/", gameId)
     print("Created %s. Edit it here %s" % (gameName, editUrl))
 
     return game
@@ -62,7 +62,7 @@ def printGames(games):
     for game in games:
         gameName = game["name"]
         gameId = game["id"]
-        gameLink = "%s/%s" % (baseUrl, game["edit_uri"])
+        gameLink = os.path.join(baseUrl, game["edit_uri"])
         data.append([gameName, gameId, gameLink])
 
     print(tabulate(data, headers=headers, tablefmt='orgtbl'))
