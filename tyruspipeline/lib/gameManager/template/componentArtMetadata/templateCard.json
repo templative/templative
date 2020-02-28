@@ -1,13 +1,9 @@
 {
-    "name": "action",
-    "templateFilename": "actionCard",
+    "name": "template",
+    "templateFilename": "templateCard",
     "textReplacements": [
-        { "scope": "piece", "key": "displayName", "source": "displayName", "filters": ["toUpper"] }, 
-        { "scope": "piece", "key": "power", "source": "power" }, 
-        { "scope": "piece", "key": "active", "source": "active" }, 
-        { "scope": "piece", "key": "activeDescription", "source": "activeDescription" }, 
-        { "scope": "piece", "key": "passive", "source": "passive" }, 
-        { "scope": "piece", "key": "passiveDescription", "source": "passiveDescription" }, 
+        { "scope": "piece", "key": "displayName", "source": "displayName", "filters": ["toUpper"]}, 
+        { "scope": "piece", "key": "description", "source": "description" }, 
         { "scope": "piece", "key": "quantity", "source": "quantity" }, 
         { "scope": "game", "key": "version", "source": "version" }
     ],
