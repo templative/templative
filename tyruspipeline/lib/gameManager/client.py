@@ -1,7 +1,7 @@
 import os
 import json
 import csv
-from ..svgmanipulation import operations as processor
+from ..svgscissors import operations as processor
 
 def loadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
