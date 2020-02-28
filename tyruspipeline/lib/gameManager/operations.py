@@ -24,7 +24,10 @@ def produceGame(gameRootDirectoryPath):
     
     components = client.loadGameComponents(gameRootDirectoryPath)
     for component in components["components"]:
-        client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
+        if component["disabled"]:
+            print("Skipping disabled %s component." % (component["name"]))
+        else:
+            client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
 
     print("Done producing %s" % gameFolderPath)
 
