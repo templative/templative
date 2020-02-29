@@ -174,7 +174,10 @@ def getScopedValue(scopedValue, game, component, pieceGamedata):
     if scope == "component":
         return component[source]
 
-    return pieceGamedata[source]
+    if scope == "piece":
+        return pieceGamedata[source]
+
+    return source
 
 
 def exportSvgToJpg(filepath, name, outputDirectory):
