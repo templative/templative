@@ -40,8 +40,8 @@ def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata,
     artFileOutputFilepath = os.path.join(outputDirectory, artFileOutputFileName)
     artFile.dump(artFileOutputFilepath)
     
-    textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, componentCompose, componentGamedata, pieceGamedata)
-    updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, componentCompose, componentGamedata, pieceGamedata)
+    textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, componentGamedata, pieceGamedata)
+    updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, componentGamedata, pieceGamedata)
 
     exportSvgToJpg(artFileOutputFilepath, artFileOutputName, outputDirectory)
 
@@ -73,14 +73,14 @@ def addOverlays(artFile, overlays, game, gameCompose, componentCompose, componen
     overlayFilesDirectory = gameCompose["artInsertsDirectory"]
 
     for overlay in overlays:
-        overlayName = getScopedValue(overlay, game, componentCompose, pieceGamedata)
+        overlayName = getScopedValue(overlay, game, componentGamedata, pieceGamedata)
         if overlayName != None and overlayName != "":
             overlayFilename = "%s.svg" % (overlayName)
             overlayFilepath = os.path.join(overlayFilesDirectory, overlayFilename)
             graphicsInsert = Element(overlayFilepath)
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 
-def textReplaceInFile(filepath, textReplacements, game, componentCompose, componentGamedata, pieceGamedata):
+def textReplaceInFile(filepath, textReplacements, game, componentGamedata, pieceGamedata):
     if filepath == None:
         print("filepath cannot be None.")
         return
@@ -91,10 +91,6 @@ def textReplaceInFile(filepath, textReplacements, game, componentCompose, compon
 
     if game == None:
         print("game cannot be None.")
-        return
-    
-    if componentCompose == None:
-        print("componentCompose cannot be None.")
         return
 
     if componentGamedata == None:
@@ -124,7 +120,7 @@ def processValueFilters(value, textReplacement):
                 value = value.upper()
     return value
 
-def updateStylesInFile(filepath, styleUpdates, game, componentCompose, componentGamedata, pieceGamedata):
+def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pieceGamedata):
     if filepath == None:
         print("filepath cannot be None.")
         return
@@ -135,10 +131,6 @@ def updateStylesInFile(filepath, styleUpdates, game, componentCompose, component
 
     if game == None:
         print("game cannot be None.")
-        return
-    
-    if componentCompose == None:
-        print("componentCompose cannot be None.")
         return
 
     if componentGamedata == None:
