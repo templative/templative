@@ -26,7 +26,7 @@ def uploadGame(gameRootDirectoryPath):
 
     uploadComponents(session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])
 
-    gameUrl = os.path.join(gameCrafterBaseUrl, "/publish/editor/", cloudGame["id"])
+    gameUrl = "%s%s%s"%(gameCrafterBaseUrl, "/publish/editor/", cloudGame["id"])
     print("Uploads finished for %s, visit %s" % (cloudGame["name"], gameUrl))
     return gameUrl
 
@@ -42,7 +42,7 @@ def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderI
     if not componentDirectoryPath:
         raise Exception("componentDirectoryPath cannot be None")
 
-    componentFile = instructionsLoader.loadComponentFile(componentDirectoryPath)
+    componentFile = instructionsLoader.loadComponentInstructions(componentDirectoryPath)
     componentType = componentFile["type"]
     componentName = componentFile["name"]
     componentDisplayName = componentFile["name"]

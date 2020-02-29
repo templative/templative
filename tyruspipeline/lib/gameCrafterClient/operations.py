@@ -10,7 +10,7 @@ def createGame(session, name, designerId):
     
     gameName = game["name"]
     gameId = game["id"]
-    editUrl = os.path.join(baseUrl, "/publish/editor/", gameId)
+    editUrl = "%s%s%s" % (baseUrl, "/publish/editor/", gameId)
     print("Created %s. Edit it here %s" % (gameName, editUrl))
 
     return game
