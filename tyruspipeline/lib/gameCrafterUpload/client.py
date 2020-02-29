@@ -8,27 +8,7 @@ p = inflect.engine()
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
 from ..gameCrafterClient import operations as gamecrafter
-
-def loadGame(gameRootDirectoryPath):
-    if not gameRootDirectoryPath:
-        raise Exception("Game root directory path cannot be None")
-
-    with open(os.path.join(gameRootDirectoryPath, "game.json")) as game:
-        return json.load(game)
-
-def loadCompany(gameRootDirectoryPath):
-    if not gameRootDirectoryPath:
-        raise Exception("Game root directory path cannot be None")
-
-    with open(os.path.join(gameRootDirectoryPath, "company.json")) as company:
-        return json.load(company)
-
-def loadComponentFile(componentDirectoryPath):
-    if not componentDirectoryPath:
-        raise Exception("componentDirectoryPath cannot be None")
-
-    with open(os.path.join(componentDirectoryPath, "component.json")) as componentFile:
-        return json.load(componentFile)
+import instructionLoader
 
 def uploadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
@@ -36,8 +16,8 @@ def uploadGame(gameRootDirectoryPath):
 
     session = gamecrafter.login()
 
-    game = loadGame(gameRootDirectoryPath)
-    company = loadCompany(gameRootDirectoryPath)
+    game = instructionLoader.loadGameInstructions(gameRootDirectoryPath)
+    company = instructionLoader.loadCompanyInstructions(gameRootDirectoryPath)
 
     print("Uploading %s for %s." % (game["displayName"], company["displayName"]))
 
@@ -62,7 +42,7 @@ def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderI
     if not componentDirectoryPath:
         raise Exception("componentDirectoryPath cannot be None")
 
-    componentFile = loadComponentFile(componentDirectoryPath)
+    componentFile = instructionLoader.loadComponentFile(componentDirectoryPath)
     componentType = componentFile["type"]
     componentName = componentFile["name"]
     componentDisplayName = componentFile["name"]
