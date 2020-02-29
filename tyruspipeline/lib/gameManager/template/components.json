@@ -6,7 +6,7 @@
             "pieceDisplayName": "Template",
             "type": "pokerDeck",
             "quantity": 1,
-            "gamedataFilename": "templates",
+            "piecesGamedataFilename": "templates",
             "artMetadataFilename": "templateCard",
             "backArtMetadataFilename": "templateCardBack"
         }

@@ -4,17 +4,21 @@ import svgutils.transform as sg
 import xml.etree.ElementTree as ET
 from wand.image import Image
        
-def createArtFileOfPiece(game, gameCompose, component, pieceGamedata, artMetaData, outputDirectory):
+def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
     if game == None:
         print("game cannot be None.")
         return
     
-    if component == None:
-        print("component cannot be None.")
+    if componentCompose == None:
+        print("componentCompose cannot be None.")
         return
 
     if artMetaData == None:
         print("artMetaData cannot be None.")
+        return
+
+    if componentGamedata == None:
+        print("componentGamedata cannot be None.")
         return
 
     if pieceGamedata == None:
@@ -29,19 +33,19 @@ def createArtFileOfPiece(game, gameCompose, component, pieceGamedata, artMetaDat
     artFilename = "%s.svg" % (artMetaData["templateFilename"])
     artFile = Element(os.path.join(templateFilesDirectory, artFilename)) 
 
-    addOverlays(artFile, artMetaData["overlays"], game, gameCompose, component, pieceGamedata)
+    addOverlays(artFile, artMetaData["overlays"], game, gameCompose, componentCompose, componentGamedata, pieceGamedata)
 
-    artFileOutputName = ("%s-%s" % (component["name"], pieceGamedata["name"]))
+    artFileOutputName = ("%s-%s" % (componentCompose["name"], pieceGamedata["name"]))
     artFileOutputFileName = "%s.svg" % (artFileOutputName)
     artFileOutputFilepath = os.path.join(outputDirectory, artFileOutputFileName)
     artFile.dump(artFileOutputFilepath)
     
-    textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, component, pieceGamedata)
-    updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, component, pieceGamedata)
+    textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, componentCompose, componentGamedata, pieceGamedata)
+    updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, componentCompose, componentGamedata, pieceGamedata)
 
     exportSvgToJpg(artFileOutputFilepath, artFileOutputName, outputDirectory)
 
-def addOverlays(artFile, overlays, game, gameCompose, component, pieceGamedata):
+def addOverlays(artFile, overlays, game, gameCompose, componentCompose, componentGamedata, pieceGamedata):
     if artFile == None:
         print("artFile cannot be None.")
         return
@@ -54,8 +58,12 @@ def addOverlays(artFile, overlays, game, gameCompose, component, pieceGamedata):
         print("game cannot be None.")
         return
     
-    if component == None:
-        print("component cannot be None.")
+    if componentCompose == None:
+        print("componentCompose cannot be None.")
+        return
+
+    if componentGamedata == None:
+        print("componentGamedata cannot be None.")
         return
 
     if pieceGamedata == None:
@@ -65,14 +73,14 @@ def addOverlays(artFile, overlays, game, gameCompose, component, pieceGamedata):
     overlayFilesDirectory = gameCompose["artInsertsDirectory"]
 
     for overlay in overlays:
-        overlayName = getScopedValue(overlay, game, component, pieceGamedata)
+        overlayName = getScopedValue(overlay, game, componentCompose, pieceGamedata)
         if overlayName != None and overlayName != "":
             overlayFilename = "%s.svg" % (overlayName)
             overlayFilepath = os.path.join(overlayFilesDirectory, overlayFilename)
             graphicsInsert = Element(overlayFilepath)
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 
-def textReplaceInFile(filepath, textReplacements, game, component, pieceGamedata):
+def textReplaceInFile(filepath, textReplacements, game, componentCompose, componentGamedata, pieceGamedata):
     if filepath == None:
         print("filepath cannot be None.")
         return
@@ -85,8 +93,12 @@ def textReplaceInFile(filepath, textReplacements, game, component, pieceGamedata
         print("game cannot be None.")
         return
     
-    if component == None:
-        print("component cannot be None.")
+    if componentCompose == None:
+        print("componentCompose cannot be None.")
+        return
+
+    if componentGamedata == None:
+        print("componentGamedata cannot be None.")
         return
 
     if pieceGamedata == None:
@@ -98,7 +110,7 @@ def textReplaceInFile(filepath, textReplacements, game, component, pieceGamedata
         contents = f.read()
         for textReplacement in textReplacements:
             key = "{%s}" % textReplacement["key"]
-            value = getScopedValue(textReplacement, game, component, pieceGamedata)
+            value = getScopedValue(textReplacement, game, componentGamedata, pieceGamedata)
             value = processValueFilters(value, textReplacement)
             contents = contents.replace(key, value)
 
@@ -112,7 +124,7 @@ def processValueFilters(value, textReplacement):
                 value = value.upper()
     return value
 
-def updateStylesInFile(filepath, styleUpdates, game, component, pieceGamedata):
+def updateStylesInFile(filepath, styleUpdates, game, componentCompose, componentGamedata, pieceGamedata):
     if filepath == None:
         print("filepath cannot be None.")
         return
@@ -125,8 +137,12 @@ def updateStylesInFile(filepath, styleUpdates, game, component, pieceGamedata):
         print("game cannot be None.")
         return
     
-    if component == None:
-        print("component cannot be None.")
+    if componentCompose == None:
+        print("componentCompose cannot be None.")
+        return
+
+    if componentGamedata == None:
+        print("componentGamedata cannot be None.")
         return
 
     if pieceGamedata == None:
@@ -139,7 +155,7 @@ def updateStylesInFile(filepath, styleUpdates, game, component, pieceGamedata):
         findById = styleUpdate["id"]
         sh = tree.find(".//*[@id='%s']" % findById)
         
-        value = getScopedValue(styleUpdate, game, component, pieceGamedata)
+        value = getScopedValue(styleUpdate, game, componentGamedata, pieceGamedata)
 
         cssKey = styleUpdate["cssValue"]
         replaceStyleWith = "%s:%s" % (cssKey, value)
@@ -148,7 +164,7 @@ def updateStylesInFile(filepath, styleUpdates, game, component, pieceGamedata):
     with open(filepath,'w') as f:
         f.write(ET.tostring(tree))
 
-def getScopedValue(scopedValue, game, component, pieceGamedata):
+def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
     if scopedValue == None:
         print("scopedValue cannot be None.")
         return
@@ -157,8 +173,8 @@ def getScopedValue(scopedValue, game, component, pieceGamedata):
         print("game cannot be None.")
         return
     
-    if component == None:
-        print("component cannot be None.")
+    if componentGamedata == None:
+        print("componentGamedata cannot be None.")
         return
 
     if pieceGamedata == None:
@@ -172,7 +188,7 @@ def getScopedValue(scopedValue, game, component, pieceGamedata):
         return game[source]
     
     if scope == "component":
-        return component[source]
+        return componentGamedata[source]
 
     if scope == "piece":
         return pieceGamedata[source]
