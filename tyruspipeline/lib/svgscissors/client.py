@@ -33,7 +33,7 @@ def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata,
     artFilename = "%s.svg" % (artMetaData["templateFilename"])
     artFile = Element(os.path.join(templateFilesDirectory, artFilename)) 
 
-    addOverlays(artFile, artMetaData["overlays"], game, gameCompose, componentCompose, componentGamedata, pieceGamedata)
+    addOverlays(artFile, artMetaData["overlays"], game, gameCompose, componentGamedata, pieceGamedata)
 
     artFileOutputName = ("%s-%s" % (componentCompose["name"], pieceGamedata["name"]))
     artFileOutputFileName = "%s.svg" % (artFileOutputName)
@@ -45,7 +45,7 @@ def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata,
 
     exportSvgToJpg(artFileOutputFilepath, artFileOutputName, outputDirectory)
 
-def addOverlays(artFile, overlays, game, gameCompose, componentCompose, componentGamedata, pieceGamedata):
+def addOverlays(artFile, overlays, game, gameCompose, componentGamedata, pieceGamedata):
     if artFile == None:
         print("artFile cannot be None.")
         return
@@ -56,10 +56,6 @@ def addOverlays(artFile, overlays, game, gameCompose, componentCompose, componen
 
     if game == None:
         print("game cannot be None.")
-        return
-    
-    if componentCompose == None:
-        print("componentCompose cannot be None.")
         return
 
     if componentGamedata == None:
