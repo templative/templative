@@ -46,8 +46,8 @@ def uploadGame(gameRootDirectoryPath):
 
     uploadComponents(session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])
 
-    gameUrl = "%s/publish/editor/%s" % (gameCrafterBaseUrl, cloudGame["id"])
-    print("Uploads finished for %s, visit %s" %(cloudGame["name"], gameUrl))
+    gameUrl = os.path.join(gameCrafterBaseUrl, "/publish/editor/", cloudGame["id"])
+    print("Uploads finished for %s, visit %s" % (cloudGame["name"], gameUrl))
     return gameUrl
 
 def uploadComponents(session, outputDirectory, cloudGame, cloudGameFolderId):
@@ -82,7 +82,7 @@ def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderI
     cloudPokerDeck = gamecrafter.createPokerDeck(session, componentName, quantity, cloudGame["id"], backImageId)
 
     for instructions in fileInstructions:
-        uploadPiece(session, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])
+        uploadPokerCardPiece(session, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])
 
 def uploadBack(session, instructions, cloudComponentFolderId):
     name = instructions["name"]
@@ -92,7 +92,7 @@ def uploadBack(session, instructions, cloudComponentFolderId):
     cloudFile = gamecrafter.uploadFile(session, filepath, cloudComponentFolderId)
     return cloudFile["id"]
 
-def uploadPiece(session, instructions, deckId, cloudComponentFolderId):
+def uploadPokerCardPiece(session, instructions, deckId, cloudComponentFolderId):
     name = instructions["name"]
     filepath = instructions["filepath"]
     quantity = instructions["quantity"]
