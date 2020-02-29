@@ -31,16 +31,16 @@ def loadGameComponents(gameRootDirectoryPath):
     with open(os.path.join(gameRootDirectoryPath, "components.json")) as componentFile:
         return json.load(componentFile)
 
-def loadComponentGamedata(gameRootDirectoryPath, gameCompose, gamedataFilename):
+def loadPiecesGamedata(gameRootDirectoryPath, gameCompose, gamedataFilename):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
     if not gamedataFilename:
         return {}
 
-    componentDataDirectory = gameCompose["componentDataDirectory"]
+    piecesGamedataDirectory = gameCompose["piecesGamedataDirectory"]
     gamedataFilenameWithExtension = "%s.csv" % (gamedataFilename)
-    filepath = os.path.join(gameRootDirectoryPath, componentDataDirectory, gamedataFilenameWithExtension)
+    filepath = os.path.join(gameRootDirectoryPath, piecesGamedataDirectory, gamedataFilenameWithExtension)
     with open(filepath) as gamedataFile:
         reader = csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
 
@@ -89,8 +89,8 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, ou
 
     componentDisplayName = component["displayName"]
 
-    componentGamedata = loadComponentGamedata(gameRootDirectoryPath, gameCompose, component["gamedataFilename"])
-    if not componentGamedata or componentGamedata == {}:
+    piecesGamedata = loadPiecesGamedata(gameRootDirectoryPath, gameCompose, component["gamedataFilename"])
+    if not piecesGamedata or piecesGamedata == {}:
         print("Skipping %s component due to missing game data." % componentDisplayName)
         return
 
@@ -112,7 +112,7 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, ou
 
     componentInstructionFilepath = os.path.join(componentDirectory, "component.json")
 
-    fileInstructionSets = processor.getInstructionSetsForFiles(game, component, componentGamedata, componentDirectory)
+    fileInstructionSets = processor.getInstructionSetsForFiles(game, component, piecesGamedata, componentDirectory)
     backInstructionSet = processor.getBackInstructionSet(component, componentDirectory)
     componentInstructions = {
         "name": componentName, 
@@ -123,4 +123,4 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, ou
     }
     dumpInstructions(componentInstructionFilepath, componentInstructions)
 
-    processor.createArtFilesForComponent(game, gameCompose, component, componentArtMetadata, componentBackArtMetadata,  componentGamedata, componentDirectory)
+    processor.createArtFilesForComponent(game, gameCompose, component, componentArtMetadata, componentBackArtMetadata,  piecesGamedata, componentDirectory)
