@@ -8,7 +8,7 @@ p = inflect.engine()
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
 from ..gameCrafterClient import operations as gamecrafter
-import instructionLoader
+import instructionsLoader
 
 def uploadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
@@ -16,8 +16,8 @@ def uploadGame(gameRootDirectoryPath):
 
     session = gamecrafter.login()
 
-    game = instructionLoader.loadGameInstructions(gameRootDirectoryPath)
-    company = instructionLoader.loadCompanyInstructions(gameRootDirectoryPath)
+    game = instructionsLoader.loadGameInstructions(gameRootDirectoryPath)
+    company = instructionsLoader.loadCompanyInstructions(gameRootDirectoryPath)
 
     print("Uploading %s for %s." % (game["displayName"], company["displayName"]))
 
@@ -42,7 +42,7 @@ def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderI
     if not componentDirectoryPath:
         raise Exception("componentDirectoryPath cannot be None")
 
-    componentFile = instructionLoader.loadComponentFile(componentDirectoryPath)
+    componentFile = instructionsLoader.loadComponentFile(componentDirectoryPath)
     componentType = componentFile["type"]
     componentName = componentFile["name"]
     componentDisplayName = componentFile["name"]
