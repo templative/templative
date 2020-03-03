@@ -6,7 +6,7 @@ def dumpInstructions(filepath, data):
         raise Exception("Instructions filepath cannot be None")
     
     with open(filepath, 'w') as outfile:
-        json.dump(data, outfile)
+        json.dump(data, outfile, indent=4, separators=(',', ': '))
 
 def createGameFolder(name, outputDirectory):    
     gameFolderPath = os.path.join(outputDirectory, name)
