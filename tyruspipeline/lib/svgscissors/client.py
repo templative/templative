@@ -141,16 +141,35 @@ def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pieceGam
     
     for styleUpdate in styleUpdates:
         findById = styleUpdate["id"]
-        sh = tree.find(".//*[@id='%s']" % findById)
+        elementToUpdate = tree.find(".//*[@id='%s']" % findById)
         
         value = getScopedValue(styleUpdate, game, componentGamedata, pieceGamedata)
-
-        cssKey = styleUpdate["cssValue"]
-        replaceStyleWith = "%s:%s" % (cssKey, value)
-        sh.set('style', replaceStyleWith)
+        replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
 
     with open(filepath,'w') as f:
         f.write(ET.tostring(tree))
+
+def replaceStyleAttributeForElement(element, attribute, key, value):
+    attributeValue = element.get(attribute, "")
+    
+    replaceStyleWith = ""    
+    found = False
+    
+    cssKeyValuePairs = attributeValue.split(';')
+    for cssKeyValuePair in cssKeyValuePairs:
+        keyAndPair = cssKeyValuePair.split(':')
+        if (keyAndPair[0] == key):
+            replaceStyleWith += "%s:%s;" % (key, value)
+            found = True
+        else:
+            replaceStyleWith += cssKeyValuePair + ';'
+        
+    if (not found):
+        newCss = "%s:%s;" % (key, value)
+        replaceStyleWith += newCss
+
+    replaceStyleWith = "%s:%s" % (key, value)
+    element.set(attribute, replaceStyleWith)
 
 def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
     if scopedValue == None:
