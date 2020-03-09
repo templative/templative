@@ -1,0 +1,16 @@
+{
+    "name": "friendCard",
+    "templateFilename": "verticalPokerCard",
+    "textReplacements": [
+        { "key": "name", "scope": "piece",  "source": "displayName", "filters": ["toUpper"]}, 
+        { "key": "description", "scope": "piece", "source": "description" }, 
+        { "key": "quantity", "scope": "piece",  "source": "quantity" }, 
+        { "key": "version", "scope": "game",  "source": "version" }
+    ],
+    "styleUpdates":[
+        { "id": "background", "cssValue": "fill", "scope": "piece", "source": "colorRGB" }
+    ],
+    "overlays": [
+        { "scope": "global", "source": "versionQuantity" }
+    ]
+}

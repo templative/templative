@@ -1,0 +1,14 @@
+{
+    "components": [
+        {
+            "name": "friendCards",
+            "type": "pokerDeck",
+            "quantity": 1,
+            "piecesGamedataFilename": "friends",
+            "componentGamedataFilename": "friend",
+            "artMetadataFilename": "friendCard",
+            "backArtMetadataFilename": "friendCardBack",
+            "disabled": false
+        }
+    ]
+}

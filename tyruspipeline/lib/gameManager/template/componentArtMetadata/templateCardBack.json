@@ -1,9 +1,0 @@
-{
-    "name": "templateBack",
-    "templateFilename": "templateCardBack",
-    "textReplacements": [
-        { "scope": "component", "key": "name", "source": "pieceDisplayName" } 
-    ],
-    "styleUpdates":[],
-    "overlays": []
-}

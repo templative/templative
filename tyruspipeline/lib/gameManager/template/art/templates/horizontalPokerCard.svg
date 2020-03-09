@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:cc="http://creativecommons.org/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns="http://www.w3.org/2000/svg"
+     width="825px"
+     height="1125px"
+     viewBox="0 0 825 1125"
+     version="1.1"
+     id="svg3328">
+    <defs
+         id="defs3322" />
+    <metadata
+         id="metadata3325">
+        <rdf:RDF>
+            <cc:Work
+                 rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                     rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                <dc:title></dc:title>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <rect
+         id="background"
+         height="1124.9989"
+         width="825"
+         y="6.8996583e-06"
+         x="-5.2465821e-06"
+         style="fill:#7e7e7e;fill-opacity:1;stroke-width:3.33279133" />
+    <polygon
+         id="polygon9173-2-4-1-4-3-2-1-2-9-2-1-7-6-3-8-4-7-8"
+         points="2535,-5321.666 2535,-4622.543 2535,-4599.899 3359.965,-4599.899 3359.965,-4622.543 3359.965,-5321.666 "
+         style="fill:#eaeaea;fill-opacity:1"
+         transform="matrix(0.99999987,0,0,1.2671107,-2534.9989,6953.5813)" />
+    <text
+         transform="matrix(0,-1.0000011,0.9999989,0,0,0)"
+         xml:space="preserve"
+         style="font-style:normal;font-weight:bold;font-size:39.99349213px;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#454545;fill-opacity:1;stroke:none;stroke-width:3.33279133"
+         x="-1035.5259"
+         y="167.55418"
+         id="title"><tspan
+             x="-1035.5259"
+             y="167.55418"
+             id="tspan5966-1-5-3-22-3-9-0-1-9-9-3-9-2-9"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:103.01057434px;line-height:100%;font-family:Tahoma;-inkscape-font-specification:'Tahoma Bold';fill:#454545;fill-opacity:1;stroke-width:3.33279133">{name} </tspan><tspan
+             id="tspan3943"
+             x="-1035.5259"
+             y="199.85037"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:103.01057434px;line-height:100%;font-family:Tahoma;-inkscape-font-specification:'Tahoma Bold';fill:#454545;fill-opacity:1;stroke-width:3.33279133" /></text>
+    <flowRoot
+         transform="matrix(0,-3.3327948,3.3327874,0,255.93567,-2367.526)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#494949;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="description"
+         xml:space="preserve"><flowRegion
+             id="flowRegion4865-3-3-3-7"><rect
+                 style="font-size:12.39309883px;fill:#494949;fill-opacity:1"
+                 y="-18.904541"
+                 x="-1021.0622"
+                 height="150.01303"
+                 width="230.59789"
+                 id="rect4867-0-2-9-3" /></flowRegion><flowPara
+             id="passiveDescription"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.39309883px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:'Tahoma Bold Italic';text-align:start;text-anchor:start;fill:#494949;fill-opacity:1">{description} </flowPara></flowRoot></svg>

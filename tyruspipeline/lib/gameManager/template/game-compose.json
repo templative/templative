@@ -1,8 +1,10 @@
 {
-    "piecesGamedataDirectory": "./piecesGamedata",
     "outputDirectory": "./output",
+
+    "piecesGamedataDirectory": "./gamedata/piece",
+    "componentGamedataDirectory": "./gamedata/component",
     
-    "artMetadataDirectory": "./componentArtMetadata",
-    "artTemplatesDirectory": "./artComponents/templates",
-    "artInsertsDirectory": "./artComponents/graphicalInserts"
+    "artMetadataDirectory": "./artMetadata",
+    "artTemplatesDirectory": "./art/templates",
+    "artInsertsDirectory": "./art/graphicalInserts"
 }
