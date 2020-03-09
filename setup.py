@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name = "tyruspipeline",
+    name = "templative",
     version = "0.0.1",
     author = "Oliver Barnum",
     author_email = "oliverbarnum32@gmail.com",
@@ -12,9 +12,9 @@ setuptools.setup(
     long_description = long_description,
     long_description_content_type = "text/markdown",
     url = "",
-    packages = ["tyruspipeline"],
+    packages = ["templative"],
     entry_points = {
-        'console_scripts': ['tyruspipeline=tyruspipeline.cli:cli']
+        'console_scripts': ['templative=templative.cli:cli']
     },
     install_requires=[
         "click", "svgutils", "requests", "tabulate", "distutils", "inflect"

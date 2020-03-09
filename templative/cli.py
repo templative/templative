@@ -5,7 +5,7 @@ from lib.gameCrafterUpload import operations as gameCrafterUpload
 
 @click.group()
 def cli():
-    """The Tyrus Pipeline CLI"""
+    """Tyrus Templative CLI"""
     pass
 
 @cli.group()

@@ -1,4 +1,4 @@
-# Tyrus Card Pipeline
+# Templative
 
 Define the cards you’d like created and how to assemble them, use the CLI, and purchase the game off of the Game Crafter.
 
