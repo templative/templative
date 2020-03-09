@@ -20,13 +20,13 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentComp
         print("Skipping %s component due to missing pieces gamedata." % componentName)
         return
 
-    componentArtMetadata = fileLoader.loadArtMetadata(gameRootDirectoryPath, gameCompose, componentCompose["artMetadataFilename"])
-    if not componentArtMetadata or componentArtMetadata == {}:
+    componentArtdata = fileLoader.loadArtdata(gameRootDirectoryPath, gameCompose, componentCompose["artdataFilename"])
+    if not componentArtdata or componentArtdata == {}:
         print("Skipping %s component due to missing front art metadata." % componentName)
         return
 
-    componentBackArtMetadata = fileLoader.loadArtMetadata(gameRootDirectoryPath, gameCompose, componentCompose["backArtMetadataFilename"])
-    if not componentBackArtMetadata or componentBackArtMetadata == {}:
+    componentBackArtdata = fileLoader.loadArtdata(gameRootDirectoryPath, gameCompose, componentCompose["backArtdataFilename"])
+    if not componentBackArtdata or componentBackArtdata == {}:
         print("Skipping %s component due to missing back art metadata." % componentName)
         return
 
@@ -47,4 +47,4 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentComp
     }
     gameWriter.dumpInstructions(componentInstructionFilepath, componentInstructions)
 
-    processor.createArtFilesForComponent(game, gameCompose, componentCompose, componentArtMetadata, componentBackArtMetadata, componentGamedata, piecesGamedata, componentDirectory)
+    processor.createArtFilesForComponent(game, gameCompose, componentCompose, componentArtdata, componentBackArtdata, componentGamedata, piecesGamedata, componentDirectory)

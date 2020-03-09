@@ -61,15 +61,15 @@ def loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentGamedataF
     with open(filepath) as componentGamedata:
         return json.load(componentGamedata)
 
-def loadArtMetadata(gameRootDirectoryPath, gameCompose, artMetadataFilename):
+def loadArtdata(gameRootDirectoryPath, gameCompose, artdataFilename):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    if not artMetadataFilename:
+    if not artdataFilename:
         return {}
 
-    artMetadataDirectory = gameCompose["artMetadataDirectory"]
-    artMetadataFilenameWithExtension = "%s.json" % (artMetadataFilename)
-    filepath = os.path.join(gameRootDirectoryPath, artMetadataDirectory, artMetadataFilenameWithExtension)
+    artdataDirectory = gameCompose["artdataDirectory"]
+    artdataFilenameWithExtension = "%s.json" % (artdataFilename)
+    filepath = os.path.join(gameRootDirectoryPath, artdataDirectory, artdataFilenameWithExtension)
     with open(filepath) as metadataFile:
         return json.load(metadataFile)

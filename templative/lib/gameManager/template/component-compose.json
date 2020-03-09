@@ -6,8 +6,8 @@
             "quantity": 1,
             "piecesGamedataFilename": "friends",
             "componentGamedataFilename": "friend",
-            "artMetadataFilename": "friendCard",
-            "backArtMetadataFilename": "friendCardBack",
+            "artdataFilename": "friendCard",
+            "backArtdataFilename": "friendCardBack",
             "disabled": false
         }
     ]

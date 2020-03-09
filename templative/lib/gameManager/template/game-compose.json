@@ -4,7 +4,7 @@
     "piecesGamedataDirectory": "./gamedata/piece",
     "componentGamedataDirectory": "./gamedata/component",
     
-    "artMetadataDirectory": "./artMetadata",
+    "artdataDirectory": "./artdata",
     "artTemplatesDirectory": "./art/templates",
     "artInsertsDirectory": "./art/graphicalInserts"
 }

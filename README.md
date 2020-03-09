@@ -30,7 +30,7 @@ Use `tyruspipeline --help` for more info.
 - Create a new component within `components.json`
 - Create a new csv doc within the `componentDataDirectory` defined in the `game-compose`
 - Define an svg template within the `artTemplatesDirectory` defined in the `game-compose`. See the [Artfile Guide](###-Artfile-Guide)
-- Define an art metadata doc within the `artMetadataDirectory` defined in the `game-compose`. See [Defining Art Metadata](###-Defining-Art-Metadata)
+- Define an art metadata doc within the `artdataDirectory` defined in the `game-compose`. See [Defining Art Metadata](###-Defining-Art-Metadata)
 
 ### Defining Gamedata
 
