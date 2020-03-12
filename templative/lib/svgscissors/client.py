@@ -142,9 +142,11 @@ def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pieceGam
     for styleUpdate in styleUpdates:
         findById = styleUpdate["id"]
         elementToUpdate = tree.find(".//*[@id='%s']" % findById)
-        
-        value = getScopedValue(styleUpdate, game, componentGamedata, pieceGamedata)
-        replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
+        if (elementToUpdate != None):
+            value = getScopedValue(styleUpdate, game, componentGamedata, pieceGamedata)
+            replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
+        else:
+            print("Could not find element with id [%s]." % (findById))
 
     with open(filepath,'w') as f:
         f.write(ET.tostring(tree))
