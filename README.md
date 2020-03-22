@@ -19,6 +19,7 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 - `python setup.py develop` to add `templative` to your path.
 - Create and cd into a directory for your game
 - `templative init`
+- Create `./ouput/`
 - `templative produce -u` to create a version of the game. Add `-u` to upload the game to the Game Crafter.
 
 Use `templative --help` for more info.
