@@ -15,13 +15,13 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 - Create an account on the [Game Crafter](https://www.thegamecrafter.com)
 - Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
 - Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [env vars](https://www.schrodinger.com/kb/1842)
-- Clone and cd into `tyrus-pipeline-cli`
-- `pip install .` to add `tyruspipeline` to your path.
+- Clone and cd into your repo
+- `python setup.py develop` to add `templative` to your path.
 - Create and cd into a directory for your game
-- `tyruspipeline init`
-- `tyruspipeline produce -u` to create a version of the game. Add `-u` to upload the game to the Game Crafter.
+- `templative init`
+- `templative produce -u` to create a version of the game. Add `-u` to upload the game to the Game Crafter.
 
-Use `tyruspipeline --help` for more info.
+Use `templative --help` for more info.
 
 ## Usage
 

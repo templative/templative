@@ -17,7 +17,7 @@ setuptools.setup(
         'console_scripts': ['templative=templative.cli:cli']
     },
     install_requires=[
-        "click", "svgutils", "requests", "tabulate", "inflect"
+        "click", "svgutils", "requests", "tabulate", "inflect", "distutils"
     ],
     python_requires='>=2.7',
 )
