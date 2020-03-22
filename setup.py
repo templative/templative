@@ -12,12 +12,9 @@ setuptools.setup(
     long_description = long_description,
     long_description_content_type = "text/markdown",
     url = "",
-    packages = ["templative"],
+    packages=setuptools.find_packages(),
     entry_points = {
         'console_scripts': ['templative=templative.cli:cli']
     },
-    install_requires=[
-        "click", "svgutils", "requests", "tabulate"
-    ],
     python_requires='>=2.7',
 )
