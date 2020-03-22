@@ -12,7 +12,7 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 
 ## QuickStart
 
-- Download [Inkscape `0.92.2`] (https://inkscape.org/release/inkscape-0.92.2/)
+- Download [Inkscape 0.92.2] (https://inkscape.org/release/inkscape-0.92.2/)
 - Clone and cd into the templative repo
 - `python setup.py develop` to add `templative` to your path.
 - Create and cd into a directory for your game
