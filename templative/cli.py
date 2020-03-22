@@ -102,5 +102,6 @@ def upload(input):
 
 @cli.command()
 def init():
-    """Create the default game project here"""
+    """Deprecated - Create the default game project here"""
+    pass
     gameManagerClient.createTemplate()
