@@ -2,8 +2,6 @@ import os
 import json
 from os.path import isfile, join
 import sys
-import inflect
-p = inflect.engine()
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
@@ -54,8 +52,7 @@ def uploadComponent(session, componentDirectoryPath, cloudGame, cloudGameFolderI
         print("Skipping %s. The %s component type is not currently supported." % (componentDisplayName, componentType))
         return
 
-    inflectedNumber = p.number_to_words(quantity)
-    print("Uploading %s %s %s(s)" % (inflectedNumber, componentDisplayName, componentType))
+    print("Uploading %s %s %s(s)" % (quantity, componentDisplayName, componentType))
 
     cloudComponentFolder = gamecrafter.createFolderAtParent(session, componentName, cloudGameFolderId)
     backImageId = uploadBack(session, backInstructions, cloudComponentFolder["id"])
