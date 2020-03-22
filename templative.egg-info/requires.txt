@@ -1,0 +1,5 @@
+click
+svgutils
+requests
+tabulate
+inflect

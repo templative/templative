@@ -1,0 +1,10 @@
+README.md
+setup.py
+templative/__init__.py
+templative/cli.py
+templative.egg-info/PKG-INFO
+templative.egg-info/SOURCES.txt
+templative.egg-info/dependency_links.txt
+templative.egg-info/entry_points.txt
+templative.egg-info/requires.txt
+templative.egg-info/top_level.txt

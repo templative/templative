@@ -1,0 +1,3 @@
+[console_scripts]
+templative = templative.cli:cli
+
