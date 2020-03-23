@@ -6,3 +6,4 @@ credentials.json
 build/
 dist/
 .token
+.thenextguy_token
