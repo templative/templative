@@ -7,7 +7,7 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 - Python 3.8.2
 
 ## QuickStart
-- `pip install templative`
+- `pip3 install templative`
 - Add templative to your PATH
 - Create and cd into a directory
 - `templative init`
