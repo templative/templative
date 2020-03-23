@@ -26,7 +26,7 @@ def uploadFile(session, filepath, folderId):
     if not os.path.isfile(filepath):
         raise Exception ('Not a file: %s' % filepath)
     
-    fileToUpload = file(filepath)
+    fileToUpload = open(filepath, "rb")
     filename = os.path.basename(filepath)
 
     return client.postFile(session, fileToUpload, filename, folderId)
