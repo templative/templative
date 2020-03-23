@@ -3,3 +3,6 @@ __pycache__/
 credentials.json
 *.pickle
 *.egg-info/
+build/
+dist/
+.token

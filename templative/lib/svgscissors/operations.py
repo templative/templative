@@ -1,5 +1,5 @@
 import os
-from client import createArtFileOfPiece
+from templative.lib.svgscissors.client import createArtFileOfPiece
 
 def createArtFilesForComponent(game, gameCompose, componentCompose, frontMetaData, backMetaData, componentGameData, piecesGamedata, outputDirectory):
     if game == None:

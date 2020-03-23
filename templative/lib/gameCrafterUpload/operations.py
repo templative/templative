@@ -1,5 +1,5 @@
 
-import client as client
+import templative.lib.gameCrafterUpload.client as client
 
 def uploadGame(gameRootDirectoryPath):
     

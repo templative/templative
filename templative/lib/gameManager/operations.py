@@ -3,9 +3,9 @@ import os
 from datetime import datetime
 # from distutils.dir_util import copy_tree
 
-import fileLoader
-import gameWriter
-import client
+from templative.lib.gameManager import fileLoader
+from templative.lib.gameManager import gameWriter
+from templative.lib.gameManager import client
 
 def produceGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:

@@ -2,23 +2,27 @@
 
 Define the cards you’d like created and how to assemble them, use the CLI, and purchase the game off of the Game Crafter.
 
+# Requirements
+- [Inkscape 0.92.2](https://inkscape.org/release/inkscape-0.92.2/)
+- Python 3.8.2
+
 ## Install
 
 ### To Keep
-`pip install -e .`
+`pip3 install -e .`
 
 ### To Develop
-`python setup.py develop`
+`python3 setup.py develop`
 
 ## QuickStart
-
-- Download [Inkscape 0.92.2](https://inkscape.org/release/inkscape-0.92.2/)
 - Clone and cd into the templative repo
 - `python setup.py develop` to add `templative` to your path.
 - Create and cd into a directory for your game
 - `templative init`
 - Create `./output/`
 - `templative produce` to create a version of the game. 
+
+### Uploading
 - Create an account on the [Game Crafter](https://www.thegamecrafter.com)
 - Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
 - Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [env vars](https://www.schrodinger.com/kb/1842)

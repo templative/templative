@@ -1,4 +1,4 @@
-import client
+from templative.lib.gameCrafterClient import client
 import os
 from uuid import uuid1
 from tabulate import tabulate

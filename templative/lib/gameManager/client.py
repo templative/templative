@@ -1,8 +1,8 @@
 import os
 import json
-from ..svgscissors import operations as processor
-import fileLoader
-import gameWriter
+from templative.lib.svgscissors import operations as processor
+from templative.lib.gameManager import fileLoader
+from templative.lib.gameManager import gameWriter
 
 def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentCompose, outputDirectory):
     if not gameRootDirectoryPath:

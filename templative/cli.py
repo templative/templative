@@ -1,7 +1,7 @@
 import click
-from lib.gameCrafterClient import operations as gameCrafterClient
-from lib.gameManager import operations as gameManagerClient
-from lib.gameCrafterUpload import operations as gameCrafterUpload
+from templative.lib.gameCrafterClient import operations as gameCrafterClient
+from templative.lib.gameManager import operations as gameManagerClient
+from templative.lib.gameCrafterUpload import operations as gameCrafterUpload
 
 @click.group()
 def cli():
@@ -105,3 +105,6 @@ def init():
     """Deprecated - Create the default game project here"""
     pass
     gameManagerClient.createTemplate()
+
+if __name__ == '__main__':
+    cli()
