@@ -6,18 +6,10 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 - [Inkscape 0.92.2](https://inkscape.org/release/inkscape-0.92.2/)
 - Python 3.8.2
 
-## Install
-
-### To Keep
-`pip3 install -e .`
-
-### To Develop
-`python3 setup.py develop`
-
 ## QuickStart
-- Clone and cd into the templative repo
-- `python setup.py develop` to add `templative` to your path.
-- Create and cd into a directory for your game
+- `pip install templative`
+- Add templative to your PATH
+- Create and cd into a directory
 - `templative init`
 - Create `./output/`
 - `templative produce` to create a version of the game. 
