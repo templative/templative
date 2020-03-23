@@ -13,8 +13,8 @@ def get(url, **kwargs):
 def handleResponse(url, response):
     statusCode = str(response.status_code)
     if not statusCode.startswith('2'):
-        print 'FAIL', response
-        print 'FAIL', response.json()
+        print ('FAIL', response)
+        print ('FAIL', response.json())
         raise Exception('%s Returned %s.' % (url, statusCode))
     
     return response.json()['result']

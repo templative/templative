@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-import httpClient as httpClient
+import templative.lib.gameCrafterClient.httpClient as httpClient
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com/api"
 

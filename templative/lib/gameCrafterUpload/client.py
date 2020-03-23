@@ -5,8 +5,8 @@ import sys
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
-from ..gameCrafterClient import operations as gamecrafter
-import instructionsLoader
+from templative.lib.gameCrafterClient import operations as gamecrafter
+from templative.lib.gameCrafterUpload import instructionsLoader
 
 def uploadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:

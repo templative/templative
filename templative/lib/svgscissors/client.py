@@ -1,4 +1,4 @@
-from element import Element
+from templative.lib.svgscissors.element import Element
 import os
 import svgutils.transform as sg
 import xml.etree.ElementTree as ET
@@ -148,7 +148,7 @@ def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pieceGam
         else:
             print("Could not find element with id [%s]." % (findById))
 
-    with open(filepath,'w') as f:
+    with open(filepath,'wb') as f:
         f.write(ET.tostring(tree))
 
 def replaceStyleAttributeForElement(element, attribute, key, value):
