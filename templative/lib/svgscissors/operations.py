@@ -28,8 +28,10 @@ def createArtFilesForComponent(game, gameCompose, componentCompose, frontMetaDat
     
     for pieceGamedata in piecesGamedata:
         createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory)
+        print("Produced %s." % (pieceGamedata["name"]))
 
     createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory)
+    print("Produced back.")
 
 def getInstructionSetsForFiles(game, componentCompose, componentGamedata, componentFilepath):
     if game == None:
