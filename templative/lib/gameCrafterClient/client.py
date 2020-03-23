@@ -71,6 +71,19 @@ def postPokerCard(session, name, deckId, quantity, imageFileId):
         has_proofed_back = 1
     )
 
+def postSmallStoutBox(session, name, quantity, gameId, topImageFileId, backImageFileId):
+    url = "%s/smallstoutbox" % gameCrafterBaseUrl
+    return httpClient.post(url,
+        session_id = session["id"],
+        name = name,
+        game_id = gameId,
+        quantity = quantity,
+        top_id = topImageFileId,
+        has_proofed_top = 1,
+        bottom_id = backImageFileId,
+        has_proofed_bottom = 1
+    )
+
 def postFolder(session, name, folderParentId):
     url = "%s/folder" % gameCrafterBaseUrl
     return httpClient.post(url,
