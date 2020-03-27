@@ -8,7 +8,7 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 
 ## QuickStart
 - Install [XQuartz](https://www.xquartz.org/) for OSX
-- `brew install cairo pango gdk-pixbuf libxml2 libxslt libffi`
+- `brew install xquartz cairo pango gdk-pixbuf libxml2 libxslt libffi imagemagick`
 - `pip3 install templative`
 - Create and cd into a directory
 - `templative init`
@@ -64,3 +64,24 @@ Overlays are svgs that are overlaid on top of the template svg.
 Style updates allow you to update a style attribute of a svg element at a given id.
 
 
+## Component Definition Types
+
+### Mono
+
+- `topArtData` and `bottomArtdata` defined in component compose.
+- No `piecesGamedata`.
+
+## Multi
+
+- Has `frontArtdata` and `backArtdata` defined in component compose.
+- Has `piecesGamedata`. 
+- A piece is created for every piece row defined in the gamedata.
+- All pieces has the same front and back artdata.
+
+## Multi Variant
+
+- No artdata in component compose.
+- Has `piecesGamedata`.
+- Expects a `frontArtdata` and `backArtdata` columns in pieces gamedata.
+- A piece is created for every piece of row defined in the gamedata.
+- Each piece has a unique front and back artdata.
