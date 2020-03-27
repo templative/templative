@@ -34,6 +34,9 @@ def produceGame(gameRootDirectoryPath):
         else:
             client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
 
+
+    rules = fileLoader.loadRules(gameRootDirectoryPath)
+    client.produceRulebook(rules, gameFolderPath)
     print("Done producing %s" % gameFolderPath)
 
     return gameFolderPath

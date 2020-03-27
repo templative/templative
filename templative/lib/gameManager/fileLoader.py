@@ -73,3 +73,12 @@ def loadArtdata(gameRootDirectoryPath, gameCompose, artdataFilename):
     filepath = os.path.join(gameRootDirectoryPath, artdataDirectory, artdataFilenameWithExtension)
     with open(filepath) as metadataFile:
         return json.load(metadataFile)
+
+def loadRules(gameRootDirectoryPath):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path cannot be None")
+
+    filepath = os.path.join(gameRootDirectoryPath, "rules.md")
+    
+    with open(filepath, "rb") as rules:
+        return rules.read()
