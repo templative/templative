@@ -84,6 +84,16 @@ def postSmallStoutBox(session, name, quantity, gameId, topImageFileId, backImage
         has_proofed_bottom = 1
     )
 
+def postDocument(session, name, quantity, gameId, pdfFileId):
+    url = "%s/document" % gameCrafterBaseUrl
+    return httpClient.post(url,
+        session_id = session["id"],
+        name = name,
+        game_id = gameId,
+        quantity = quantity,
+        pdf_id = pdfFileId,
+    )
+
 def postFolder(session, name, folderParentId):
     url = "%s/folder" % gameCrafterBaseUrl
     return httpClient.post(url,

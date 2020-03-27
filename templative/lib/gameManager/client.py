@@ -59,4 +59,5 @@ def produceRulebook(rules, gameFolderPath):
     # md_file_path: input markdown file path
     # css_file_path: input styles path (CSS)
     # base_url: absolute base path for markdown linked content (as images)
-    md2pdf(outputFilepath, md_content=rules)
+    cssFilepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "pdfStyles.css")
+    md2pdf(outputFilepath, md_content=rules, css_file_path=cssFilepath)

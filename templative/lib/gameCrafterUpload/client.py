@@ -24,6 +24,8 @@ def uploadGame(gameRootDirectoryPath):
 
     uploadComponents(session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])
 
+    uploadRules(session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])
+
     gameUrl = "%s%s%s"%(gameCrafterBaseUrl, "/publish/editor/", cloudGame["id"])
     print("Uploads finished for %s, visit %s" % (cloudGame["name"], gameUrl))
     return gameUrl
@@ -77,3 +79,13 @@ def uploadPokerCardPiece(session, instructions, deckId, cloudComponentFolderId):
 
     cloudFile = gamecrafter.uploadFile(session, filepath, cloudComponentFolderId)
     pokerCard = gamecrafter.createPokerCard(session, name, deckId, quantity, cloudFile["id"])
+
+def uploadRules(session, gameRootDirectoryPath, cloudGame, folderId):
+    name = "rules"
+    filepath = join(gameRootDirectoryPath,"rules.pdf")
+    quantity = 1
+    print("Uploading %s" % (filepath))
+
+    cloudFile = gamecrafter.uploadFile(session, filepath, folderId)
+    document = gamecrafter.createDocument(session, name, quantity, cloudGame["id"], cloudFile["id"])
+    

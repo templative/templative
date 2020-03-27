@@ -40,6 +40,9 @@ def createPokerCard(session, name, deckId, quantity, imageFileId):
 def createSmallStoutBox(session, name, deckId, quantity, topImageFileId, bottomImageFileId):
     return client.postSmallStoutBox(session, name, deckId, quantity, topImageFileId, bottomImageFileId)
 
+def createDocument(session, name, quantity, gameId, pdfFileId):
+    return client.postDocument(session, name, quantity, gameId, pdfFileId)
+
 def printUser(session):
     print(client.getUser(session))
 
