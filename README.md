@@ -7,8 +7,9 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 - Python 3.8.2
 
 ## QuickStart
+- Install [XQuartz](https://www.xquartz.org/) for OSX
+- `brew install cairo pango gdk-pixbuf libxml2 libxslt libffi`
 - `pip3 install templative`
-- Add templative to your PATH
 - Create and cd into a directory
 - `templative init`
 - Create `./output/`
