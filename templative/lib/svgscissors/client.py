@@ -3,8 +3,10 @@ import os
 import svgutils.transform as sg
 import xml.etree.ElementTree as ET
 from wand.image import Image
-       
-def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
+import asyncio 
+from aiofile import AIOFile
+
+async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
     if game == None:
         print("game cannot be None.")
         return
@@ -33,19 +35,25 @@ def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata,
     artFilename = "%s.svg" % (artMetaData["templateFilename"])
     artFile = Element(os.path.join(templateFilesDirectory, artFilename)) 
 
-    addOverlays(artFile, artMetaData["overlays"], game, gameCompose, componentGamedata, pieceGamedata)
+    await addOverlays(artFile, artMetaData["overlays"], game, gameCompose, componentGamedata, pieceGamedata)
 
     artFileOutputName = ("%s-%s" % (componentCompose["name"], pieceGamedata["name"]))
+    artFileOutputFilepath = await createArtfile(artFile, artFileOutputName, outputDirectory)
+    
+    await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, componentGamedata, pieceGamedata)
+    await updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, componentGamedata, pieceGamedata)
+
+    await exportSvgToJpg(artFileOutputFilepath, artFileOutputName, outputDirectory)
+    print("Produced %s." % (pieceGamedata["name"]))
+
+async def createArtfile(artFile, artFileOutputName, outputDirectory):
+    
     artFileOutputFileName = "%s.svg" % (artFileOutputName)
     artFileOutputFilepath = os.path.join(outputDirectory, artFileOutputFileName)
     artFile.dump(artFileOutputFilepath)
-    
-    textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, componentGamedata, pieceGamedata)
-    updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, componentGamedata, pieceGamedata)
+    return artFileOutputFilepath
 
-    exportSvgToJpg(artFileOutputFilepath, artFileOutputName, outputDirectory)
-
-def addOverlays(artFile, overlays, game, gameCompose, componentGamedata, pieceGamedata):
+async def addOverlays(artFile, overlays, game, gameCompose, componentGamedata, pieceGamedata):
     if artFile == None:
         print("artFile cannot be None.")
         return
@@ -69,14 +77,14 @@ def addOverlays(artFile, overlays, game, gameCompose, componentGamedata, pieceGa
     overlayFilesDirectory = gameCompose["artInsertsDirectory"]
 
     for overlay in overlays:
-        overlayName = getScopedValue(overlay, game, componentGamedata, pieceGamedata)
+        overlayName = await getScopedValue(overlay, game, componentGamedata, pieceGamedata)
         if overlayName != None and overlayName != "":
             overlayFilename = "%s.svg" % (overlayName)
             overlayFilepath = os.path.join(overlayFilesDirectory, overlayFilename)
             graphicsInsert = Element(overlayFilepath)
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 
-def textReplaceInFile(filepath, textReplacements, game, componentGamedata, pieceGamedata):
+async def textReplaceInFile(filepath, textReplacements, game, componentGamedata, pieceGamedata):
     if filepath == None:
         print("filepath cannot be None.")
         return
@@ -98,25 +106,25 @@ def textReplaceInFile(filepath, textReplacements, game, componentGamedata, piece
         return
     
     contents = ""
-    with open(filepath, 'r') as f:
-        contents = f.read()
+    async with AIOFile(filepath, 'r') as f:
+        contents = await f.read()
         for textReplacement in textReplacements:
             key = "{%s}" % textReplacement["key"]
-            value = getScopedValue(textReplacement, game, componentGamedata, pieceGamedata)
-            value = processValueFilters(value, textReplacement)
+            value = await getScopedValue(textReplacement, game, componentGamedata, pieceGamedata)
+            value = await processValueFilters(value, textReplacement)
             contents = contents.replace(key, value)
 
-    with open(filepath,'w') as f:
-        f.write(contents)
+    async with AIOFile(filepath,'w') as f:
+        await f.write(contents)
 
-def processValueFilters(value, textReplacement):
+async def processValueFilters(value, textReplacement):
     if "filters" in textReplacement:
         for filter in textReplacement["filters"]:
             if filter == "toUpper":
                 value = value.upper()
     return value
 
-def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pieceGamedata):
+async def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pieceGamedata):
     if filepath == None:
         print("filepath cannot be None.")
         return
@@ -143,15 +151,15 @@ def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pieceGam
         findById = styleUpdate["id"]
         elementToUpdate = tree.find(".//*[@id='%s']" % findById)
         if (elementToUpdate != None):
-            value = getScopedValue(styleUpdate, game, componentGamedata, pieceGamedata)
-            replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
+            value = await getScopedValue(styleUpdate, game, componentGamedata, pieceGamedata)
+            await replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
         else:
             print("Could not find element with id [%s]." % (findById))
 
-    with open(filepath,'wb') as f:
-        f.write(ET.tostring(tree))
+    async with AIOFile(filepath,'wb') as f:
+        await f.write(ET.tostring(tree))
 
-def replaceStyleAttributeForElement(element, attribute, key, value):
+async def replaceStyleAttributeForElement(element, attribute, key, value):
     attributeValue = element.get(attribute, "")
     
     replaceStyleWith = ""    
@@ -173,7 +181,7 @@ def replaceStyleAttributeForElement(element, attribute, key, value):
     replaceStyleWith = "%s:%s" % (key, value)
     element.set(attribute, replaceStyleWith)
 
-def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
+async def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
     if scopedValue == None:
         print("scopedValue cannot be None.")
         return
@@ -205,7 +213,7 @@ def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
     return source
 
 
-def exportSvgToJpg(filepath, name, outputDirectory):
+async def exportSvgToJpg(filepath, name, outputDirectory):
     with Image(filename=filepath) as image:
         outputFilename = "%s.jpg" % (name)
         outputFilepath = os.path.join(outputDirectory, outputFilename)

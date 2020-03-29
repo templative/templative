@@ -1,20 +1,24 @@
 import os
-import requests
+import requests as old_requests
+import requests_async as requests
+import json
+import aiohttp
 
-def post(url, files=None, **kwargs):
-    # print(url)
-    response = requests.post(url, params=kwargs, files=files)
-    return handleResponse(url, response)
+async def post(session, url, **kwargs):
+    async with session.post(url, data=kwargs) as response:
+        return await handleResponse(url, response)
 
-def get(url, **kwargs):
-    response = requests.get(url, params=kwargs)
-    return handleResponse(url, response)
+async def get(session, url, **kwargs):
+    async with  session.get(url, params=kwargs) as response:
+        return await handleResponse(url, response)
 
-def handleResponse(url, response):
-    statusCode = str(response.status_code)
+async def handleResponse(url, response):
+    statusCode = str(response.status)
+    responseText = await response.text()
+    responseJson = json.loads(responseText)
     if not statusCode.startswith('2'):
         print ('FAIL', response)
-        print ('FAIL', response.json())
+        print ('FAIL', responseJson)
         raise Exception('%s Returned %s.' % (url, statusCode))
     
-    return response.json()['result']
+    return responseJson['result']

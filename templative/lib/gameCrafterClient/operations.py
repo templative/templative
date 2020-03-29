@@ -2,11 +2,13 @@ from templative.lib.gameCrafterClient import client
 import os
 from uuid import uuid1
 from tabulate import tabulate
+import asyncio
+from aiofile import AIOFile
 
 baseUrl = "https://www.thegamecrafter.com"
 
-def createGame(session, name, designerId):
-    game = client.postGame(session, name, designerId)
+async def createGame(clientSession, session, name, designerId):
+    game = await client.postGame(clientSession, session, name, designerId)
     
     gameName = game["name"]
     gameId = game["id"]
@@ -15,53 +17,53 @@ def createGame(session, name, designerId):
 
     return game
 
-def createFolderAtRoot(session, name):
-    user = client.getUser(session)
-    return client.postFolder(session, name, user['root_folder_id'])
+async def createFolderAtRoot(clientSession, session, name):
+    user = await client.getUser(clientSession, session)
+    return await client.postFolder(clientSession, session, name, user['root_folder_id'])
 
-def createFolderAtParent(session, name, folderId):
-    return client.postFolder(session, name, folderId)
+async def createFolderAtParent(clientSession, session, name, folderId):
+    return await client.postFolder(clientSession, session, name, folderId)
 
-def uploadFile(session, filepath, folderId):
+async def uploadFile(clientSession, session, filepath, folderId):
     if not os.path.isfile(filepath):
         raise Exception ('Not a file: %s' % filepath)
     
-    fileToUpload = open(filepath, "rb")
     filename = os.path.basename(filepath)
 
-    return client.postFile(session, fileToUpload, filename, folderId)
+    with open(filepath, "rb") as fileToUpload:
+        return await client.postFile(clientSession, session, fileToUpload, filename, folderId)
 
-def createPokerDeck(session, name, quantity, gameId, imageFileId):
-    return client.postPokerDeck(session, name, quantity, gameId, imageFileId)
+async def createPokerDeck(clientSession, session, name, quantity, gameId, imageFileId):
+    return await client.postPokerDeck(clientSession, session, name, quantity, gameId, imageFileId)
 
-def createPokerCard(session, name, deckId, quantity, imageFileId):
-    return client.postPokerCard(session, name, deckId, quantity, imageFileId)
+async def createPokerCard(clientSession, session, name, deckId, quantity, imageFileId):
+    return await client.postPokerCard(clientSession, session, name, deckId, quantity, imageFileId)
 
-def createSmallStoutBox(session, gameId, name, quantity, topImageFileId, bottomImageFileId):
-    return client.postSmallStoutBox(session, gameId, name, quantity, topImageFileId, bottomImageFileId)
+async def createSmallStoutBox(clientSession, session, gameId, name, quantity, topImageFileId, bottomImageFileId):
+    return await client.postSmallStoutBox(clientSession, session, gameId, name, quantity, topImageFileId, bottomImageFileId)
 
-def createDocument(session, name, quantity, gameId, pdfFileId):
-    return client.postDocument(session, name, quantity, gameId, pdfFileId)
+async def createDocument(clientSession, session, name, quantity, gameId, pdfFileId):
+    return await client.postDocument(clientSession, session, name, quantity, gameId, pdfFileId)
 
-def printUser(session):
-    print(client.getUser(session))
+async def printUser(clientSession, session):
+    print(await client.getUser(clientSession, session))
 
-def listGames(session):
-    gamesResponse = client.getGamesForUser(session)
-    printGames(gamesResponse["items"])
+async def listGames(clientSession, session):
+    gamesResponse = await client.getGamesForUser(clientSession, session)
+    await printGames(gamesResponse["items"])
 
-def listGamesForUserDesigners(session):
-    designersResponse = client.getDesigners(session)
+async def listGamesForUserDesigners(clientSession, session):
+    designersResponse = await client.getDesigners(clientSession, session)
     designers = designersResponse["items"]
 
     games = []
     for designer in designers:
-        gamesResponse = client.getGamesForDesignerId(session, designer["id"])
+        gamesResponse = await client.getGamesForDesignerId(clientSession, session, designer["id"])
         games.extend(gamesResponse["items"])
 
     printGames(games)   
 
-def printGames(games):
+async def printGames(clientSession, games):
     headers = ["name", "id", "link"]
     data = []
 
@@ -73,8 +75,8 @@ def printGames(games):
 
     print(tabulate(data, headers=headers, tablefmt='orgtbl'))
 
-def listDesigners(session):
-    designersResponse = client.getDesigners(session)
+async def listDesigners(clientSession, session):
+    designersResponse = await client.getDesigners(clientSession, session)
 
     headers = ["name", "id"]
     data = []
@@ -86,7 +88,7 @@ def listDesigners(session):
 
     print(tabulate(data, headers=headers, tablefmt='orgtbl'))
 
-def login():
+async def login(clientSession):
     publicApiKey = os.environ.get('THEGAMECRAFTER_PUBLIC_KEY')
     if not publicApiKey:
         raise Exception('Could not log in. You need to set the env variable THEGAMECRAFTER_PUBLIC_KEY. Value is %s' % publicApiKey)
@@ -99,4 +101,4 @@ def login():
     if not userPassword:
         raise Exception('Could not log in. You need to set the env variable THEGAMECRAFTER_PASSWORD. Value is %s' % userPassword)
 
-    return client.login(publicApiKey, userName, userPassword)
+    return await client.login(clientSession, publicApiKey, userName, userPassword)

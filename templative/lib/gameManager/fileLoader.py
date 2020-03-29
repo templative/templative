@@ -1,36 +1,38 @@
 import os
 import json
 import csv
+import io
+from aiofile import AIOFile
 
-def loadGameCompose(gameRootDirectoryPath):
+async def loadGameCompose(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open(os.path.join(gameRootDirectoryPath, "game-compose.json")) as gameCompose:
-        return json.load(gameCompose)
+    async with AIOFile(os.path.join(gameRootDirectoryPath, "game-compose.json")) as gameCompose:
+        return json.loads(await gameCompose.read())
 
-def loadComponentCompose(gameRootDirectoryPath):
+async def loadComponentCompose(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open(os.path.join(gameRootDirectoryPath, "component-compose.json")) as componentFile:
-        return json.load(componentFile)
+    async with AIOFile(os.path.join(gameRootDirectoryPath, "component-compose.json")) as componentFile:
+        return json.loads(await componentFile.read())
 
-def loadGame(gameRootDirectoryPath):
+async def loadGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open(os.path.join(gameRootDirectoryPath, "game.json")) as game:
-        return json.load(game)
+    async with AIOFile(os.path.join(gameRootDirectoryPath, "game.json")) as game:
+        return json.loads(await game.read())
 
-def loadCompany(gameRootDirectoryPath):
+async def loadCompany(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open(os.path.join(gameRootDirectoryPath, "company.json")) as company:
-        return json.load(company)
+    async with AIOFile(os.path.join(gameRootDirectoryPath, "company.json")) as company:
+        return json.loads(await company.read())
 
-def loadPiecesGamedata(gameRootDirectoryPath, gameCompose, piecesGamedataFilename):
+async def loadPiecesGamedata(gameRootDirectoryPath, gameCompose, piecesGamedataFilename):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
@@ -48,7 +50,7 @@ def loadPiecesGamedata(gameRootDirectoryPath, gameCompose, piecesGamedataFilenam
             gamedata.append(row)
         return gamedata
 
-def loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentGamedataFilename):
+async def loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentGamedataFilename):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
@@ -58,10 +60,10 @@ def loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentGamedataF
     componentGamedataDirectory = gameCompose["componentGamedataDirectory"]
     componentGamedataFilenameWithExtension = "%s.json" % (componentGamedataFilename)
     filepath = os.path.join(gameRootDirectoryPath, componentGamedataDirectory, componentGamedataFilenameWithExtension)
-    with open(filepath) as componentGamedata:
-        return json.load(componentGamedata)
+    async with AIOFile(filepath) as componentGamedata:
+        return json.loads(await componentGamedata.read())
 
-def loadArtdata(gameRootDirectoryPath, gameCompose, artdataFilename):
+async def loadArtdata(gameRootDirectoryPath, gameCompose, artdataFilename):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
@@ -71,14 +73,14 @@ def loadArtdata(gameRootDirectoryPath, gameCompose, artdataFilename):
     artdataDirectory = gameCompose["artdataDirectory"]
     artdataFilenameWithExtension = "%s.json" % (artdataFilename)
     filepath = os.path.join(gameRootDirectoryPath, artdataDirectory, artdataFilenameWithExtension)
-    with open(filepath) as metadataFile:
-        return json.load(metadataFile)
+    async with AIOFile(filepath) as metadataFile:
+        return json.loads(await metadataFile.read())
 
-def loadRules(gameRootDirectoryPath):
+async def loadRules(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
     filepath = os.path.join(gameRootDirectoryPath, "rules.md")
     
-    with open(filepath, "rb") as rules:
-        return rules.read()
+    async with AIOFile(filepath, "rb") as rules:
+        return await rules.read()

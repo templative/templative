@@ -1,55 +1,56 @@
 import os
+import asyncio
 from datetime import datetime
 
 import templative.lib.gameCrafterClient.httpClient as httpClient
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com/api"
 
-def login(publicApiKey, userName, userPassword):
+async def login(client, publicApiKey, userName, userPassword):
     url = "%s/session" % gameCrafterBaseUrl
-    return httpClient.post(url, 
+    return await httpClient.post(client, url, 
         api_key_id = publicApiKey,
         username = userName,
         password = userPassword
     )
 
-def getUser(session):
+async def getUser(client, session):
     url = "%s/user/%s" % (gameCrafterBaseUrl, session["user_id"])
     
-    return httpClient.get(url, 
+    return await httpClient.get(client, url, 
         session_id = session["id"]
     )
 
-def getDesigners(session):
+async def getDesigners(client, session):
     url = "%s/user/%s/designers" % (gameCrafterBaseUrl, session["user_id"])
-    return httpClient.get(url,
+    return await httpClient.get(client, url,
         session_id = session["id"]
     )
 
-def getGamesForDesignerId(session, designerId):
+async def getGamesForDesignerId(client, session, designerId):
     url = "%s/designer/%s/games" % (gameCrafterBaseUrl, designerId)
-    return httpClient.get(url,
+    return await httpClient.get(client, url,
         session_id = session["id"]
     )
 
-def getGamesForUser(session):
+async def getGamesForUser(client, session):
     url = "%s/user/%s/games" % (gameCrafterBaseUrl, session["user_id"])
-    return httpClient.get(url,
+    return await httpClient.get(client, url,
         session_id = session["id"]
     )
 
-def postGame(session, name, designerId):
+async def postGame(client, session, name, designerId):
     url = "%s/game" % gameCrafterBaseUrl
-    return httpClient.post(url,
+    return await httpClient.post(client, url,
         session_id = session["id"],
         name = name,
         designer_id = designerId,
         description='Automatically created (%s)' % name,
     )
 
-def postPokerDeck(session, name, quantity, gameId, backImageFileId):
+async def postPokerDeck(client, session, name, quantity, gameId, backImageFileId):
     url = "%s/pokerdeck" % gameCrafterBaseUrl
-    return httpClient.post(url,
+    return await httpClient.post(client, url,
         session_id = session["id"],
         name = name,
         game_id = gameId,
@@ -58,9 +59,9 @@ def postPokerDeck(session, name, quantity, gameId, backImageFileId):
         has_proofed_back = 1
     )
 
-def postPokerCard(session, name, deckId, quantity, imageFileId):
+async def postPokerCard(client, session, name, deckId, quantity, imageFileId):
     url = "%s/pokercard" % gameCrafterBaseUrl
-    return httpClient.post(url,
+    return await httpClient.post(client, url,
         session_id = session["id"],
         name = name,
         deck_id = deckId,
@@ -71,9 +72,9 @@ def postPokerCard(session, name, deckId, quantity, imageFileId):
         has_proofed_back = 1
     )
 
-def postSmallStoutBox(session, gameId, name, quantity, topImageFileId, backImageFileId):
+async def postSmallStoutBox(client, session, gameId, name, quantity, topImageFileId, backImageFileId):
     url = "%s/smallstoutbox" % gameCrafterBaseUrl
-    return httpClient.post(url,
+    return await httpClient.post(client, url,
         session_id = session["id"],
         name = name,
         game_id = gameId,
@@ -84,9 +85,9 @@ def postSmallStoutBox(session, gameId, name, quantity, topImageFileId, backImage
         has_proofed_bottom = 1
     )
 
-def postDocument(session, name, quantity, gameId, pdfFileId):
+async def postDocument(client, session, name, quantity, gameId, pdfFileId):
     url = "%s/document" % gameCrafterBaseUrl
-    return httpClient.post(url,
+    return await httpClient.post(client, url,
         session_id = session["id"],
         name = name,
         game_id = gameId,
@@ -94,20 +95,20 @@ def postDocument(session, name, quantity, gameId, pdfFileId):
         pdf_id = pdfFileId,
     )
 
-def postFolder(session, name, folderParentId):
+async def postFolder(client, session, name, folderParentId):
     url = "%s/folder" % gameCrafterBaseUrl
-    return httpClient.post(url,
+    return await httpClient.post(client, url,
         session_id = session["id"],
         name=name,
         user_Id=session["user_id"],
         parent_id=folderParentId,
     )
 
-def postFile(session, file, filename, folderId):
+async def postFile(client, session, file, filename, folderId):
     url = "%s/file" % gameCrafterBaseUrl
-    return httpClient.post(url,
+    return await httpClient.post(client, url,
         session_id = session["id"],
-        files={"file":file}, 
+        file=file, 
         name=filename, 
         folder_id=folderId)
 

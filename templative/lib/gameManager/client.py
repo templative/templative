@@ -1,4 +1,5 @@
 import os
+import asyncio
 import json
 from templative.lib.svgscissors import operations as processor
 from templative.lib.gameManager import fileLoader
@@ -6,40 +7,40 @@ from templative.lib.gameManager import gameWriter
 
 from md2pdf.core import md2pdf
 
-def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentCompose, outputDirectory):
+async def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentCompose, outputDirectory):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
     componentName = componentCompose["name"]
 
-    componentGamedata = fileLoader.loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentCompose["componentGamedataFilename"])
+    componentGamedata = await fileLoader.loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentCompose["componentGamedataFilename"])
     if not componentGamedata or componentGamedata == {}:
         print("Skipping %s component due to missing component gamedata." % componentName)
         return
 
-    piecesGamedata = fileLoader.loadPiecesGamedata(gameRootDirectoryPath, gameCompose, componentCompose["piecesGamedataFilename"])
+    piecesGamedata = await fileLoader.loadPiecesGamedata(gameRootDirectoryPath, gameCompose, componentCompose["piecesGamedataFilename"])
     if not piecesGamedata or piecesGamedata == {}:
         print("Skipping %s component due to missing pieces gamedata." % componentName)
         return
 
-    componentArtdata = fileLoader.loadArtdata(gameRootDirectoryPath, gameCompose, componentCompose["artdataFilename"])
+    componentArtdata = await fileLoader.loadArtdata(gameRootDirectoryPath, gameCompose, componentCompose["artdataFilename"])
     if not componentArtdata or componentArtdata == {}:
         print("Skipping %s component due to missing front art metadata." % componentName)
         return
 
-    componentBackArtdata = fileLoader.loadArtdata(gameRootDirectoryPath, gameCompose, componentCompose["backArtdataFilename"])
+    componentBackArtdata = await fileLoader.loadArtdata(gameRootDirectoryPath, gameCompose, componentCompose["backArtdataFilename"])
     if not componentBackArtdata or componentBackArtdata == {}:
         print("Skipping %s component due to missing back art metadata." % componentName)
         return
 
     print("Creating art assets for %s component." % (componentName))
 
-    componentDirectory = gameWriter.createComponentFolder(componentName, outputDirectory)
+    componentDirectory = await gameWriter.createComponentFolder(componentName, outputDirectory)
 
     componentInstructionFilepath = os.path.join(componentDirectory, "component.json")
 
-    frontInstructionSets = processor.getInstructionSetsForFiles(game, componentCompose, piecesGamedata, componentDirectory)
-    backInstructionSet = processor.getBackInstructionSet(componentCompose, componentDirectory)
+    frontInstructionSets = await processor.getInstructionSetsForFiles(game, componentCompose, piecesGamedata, componentDirectory)
+    backInstructionSet = await processor.getBackInstructionSet(componentCompose, componentDirectory)
     componentInstructions = {
         "name": componentName, 
         "type": componentCompose["type"],
@@ -47,11 +48,11 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentComp
         "frontInstructions": frontInstructionSets,
         "backInstructions": backInstructionSet
     }
-    gameWriter.dumpInstructions(componentInstructionFilepath, componentInstructions)
+    await gameWriter.dumpInstructions(componentInstructionFilepath, componentInstructions)
 
-    processor.createArtFilesForComponent(game, gameCompose, componentCompose, componentArtdata, componentBackArtdata, componentGamedata, piecesGamedata, componentDirectory)
+    await processor.createArtFilesForComponent(game, gameCompose, componentCompose, componentArtdata, componentBackArtdata, componentGamedata, piecesGamedata, componentDirectory)
 
-def produceRulebook(rules, gameFolderPath):
+async def produceRulebook(rules, gameFolderPath):
     outputFilepath = os.path.join(gameFolderPath, "rules.pdf")
     cssFilepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "pdfStyles.css")
     md2pdf(outputFilepath, md_content=rules, css_file_path=cssFilepath)

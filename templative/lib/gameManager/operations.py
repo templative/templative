@@ -1,5 +1,6 @@
 import uuid
 import os
+import asyncio
 from datetime import datetime
 # from distutils.dir_util import copy_tree
 
@@ -7,44 +8,44 @@ from templative.lib.gameManager import fileLoader
 from templative.lib.gameManager import gameWriter
 from templative.lib.gameManager import client
 
-def produceGame(gameRootDirectoryPath, componentName):
+async def produceGame(gameRootDirectoryPath, componentName):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
 
     isExclusivelyComponent = componentName != None
-    game = fileLoader.loadGame(gameRootDirectoryPath)
+    game = await fileLoader.loadGame(gameRootDirectoryPath)
     
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     uniqueGameName = ("%s_%s_%s_%s" % (game["name"], game["version"], game["versionName"], timestamp)).replace(" ", "")
     game["name"] = uniqueGameName
 
-    gameCompose = fileLoader.loadGameCompose(gameRootDirectoryPath)
+    gameCompose = await fileLoader.loadGameCompose(gameRootDirectoryPath)
 
-    gameFolderPath = gameWriter.createGameFolder(game["name"], gameCompose["outputDirectory"])
+    gameFolderPath = await gameWriter.createGameFolder(game["name"], gameCompose["outputDirectory"])
     print("Producing %s" % gameFolderPath)    
 
-    gameWriter.copyGameFromGameFolderToOutput(game, gameFolderPath)
+    await gameWriter.copyGameFromGameFolderToOutput(game, gameFolderPath)
 
-    company = fileLoader.loadCompany(gameRootDirectoryPath)
-    gameWriter.copyCompanyFromGameFolderToOutput(company, gameFolderPath)
+    company = await fileLoader.loadCompany(gameRootDirectoryPath)
+    await gameWriter.copyCompanyFromGameFolderToOutput(company, gameFolderPath)
     
-    componentCompose = fileLoader.loadComponentCompose(gameRootDirectoryPath)
+    componentCompose = await fileLoader.loadComponentCompose(gameRootDirectoryPath)
     for component in componentCompose["components"]:
         if not isExclusivelyComponent and component["disabled"]:
             print("Skipping disabled %s component." % (component["name"]))
         elif isExclusivelyComponent and component["name"] != componentName:
             print("Skipping %s component." % (component["name"]))
         else:
-            client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
+            await client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
 
 
-    rules = fileLoader.loadRules(gameRootDirectoryPath)
-    client.produceRulebook(rules, gameFolderPath)
+    rules = await fileLoader.loadRules(gameRootDirectoryPath)
+    await client.produceRulebook(rules, gameFolderPath)
     print("Done producing %s" % gameFolderPath)
 
     return gameFolderPath
 
-def createTemplate():
+async def createTemplate():
     if(os.path.exists(".game-compose")):
         print("Error: Existing game compose here.")
         return

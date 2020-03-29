@@ -1,7 +1,16 @@
 import click
+import asyncio
 from templative.lib.gameCrafterClient import operations as gameCrafterClient
 from templative.lib.gameManager import operations as gameManagerClient
 from templative.lib.gameCrafterUpload import operations as gameCrafterUpload
+from functools import wraps
+
+def coro(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        return asyncio.run(f(*args, **kwargs))
+
+    return wrapper
 
 @click.group()
 def cli():
@@ -9,103 +18,107 @@ def cli():
     pass
 
 @cli.group()
-def gamecrafter():
+async def gamecrafter():
     """Manage game crafter assets"""
     pass
 
 @gamecrafter.group()
-def designers():
+async def designers():
     """Manage designers"""
     pass
 
 @designers.command(name="ls")
-def listDesigners():
+async def listDesigners():
     """List designers"""
-    session = gameCrafterClient.login()
-    gameCrafterClient.listDesigners(session)
+    session = await gameCrafterClient.login()
+    await gameCrafterClient.listDesigners(session)
 
 @gamecrafter.group()
-def games():
+async def games():
     """Manage games"""
     pass
 
 @games.command(name="ls")
-def listGames():
+async def listGames():
     """List games"""
-    session = gameCrafterClient.login()
-    gameCrafterClient.listGames(session)
+    session = await gameCrafterClient.login()
+    await gameCrafterClient.listGames(session)
 
 @games.command()
 @click.option('-n', '--gameName', required=True, prompt='Game name', help='The name of the new game.')
 @click.option('-d', '--designerId', default=-1, prompt='Designer id', help='The id of the game crafter designer creating the game.')
-def create(gameName, designerId):
+async def create(gameName, designerId):
     """Create a game"""
-    session = gameCrafterClient.login()
-    gameCrafterClient.createGame(session, gameName, designerId)
+    session = await gameCrafterClient.login()
+    await gameCrafterClient.createGame(session, gameName, designerId)
 
 @gamecrafter.group()
-def upload():
+async def upload():
     """Upload folders and files"""
     pass
 
 @upload.command()
 @click.option('-n', '--name', required=True, prompt='Folder name', help='The name of the new folder.')
 @click.option('-f', '--id', default=-1, prompt='Parent id', help='The id of the parent folder. A default of -1 creates it at the user root.')
-def folder(name, id):
+async def folder(name, id):
     """Upload a folder"""
-    session = gameCrafterClient.login()
+    session = await gameCrafterClient.login()
     folder = None
     if id > 0:
-        folder = gameCrafterClient.createFolderAtParent(session, name, id)
+        folder = await gameCrafterClient.createFolderAtParent(session, name, id)
         print("Created folder %s under parent %s" % (folder["id"], folder["parent_id"]))
     else:
-        folder = gameCrafterClient.createFolderAtRoot(session, name)
+        folder = await gameCrafterClient.createFolderAtRoot(session, name)
         print("Created folder %s under users root directory %s" % (folder["id"], folder["parent_id"]))
 
 @upload.command()
 @click.option('-n', '--name', required=True, prompt='Folder name', help='The name of the new folder.')
 @click.option('-f', '--folderId', required=True, prompt='Parent id', help='The id of the parent folder.')
-def file(filepath, folderId):
+async def file(filepath, folderId):
     """Upload a file"""
-    session = gameCrafterClient.login()
-    uploadedFile = gameCrafterClient.uploadFile(session, filepath, folderId)
+    session = await gameCrafterClient.login()
+    uploadedFile = await gameCrafterClient.uploadFile(session, filepath, folderId)
     print("Uploaded file %s under %s" % (uploadedFile["id"], folderId))  
 
 @upload.command(name="ls")
 @click.option('-f', '--folderId', default=-1, prompt='Parent id', help='The id of the folder. A default of -1 searches from the user root.')
 @click.option('r', '--recursive', default=False, prompt='Recursive', help='Whether to list recursively.')
 @click.option('--includeFiles', default=False, prompt='Include files', help='Whether to include files in the list.')
-def listFolderChildren(folderId, recursive, includeFiles):
+async def listFolderChildren(folderId, recursive, includeFiles):
     """List the folder's contents"""
     print("listFolderChildren not implemented.")
     return
-    session = gameCrafterClient.login()
+    session = await gameCrafterClient.login()
     folder = None
     if id > 0:
         pass
     else:
         pass
 
+
 @cli.command()
+@coro
 @click.option('-u/--no-upload', default=False, help='Whether to upload after the game is produced.')
 @click.option('-c', default=None, help="Produce only a specific component by its name. Ignores disabled.")
-def produce(u, c):
+async def produce(u, c, _anyio_backend="asyncio"):
     """Produce the game in the current directory"""
-    producedGame = gameManagerClient.produceGame(".", c)
+    producedGame = await gameManagerClient.produceGame(".", c)
     if(u):
-        gameUploadUrl = gameCrafterUpload.uploadGame(producedGame)
+        gameUploadUrl = await gameCrafterUpload.uploadGame(producedGame)
 
 @cli.command()
+@coro
 @click.option('-i', '--input', prompt='Input directory', help='The directory of the produced game.')
-def upload(input):
+async def upload(input):
     """Upload a produced game in a directory"""
-    gameUploadUrl = gameCrafterUpload.uploadGame(input)
+    gameUploadUrl = await gameCrafterUpload.uploadGame(input)
 
 @cli.command()
-def init():
+async def init():
     """Deprecated - Create the default game project here"""
+    print("Init is not implemented.")
     pass
-    gameManagerClient.createTemplate()
+    await gameManagerClient.createTemplate()
 
 if __name__ == '__main__':
     cli()

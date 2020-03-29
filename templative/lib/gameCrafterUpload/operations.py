@@ -1,11 +1,14 @@
 
 import templative.lib.gameCrafterUpload.client as client
+import asyncio
+import aiohttp
 
-def uploadGame(gameRootDirectoryPath):
+async def uploadGame(gameRootDirectoryPath):
     
     if gameRootDirectoryPath is None:
         print("gameRootDirectoryPath cannot be None")
         return
 
-    return client.uploadGame(gameRootDirectoryPath)
+    async with aiohttp.ClientSession() as clientSession:
+        return await client.uploadGame(clientSession, gameRootDirectoryPath)
 

@@ -1,23 +1,24 @@
 import os
 import json
+from aiofile import AIOFile
 
-def loadGameInstructions(gameRootDirectoryPath):
+async def loadGameInstructions(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open(os.path.join(gameRootDirectoryPath, "game.json")) as game:
-        return json.load(game)
+    async with AIOFile(os.path.join(gameRootDirectoryPath, "game.json")) as game:
+        return json.loads(await game.read())
 
-def loadCompanyInstructions(gameRootDirectoryPath):
+async def loadCompanyInstructions(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    with open(os.path.join(gameRootDirectoryPath, "company.json")) as company:
-        return json.load(company)
+    async with AIOFile(os.path.join(gameRootDirectoryPath, "company.json")) as company:
+        return json.loads(await company.read())
 
-def loadComponentInstructions(componentDirectoryPath):
+async def loadComponentInstructions(componentDirectoryPath):
     if not componentDirectoryPath:
         raise Exception("componentDirectoryPath cannot be None")
 
-    with open(os.path.join(componentDirectoryPath, "component.json")) as componentFile:
-        return json.load(componentFile)
+    async with AIOFile(os.path.join(componentDirectoryPath, "component.json")) as componentFile:
+        return json.loads(await componentFile.read())

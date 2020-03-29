@@ -1,7 +1,8 @@
 import os
 from templative.lib.svgscissors.client import createArtFileOfPiece
+import asyncio
 
-def createArtFilesForComponent(game, gameCompose, componentCompose, frontMetaData, backMetaData, componentGameData, piecesGamedata, outputDirectory):
+async def createArtFilesForComponent(game, gameCompose, componentCompose, frontMetaData, backMetaData, componentGameData, piecesGamedata, outputDirectory):
     if game == None:
         print("game cannot be None.")
         return
@@ -27,13 +28,10 @@ def createArtFilesForComponent(game, gameCompose, componentCompose, frontMetaDat
         return
     
     for pieceGamedata in piecesGamedata:
-        createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory)
-        print("Produced %s." % (pieceGamedata["name"]))
+        await createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory) 
+    await createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory)
 
-    createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory)
-    print("Produced back.")
-
-def getInstructionSetsForFiles(game, componentCompose, componentGamedata, componentFilepath):
+async def getInstructionSetsForFiles(game, componentCompose, componentGamedata, componentFilepath):
     if game == None:
         print("game cannot be None.")
         return
@@ -54,7 +52,7 @@ def getInstructionSetsForFiles(game, componentCompose, componentGamedata, compon
 
     return instructionSets
 
-def getBackInstructionSet(componentCompose, componentFilepath):
+async def getBackInstructionSet(componentCompose, componentFilepath):
     filename = "%s-back.jpg" % componentCompose["name"]
     backFilepath = os.path.join(componentFilepath, filename)
     return {"name": filename, "filepath": backFilepath}

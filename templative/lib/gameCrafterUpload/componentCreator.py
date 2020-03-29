@@ -1,7 +1,8 @@
 from templative.lib.gameCrafterClient import operations as gamecrafter
 from os.path import isfile, join
+import asyncio 
 
-def createPokerDeck(session, component, cloudGameId, cloudGameFolderId):
+async def createPokerDeck(client, session, component, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
     frontInstructions = component["frontInstructions"]
@@ -9,15 +10,15 @@ def createPokerDeck(session, component, cloudGameId, cloudGameFolderId):
 
     print("Uploading %s %s %s(s)" % (quantity, componentName, component["type"]))
 
-    cloudComponentFolder = gamecrafter.createFolderAtParent(session, componentName, cloudGameFolderId)
+    cloudComponentFolder = await gamecrafter.createFolderAtParent(client, session, componentName, cloudGameFolderId)
     
-    backImageId = createFileInFolder(session, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
-    cloudPokerDeck = gamecrafter.createPokerDeck(session, componentName, quantity, cloudGameId, backImageId)
+    backImageId = await createFileInFolder(client, session, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
+    cloudPokerDeck = await gamecrafter.createPokerDeck(client, session, componentName, quantity, cloudGameId, backImageId)
 
     for instructions in frontInstructions:
-        createPokerCardPiece(session, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])
+        await createPokerCardPiece(client, session, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])
 
-def createSmallStoutBox(session, component, cloudGameId, cloudGameFolderId):
+async def createSmallStoutBox(client, session, component, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
     frontInstructions = component["frontInstructions"]
@@ -25,31 +26,31 @@ def createSmallStoutBox(session, component, cloudGameId, cloudGameFolderId):
 
     print("Uploading %s %s %s(s)" % (quantity, componentName, component["type"]))
 
-    cloudComponentFolder = gamecrafter.createFolderAtParent(session, componentName, cloudGameFolderId)
-    topImageFileId = createFileInFolder(session, frontInstructions[0]["name"], frontInstructions[0]["filepath"], cloudComponentFolder["id"])
-    bottomImageFileId = createFileInFolder(session, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
+    cloudComponentFolder = await gamecrafter.createFolderAtParent(client, session, componentName, cloudGameFolderId)
+    topImageFileId = await createFileInFolder(client, session, frontInstructions[0]["name"], frontInstructions[0]["filepath"], cloudComponentFolder["id"])
+    bottomImageFileId = await createFileInFolder(client, session, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
 
-    cloudPokerDeck = gamecrafter.createSmallStoutBox(session, cloudGameId, componentName, quantity, topImageFileId, bottomImageFileId)
+    cloudPokerDeck = await gamecrafter.createSmallStoutBox(client, session, cloudGameId, componentName, quantity, topImageFileId, bottomImageFileId)
 
-def createRules(session, gameRootDirectoryPath, cloudGame, folderId):
+async def createRules(client, session, gameRootDirectoryPath, cloudGame, folderId):
     name = "rules"
     filepath = join(gameRootDirectoryPath, "rules.pdf")
     quantity = 1
     print("Uploading %s" % (filepath))
 
-    cloudFile = gamecrafter.uploadFile(session, filepath, folderId)
-    document = gamecrafter.createDocument(session, name, quantity, cloudGame["id"], cloudFile["id"])
+    cloudFile = await gamecrafter.uploadFile(client, session, filepath, folderId)
+    document = await gamecrafter.createDocument(client, session, name, quantity, cloudGame["id"], cloudFile["id"])
 
-def createFileInFolder(session, name, filepath, cloudComponentFolderId):
+async def createFileInFolder(client, session, name, filepath, cloudComponentFolderId):
     print("Uploading %s from %s" % (name, filepath))
-    cloudFile = gamecrafter.uploadFile(session, filepath, cloudComponentFolderId)
+    cloudFile = await gamecrafter.uploadFile(client, session, filepath, cloudComponentFolderId)
     return cloudFile["id"]
 
-def createPokerCardPiece(session, instructions, deckId, cloudComponentFolderId):
+async def createPokerCardPiece(client, session, instructions, deckId, cloudComponentFolderId):
     name = instructions["name"]
     filepath = instructions["filepath"]
     quantity = instructions["quantity"]
     print("Uploading %s" % (filepath))
 
-    cloudFile = gamecrafter.uploadFile(session, filepath, cloudComponentFolderId)
-    pokerCard = gamecrafter.createPokerCard(session, name, deckId, quantity, cloudFile["id"])
+    cloudFile = await gamecrafter.uploadFile(client, session, filepath, cloudComponentFolderId)
+    pokerCard = await gamecrafter.createPokerCard(client, session, name, deckId, quantity, cloudFile["id"])
