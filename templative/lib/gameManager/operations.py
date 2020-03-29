@@ -7,10 +7,11 @@ from templative.lib.gameManager import fileLoader
 from templative.lib.gameManager import gameWriter
 from templative.lib.gameManager import client
 
-def produceGame(gameRootDirectoryPath):
+def produceGame(gameRootDirectoryPath, componentName):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
 
+    isExclusivelyComponent = componentName != None
     game = fileLoader.loadGame(gameRootDirectoryPath)
     
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -29,8 +30,10 @@ def produceGame(gameRootDirectoryPath):
     
     componentCompose = fileLoader.loadComponentCompose(gameRootDirectoryPath)
     for component in componentCompose["components"]:
-        if component["disabled"]:
+        if not isExclusivelyComponent and component["disabled"]:
             print("Skipping disabled %s component." % (component["name"]))
+        elif isExclusivelyComponent and component["name"] != componentName:
+            print("Skipping %s component." % (component["name"]))
         else:
             client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
 

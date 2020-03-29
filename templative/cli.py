@@ -88,9 +88,10 @@ def listFolderChildren(folderId, recursive, includeFiles):
 
 @cli.command()
 @click.option('-u/--no-upload', default=False, help='Whether to upload after the game is produced.')
-def produce(u):
+@click.option('-c', default=None, help="Produce only a specific component by its name. Ignores disabled.")
+def produce(u, c):
     """Produce the game in the current directory"""
-    producedGame = gameManagerClient.produceGame(".")
+    producedGame = gameManagerClient.produceGame(".", c)
     if(u):
         gameUploadUrl = gameCrafterUpload.uploadGame(producedGame)
 
