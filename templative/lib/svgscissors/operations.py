@@ -27,9 +27,13 @@ async def createArtFilesForComponent(game, gameCompose, componentCompose, frontM
         print("outputDirectory cannot be None.")
         return
     
+    tasks = []
     for pieceGamedata in piecesGamedata:
-        await createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory) 
-    await createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory)
+        tasks.append(asyncio.create_task(createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory)))
+    tasks.append(asyncio.create_task(createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory)))
+
+    for task in tasks:
+        await task
 
 async def getInstructionSetsForFiles(game, componentCompose, componentGamedata, componentFilepath):
     if game == None:

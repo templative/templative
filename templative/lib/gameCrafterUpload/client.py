@@ -2,6 +2,7 @@ import os
 import json
 from os.path import isfile, join
 import sys
+import asyncio
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
@@ -23,8 +24,11 @@ async def uploadGame(client, gameRootDirectoryPath):
     cloudGame = await gamecrafter.createGame(client, session, game["name"], company["gameCrafterDesignerId"])
     cloudGameFolder = await gamecrafter.createFolderAtRoot(client, session, game["name"])
 
-    await createComponents(client,session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])
-    await componentCreator.createRules(client, session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])
+    tasks = []
+    tasks.append(asyncio.create_task(createComponents(client,session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))
+    tasks.append(asyncio.create_task(componentCreator.createRules(client, session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))
+    for task in tasks:
+        await task
 
     gameUrl = "%s%s%s"%(gameCrafterBaseUrl, "/publish/editor/", cloudGame["id"])
     print("Uploads finished for %s, visit %s" % (cloudGame["name"], gameUrl))
@@ -34,9 +38,13 @@ async def createComponents(client,session, outputDirectory, cloudGame, cloudGame
     if not outputDirectory:
         raise Exception("outputDirectory cannot be None")
 
+    tasks = []
     for directoryPath in next(os.walk(outputDirectory))[1]:
         componentDirectoryPath = "%s/%s" % (outputDirectory, directoryPath)
-        await createComponent(client, session, componentDirectoryPath, cloudGame, cloudGameFolderId)
+        tasks.append(asyncio.create_task(createComponent(client, session, componentDirectoryPath, cloudGame, cloudGameFolderId)))
+    
+    for task in tasks:
+        await task
 
 async def createComponent(client, session, componentDirectoryPath, cloudGame, cloudGameFolderId):
     if not componentDirectoryPath:

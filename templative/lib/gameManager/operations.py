@@ -24,23 +24,28 @@ async def produceGame(gameRootDirectoryPath, componentName):
     gameFolderPath = await gameWriter.createGameFolder(game["name"], gameCompose["outputDirectory"])
     print("Producing %s" % gameFolderPath)    
 
-    await gameWriter.copyGameFromGameFolderToOutput(game, gameFolderPath)
+    tasks = []
+    tasks.append(asyncio.create_task(gameWriter.copyGameFromGameFolderToOutput(game, gameFolderPath)))
 
     company = await fileLoader.loadCompany(gameRootDirectoryPath)
-    await gameWriter.copyCompanyFromGameFolderToOutput(company, gameFolderPath)
+    tasks.append(asyncio.create_task(gameWriter.copyCompanyFromGameFolderToOutput(company, gameFolderPath)))
     
     componentCompose = await fileLoader.loadComponentCompose(gameRootDirectoryPath)
+
     for component in componentCompose["components"]:
         if not isExclusivelyComponent and component["disabled"]:
             print("Skipping disabled %s component." % (component["name"]))
         elif isExclusivelyComponent and component["name"] != componentName:
             print("Skipping %s component." % (component["name"]))
         else:
-            await client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
-
-
+            tasks.append(asyncio.create_task(client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)))
+            
     rules = await fileLoader.loadRules(gameRootDirectoryPath)
-    await client.produceRulebook(rules, gameFolderPath)
+    tasks.append(asyncio.create_task(client.produceRulebook(rules, gameFolderPath)))
+    
+    for task in tasks:
+        await task
+    
     print("Done producing %s" % gameFolderPath)
 
     return gameFolderPath
