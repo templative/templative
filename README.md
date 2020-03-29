@@ -9,8 +9,8 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 ## QuickStart
 - Install [XQuartz](https://www.xquartz.org/) for OSX
 - Install `Install Certificates.command` located in Python3.8 application directory. Bonkers.
-- `brew install python3 xquartz cairo pango gdk-pixbuf libxml2 libxslt libffi imagemagick`
-- `pip3 install templative`
+- `xargs brew install < brewRequirements.txt`
+- `pipenv install`
 - Create and cd into a directory
 - `templative init`
 - Create `./output/`
