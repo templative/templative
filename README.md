@@ -8,7 +8,7 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 
 ## QuickStart
 - Install [XQuartz](https://www.xquartz.org/) for OSX
-- `brew install xquartz cairo pango gdk-pixbuf libxml2 libxslt libffi imagemagick`
+- `brew install python3 xquartz cairo pango gdk-pixbuf libxml2 libxslt libffi imagemagick`
 - `pip3 install templative`
 - Create and cd into a directory
 - `templative init`
