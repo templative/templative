@@ -2,6 +2,8 @@ import os
 import json
 from os.path import isfile, join
 import sys
+import threading
+from multiprocessing import Process
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
@@ -34,9 +36,16 @@ async def createComponents(client,session, outputDirectory, cloudGame, cloudGame
     if not outputDirectory:
         raise Exception("outputDirectory cannot be None")
 
+    threads = []
     for directoryPath in next(os.walk(outputDirectory))[1]:
         componentDirectoryPath = "%s/%s" % (outputDirectory, directoryPath)
-        await createComponent(client, session, componentDirectoryPath, cloudGame, cloudGameFolderId)
+        threads.append(Proccess(await createComponent(client, session, componentDirectoryPath, cloudGame, cloudGameFolderId)))
+    
+    for thread in threads:
+        thread.start()
+        thread.join()
+        
+    print("Done with threads")
 
 async def createComponent(client, session, componentDirectoryPath, cloudGame, cloudGameFolderId):
     if not componentDirectoryPath:

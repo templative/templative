@@ -1,3 +1,5 @@
+import threading
+import multiprocessing
 import uuid
 import os
 import asyncio
@@ -30,14 +32,20 @@ async def produceGame(gameRootDirectoryPath, componentName):
     await gameWriter.copyCompanyFromGameFolderToOutput(company, gameFolderPath)
     
     componentCompose = await fileLoader.loadComponentCompose(gameRootDirectoryPath)
+    threads = []
     for component in componentCompose["components"]:
         if not isExclusivelyComponent and component["disabled"]:
             print("Skipping disabled %s component." % (component["name"]))
         elif isExclusivelyComponent and component["name"] != componentName:
             print("Skipping %s component." % (component["name"]))
         else:
-            await client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)
+            threads.append(multiprocessing.Process(await client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)))
 
+    for thread in threads:
+        thread.start()
+    
+    for thread in threads:
+        thread.join()
 
     rules = await fileLoader.loadRules(gameRootDirectoryPath)
     await client.produceRulebook(rules, gameFolderPath)

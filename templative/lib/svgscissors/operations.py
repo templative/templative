@@ -1,6 +1,8 @@
 import os
 from templative.lib.svgscissors.client import createArtFileOfPiece
 import asyncio
+import threading
+from multiprocessing import Process
 
 async def createArtFilesForComponent(game, gameCompose, componentCompose, frontMetaData, backMetaData, componentGameData, piecesGamedata, outputDirectory):
     if game == None:
@@ -26,10 +28,16 @@ async def createArtFilesForComponent(game, gameCompose, componentCompose, frontM
     if outputDirectory == None: 
         print("outputDirectory cannot be None.")
         return
-    
+
+    threads = []
+
     for pieceGamedata in piecesGamedata:
-        await createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory) 
-    await createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory)
+        threads.append(threading.Thread(await createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory)))
+    threads.append(Process(await createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory)))
+
+    for thread in threads:
+        thread.start()
+        thread.join()        
 
 async def getInstructionSetsForFiles(game, componentCompose, componentGamedata, componentFilepath):
     if game == None:
