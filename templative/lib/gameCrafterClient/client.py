@@ -71,7 +71,7 @@ def postPokerCard(session, name, deckId, quantity, imageFileId):
         has_proofed_back = 1
     )
 
-def postSmallStoutBox(session, name, quantity, gameId, topImageFileId, backImageFileId):
+def postSmallStoutBox(session, gameId, name, quantity, topImageFileId, backImageFileId):
     url = "%s/smallstoutbox" % gameCrafterBaseUrl
     return httpClient.post(url,
         session_id = session["id"],

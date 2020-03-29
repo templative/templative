@@ -38,13 +38,13 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentComp
 
     componentInstructionFilepath = os.path.join(componentDirectory, "component.json")
 
-    fileInstructionSets = processor.getInstructionSetsForFiles(game, componentCompose, piecesGamedata, componentDirectory)
+    frontInstructionSets = processor.getInstructionSetsForFiles(game, componentCompose, piecesGamedata, componentDirectory)
     backInstructionSet = processor.getBackInstructionSet(componentCompose, componentDirectory)
     componentInstructions = {
         "name": componentName, 
         "type": componentCompose["type"],
         "quantity": componentCompose["quantity"],
-        "fileInstructions": fileInstructionSets,
+        "frontInstructions": frontInstructionSets,
         "backInstructions": backInstructionSet
     }
     gameWriter.dumpInstructions(componentInstructionFilepath, componentInstructions)
@@ -53,11 +53,5 @@ def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentComp
 
 def produceRulebook(rules, gameFolderPath):
     outputFilepath = os.path.join(gameFolderPath, "rules.pdf")
-    
-    # pdf_file_path: output PDF file path
-    # md_content: input markdown raw string content
-    # md_file_path: input markdown file path
-    # css_file_path: input styles path (CSS)
-    # base_url: absolute base path for markdown linked content (as images)
     cssFilepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "pdfStyles.css")
     md2pdf(outputFilepath, md_content=rules, css_file_path=cssFilepath)
