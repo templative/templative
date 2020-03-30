@@ -1,18 +1,14 @@
 import setuptools
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
-
 setuptools.setup(
     name = "templative",
     version = "1.0.0",
     author = "Oliver Barnum",
     author_email = "oliverbarnum32@gmail.com",
     description = "Populate svgs using csvs, output jpg images, and upload them to the Game Crafter",
-    long_description = long_description,
-    long_description_content_type = "text/markdown",
     url = "",
-    packages=setuptools.find_packages(),
+    packages=["templative"],
+    install_requires=["aiofile", "aiohttp", "appdirs", "async-timeout", "attrs", "cairocffi", "CairoSVG", "certifi", "cffi", "chardet", "click", "cssselect2", "defusedxml", "distlib", "docopt", "ensure", "filelock", "h11", "h2", "hpack", "html5lib", "http3", "hyperframe", "idna", "lxml", "markdown2", "md2pdf", "mpmath", "multidict", "pbr", "Pillow", "pycparser", "Pyphen", "requests", "requests-async", "rfc3986", "six", "stevedore", "svgutils", "tabulate", "tinycss2", "urllib3", "virtualenv", "virtualenv-clone", "virtualenvwrapper", "Wand", "WeasyPrint", "webencodings", "yarl"],
     entry_points = {
         "console_scripts": ["templative=templative.cli:cli"]
     },
