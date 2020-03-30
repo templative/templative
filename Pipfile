@@ -18,6 +18,7 @@ mpmath = "*"
 ensure = "*"
 wand = "*"
 md2pdf = "*"
+virtualenvwrapper = "*"
 
 [requires]
 python_version = "3.8"
