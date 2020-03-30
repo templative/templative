@@ -3,44 +3,41 @@
 Define the cards you’d like created and how to assemble them, use the CLI, and purchase the game off of the Game Crafter.
 
 # Requirements
+- Install [XQuartz](https://www.xquartz.org/) for OSX
 - [Inkscape 0.92.2](https://inkscape.org/release/inkscape-0.92.2/)
 - Python 3.8.2
+- Install `Install Certificates.command` located in Python3.8 application directory if you haven't already.
 
 ## QuickStart
-- Install [XQuartz](https://www.xquartz.org/) for OSX
-- Install `Install Certificates.command` located in Python3.8 application directory. Bonkers.
 - `xargs brew install < brewRequirements.txt`
 - `pipenv install`
 - Create and cd into a directory
 - `templative init`
-- Create `./output/`
 - `templative produce` to create a version of the game. 
 
 ### Uploading
 - Create an account on the [Game Crafter](https://www.thegamecrafter.com)
 - Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
 - Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [env vars](https://www.schrodinger.com/kb/1842)
-- `templative produce -u` to upload the game to the Game Crafter.
+- `templative upload` to upload the last produced version to the Game Crafter.
 
 Use `templative --help` for more info.
 
-## Usage
+## Creating a New Component
 
-### Creating a New Component
-
-- Create a new component within `components.json`
-- Create a new csv doc within the `componentDataDirectory` defined in the `game-compose`
+- Create a new csv file within the `piecesGamedataDirectory` defined in the `game-compose`
+- Create a new json file within the `componentGamedataDirectory` defined in the `game-compose`
 - Define an svg template within the `artTemplatesDirectory` defined in the `game-compose`. See the [Artfile Guide](###-Artfile-Guide)
 - Define an art metadata doc within the `artdataDirectory` defined in the `game-compose`. See [Defining Art Metadata](###-Defining-Art-Metadata)
+- Create a new component within `component-compose.json` that specifies in the filesnames of the files created above.
 
 ### Defining Gamedata
 
 Gamedata files are csv's that contain rows of piece data. All gamedata files must include the headers `name`, `displayName`, `quantity`.
 
-### Artfile Guide
+### Artfiles
 
-- Art files must have a `viewbox` of `0 0 69.86129 95.265602`
-- Document sizes must be `69.861 mm x 95.266 mm`
+Art files must have a `viewbox` that matches the gamecrafter specifications. For instance if poker cards require 825px by 1125px then the viewbox must be `0 0 825 1125` and the document size must specify px with width at `825px` and height at `1125px`. Viewbox inherits the units of the width and height.
 
 ### Defining Art Metadata
 
@@ -65,7 +62,7 @@ Overlays are svgs that are overlaid on top of the template svg.
 Style updates allow you to update a style attribute of a svg element at a given id.
 
 
-## Component Definition Types
+## Component Definition Types - Deprecated
 
 ### Mono
 
