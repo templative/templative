@@ -22,3 +22,15 @@ async def loadComponentInstructions(componentDirectoryPath):
 
     async with AIOFile(os.path.join(componentDirectoryPath, "component.json")) as componentFile:
         return json.loads(await componentFile.read())
+
+async def loadGameCompose():
+    async with AIOFile("game-compose.json") as gameCompose:
+        return json.loads(await gameCompose.read())
+
+async def getLastOutputFileDirectory():
+    gameCompose = await loadGameCompose()
+    outputDirectory = gameCompose["outputDirectory"]
+    lastFileDirectory = os.path.join(outputDirectory, ".last")
+
+    async with AIOFile(lastFileDirectory) as lastFile:
+        return await lastFile.read()

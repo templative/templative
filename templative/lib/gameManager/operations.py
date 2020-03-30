@@ -22,6 +22,7 @@ async def produceGame(gameRootDirectoryPath, componentName):
     gameCompose = await fileLoader.loadGameCompose(gameRootDirectoryPath)
 
     gameFolderPath = await gameWriter.createGameFolder(game["name"], gameCompose["outputDirectory"])
+    await gameWriter.updateLastOutputFolder(gameCompose["outputDirectory"], gameFolderPath)
     print("Producing %s" % gameFolderPath)    
 
     tasks = []

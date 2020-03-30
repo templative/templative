@@ -14,6 +14,11 @@ async def createGameFolder(name, outputDirectory):
     os.mkdir(gameFolderPath)
     return gameFolderPath
 
+async def updateLastOutputFolder(outputDirectory, gameFolderPath):
+    lastFilepath = os.path.join(outputDirectory, ".last")
+    async with AIOFile(lastFilepath, "w") as lastFile:
+        await lastFile.write(gameFolderPath)
+
 async def createComponentFolder(name, outputDirectory):
     componentDirectory = os.path.join(outputDirectory, name)
     os.mkdir(componentDirectory)
