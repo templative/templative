@@ -1,0 +1,1 @@
+imagemagick cairo pango
