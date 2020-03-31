@@ -9,11 +9,12 @@ python-dependencies:
 	pipenv --rm 
 
 brew-dependencies:
+	# Creates duplicates of main brew packages
 	xargs brew deps --union < Brewfile > .brew-resources
+	cat Brewfile >> .brew-resources
 	sed -i -e 's|\(.*\)|depends_on "\1"|' .brew-resources
 	
 dependencies: brew-dependencies python-dependencies
-
 	cat .brew-resources > .resources
 	cat .python-resources >> .resources
 
