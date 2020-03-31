@@ -8,7 +8,6 @@ setuptools.setup(
     description = "Populate svgs using csvs, output jpg images, and upload them to the Game Crafter",
     url = "",
     packages=["templative"],
-    install_requires=["aiofile", "aiohttp", "appdirs", "async-timeout", "attrs", "cairocffi", "CairoSVG", "certifi", "cffi", "chardet", "click", "cssselect2", "defusedxml", "distlib", "docopt", "ensure", "filelock", "h11", "h2", "hpack", "html5lib", "http3", "hyperframe", "idna", "lxml", "markdown2", "md2pdf", "mpmath", "multidict", "pbr", "Pillow", "pycparser", "Pyphen", "requests", "requests-async", "rfc3986", "six", "stevedore", "svgutils", "tabulate", "tinycss2", "urllib3", "virtualenv", "virtualenv-clone", "virtualenvwrapper", "Wand", "WeasyPrint", "webencodings", "yarl"],
     entry_points = {
         "console_scripts": ["templative=templative.cli:cli"]
     },
