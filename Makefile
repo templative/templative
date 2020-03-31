@@ -10,7 +10,7 @@ python-dependencies:
 
 brew-dependencies:
 	xargs brew deps --union < Brewfile > .brew-resources
-	sed -i -e 's|\(.*\)|depends on "\1"|' .brew-resources
+	sed -i -e 's|\(.*\)|depends_on "\1"|' .brew-resources
 	
 dependencies: brew-dependencies python-dependencies
 
