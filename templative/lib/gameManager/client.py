@@ -5,7 +5,7 @@ from templative.lib.svgscissors import operations as processor
 from templative.lib.gameManager import fileLoader
 from templative.lib.gameManager import gameWriter
 
-from md2pdf.core import md2pdf
+from templative.lib.gameManager.md2pdf import md2pdf
 
 async def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentCompose, outputDirectory):
     if not gameRootDirectoryPath:

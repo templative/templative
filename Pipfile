@@ -16,7 +16,8 @@ svgutils = "*"
 mpmath = "*"
 ensure = "*"
 wand = "*"
-md2pdf = "*"
+markdown2 = "*"
+WeasyPrint = "*"
 
 [requires]
 python_version = "3.7.7"
