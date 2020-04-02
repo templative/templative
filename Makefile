@@ -8,6 +8,14 @@ python-dependencies:
 	rm .freeze
 	pipenv --rm 
 
+poet-depend:
+	pipenv run pip install $(package)
+	pipenv run pip freeze | sed s/=.*// > .freeze
+	pipenv run pip install homebrew-pypi-poet
+	pipenv run xargs -t poet -s < .freeze
+	rm .freeze
+	pipenv --rm 
+
 brew-dependencies:
 	# Creates duplicates of main brew packages
 	xargs brew deps --union < Brewfile > .brew-resources
@@ -29,9 +37,15 @@ develop:
 	pipenv run python setup.py develop
 	pipenv run pip install -e .
 
+test:
+	pipenv run templative	
+	pipenv run templative produce -d ~/apcw-defines -c protests
+
 undevelop:
 	pipenv run python setup.py develop --uninstall
 	pipenv --rm
+
+suite: develop test undevelop
 
 clean:
 	rm -rf dist/
@@ -42,3 +56,4 @@ clean:
 release: clean
 	pipenv run python setup.py sdist
 	pipenv run twine upload dist/*b
+
