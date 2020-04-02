@@ -1,10 +1,9 @@
-from templative.lib.gameCrafterClient import client
 import os
+import asyncio
 from uuid import uuid1
 from tabulate import tabulate
-import asyncio
 from aiofile import AIOFile
-
+import templative.lib.gameCrafterClient.client
 baseUrl = "https://www.thegamecrafter.com"
 
 async def createGame(clientSession, session, name, designerId):

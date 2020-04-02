@@ -1,5 +1,5 @@
 import os
-from templative.lib.svgscissors.client import createArtFileOfPiece
+from templative.lib.svgScissors.client import createArtFileOfPiece
 import asyncio
 
 async def createArtFilesForComponent(game, gameCompose, componentCompose, frontMetaData, backMetaData, componentGameData, piecesGamedata, outputDirectory):

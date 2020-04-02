@@ -1,13 +1,13 @@
-import setuptools
+from setuptools import setup, find_packages
 
-setuptools.setup(
+setup(
     name = "templative",
     version = "1.0.0",
     author = "Oliver Barnum",
     author_email = "oliverbarnum32@gmail.com",
     description = "Populate svgs using csvs, output jpg images, and upload them to the Game Crafter",
     url = "",
-    packages=["templative"],
+    packages=find_packages(),
     entry_points = {
         "console_scripts": ["templative=templative.cli:cli"]
     },

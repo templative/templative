@@ -1,10 +1,11 @@
-from templative.lib.svgscissors.element import Element
 import os
+import asyncio 
 import svgutils.transform as sg
 import xml.etree.ElementTree as ET
 from wand.image import Image
-import asyncio 
 from aiofile import AIOFile
+from cairosvg import svg2png
+from templative.lib.svgScissors.element import Element
 
 async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
     if game == None:
@@ -218,3 +219,7 @@ async def exportSvgToJpg(filepath, name, outputDirectory):
         outputFilename = "%s.jpg" % (name)
         outputFilepath = os.path.join(outputDirectory, outputFilename)
         image.save(filename=outputFilepath)
+
+    # outputFilename = "%s.jpg" % (name)
+    # outputFilepath = os.path.join(outputDirectory, outputFilename)
+    # svg2png(file_obj=open(filepath,"rb"),write_to=outputFilepath)
