@@ -6,7 +6,7 @@ import asyncio
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
-from templative.lib.gameCrafterClient import operations as gamecrafter
+import gameCrafterClient as gamecrafter
 from templative.lib.gameCrafterUpload import instructionsLoader
 from templative.lib.gameCrafterUpload import componentCreator
 
@@ -14,19 +14,19 @@ async def uploadGame(client, gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    session = await gamecrafter.login(client)
+    gameCrafterSession = await gamecrafter.login()
 
     game = await instructionsLoader.loadGameInstructions(gameRootDirectoryPath)
     company = await instructionsLoader.loadCompanyInstructions(gameRootDirectoryPath)
 
     print("Uploading %s for %s." % (game["displayName"], company["displayName"]))
 
-    cloudGame = await gamecrafter.createGame(client, session, game["name"], company["gameCrafterDesignerId"])
-    cloudGameFolder = await gamecrafter.createFolderAtRoot(client, session, game["name"])
+    cloudGame = await gamecrafter.createGame(gameCrafterSession, game["name"], company["gameCrafterDesignerId"])
+    cloudGameFolder = await gamecrafter.createFolderAtRoot(gameCrafterSession, game["name"])
 
     tasks = []
-    tasks.append(asyncio.create_task(createComponents(client,session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))
-    tasks.append(asyncio.create_task(componentCreator.createRules(client, session, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))
+    tasks.append(asyncio.create_task(createComponents(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))
+    tasks.append(asyncio.create_task(componentCreator.createRules(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))
     for task in tasks:
         await task
 
@@ -34,19 +34,19 @@ async def uploadGame(client, gameRootDirectoryPath):
     print("Uploads finished for %s, visit %s" % (cloudGame["name"], gameUrl))
     return gameUrl
 
-async def createComponents(client,session, outputDirectory, cloudGame, cloudGameFolderId):
+async def createComponents(gameCrafterSession, outputDirectory, cloudGame, cloudGameFolderId):
     if not outputDirectory:
         raise Exception("outputDirectory cannot be None")
 
     tasks = []
     for directoryPath in next(os.walk(outputDirectory))[1]:
         componentDirectoryPath = "%s/%s" % (outputDirectory, directoryPath)
-        tasks.append(asyncio.create_task(createComponent(client, session, componentDirectoryPath, cloudGame, cloudGameFolderId)))
+        tasks.append(asyncio.create_task(createComponent(gameCrafterSession, componentDirectoryPath, cloudGame, cloudGameFolderId)))
     
     for task in tasks:
         await task
 
-async def createComponent(client, session, componentDirectoryPath, cloudGame, cloudGameFolderId):
+async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame, cloudGameFolderId):
     if not componentDirectoryPath:
         raise Exception("componentDirectoryPath cannot be None")
 
@@ -54,10 +54,10 @@ async def createComponent(client, session, componentDirectoryPath, cloudGame, cl
 
     componentType = componentFile["type"]
     if componentType == "pokerDeck":
-        await componentCreator.createPokerDeck(client, session, componentFile, cloudGame["id"], cloudGameFolderId)
+        await componentCreator.createPokerDeck(gameCrafterSession, componentFile, cloudGame["id"], cloudGameFolderId)
         return
     elif componentType == "smallStoutBox":
-        await componentCreator.createSmallStoutBox(client, session, componentFile, cloudGame["id"], cloudGameFolderId)
+        await componentCreator.createSmallStoutBox(gameCrafterSession, componentFile, cloudGame["id"], cloudGameFolderId)
         return
      
     print("Skipping %s. The %s component type is not currently supported." % (componentFile["displayName"], componentType))   

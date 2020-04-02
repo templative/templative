@@ -1,4 +1,4 @@
-from templative.lib.gameCrafterClient import operations as gamecrafter
+import gameCrafterClient as gamecrafter
 from os.path import isfile, join
 import asyncio 
 
