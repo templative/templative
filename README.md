@@ -3,10 +3,13 @@
 Define the cards you’d like created and how to assemble them, use the CLI, and purchase the game off of the Game Crafter.
 
 # Requirements
+- xcode
+- xcode-select --install
 - Install [XQuartz](https://www.xquartz.org/) for OSX
 - [Inkscape 0.92.2](https://inkscape.org/release/inkscape-0.92.2/)
 - Python 3.8.2
 - Install `Install Certificates.command` located in Python3.8 application directory if you haven't already.
+- `https://www.imagemagick.org/discourse-server/viewtopic.php?t=23916`
 
 ## QuickStart
 - `xargs brew install < brewRequirements.txt`
