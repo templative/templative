@@ -2,16 +2,16 @@ python-dependencies:
 	pipenv --rm
 	pipenv lock 
 	pipenv sync 
-	pipenv run pip freeze | sed s/=.*// > .freeze
-	pipenv run pip install homebrew-pypi-poet
+	pipenv run pip3 freeze | sed s/=.*// > .freeze
+	pipenv run pip3 install homebrew-pypi-poet
 	pipenv run xargs poet -s < .freeze > .python-resources
 	rm .freeze
 	pipenv --rm 
 
 poet-depend:
-	pipenv run pip install $(package)
-	pipenv run pip freeze | sed s/=.*// > .freeze
-	pipenv run pip install homebrew-pypi-poet
+	pipenv run pip3 install $(package)
+	pipenv run pip3 freeze | sed s/=.*// > .freeze
+	pipenv run pip3 install homebrew-pypi-poet
 	pipenv run xargs -t poet -s < .freeze
 	rm .freeze
 	pipenv --rm 
@@ -31,19 +31,22 @@ dependencies: brew-dependencies python-dependencies
 
 	echo "Created .resources for homebrew file"
 	
-develop:
+pipdevelop:
 	pipenv --rm
 	pipenv sync 
-	pipenv run python setup.py develop
-	pipenv run pip install -e .
+	pipenv run python3 setup.py develop
+	pipenv run pip3 install -e .
 
-test:
-	pipenv run templative	
-	pipenv run templative produce -d ~/apcw-defines -c protests
+pipundevelop:
+	pipenv run python3 setup.py develop --uninstall
+	pipenv --rm
+
+develop:
+	python3 setup.py develop
+	pip3 install -e .
 
 undevelop:
-	pipenv run python setup.py develop --uninstall
-	pipenv --rm
+	python3 setup.py develop --uninstall
 
 suite: develop test undevelop
 
@@ -54,6 +57,6 @@ clean:
 	find . -name '*.pyc' -delete
 
 release: clean
-	pipenv run python setup.py sdist
+	pipenv run python3 setup.py sdist
 	pipenv run twine upload dist/*b
 
