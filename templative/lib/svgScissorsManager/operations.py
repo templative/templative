@@ -1,5 +1,5 @@
 import os
-from templative.lib.svgScissors.client import createArtFileOfPiece
+import svgScissors
 import asyncio
 
 async def createArtFilesForComponent(game, gameCompose, componentCompose, frontMetaData, backMetaData, componentGameData, piecesGamedata, outputDirectory):
@@ -29,8 +29,8 @@ async def createArtFilesForComponent(game, gameCompose, componentCompose, frontM
     
     tasks = []
     for pieceGamedata in piecesGamedata:
-        tasks.append(asyncio.create_task(createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory)))
-    tasks.append(asyncio.create_task(createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory)))
+        tasks.append(asyncio.create_task(svgScissors.createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory)))
+    tasks.append(asyncio.create_task(svgScissors.createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory)))
 
     for task in tasks:
         await task
