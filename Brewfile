@@ -1,1 +1,1 @@
-imagemagick cairo pango
+svgScissors
