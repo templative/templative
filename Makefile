@@ -16,6 +16,14 @@ poet-depend:
 	rm .freeze
 	pipenv --rm 
 
+full-depend:
+	pipenv run pip3 install $(package)
+	pipenv run pip3 freeze | sed s/=.*// > .freeze
+	pipenv run pip3 install homebrew-pypi-poet
+	pipenv run poet -f $(package)
+	rm .freeze
+	pipenv --rm 
+
 brew-dependencies:
 	# Creates duplicates of main brew packages
 	xargs brew deps --union < Brewfile > .brew-resources
@@ -59,4 +67,6 @@ clean:
 release: clean
 	pipenv run python3 setup.py sdist
 	pipenv run twine upload dist/*b
+	rm -fr build dist .egg requests.egg-info
+
 
