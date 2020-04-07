@@ -1,20 +1,16 @@
 import os
-import json
 from os.path import isfile, join
+import json
 import sys
 import asyncio
+import gamecrafterclient as gamecrafter
+from . import instructionsLoader, componentCreator
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
-import gamecrafterclient as gamecrafter
-from templative.lib.gameCrafterUpload import instructionsLoader
-from templative.lib.gameCrafterUpload import componentCreator
-
-async def uploadGame(client, gameRootDirectoryPath):
+async def uploadGame(gameCrafterSession, gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
-
-    gameCrafterSession = await gamecrafter.login()
 
     game = await instructionsLoader.loadGameInstructions(gameRootDirectoryPath)
     company = await instructionsLoader.loadCompanyInstructions(gameRootDirectoryPath)

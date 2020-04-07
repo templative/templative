@@ -104,14 +104,18 @@ async def produce(u, c, _anyio_backend="asyncio"):
     """Produce the game in the current directory"""
     producedGame = await gameManagerClient.produceGame(".", c)
     if(u):
-        gameUploadUrl = await gameCrafterUpload.uploadGame(producedGame)
+        session = await gameCrafterClient.login()
+        gameUploadUrl = await gameCrafterUpload.uploadGame(session, producedGame)
+        await gameCrafterClient.logout(session)
 
 @cli.command()
 @coro
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
 async def upload(input):
     """Upload a produced game in a directory"""
-    gameUploadUrl = await gameCrafterUpload.uploadGame(input)
+    session = await gameCrafterClient.login()
+    gameUploadUrl = await gameCrafterUpload.uploadGame(session, input)
+    await gameCrafterClient.logout(session)
 
 @cli.command()
 async def init():

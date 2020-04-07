@@ -1,12 +1,15 @@
 import asyncio
 
-from templative.lib.gameCrafterUpload.instructionsLoader import getLastOutputFileDirectory
-import templative.lib.gameCrafterUpload.client as client
+from .instructionsLoader import getLastOutputFileDirectory
+from . import client
 
-async def uploadGame(gameRootDirectoryPath):
+async def uploadGame(session, gameRootDirectoryPath):
     
-    if gameRootDirectoryPath is None:
-        gameRootDirectoryPath = await getLastOutputFileDirectory()    
+    if session is None:
+        raise Exception("You must provide a Game Crafter session.")
 
-    return await client.uploadGame(gameRootDirectoryPath)
+    if gameRootDirectoryPath is None:
+        gameRootDirectoryPath = await getLastOutputFileDirectory()   
+
+    return await client.uploadGame(session, gameRootDirectoryPath)
 
