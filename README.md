@@ -6,14 +6,13 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 - xcode
 - xcode-select --install
 - Install [XQuartz](https://www.xquartz.org/) for OSX
-- [Inkscape 0.92.2](https://inkscape.org/release/inkscape-0.92.2/)
-- Python 3.8.2
+- [Inkscape v1](https://inkscape.org)
 - Install `Install Certificates.command` located in Python3.8 application directory if you haven't already.
-- `https://www.imagemagick.org/discourse-server/viewtopic.php?t=23916`
+- `brew tap thenextguy32/homebrew-templative`
+- `brew install templative`
+- Update `/usr/local/etc/Imagemagick-7/delegates.yml` file to use `export-file` instead of `export-png` as noted in the comment near the middle of the file.
 
 ## QuickStart
-- `xargs brew install < brewRequirements.txt`
-- `pipenv install`
 - Create and cd into a directory
 - `templative init`
 - `templative produce` to create a version of the game. 
