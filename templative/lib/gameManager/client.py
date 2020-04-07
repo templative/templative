@@ -1,10 +1,9 @@
 import os
 import asyncio
 import json
-from templative.lib.svgScissorsManager import operations as processor
-from templative.lib.gameManager import fileLoader
-from templative.lib.gameManager import gameWriter
-from templative.lib.gameManager.md2pdf import md2pdf
+from md2pdf import md2pdf
+from . import svgScissorsManager as processor
+from . import fileLoader, gameWriter
 
 async def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentCompose, outputDirectory):
     if not gameRootDirectoryPath:
