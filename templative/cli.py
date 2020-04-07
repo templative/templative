@@ -1,8 +1,8 @@
 import click
 import asyncio
 import gamecrafterclient as gameCrafterClient
-from templative.lib.gameManager import operations as gameManagerClient
-from templative.lib.gameCrafterUpload import operations as gameCrafterUpload
+from .lib import gameManager as gameManagerClient
+from .lib import gameCrafterUpload as gameCrafterUpload
 from functools import wraps
 
 def coro(f):

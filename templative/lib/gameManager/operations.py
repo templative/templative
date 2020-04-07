@@ -4,9 +4,7 @@ import asyncio
 from datetime import datetime
 # from distutils.dir_util import copy_tree
 
-from templative.lib.gameManager import fileLoader
-from templative.lib.gameManager import gameWriter
-from templative.lib.gameManager import client
+from . import client, fileLoader, gameWriter
 
 async def produceGame(gameRootDirectoryPath, componentName):
     if not gameRootDirectoryPath:
