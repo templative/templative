@@ -7,18 +7,11 @@ verify_ssl = true
 
 [packages]
 click = "*"
-requests-async = "*"
-aiohttp = "*"
-tabulate = "*"
 aiofile = "*"
-svgutils = "*"
-mpmath = "*"
-ensure = "*"
-wand = "*"
 markdown2 = "*"
 WeasyPrint = "*"
-gameCrafterClient = "1.0.1"
-svgScissors = "0.0.4"
+gamecrafterclient = "1.0.5"
+svgscissors = "0.0.9"
 
 [requires]
 python_version = "3.7.7"

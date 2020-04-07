@@ -1,6 +1,6 @@
 import click
 import asyncio
-import gameCrafterClient
+import gamecrafterclient as gameCrafterClient
 from templative.lib.gameManager import operations as gameManagerClient
 from templative.lib.gameCrafterUpload import operations as gameCrafterUpload
 from functools import wraps

@@ -6,7 +6,7 @@ import asyncio
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
-import gameCrafterClient as gamecrafter
+import gamecrafterclient as gamecrafter
 from templative.lib.gameCrafterUpload import instructionsLoader
 from templative.lib.gameCrafterUpload import componentCreator
 
