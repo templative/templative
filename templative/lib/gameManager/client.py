@@ -1,7 +1,7 @@
 import os
 import asyncio
 import json
-from md2pdf import md2pdf
+from . import rulesWriter
 from . import svgScissorsManager as processor
 from . import fileLoader, gameWriter
 
@@ -53,4 +53,4 @@ async def produceGameComponent(gameRootDirectoryPath, game, gameCompose, compone
 async def produceRulebook(rules, gameFolderPath):
     outputFilepath = os.path.join(gameFolderPath, "rules.pdf")
     cssFilepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "pdfStyles.css")
-    md2pdf(outputFilepath, md_content=rules, css_file_path=cssFilepath)
+    rulesWriter.convertMarkdownToPdf(outputFilepath, md_content=rules, css_file_path=cssFilepath)

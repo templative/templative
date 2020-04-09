@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name = "templative",
-    version = "0.3.4",
+    version = "0.3.5",
     author = "Oliver Barnum",
     author_email = "oliverbarnum32@gmail.com",
     description = "Populate svgs using csvs, output jpg images, and upload them to the Game Crafter",
     url = "",
     packages=find_packages(),
-    install_requires=["asyncio", "aiofile", "click", "md2pdf", "asyncio", "ensure", "svgutils", "wand", "mpmath", "tabulate", "aiohttp"],
+    install_requires=["asyncio", "aiofile", "click", "markdown2", "WeasyPrint", "asyncio", "ensure", "svgutils", "wand", "mpmath", "tabulate", "aiohttp"],
     entry_points = {
         "console_scripts": ["templative=templative.cli:cli"]
     },

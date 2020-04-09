@@ -8,7 +8,8 @@ verify_ssl = true
 [packages]
 click = "*"
 aiofile = "*"
-md2pdf = "*"
+markdown2 = "*"
+WeasyPrint = "*"
 asyncio = "*"
 ensure = "*"
 svgutils = "*"
