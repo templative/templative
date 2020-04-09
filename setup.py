@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "templative",
-    version = "0.3.8",
+    version = "0.3.9",
     author = "Oliver Barnum",
     author_email = "oliverbarnum32@gmail.com",
     description = "Populate svgs using csvs, output jpg images, and upload them to the Game Crafter",
@@ -12,6 +12,7 @@ setup(
     entry_points = {
         "console_scripts": ["templative=templative.cli:cli"]
     },
+    include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
