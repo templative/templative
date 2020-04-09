@@ -1,9 +1,8 @@
 import os
 import asyncio
 import json
-from . import rulesWriter
 from . import svgScissorsManager as processor
-from . import fileLoader, gameWriter
+from . import fileLoader, gameWriter, rulesWriter
 
 async def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentCompose, outputDirectory):
     if not gameRootDirectoryPath:

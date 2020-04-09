@@ -11,7 +11,12 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 - `brew tap thenextguy32/homebrew-templative`
 - `brew install templative`
 - Update `/usr/local/etc/Imagemagick-7/delegates.yml` file to use `export-file` instead of `export-png` as noted in the comment near the middle of the file.
-
+- `identify -list delegate`
+- `convert -list delegate`
+- `/usr/local/Cellar/imagemagick/7.0.10-0/etc/ImageMagick-7/delegates.xml`
+- ln -s /Applications/Inkscape.app/Contents/MacOS/inkscape \
+  /usr/local/bin/inkscape
+  
 ## QuickStart
 - Create and cd into a directory
 - `templative init`
