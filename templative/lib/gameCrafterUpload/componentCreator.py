@@ -1,4 +1,4 @@
-import gamecrafterclient as gamecrafter
+from .. import gamecrafterclient as gamecrafter
 from os.path import isfile, join
 import asyncio 
 

@@ -1,6 +1,6 @@
 import click
 import asyncio
-import gamecrafterclient as gameCrafterClient
+from .lib import gamecrafterclient as gameCrafterClient
 from .lib import gameManager as gameManagerClient
 from .lib import gameCrafterUpload as gameCrafterUpload
 from functools import wraps
