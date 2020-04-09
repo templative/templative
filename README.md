@@ -3,20 +3,15 @@
 Define the cards you’d like created and how to assemble them, use the CLI, and purchase the game off of the Game Crafter.
 
 # Requirements
-- xcode
-- xcode-select --install
+- Install xcode
+- `xcode-select --install`
 - Install [XQuartz](https://www.xquartz.org/) for OSX
 - [Inkscape v1](https://inkscape.org)
-- Install `Install Certificates.command` located in Python3.8 application directory if you haven't already.
+- Install `Install Certificates.command` located in Python3.* application directory if you haven't already.
 - `brew tap thenextguy32/homebrew-templative`
 - `brew install templative`
-- Update `/usr/local/etc/Imagemagick-7/delegates.yml` file to use `export-file` instead of `export-png` as noted in the comment near the middle of the file.
-- `identify -list delegate`
-- `convert -list delegate`
-- `/usr/local/Cellar/imagemagick/7.0.10-0/etc/ImageMagick-7/delegates.xml`
-- ln -s /Applications/Inkscape.app/Contents/MacOS/inkscape \
-  /usr/local/bin/inkscape
-  
+- Update `/usr/local/etc/Imagemagick-7/delegates.yml` or `/usr/local/Cellar/imagemagick/7.0.10-0/etc/ImageMagick-7/delegates.xml` file to use `export-file` instead of `export-png` as noted in the comment near the middle of the file.
+
 ## QuickStart
 - Create and cd into a directory
 - `templative init`
@@ -67,26 +62,3 @@ Overlays are svgs that are overlaid on top of the template svg.
 #### Style Updates
 
 Style updates allow you to update a style attribute of a svg element at a given id.
-
-
-## Component Definition Types - Deprecated
-
-### Mono
-
-- `topArtData` and `bottomArtdata` defined in component compose.
-- No `piecesGamedata`.
-
-## Multi
-
-- Has `frontArtdata` and `backArtdata` defined in component compose.
-- Has `piecesGamedata`. 
-- A piece is created for every piece row defined in the gamedata.
-- All pieces has the same front and back artdata.
-
-## Multi Variant
-
-- No artdata in component compose.
-- Has `piecesGamedata`.
-- Expects a `frontArtdata` and `backArtdata` columns in pieces gamedata.
-- A piece is created for every piece of row defined in the gamedata.
-- Each piece has a unique front and back artdata.
