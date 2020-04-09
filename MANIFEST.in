@@ -1,2 +1,2 @@
 include templative/lib/gameManager/templative/*
-include templative/lib/gameManager/rulesWriter.py
+include templative/lib/gameManager/pdfStyles.css

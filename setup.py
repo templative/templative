@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "templative",
-    version = "0.3.9",
+    version = "0.3.10",
     author = "Oliver Barnum",
     author_email = "oliverbarnum32@gmail.com",
     description = "Populate svgs using csvs, output jpg images, and upload them to the Game Crafter",
