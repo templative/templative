@@ -1,5 +1,5 @@
 import os
-import svgscissors as svgScissors
+from .. import svgscissors as svgScissors
 import asyncio
 
 async def createArtFilesForComponent(game, gameCompose, componentCompose, frontMetaData, backMetaData, componentGameData, piecesGamedata, outputDirectory):

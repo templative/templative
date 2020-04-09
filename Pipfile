@@ -9,8 +9,13 @@ verify_ssl = true
 click = "*"
 aiofile = "*"
 md2pdf = "*"
-gamecrafterclient = "1.0.8"
-svgscissors = "0.0.11"
+asyncio = "*"
+ensure = "*"
+svgutils = "*"
+wand = "*"
+mpmath = "*"
+tabulate = "*"
+aiohttp = "*"
 
 [requires]
 python_version = "3.7.7"

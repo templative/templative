@@ -3,7 +3,7 @@ from os.path import isfile, join
 import json
 import sys
 import asyncio
-import gamecrafterclient as gamecrafter
+from .. import gamecrafterclient as gamecrafter
 from . import instructionsLoader, componentCreator
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
