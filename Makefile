@@ -24,6 +24,17 @@ full-depend:
 	rm .freeze
 	pipenv --rm 
 
+brew-clean:
+	# brew tap beeftornado/rmtree
+	brew rmtree templative
+	brew rmtree imagemagick
+	brew rmtree pango
+	brew rmtree cairo
+
+pip-clean:
+	# pip install pip-autoremove
+	pip-autoremove templative -y
+
 brew-dependencies:
 	# Creates duplicates of main brew packages
 	xargs brew deps --union < Brewfile > .brew-resources
