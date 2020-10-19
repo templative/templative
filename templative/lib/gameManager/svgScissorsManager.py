@@ -6,7 +6,7 @@ async def createArtFilesForComponent(game, gameCompose, componentCompose, frontM
     if game == None:
         print("game cannot be None.")
         return
-    
+
     if componentCompose == None:
         print("componentCompose cannot be None.")
         return
@@ -23,10 +23,10 @@ async def createArtFilesForComponent(game, gameCompose, componentCompose, frontM
         print("piecesGamedata cannot be None.")
         return
 
-    if outputDirectory == None: 
+    if outputDirectory == None:
         print("outputDirectory cannot be None.")
         return
-    
+
     tasks = []
     for pieceGamedata in piecesGamedata:
         tasks.append(asyncio.create_task(svgScissors.createArtFileOfPiece(game, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory)))
@@ -39,7 +39,7 @@ async def getInstructionSetsForFiles(game, componentCompose, componentGamedata, 
     if game == None:
         print("game cannot be None.")
         return
-    
+
     if componentCompose == None:
         print("component cannot be None.")
         return
