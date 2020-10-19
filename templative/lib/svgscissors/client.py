@@ -1,5 +1,5 @@
 import os
-import asyncio 
+import asyncio
 import svgutils.transform as sg
 import xml.etree.ElementTree as ET
 from wand.image import Image
@@ -8,7 +8,7 @@ from aiofile import AIOFile
 from .element import Element
 
 async def createArtfile(artFile, artFileOutputName, outputDirectory):
-    
+
     artFileOutputFileName = "%s.svg" % (artFileOutputName)
     artFileOutputFilepath = os.path.join(outputDirectory, artFileOutputFileName)
     artFile.dump(artFileOutputFilepath)
@@ -19,7 +19,7 @@ async def addOverlays(artFile, overlays, game, gameCompose, componentGamedata, p
         print("artFile cannot be None.")
         return
 
-    if overlays == None: 
+    if overlays == None:
         print("overlays cannot be None.")
         return
 
@@ -50,7 +50,7 @@ async def textReplaceInFile(filepath, textReplacements, game, componentGamedata,
         print("filepath cannot be None.")
         return
 
-    if textReplacements == None: 
+    if textReplacements == None:
         print("textReplacements cannot be None.")
         return
 
@@ -65,7 +65,7 @@ async def textReplaceInFile(filepath, textReplacements, game, componentGamedata,
     if pieceGamedata == None:
         print("pieceGamedata cannot be None.")
         return
-    
+
     contents = ""
     async with AIOFile(filepath, 'r') as f:
         contents = await f.read()
@@ -90,7 +90,7 @@ async def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pi
         print("filepath cannot be None.")
         return
 
-    if styleUpdates == None: 
+    if styleUpdates == None:
         print("styleUpdates cannot be None.")
         return
 
@@ -105,27 +105,31 @@ async def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pi
     if pieceGamedata == None:
         print("pieceGamedata cannot be None.")
         return
-    
-    tree = ET.parse(filepath).getroot()
-    
-    for styleUpdate in styleUpdates:
-        findById = styleUpdate["id"]
-        elementToUpdate = tree.find(".//*[@id='%s']" % findById)
-        if (elementToUpdate != None):
-            value = await getScopedValue(styleUpdate, game, componentGamedata, pieceGamedata)
-            await replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
-        else:
-            print("Could not find element with id [%s]." % (findById))
 
-    async with AIOFile(filepath,'wb') as f:
-        await f.write(ET.tostring(tree))
+    try:
+        parsedTree = ET.parse(filepath)
+        tree = parsedTree.getroot()
+
+        for styleUpdate in styleUpdates:
+            findById = styleUpdate["id"]
+            elementToUpdate = tree.find(".//*[@id='%s']" % findById)
+            if (elementToUpdate != None):
+                value = await getScopedValue(styleUpdate, game, componentGamedata, pieceGamedata)
+                await replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
+            else:
+                print("Could not find element with id [%s]." % (findById))
+
+        async with AIOFile(filepath,'wb') as f:
+            await f.write(ET.tostring(tree))
+    except ET.ParseError as pe:
+        print("Production failed!", pe, filepath)
 
 async def replaceStyleAttributeForElement(element, attribute, key, value):
     attributeValue = element.get(attribute, "")
-    
-    replaceStyleWith = ""    
+
+    replaceStyleWith = ""
     found = False
-    
+
     cssKeyValuePairs = attributeValue.split(';')
     for cssKeyValuePair in cssKeyValuePairs:
         keyAndPair = cssKeyValuePair.split(':')
@@ -134,7 +138,7 @@ async def replaceStyleAttributeForElement(element, attribute, key, value):
             found = True
         else:
             replaceStyleWith += cssKeyValuePair + ';'
-        
+
     if (not found):
         newCss = "%s:%s;" % (key, value)
         replaceStyleWith += newCss
@@ -150,7 +154,7 @@ async def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
     if game == None:
         print("game cannot be None.")
         return
-    
+
     if componentGamedata == None:
         print("componentGamedata cannot be None.")
         return
@@ -158,13 +162,13 @@ async def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
     if pieceGamedata == None:
         print("pieceGamedata cannot be None.")
         return
-    
+
     scope = scopedValue["scope"]
     source = scopedValue["source"]
 
     if scope == "game":
         return game[source]
-    
+
     if scope == "component":
         return componentGamedata[source]
 
@@ -175,7 +179,10 @@ async def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
 
 
 async def exportSvgToJpg(filepath, name, outputDirectory):
+    # try:
     with Image(filename=filepath) as image:
         outputFilename = "%s.jpg" % (name)
         outputFilepath = os.path.join(outputDirectory, outputFilename)
         image.save(filename=outputFilepath)
+    # except wand.exceptions.WandRuntimeError as error:
+    #     print(error, filepath, name)
