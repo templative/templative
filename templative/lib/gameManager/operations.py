@@ -12,7 +12,7 @@ async def produceGame(gameRootDirectoryPath, componentName):
 
     isExclusivelyComponent = componentName != None
     game = await fileLoader.loadGame(gameRootDirectoryPath)
-    
+
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     uniqueGameName = ("%s_%s_%s_%s" % (game["name"], game["version"], game["versionName"], timestamp)).replace(" ", "")
     game["name"] = uniqueGameName
@@ -21,14 +21,14 @@ async def produceGame(gameRootDirectoryPath, componentName):
 
     gameFolderPath = await gameWriter.createGameFolder(game["name"], gameCompose["outputDirectory"])
     await gameWriter.updateLastOutputFolder(gameCompose["outputDirectory"], gameFolderPath)
-    print("Producing %s" % gameFolderPath)    
+    print("Producing %s" % gameFolderPath)
 
     tasks = []
     tasks.append(asyncio.create_task(gameWriter.copyGameFromGameFolderToOutput(game, gameFolderPath)))
 
     company = await fileLoader.loadCompany(gameRootDirectoryPath)
     tasks.append(asyncio.create_task(gameWriter.copyCompanyFromGameFolderToOutput(company, gameFolderPath)))
-    
+
     componentCompose = await fileLoader.loadComponentCompose(gameRootDirectoryPath)
 
     for component in componentCompose["components"]:
@@ -38,13 +38,13 @@ async def produceGame(gameRootDirectoryPath, componentName):
             print("Skipping %s component." % (component["name"]))
         else:
             tasks.append(asyncio.create_task(client.produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)))
-            
+
     rules = await fileLoader.loadRules(gameRootDirectoryPath)
     tasks.append(asyncio.create_task(client.produceRulebook(rules, gameFolderPath)))
-    
+
     for task in tasks:
         await task
-    
+
     print("Done producing %s" % gameFolderPath)
 
     return gameFolderPath

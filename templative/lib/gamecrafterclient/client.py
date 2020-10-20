@@ -7,7 +7,7 @@ gameCrafterBaseUrl = "https://www.thegamecrafter.com/api"
 
 async def login(gameCrafterSession, publicApiKey, userName, userPassword):
     url = "%s/session" % gameCrafterBaseUrl
-    return await httpClient.post(gameCrafterSession, url, 
+    return await httpClient.post(gameCrafterSession, url,
         api_key_id = publicApiKey,
         username = userName,
         password = userPassword
@@ -16,12 +16,12 @@ async def login(gameCrafterSession, publicApiKey, userName, userPassword):
 async def logout(gameCrafterSession):
     url = "%s/session/%s" % (gameCrafterBaseUrl, gameCrafterSession.sessionId)
     await httpClient.delete(gameCrafterSession, url)
-    await gameCrafterSession.httpSession.close() 
+    await gameCrafterSession.httpSession.close()
 
 async def getUser(gameCrafterSession):
     url = "%s/user/%s" % (gameCrafterBaseUrl, gameCrafterSession.userId)
-    
-    return await httpClient.get(gameCrafterSession, url, 
+
+    return await httpClient.get(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId
     )
 
@@ -112,8 +112,8 @@ async def postFile(gameCrafterSession, file, filename, folderId):
     url = "%s/file" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId,
-        file=file, 
-        name=filename, 
+        file=file,
+        name=filename,
         folder_id=folderId)
 
 

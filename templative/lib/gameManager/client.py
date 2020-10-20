@@ -39,7 +39,7 @@ async def produceGameComponent(gameRootDirectoryPath, game, gameCompose, compone
     frontInstructionSets = await processor.getInstructionSetsForFiles(game, componentCompose, piecesGamedata, componentDirectory)
     backInstructionSet = await processor.getBackInstructionSet(componentCompose, componentDirectory)
     componentInstructions = {
-        "name": componentName, 
+        "name": componentName,
         "type": componentCompose["type"],
         "quantity": componentCompose["quantity"],
         "frontInstructions": frontInstructionSets,

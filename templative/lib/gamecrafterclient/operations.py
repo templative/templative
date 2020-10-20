@@ -12,7 +12,7 @@ baseUrl = "https://www.thegamecrafter.com"
 
 async def createGame(gameCrafterSession, name, designerId):
     game = await client.postGame(gameCrafterSession, name, designerId)
-    
+
     gameName = game["name"]
     gameId = game["id"]
     editUrl = "%s%s%s" % (baseUrl, "/publish/editor/", gameId)
@@ -30,7 +30,7 @@ async def createFolderAtParent(gameCrafterSession, name, folderId):
 async def uploadFile(gameCrafterSession, filepath, folderId):
     if not os.path.isfile(filepath):
         raise Exception ('Not a file: %s' % filepath)
-    
+
     filename = os.path.basename(filepath)
 
     with open(filepath, "rb") as fileToUpload:
@@ -64,7 +64,7 @@ async def listGamesForUserDesigners(gameCrafterSession):
         gamesResponse = await client.getGamesForDesignerId(gameCrafterSession, designer["id"])
         games.extend(gamesResponse["items"])
 
-    printGames(games)   
+    printGames(games)
 
 async def printGames(clientSession, games):
     headers = ["name", "id", "link"]
@@ -92,11 +92,10 @@ async def listDesigners(gameCrafterSession):
     print(tabulate(data, headers=headers, tablefmt='orgtbl'))
 
 async def login():
-    
     publicApiKey = os.environ.get('THEGAMECRAFTER_PUBLIC_KEY')
     if not publicApiKey:
         raise Exception('Could not log in. You need to set the env variable THEGAMECRAFTER_PUBLIC_KEY. Value is %s' % publicApiKey)
-    
+
     userName = os.environ.get('THEGAMECRAFTER_USER')
     if not userName:
         raise Exception('Could not log in. You need to set the env variable THEGAMECRAFTER_USER. Value is %s' % userName)
@@ -104,7 +103,7 @@ async def login():
     userPassword = os.environ.get('THEGAMECRAFTER_PASSWORD')
     if not userPassword:
         raise Exception('Could not log in. You need to set the env variable THEGAMECRAFTER_PASSWORD. Value is %s' % userPassword)
-    
+
     gameCrafterSession = GameCrafterSession(aiohttp.ClientSession())
     login = await client.login(gameCrafterSession, publicApiKey, userName, userPassword)
     gameCrafterSession.login(sessionId=login["id"], userId=login["user_id"])

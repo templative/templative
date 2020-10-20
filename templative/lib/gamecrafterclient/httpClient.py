@@ -21,5 +21,5 @@ async def handleResponse(url, response):
         print ('FAIL', response)
         print ('FAIL', responseJson)
         raise Exception('%s Returned %s.' % (url, statusCode))
-    
+
     return responseJson['result']

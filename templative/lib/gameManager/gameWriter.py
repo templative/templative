@@ -5,11 +5,11 @@ from aiofile import AIOFile
 async def dumpInstructions(filepath, data):
     if not filepath:
         raise Exception("Instructions filepath cannot be None")
-    
+
     with open(filepath, 'w') as outfile:
         json.dump(data, outfile, indent=4, separators=(',', ': '))
 
-async def createGameFolder(name, outputDirectory):    
+async def createGameFolder(name, outputDirectory):
     gameFolderPath = os.path.join(outputDirectory, name)
     os.mkdir(gameFolderPath)
     return gameFolderPath

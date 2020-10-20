@@ -1,5 +1,5 @@
-@media print { 
-    @page { 
-        size: letter 
-    } 
+@media print {
+    @page {
+        size: letter
+    }
 }

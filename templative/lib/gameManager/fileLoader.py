@@ -81,6 +81,6 @@ async def loadRules(gameRootDirectoryPath):
         raise Exception("Game root directory path cannot be None")
 
     filepath = os.path.join(gameRootDirectoryPath, "rules.md")
-    
+
     async with AIOFile(filepath, "rb") as rules:
         return await rules.read()

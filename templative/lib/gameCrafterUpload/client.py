@@ -38,7 +38,7 @@ async def createComponents(gameCrafterSession, outputDirectory, cloudGame, cloud
     for directoryPath in next(os.walk(outputDirectory))[1]:
         componentDirectoryPath = "%s/%s" % (outputDirectory, directoryPath)
         tasks.append(asyncio.create_task(createComponent(gameCrafterSession, componentDirectoryPath, cloudGame, cloudGameFolderId)))
-    
+
     for task in tasks:
         await task
 
@@ -55,5 +55,5 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
     elif componentType == "smallStoutBox":
         await componentCreator.createSmallStoutBox(gameCrafterSession, componentFile, cloudGame["id"], cloudGameFolderId)
         return
-     
-    print("Skipping %s. The %s component type is not currently supported." % (componentFile["displayName"], componentType))   
+
+    print("Skipping %s. The %s component type is not currently supported." % (componentFile["displayName"], componentType))
