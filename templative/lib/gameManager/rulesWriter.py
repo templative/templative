@@ -10,7 +10,7 @@ def convertMarkdownToPdf(pdf_file_path, md_content=None, md_file_path=None, css_
         raw_html = markdown(md_content, extras=extras)
 
     if not len(raw_html):
-        raise ValidationError('Input markdown seems empty')
+        raise Exception('Input markdown seems empty')
 
     html = HTML(string=raw_html, base_url=base_url)
 
