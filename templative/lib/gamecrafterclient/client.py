@@ -53,18 +53,19 @@ async def postGame(gameCrafterSession, name, designerId):
     )
 
 async def postPokerDeck(gameCrafterSession, name, quantity, gameId, backImageFileId):
-    url = "%s/pokerdeck" % gameCrafterBaseUrl
+    url = "%s/deck" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId,
         name = name,
         game_id = gameId,
+        identity = "PokerDeck",
         quantity = quantity,
         back_id = backImageFileId,
         has_proofed_back = 1
     )
 
 async def postPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId):
-    url = "%s/pokercard" % gameCrafterBaseUrl
+    url = "%s/card" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId,
         name = name,
@@ -77,7 +78,7 @@ async def postPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId)
     )
 
 async def postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, backImageFileId):
-    url = "%s/smallstoutbox" % gameCrafterBaseUrl
+    url = "%s/twosidedbox" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId,
         name = name,
@@ -85,6 +86,7 @@ async def postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImage
         quantity = quantity,
         top_id = topImageFileId,
         has_proofed_top = 1,
+        identity = "SmallStoutBox",
         bottom_id = backImageFileId,
         has_proofed_bottom = 1
     )
@@ -96,6 +98,7 @@ async def postDocument(gameCrafterSession, name, quantity, gameId, pdfFileId):
         name = name,
         game_id = gameId,
         quantity = quantity,
+        identity = "Document",
         pdf_id = pdfFileId,
     )
 
