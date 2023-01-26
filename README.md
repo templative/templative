@@ -2,7 +2,9 @@
 
 Define the cards you’d like created and how to assemble them, use the CLI, and purchase the game off of the Game Crafter.
 
-# Requirements
+# Install
+
+## OSX
 - Install Python3 and pip3.
 - Install xcode
 - `xcode-select --install`
@@ -11,7 +13,16 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 - Install `Install Certificates.command` located in Python3.* application directory if you haven't already.
 - `brew tap thenextguy32/homebrew-templative`
 - `brew install templative`
-- Update `/usr/local/etc/Imagemagick-7/delegates.yml` or `/usr/local/Cellar/imagemagick/7.0.10-0/etc/ImageMagick-7/delegates.xml` file to use `export-file` instead of `export-png` as noted in the comment near the middle of the file.
+- Update `/usr/local/etc/Imagemagick-7/delegates.yml` or `/usr/local/Cellar/imagemagick/7.0.10-0/etc/ImageMagick-7/delegates.xml` file to use `export-file` instead of `export-png` as noted in the comment near the middle of the file.'
+
+## Windows
+- Install Python3.
+- Install [ImageMagick](https://imagemagick.org/script/download.php#windows).
+- Install [Inkscape](https://inkscape.org).
+- Install [GTK](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases).
+- `python setup.py develop`
+- `pip install -U wand`
+- `pip install -U weasyprint`
 
 ## QuickStart
 - Create and cd into a directory
