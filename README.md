@@ -20,6 +20,7 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 - Install [ImageMagick](https://imagemagick.org/script/download.php#windows).
 - Install [Inkscape](https://inkscape.org).
 - Install [GTK](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases).
+- Confirm `C:\Program Files\GTK3-Runtime Win64\bin` is a item under your system environment variable PATH.
 - `python setup.py develop`
 - `pip install -U wand`
 - `pip install -U weasyprint`
@@ -32,7 +33,7 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 ### Uploading
 - Create an account on the [Game Crafter](https://www.thegamecrafter.com)
 - Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
-- Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [env vars](https://www.schrodinger.com/kb/1842)
+- Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [user env vars](https://www.schrodinger.com/kb/1842)
 - `templative upload` to upload the last produced version to the Game Crafter.
 
 Use `templative --help` for more info.
