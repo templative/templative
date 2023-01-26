@@ -15,7 +15,7 @@ async def createGame(gameCrafterSession, name, designerId):
 
     gameName = game["name"]
     gameId = game["id"]
-    editUrl = "%s%s%s" % (baseUrl, "/publish/editor/", gameId)
+    editUrl = "%s%s%s" % (baseUrl, "/make/games/", gameId)
     print("Created %s. Edit it here %s" % (gameName, editUrl))
 
     return game

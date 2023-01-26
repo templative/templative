@@ -26,7 +26,7 @@ async def uploadGame(gameCrafterSession, gameRootDirectoryPath):
     for task in tasks:
         await task
 
-    gameUrl = "%s%s%s"%(gameCrafterBaseUrl, "/publish/editor/", cloudGame["id"])
+    gameUrl = "%s%s%s"%(gameCrafterBaseUrl, "/make/games/", cloudGame["id"])
     print("Uploads finished for %s, visit %s" % (cloudGame["name"], gameUrl))
     return gameUrl
 
