@@ -4,7 +4,7 @@ import svgutils.transform as sg
 import xml.etree.ElementTree as ET
 from wand.image import Image
 from aiofile import AIOFile
-
+import wand.exceptions
 from .element import Element
 
 async def createArtfile(artFile, artFileOutputName, outputDirectory):
@@ -179,10 +179,11 @@ async def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
 
 
 async def exportSvgToJpg(filepath, name, outputDirectory):
-    # try:
-    with Image(filename=filepath) as image:
-        outputFilename = "%s.jpg" % (name)
-        outputFilepath = os.path.join(outputDirectory, outputFilename)
-        image.save(filename=outputFilepath)
-    # except wand.exceptions.WandRuntimeError as error:
-    #     print(error, filepath, name)
+    outputFilename = "%s.jpg" % (name)
+    outputFilepath = os.path.join(outputDirectory, outputFilename)
+    try:
+        svgImage = Image(filename=filepath)    
+        svgImage.save(filename=outputFilepath)
+        svgImage.close()
+    except wand.exceptions.WandRuntimeError as error:
+        print(error, filepath, name)
