@@ -1,8 +1,8 @@
 import click
 import asyncio
-from .lib import gamecrafterclient as gameCrafterClient
-from .lib import gameManager as gameManagerClient
-from .lib import gameCrafterUpload as gameCrafterUpload
+import lib.gamecrafterclient as gameCrafterClient
+import lib.gameManager as gameManagerClient
+import lib.gameCrafterUpload as gameCrafterUpload
 from functools import wraps
 
 def coro(f):

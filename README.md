@@ -4,6 +4,10 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 
 # Install
 
+
+
+inkscape "C:\Users\User\Documents\git\studio-tyrus\apcw\apcw-defines\output\capsAndHammers_1.2.51_PaxSouth_2023-01-26_06-27-37\capsAction\capsAction-admiral.svg" --export-filename="C:\Users\User\Documents\git\studio-tyrus\apcw\apcw-defines\output\capsAndHammers_1.2.51_PaxSouth_2023-01-26_06-27-37\capsAction\capsAction-admiral.png" --export-dpi="96" --export-background="rgb(100%,100%,100%)" --export-background-opacity="1"
+
 ## OSX
 - Install Python3 and pip3.
 - Install xcode
@@ -19,8 +23,10 @@ Define the cards you’d like created and how to assemble them, use the CLI, and
 - Install Python3.
 - Install [ImageMagick](https://imagemagick.org/script/download.php#windows).
 - Install [Inkscape](https://inkscape.org).
+- Add `C:\Program Files\Inkscape\bin` to path.
+- Update `C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\delegates.xml` to use Inkscape for svg to png conversions `<delegate decode="svg:decode" stealth="True" command="&quot;inkscape&quot; &quot;%s&quot; --o=&quot;%s&quot; --export-dpi=&quot;%s&quot; --export-background=&quot;%s&quot; --export-background-opacity=&quot;%s&quot; &gt; &quot;%s&quot; 2&gt;&amp;1"/>`
 - Install [GTK](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases).
-- Confirm `C:\Program Files\GTK3-Runtime Win64\bin` is a item under your system environment variable PATH.
+- Add `C:\Program Files\GTK3-Runtime Win64\bin` to path.
 - `python setup.py develop`
 - `pip install -U wand`
 - `pip install -U weasyprint`
@@ -97,5 +103,5 @@ Python3 setuptools not found:
 If you see: `wand.exceptions.DrawError: non-conforming drawing primitive definition `letter-spacing' @ error/draw.c/RenderMVGContent/4434`
 It's because you need to update the delegates.xml. Line 113~114 should equal:
 `  <!-- Change export-png to export-file for inkscape 1.0+ -->
-  <delegate decode="svg:decode" stealth="True" command="&quot;inkscape&quot; &quot;%s&quot; --export-file=&quot;%s&quot; --export-dpi=&quot;%s&quot; --export-background=&quot;%s&quot; --export-background-opacity=&quot;%s&quot; &gt; &quot;%s&quot; 2&gt;&amp;1"/>`
+  <delegate decode="svg:decode" stealth="True" command="&quot;inkscape&quot; &quot;%s&quot; --o=&quot;%s&quot; --export-dpi=&quot;%s&quot; --export-background=&quot;%s&quot; --export-background-opacity=&quot;%s&quot; &gt; &quot;%s&quot; 2&gt;&amp;1"/>`
 
