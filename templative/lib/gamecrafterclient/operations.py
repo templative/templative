@@ -12,6 +12,7 @@ baseUrl = "https://www.thegamecrafter.com"
 
 async def createGame(gameCrafterSession, name, designerId):
     game = await client.postGame(gameCrafterSession, name, designerId)
+    
 
     gameName = game["name"]
     gameId = game["id"]
