@@ -1,5 +1,3 @@
-import os
-from .element import Element
 from . import svgScissors
 import asyncio
 
