@@ -1,11 +1,14 @@
 import os
-import xml.etree.ElementTree as ET
-from wand.image import Image
+from xml.etree import ElementTree
 from aiofile import AIOFile
-import wand.exceptions
-
 import svgmanip
+import subprocess
 
+componentImageSizePixels = {
+    "pokerDeck": { "width": 825, "height":1125 },
+    "largeRing": { "width": 450, "height":450 },
+    "smallStoutBox": { "width": 375, "height": 375 },
+}
 
 async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
     if game == None:
@@ -43,11 +46,22 @@ async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGam
 
     await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, componentGamedata, pieceGamedata)
     await updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, componentGamedata, pieceGamedata)
-    await exportSvgToJpg(artFileOutputFilepath, artFileOutputName, outputDirectory)
+    await assignSize(artFileOutputFilepath, componentCompose)
+    await exportSvgToPng(artFileOutputFilepath, artFileOutputName, outputDirectory)
     print("Produced %s." % (pieceGamedata["name"]))
 
-async def createArtfile(artFile, artFileOutputName, outputDirectory):
 
+async def assignSize(artFileOutputFilepath, componentCompose):
+    imageSizePixels = componentImageSizePixels[componentCompose["type"]]
+    elementTree = ElementTree.parse(artFileOutputFilepath)
+    root = elementTree.getroot()
+    root.set("width", "%spx" % imageSizePixels["width"])
+    root.set("height", "%spx" % imageSizePixels["height"])
+    root.set("viewbox", "0 0 %s %s" % (imageSizePixels["width"], imageSizePixels["height"]))
+    async with AIOFile(artFileOutputFilepath,'wb') as f:
+        await f.write(ElementTree.tostring(root))
+    
+async def createArtfile(artFile, artFileOutputName, outputDirectory):
     artFileOutputFileName = "%s.svg" % (artFileOutputName)
     artFileOutputFilepath = os.path.join(outputDirectory, artFileOutputFileName)
     artFile.dump(artFileOutputFilepath)
@@ -146,7 +160,7 @@ async def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pi
         return
 
     try:
-        parsedTree = ET.parse(filepath)
+        parsedTree = ElementTree.parse(filepath)
         tree = parsedTree.getroot()
 
         for styleUpdate in styleUpdates:
@@ -159,8 +173,8 @@ async def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pi
                 print("Could not find element with id [%s]." % (findById))
 
         async with AIOFile(filepath,'wb') as f:
-            await f.write(ET.tostring(tree))
-    except ET.ParseError as pe:
+            await f.write(ElementTree.tostring(tree))
+    except ElementTree.ParseError as pe:
         print("Production failed!", pe, filepath)
 
 async def replaceStyleAttributeForElement(element, attribute, key, value):
@@ -216,13 +230,12 @@ async def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
 
     return source
 
-
-async def exportSvgToJpg(filepath, name, outputDirectory):
-    outputFilename = "%s.jpg" % (name)
+async def exportSvgToPng(filepath, name, outputDirectory):
+    outputFilename = "%s.png" % (name)
     outputFilepath = os.path.join(outputDirectory, outputFilename)
-    try:
-        svgImage = Image(filename=filepath)    
-        svgImage.save(filename=outputFilepath)
-        svgImage.close()
-    except wand.exceptions.WandRuntimeError as error:
-        print(error, filepath, name)
+    commands = ["inkscape", filepath, "--export-filename=" + os.path.abspath(outputFilepath), "--export-width=825", "--export-background-opacity=0"]
+    message = ""
+    for command in commands:
+        message = message + command + " "
+    subprocess.run(commands, shell=True)
+    

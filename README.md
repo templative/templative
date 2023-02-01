@@ -7,6 +7,8 @@ Use `templative --help` for more info.
 # Installation
 
 - Install Python3.
+- Install `npm`
+- `npm install svgexport`
 
 ## OSX Prereqs
 - Install xcode
@@ -19,7 +21,7 @@ Use `templative --help` for more info.
 ## Windows Prereqs
 - Install [ImageMagick](https://imagemagick.org/script/download.php#windows).
 - Install [Inkscape](https://inkscape.org).
-- Possibly add `C:\Program Files\Inkscape\bin` to path.
+- Add `C:\Program Files\Inkscape\bin` to path AFTER python path or your python gets wrecked.
 - Install [GTK](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases).
 - Add `C:\Program Files\GTK3-Runtime Win64\bin` to path.
 - Update `C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\delegates.xml`
@@ -50,6 +52,12 @@ Use `templative --help` for more info.
 
 ## Why we use the Inkscape delegate
 Inkscape support flow roots, which allows for naturally wrapping text without hyphens. This feature is invaluable as we do not know the length of texts we add to our art templates. This is a svg feature (of SVG 1.2?) that has not been universally adopted. The default wand delegate for svg->png throws out flowroots.
+
+### Further Reading
+
+- [Auto line-wrapping in SVG Text](https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text)
+- [Multiline SVG Text](https://www.oreilly.com/library/view/svg-text-layout/9781491933817/ch04.html)
+- [Foreign Object SVG Text](https://codepen.io/maxzz/pen/NzBGVE)
 
 # Creating Components
 
