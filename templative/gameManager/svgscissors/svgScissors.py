@@ -1,10 +1,11 @@
 import os
-import svgutils.transform as sg
 import xml.etree.ElementTree as ET
 from wand.image import Image
 from aiofile import AIOFile
 import wand.exceptions
-from .element import Element
+
+import svgmanip
+
 
 async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
     if game == None:
@@ -33,7 +34,7 @@ async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGam
 
     templateFilesDirectory = gameCompose["artTemplatesDirectory"]
     artFilename = "%s.svg" % (artMetaData["templateFilename"])
-    artFile = Element(os.path.join(templateFilesDirectory, artFilename))
+    artFile = svgmanip.Element(os.path.join(templateFilesDirectory, artFilename))
 
     await addOverlays(artFile, artMetaData["overlays"], game, gameCompose, componentGamedata, pieceGamedata)
 
@@ -80,7 +81,7 @@ async def addOverlays(artFile, overlays, game, gameCompose, componentGamedata, p
         if overlayName != None and overlayName != "":
             overlayFilename = "%s.svg" % (overlayName)
             overlayFilepath = os.path.join(overlayFilesDirectory, overlayFilename)
-            graphicsInsert = Element(overlayFilepath)
+            graphicsInsert = svgmanip.Element(overlayFilepath)
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 
 async def textReplaceInFile(filepath, textReplacements, game, componentGamedata, pieceGamedata):
