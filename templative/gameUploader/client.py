@@ -1,10 +1,6 @@
 import os
-from os.path import isfile, join
-import json
-import sys
 import asyncio
-from .. import gamecrafterclient as gamecrafter
-from . import instructionsLoader, componentCreator
+from . import instructionsLoader, componentCreator, gameCrafterClient
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
@@ -17,8 +13,8 @@ async def uploadGame(gameCrafterSession, gameRootDirectoryPath):
 
     print("Uploading %s for %s." % (game["displayName"], company["displayName"]))
 
-    cloudGame = await gamecrafter.createGame(gameCrafterSession, game["name"], company["gameCrafterDesignerId"])
-    cloudGameFolder = await gamecrafter.createFolderAtRoot(gameCrafterSession, game["name"])
+    cloudGame = await gameCrafterClient.createGame(gameCrafterSession, game["name"], company["gameCrafterDesignerId"])
+    cloudGameFolder = await gameCrafterClient.createFolderAtRoot(gameCrafterSession, game["name"])
 
     tasks = []
     tasks.append(asyncio.create_task(createComponents(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))

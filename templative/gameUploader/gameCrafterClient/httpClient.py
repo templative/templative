@@ -1,4 +1,3 @@
-import os
 import json
 
 async def post(gameCrafterSession, url, **kwargs):

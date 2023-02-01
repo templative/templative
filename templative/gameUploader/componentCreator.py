@@ -1,5 +1,5 @@
-from .. import gamecrafterclient as gamecrafter
-from os.path import isfile, join
+from . import gameCrafterClient
+from os.path import join
 import asyncio
 
 async def createPokerDeck(gameCrafterSession, component, cloudGameId, cloudGameFolderId):
@@ -10,11 +10,11 @@ async def createPokerDeck(gameCrafterSession, component, cloudGameId, cloudGameF
 
     print("Uploading %s %s %s(s)" % (quantity, componentName, component["type"]))
 
-    cloudComponentFolder = await gamecrafter.createFolderAtParent(gameCrafterSession, componentName, cloudGameFolderId)
+    cloudComponentFolder = await gameCrafterClient.createFolderAtParent(gameCrafterSession, componentName, cloudGameFolderId)
 
     tasks = []
     backImageId = await createFileInFolder(gameCrafterSession, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
-    cloudPokerDeck = await gamecrafter.createPokerDeck(gameCrafterSession, componentName, quantity, cloudGameId, backImageId)
+    cloudPokerDeck = await gameCrafterClient.createPokerDeck(gameCrafterSession, componentName, quantity, cloudGameId, backImageId)
 
     for instructions in frontInstructions:
         tasks.append(asyncio.create_task(createPokerCardPiece(gameCrafterSession, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])))
@@ -30,12 +30,12 @@ async def createSmallStoutBox(gameCrafterSession, component, cloudGameId, cloudG
 
     print("Uploading %s %s %s(s)" % (quantity, componentName, component["type"]))
 
-    cloudComponentFolder = await gamecrafter.createFolderAtParent(gameCrafterSession, componentName, cloudGameFolderId)
+    cloudComponentFolder = await gameCrafterClient.createFolderAtParent(gameCrafterSession, componentName, cloudGameFolderId)
 
     topImageFileId = await createFileInFolder(gameCrafterSession, frontInstructions[0]["name"], frontInstructions[0]["filepath"], cloudComponentFolder["id"])
     bottomImageFileId = await createFileInFolder(gameCrafterSession, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
 
-    cloudPokerDeck = await gamecrafter.createSmallStoutBox(gameCrafterSession, cloudGameId, componentName, quantity, topImageFileId, bottomImageFileId)
+    cloudPokerDeck = await gameCrafterClient.createSmallStoutBox(gameCrafterSession, cloudGameId, componentName, quantity, topImageFileId, bottomImageFileId)
 
 async def createRules(gameCrafterSession, gameRootDirectoryPath, cloudGame, folderId):
     name = "rules"
@@ -43,12 +43,12 @@ async def createRules(gameCrafterSession, gameRootDirectoryPath, cloudGame, fold
     quantity = 1
     print("Uploading %s" % (filepath))
 
-    cloudFile = await gamecrafter.uploadFile(gameCrafterSession, filepath, folderId)
-    document = await gamecrafter.createDocument(gameCrafterSession, name, quantity, cloudGame["id"], cloudFile["id"])
+    cloudFile = await gameCrafterClient.uploadFile(gameCrafterSession, filepath, folderId)
+    document = await gameCrafterClient.createDocument(gameCrafterSession, name, quantity, cloudGame["id"], cloudFile["id"])
 
 async def createFileInFolder(gameCrafterSession, name, filepath, cloudComponentFolderId):
     print("Uploading %s from %s" % (name, filepath))
-    cloudFile = await gamecrafter.uploadFile(gameCrafterSession, filepath, cloudComponentFolderId)
+    cloudFile = await gameCrafterClient.uploadFile(gameCrafterSession, filepath, cloudComponentFolderId)
     return cloudFile["id"]
 
 async def createPokerCardPiece(gameCrafterSession, instructions, deckId, cloudComponentFolderId):
@@ -57,5 +57,5 @@ async def createPokerCardPiece(gameCrafterSession, instructions, deckId, cloudCo
     quantity = instructions["quantity"]
     print("Uploading %s" % (filepath))
 
-    cloudFile = await gamecrafter.uploadFile(gameCrafterSession, filepath, cloudComponentFolderId)
-    pokerCard = await gamecrafter.createPokerCard(gameCrafterSession, name, deckId, quantity, cloudFile["id"])
+    cloudFile = await gameCrafterClient.uploadFile(gameCrafterSession, filepath, cloudComponentFolderId)
+    pokerCard = await gameCrafterClient.createPokerCard(gameCrafterSession, name, deckId, quantity, cloudFile["id"])

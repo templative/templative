@@ -5,12 +5,14 @@ setup(
     version = "0.3.10",
     author = "Oliver Barnum",
     author_email = "oliverbarnum32@gmail.com",
-    description = "Populate svgs using csvs, output jpg images, and upload them to the Game Crafter",
+    description = "Create GameCrafter games based on art templates, json, and csvs.",
     url = "",
     packages=find_packages(),
     install_requires=["asyncio", "aiofile", "click", "markdown2", "WeasyPrint", "ensure", "svgutils", "wand", "mpmath", "tabulate", "aiohttp"],
     entry_points = {
-        "console_scripts": ["templative=templative.cli:cli"]
+        "console_scripts": [
+            "templative=templative:cli"
+        ]
     },
     include_package_data=True,
     classifiers=[

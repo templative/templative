@@ -1,5 +1,3 @@
-import aiohttp
-import asyncio
 class GameCrafterSession:
     def __init__ (self, httpSession):
         self.httpSession = httpSession

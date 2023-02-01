@@ -1,19 +1,15 @@
 import os
-import asyncio
-from uuid import uuid1
 from tabulate import tabulate
-from aiofile import AIOFile
 import aiohttp
 
-from . import client
+from . import gameCrafterOperations
 from .gameCrafterSession import GameCrafterSession
 
 baseUrl = "https://www.thegamecrafter.com"
 
 async def createGame(gameCrafterSession, name, designerId):
-    game = await client.postGame(gameCrafterSession, name, designerId)
+    game = await gameCrafterOperations.postGame(gameCrafterSession, name, designerId)
     
-
     gameName = game["name"]
     gameId = game["id"]
     editUrl = "%s%s%s" % (baseUrl, "/make/games/", gameId)
@@ -22,11 +18,11 @@ async def createGame(gameCrafterSession, name, designerId):
     return game
 
 async def createFolderAtRoot(gameCrafterSession, name):
-    user = await client.getUser(gameCrafterSession)
-    return await client.postFolder(gameCrafterSession, name, user['root_folder_id'])
+    user = await gameCrafterOperations.getUser(gameCrafterSession)
+    return await gameCrafterOperations.postFolder(gameCrafterSession, name, user['root_folder_id'])
 
 async def createFolderAtParent(gameCrafterSession, name, folderId):
-    return await client.postFolder(gameCrafterSession, name, folderId)
+    return await gameCrafterOperations.postFolder(gameCrafterSession, name, folderId)
 
 async def uploadFile(gameCrafterSession, filepath, folderId):
     if not os.path.isfile(filepath):
@@ -35,34 +31,34 @@ async def uploadFile(gameCrafterSession, filepath, folderId):
     filename = os.path.basename(filepath)
 
     with open(filepath, "rb") as fileToUpload:
-        return await client.postFile(gameCrafterSession, fileToUpload, filename, folderId)
+        return await gameCrafterOperations.postFile(gameCrafterSession, fileToUpload, filename, folderId)
 
 async def createPokerDeck(gameCrafterSession, name, quantity, gameId, imageFileId):
-    return await client.postPokerDeck(gameCrafterSession, name, quantity, gameId, imageFileId)
+    return await gameCrafterOperations.postPokerDeck(gameCrafterSession, name, quantity, gameId, imageFileId)
 
 async def createPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId):
-    return await client.postPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId)
+    return await gameCrafterOperations.postPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId)
 
 async def createSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, bottomImageFileId):
-    return await client.postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, bottomImageFileId)
+    return await gameCrafterOperations.postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, bottomImageFileId)
 
 async def createDocument(gameCrafterSession, name, quantity, gameId, pdfFileId):
-    return await client.postDocument(gameCrafterSession, name, quantity, gameId, pdfFileId)
+    return await gameCrafterOperations.postDocument(gameCrafterSession, name, quantity, gameId, pdfFileId)
 
 async def printUser(gameCrafterSession):
-    print(await client.getUser(gameCrafterSession))
+    print(await gameCrafterOperations.getUser(gameCrafterSession))
 
 async def listGames(gameCrafterSession):
-    gamesResponse = await client.getGamesForUser(gameCrafterSession)
+    gamesResponse = await gameCrafterOperations.getGamesForUser(gameCrafterSession)
     await printGames(gamesResponse["items"])
 
 async def listGamesForUserDesigners(gameCrafterSession):
-    designersResponse = await client.getDesigners(gameCrafterSession)
+    designersResponse = await gameCrafterOperations.getDesigners(gameCrafterSession)
     designers = designersResponse["items"]
 
     games = []
     for designer in designers:
-        gamesResponse = await client.getGamesForDesignerId(gameCrafterSession, designer["id"])
+        gamesResponse = await gameCrafterOperations.getGamesForDesignerId(gameCrafterSession, designer["id"])
         games.extend(gamesResponse["items"])
 
     printGames(games)
@@ -80,7 +76,7 @@ async def printGames(clientSession, games):
     print(tabulate(data, headers=headers, tablefmt='orgtbl'))
 
 async def listDesigners(gameCrafterSession):
-    designersResponse = await client.getDesigners(gameCrafterSession)
+    designersResponse = await gameCrafterOperations.getDesigners(gameCrafterSession)
 
     headers = ["name", "id"]
     data = []
@@ -106,9 +102,9 @@ async def login():
         raise Exception('Could not log in. You need to set the env variable THEGAMECRAFTER_PASSWORD. Value is %s' % userPassword)
 
     gameCrafterSession = GameCrafterSession(aiohttp.ClientSession())
-    login = await client.login(gameCrafterSession, publicApiKey, userName, userPassword)
+    login = await gameCrafterOperations.login(gameCrafterSession, publicApiKey, userName, userPassword)
     gameCrafterSession.login(sessionId=login["id"], userId=login["user_id"])
     return gameCrafterSession
 
 async def logout(gameCrafterSession):
-    await client.logout(gameCrafterSession)
+    await gameCrafterOperations.logout(gameCrafterSession)

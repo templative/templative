@@ -1,9 +1,8 @@
-import asyncio
-
 from .instructionsLoader import getLastOutputFileDirectory
-from . import client
+from . import client, gameCrafterClient
 
-async def uploadGame(session, gameRootDirectoryPath):
+async def uploadGame(gameRootDirectoryPath):
+    session = await gameCrafterClient.login()
 
     if session is None:
         raise Exception("You must provide a Game Crafter session.")
@@ -11,5 +10,7 @@ async def uploadGame(session, gameRootDirectoryPath):
     if gameRootDirectoryPath is None:
         gameRootDirectoryPath = await getLastOutputFileDirectory()
 
-    return await client.uploadGame(session, gameRootDirectoryPath)
+    result = await client.uploadGame(session, gameRootDirectoryPath)
+    gameCrafterClient.logout(session)
+    return result
 

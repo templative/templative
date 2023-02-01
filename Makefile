@@ -61,8 +61,9 @@ pipundevelop:
 	pipenv --rm
 
 develop:
-	python3 setup.py develop
-	pip3 install -e .
+	python setup.py develop
+	pip install -e .
+	pip show templative
 
 undevelop:
 	python3 setup.py develop --uninstall

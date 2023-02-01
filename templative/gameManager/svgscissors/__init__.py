@@ -1,5 +1,6 @@
 import os
-from .. import svgscissors as svgScissors
+from .element import Element
+from . import svgScissors
 import asyncio
 
 async def createArtFilesForComponent(game, gameCompose, componentCompose, frontMetaData, backMetaData, componentGameData, piecesGamedata, outputDirectory):
@@ -34,29 +35,3 @@ async def createArtFilesForComponent(game, gameCompose, componentCompose, frontM
 
     for task in tasks:
         await task
-
-async def getInstructionSetsForFiles(game, componentCompose, componentGamedata, componentFilepath):
-    if game == None:
-        print("game cannot be None.")
-        return
-
-    if componentCompose == None:
-        print("component cannot be None.")
-        return
-
-    if componentGamedata == None:
-        print("componentGamedata cannot be None.")
-        return
-
-    instructionSets = []
-    for pieceGamedata in componentGamedata:
-        filename = "%s-%s.jpg" % (componentCompose["name"], pieceGamedata["name"])
-        artFilepath = os.path.join(componentFilepath, filename)
-        instructionSets.append({"name": pieceGamedata["name"], "filepath": artFilepath, "quantity": pieceGamedata["quantity"]})
-
-    return instructionSets
-
-async def getBackInstructionSet(componentCompose, componentFilepath):
-    filename = "%s-back.jpg" % componentCompose["name"]
-    backFilepath = os.path.join(componentFilepath, filename)
-    return {"name": filename, "filepath": backFilepath}
