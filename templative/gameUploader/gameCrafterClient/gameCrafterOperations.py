@@ -131,6 +131,29 @@ async def postFile(gameCrafterSession, file, filename, folderId):
         name=filename,
         folder_id=folderId)
 
+async def postTwoSidedSluggedSet(gameCrafterSession, name, identity, quantity, gameId, backImageFileId):
+    url = "%s/twosidedsluggedset" % gameCrafterBaseUrl
+    return await httpClient.post(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId,
+        name = name,
+        game_id = gameId,
+        identity = identity,
+        quantity = quantity,
+        back_id = backImageFileId,
+        has_proofed_back = 1
+    )
+
+async def postTwoSidedSlugged(gameCrafterSession, name, setId, quantity, imageFileId):
+    url = "%s/twosidedslugged" % gameCrafterBaseUrl
+    return await httpClient.post(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId,
+        name = name,
+        set_id = setId,
+        quantity = quantity,
+        face_id = imageFileId,
+        has_proofed_face = 1,
+        has_proofed_back = 1
+    )
 
 
 

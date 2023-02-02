@@ -56,6 +56,12 @@ async def createPokerDeck(gameCrafterSession, name, quantity, gameId, imageFileI
 async def createPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId):
     return await gameCrafterOperations.postPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId)
 
+async def createTwoSidedSluggedSet(gameCrafterSession, name, identity, quantity, gameId, backImageFileId):
+    return await gameCrafterOperations.postTwoSidedSluggedSet(gameCrafterSession, name, identity, quantity, gameId, backImageFileId)
+
+async def createTwoSidedSlugged(gameCrafterSession, name, setId, quantity, imageFileId):
+    return await gameCrafterOperations.postTwoSidedSlugged(gameCrafterSession, name, setId, quantity, imageFileId)
+
 async def createSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, bottomImageFileId):
     return await gameCrafterOperations.postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, bottomImageFileId)
 

@@ -5,10 +5,10 @@ import svgmanip
 import subprocess
 
 componentImageSizePixels = {
-    "pokerDeck": { "width": 825, "height":1125 },
-    "largeRing": { "width": 450, "height":450 },
-    "largeChit": { "width": 375, "height": 375 },
-    "smallStoutBox": { "width": 3600, "height": 3000 },
+    "PokerDeck": { "width": 825, "height":1125 },
+    "LargeRing": { "width": 450, "height":450 },
+    "LargeSquareChit": { "width": 375, "height": 375 },
+    "SmallStoutBox": { "width": 3600, "height": 3000 },
 }
 
 async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):

@@ -22,6 +22,26 @@ async def createPokerDeck(gameCrafterSession, component, cloudGameId, cloudGameF
     for task in tasks:
         await task
 
+async def createTwoSidedSlugged(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
+    componentName = component["name"]
+    quantity = component["quantity"]
+    frontInstructions = component["frontInstructions"]
+    backInstructions = component["backInstructions"]
+
+    print("Uploading %s %s %s(s)" % (quantity, componentName, identity))
+
+    cloudComponentFolder = await gameCrafterClient.createFolderAtParent(gameCrafterSession, componentName, cloudGameFolderId)
+
+    tasks = []
+    backImageId = await createFileInFolder(gameCrafterSession, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
+    cloudPokerDeck = await gameCrafterClient.createTwoSidedSluggedSet(gameCrafterSession, componentName, identity, quantity, cloudGameId, backImageId)
+
+    for instructions in frontInstructions:
+        tasks.append(asyncio.create_task(createTwoSidedSluggedPiece(gameCrafterSession, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])))
+
+    for task in tasks:
+        await task
+
 async def createSmallStoutBox(gameCrafterSession, component, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
@@ -59,3 +79,12 @@ async def createPokerCardPiece(gameCrafterSession, instructions, deckId, cloudCo
 
     cloudFile = await gameCrafterClient.uploadFile(gameCrafterSession, filepath, cloudComponentFolderId)
     pokerCard = await gameCrafterClient.createPokerCard(gameCrafterSession, name, deckId, quantity, cloudFile["id"])
+
+async def createTwoSidedSluggedPiece(gameCrafterSession, instructions, setId, cloudComponentFolderId):
+    name = instructions["name"]
+    filepath = instructions["filepath"]
+    quantity = instructions["quantity"]
+    print("Uploading %s" % (filepath))
+
+    cloudFile = await gameCrafterClient.uploadFile(gameCrafterSession, filepath, cloudComponentFolderId)
+    twoSidedSlugged = await gameCrafterClient.createTwoSidedSlugged(gameCrafterSession, name, setId, quantity, cloudFile["id"])

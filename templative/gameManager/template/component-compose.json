@@ -2,7 +2,7 @@
     "components": [
         {
             "name": "friendCards",
-            "type": "pokerDeck",
+            "type": "PokerDeck",
             "quantity": 1,
             "piecesGamedataFilename": "friends",
             "componentGamedataFilename": "friend",

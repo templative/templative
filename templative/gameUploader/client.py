@@ -46,12 +46,14 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
     componentFile = await instructionsLoader.loadComponentInstructions(componentDirectoryPath)
 
     componentType = componentFile["type"]
-    if componentType == "pokerDeck":
+    if componentType == "PokerDeck":
         await componentCreator.createPokerDeck(gameCrafterSession, componentFile, cloudGame["id"], cloudGameFolderId)
         return
-    elif componentType == "smallStoutBox":
+    elif componentType == "SmallStoutBox":
         await componentCreator.createSmallStoutBox(gameCrafterSession, componentFile, cloudGame["id"], cloudGameFolderId)
         return
+    elif componentType == "LargeRing" or componentType == "LargeSquareChit":
+        await componentCreator.createTwoSidedSlugged(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
 
    
     print("Skipping %s. The %s component type is not currently supported." % (componentFile["name"], componentType))
