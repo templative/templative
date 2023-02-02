@@ -11,6 +11,6 @@ async def uploadGame(gameRootDirectoryPath):
         gameRootDirectoryPath = await getLastOutputFileDirectory()
 
     result = await client.uploadGame(session, gameRootDirectoryPath)
-    gameCrafterClient.logout(session)
+    await gameCrafterClient.logout(session)
     return result
 
