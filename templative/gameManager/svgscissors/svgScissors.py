@@ -8,7 +8,7 @@ componentImageSizePixels = {
     "pokerDeck": { "width": 825, "height":1125 },
     "largeRing": { "width": 450, "height":450 },
     "largeChit": { "width": 375, "height": 375 },
-    "smallStoutBox": { "width": 375, "height": 375 },
+    "smallStoutBox": { "width": 3600, "height": 3000 },
 }
 
 async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
@@ -47,13 +47,16 @@ async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGam
 
     await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, componentGamedata, pieceGamedata)
     await updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, componentGamedata, pieceGamedata)
-    await assignSize(artFileOutputFilepath, componentCompose)
-    await exportSvgToImage(artFileOutputFilepath, artFileOutputName, outputDirectory)
+    
+    if not componentCompose["type"] in componentImageSizePixels:
+        raise Exception("No image size for %s", componentCompose["type"]) 
+    imageSizePixels = componentImageSizePixels[componentCompose["type"]]
+    await assignSize(artFileOutputFilepath, imageSizePixels)
+    await exportSvgToImage(artFileOutputFilepath, imageSizePixels, artFileOutputName, outputDirectory)
     print("Produced %s." % (pieceGamedata["name"]))
 
 
-async def assignSize(artFileOutputFilepath, componentCompose):
-    imageSizePixels = componentImageSizePixels[componentCompose["type"]]
+async def assignSize(artFileOutputFilepath, imageSizePixels):
     elementTree = ElementTree.parse(artFileOutputFilepath)
     root = elementTree.getroot()
     root.set("width", "%spx" % imageSizePixels["width"])
@@ -238,10 +241,12 @@ def runCommands(commands):
     
     subprocess.run(commands, shell=True)
 
-async def exportSvgToImage(filepath, name, outputDirectory):
+async def exportSvgToImage(filepath, imageSizePixels, name, outputDirectory):
+    
+
     pngFilepath = os.path.abspath(os.path.join(outputDirectory, "%s.png" % (name))) 
     runCommands([
-        "inkscape", filepath, "--export-filename=" + pngFilepath, "--export-width=825", "--export-background-opacity=0" ])
+        "inkscape", filepath, "--export-filename=" + pngFilepath, "--export-width=%s" % imageSizePixels["width"], "--export-height=%s" % imageSizePixels["height"],"--export-background-opacity=0" ])
 
     jpgFilepath = os.path.abspath(os.path.join(outputDirectory, "%s.jpg" % (name))) 
     runCommands(["convert", pngFilepath, jpgFilepath ])
