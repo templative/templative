@@ -52,4 +52,6 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
         await componentCreator.createSmallStoutBox(gameCrafterSession, componentFile, cloudGame["id"], cloudGameFolderId)
         return
 
-    print("Skipping %s. The %s component type is not currently supported." % (componentFile["displayName"], componentType))
+   
+    print("Skipping %s. The %s component type is not currently supported." % (componentFile["name"], componentType))
+        
