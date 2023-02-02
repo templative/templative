@@ -48,7 +48,7 @@ async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGam
     await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, componentGamedata, pieceGamedata)
     await updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, componentGamedata, pieceGamedata)
     await assignSize(artFileOutputFilepath, componentCompose)
-    await exportSvgToPng(artFileOutputFilepath, artFileOutputName, outputDirectory)
+    await exportSvgToImage(artFileOutputFilepath, artFileOutputName, outputDirectory)
     print("Produced %s." % (pieceGamedata["name"]))
 
 
@@ -231,12 +231,18 @@ async def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
 
     return source
 
-async def exportSvgToPng(filepath, name, outputDirectory):
-    outputFilename = "%s.png" % (name)
-    outputFilepath = os.path.join(outputDirectory, outputFilename)
-    commands = ["inkscape", filepath, "--export-filename=" + os.path.abspath(outputFilepath), "--export-width=825", "--export-background-opacity=0"]
+def runCommands(commands):
     message = ""
     for command in commands:
         message = message + command + " "
+    
     subprocess.run(commands, shell=True)
+
+async def exportSvgToImage(filepath, name, outputDirectory):
+    pngFilepath = os.path.abspath(os.path.join(outputDirectory, "%s.png" % (name))) 
+    runCommands([
+        "inkscape", filepath, "--export-filename=" + pngFilepath, "--export-width=825", "--export-background-opacity=0" ])
+
+    jpgFilepath = os.path.abspath(os.path.join(outputDirectory, "%s.jpg" % (name))) 
+    runCommands(["convert", pngFilepath, jpgFilepath ])
     
