@@ -22,8 +22,8 @@ async def produceGame(gameRootDirectoryPath):
     tasks = []
     tasks.append(asyncio.create_task(outputWriter.copyGameFromGameFolderToOutput(game, gameFolderPath)))
 
-    company = await defineLoader.loadCompany(gameRootDirectoryPath)
-    tasks.append(asyncio.create_task(outputWriter.copyCompanyFromGameFolderToOutput(company, gameFolderPath)))
+    studioCompose = await defineLoader.loadStudio(gameRootDirectoryPath)
+    tasks.append(asyncio.create_task(outputWriter.copyStudioFromGameFolderToOutput(studioCompose, gameFolderPath)))
 
     componentCompose = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
 
@@ -31,7 +31,7 @@ async def produceGame(gameRootDirectoryPath):
         if component["disabled"]:
             print("Skipping disabled %s component." % (component["name"]))
             continue
-        tasks.append(asyncio.create_task(produceGameComponent(gameRootDirectoryPath, game, gameCompose, component, gameFolderPath)))
+        tasks.append(asyncio.create_task(produceGameComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, component, gameFolderPath)))
 
     rules = await defineLoader.loadRules(gameRootDirectoryPath)
     tasks.append(asyncio.create_task(rulesMarkdownProcessor.produceRulebook(rules, gameFolderPath)))
@@ -43,7 +43,7 @@ async def produceGame(gameRootDirectoryPath):
 
     return gameFolderPath
 
-async def produceGameComponent(gameRootDirectoryPath, game, gameCompose, componentCompose, outputDirectory):
+async def produceGameComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, componentCompose, outputDirectory):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
@@ -86,7 +86,7 @@ async def produceGameComponent(gameRootDirectoryPath, game, gameCompose, compone
     }
     await outputWriter.dumpInstructions(componentInstructionFilepath, componentInstructions)
 
-    await svgscissors.createArtFilesForComponent(game, gameCompose, componentCompose, componentArtdata, componentBackArtdata, componentGamedata, piecesGamedata, componentDirectory)
+    await svgscissors.createArtFilesForComponent(game, studioCompose, gameCompose, componentCompose, componentArtdata, componentBackArtdata, componentGamedata, piecesGamedata, componentDirectory)
 
 async def getInstructionSetsForFiles(game, componentCompose, componentGamedata, componentFilepath):
     if game == None:

@@ -24,11 +24,11 @@ async def createComponentFolder(name, outputDirectory):
     os.mkdir(componentDirectory)
     return componentDirectory
 
-async def copyCompanyFromGameFolderToOutput(company, gameFolderPath):
-    companyFilepath = os.path.join(gameFolderPath, "company.json")
-    await dumpInstructions(companyFilepath, company)
+async def copyStudioFromGameFolderToOutput(studio, gameFolderPath):
+    studioFilepath = os.path.join(gameFolderPath, "studio.json")
+    await dumpInstructions(studioFilepath, studio)
 
 async def copyGameFromGameFolderToOutput(game, gameFolderPath):
-    companyFilepath = os.path.join(gameFolderPath, "game.json")
-    await dumpInstructions(companyFilepath, game)
+    studioFilepath = os.path.join(gameFolderPath, "studio.json")
+    await dumpInstructions(studioFilepath, game)
 

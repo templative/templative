@@ -11,9 +11,13 @@ componentImageSizePixels = {
     "SmallStoutBox": { "width": 3600, "height": 3000 },
 }
 
-async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
+async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
     if game == None:
         print("game cannot be None.")
+        return
+
+    if studioCompose == None:
+        print("studioCompose cannot be None.")
         return
 
     if componentCompose == None:
@@ -40,13 +44,13 @@ async def createArtFileOfPiece(game, gameCompose, componentCompose, componentGam
     artFilename = "%s.svg" % (artMetaData["templateFilename"])
     artFile = svgmanip.Element(os.path.join(templateFilesDirectory, artFilename))
 
-    await addOverlays(artFile, artMetaData["overlays"], game, gameCompose, componentGamedata, pieceGamedata)
+    await addOverlays(artFile, artMetaData["overlays"], studioCompose, game, gameCompose, componentGamedata, pieceGamedata)
 
     artFileOutputName = ("%s-%s" % (componentCompose["name"], pieceGamedata["name"]))
     artFileOutputFilepath = await createArtfile(artFile, artFileOutputName, outputDirectory)
 
-    await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], game, componentGamedata, pieceGamedata)
-    await updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], game, componentGamedata, pieceGamedata)
+    await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], studioCompose, game, componentGamedata, pieceGamedata)
+    await updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], studioCompose, game, componentGamedata, pieceGamedata)
     
     if not componentCompose["type"] in componentImageSizePixels:
         raise Exception("No image size for %s", componentCompose["type"]) 
@@ -71,13 +75,17 @@ async def createArtfile(artFile, artFileOutputName, outputDirectory):
     artFile.dump(artFileOutputFilepath)
     return artFileOutputFilepath
 
-async def addOverlays(artFile, overlays, game, gameCompose, componentGamedata, pieceGamedata):
+async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGamedata, pieceGamedata):
     if artFile == None:
         print("artFile cannot be None.")
         return
 
     if overlays == None:
         print("overlays cannot be None.")
+        return
+
+    if studio == None:
+        print("studio cannot be None.")
         return
 
     if game == None:
@@ -95,20 +103,24 @@ async def addOverlays(artFile, overlays, game, gameCompose, componentGamedata, p
     overlayFilesDirectory = gameCompose["artInsertsDirectory"]
 
     for overlay in overlays:
-        overlayName = await getScopedValue(overlay, game, componentGamedata, pieceGamedata)
+        overlayName = await getScopedValue(overlay, studio, game, componentGamedata, pieceGamedata)
         if overlayName != None and overlayName != "":
             overlayFilename = "%s.svg" % (overlayName)
             overlayFilepath = os.path.join(overlayFilesDirectory, overlayFilename)
             graphicsInsert = svgmanip.Element(overlayFilepath)
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 
-async def textReplaceInFile(filepath, textReplacements, game, componentGamedata, pieceGamedata):
+async def textReplaceInFile(filepath, textReplacements, studio, game, componentGamedata, pieceGamedata):
     if filepath == None:
         print("filepath cannot be None.")
         return
 
     if textReplacements == None:
         print("textReplacements cannot be None.")
+        return
+
+    if studio == None:
+        print("studio cannot be None.")
         return
 
     if game == None:
@@ -128,7 +140,7 @@ async def textReplaceInFile(filepath, textReplacements, game, componentGamedata,
         contents = await f.read()
         for textReplacement in textReplacements:
             key = "{%s}" % textReplacement["key"]
-            value = await getScopedValue(textReplacement, game, componentGamedata, pieceGamedata)
+            value = await getScopedValue(textReplacement, studio, game, componentGamedata, pieceGamedata)
             value = await processValueFilters(value, textReplacement)
             contents = contents.replace(key, str(value))
 
@@ -142,13 +154,17 @@ async def processValueFilters(value, textReplacement):
                 value = value.upper()
     return value
 
-async def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pieceGamedata):
+async def updateStylesInFile(filepath, styleUpdates, studio, game, componentGamedata, pieceGamedata):
     if filepath == None:
         print("filepath cannot be None.")
         return
 
     if styleUpdates == None:
         print("styleUpdates cannot be None.")
+        return
+
+    if studio == None:
+        print("studio cannot be None.")
         return
 
     if game == None:
@@ -171,7 +187,7 @@ async def updateStylesInFile(filepath, styleUpdates, game, componentGamedata, pi
             findById = styleUpdate["id"]
             elementToUpdate = tree.find(".//*[@id='%s']" % findById)
             if (elementToUpdate != None):
-                value = await getScopedValue(styleUpdate, game, componentGamedata, pieceGamedata)
+                value = await getScopedValue(styleUpdate, studio, game, componentGamedata, pieceGamedata)
                 await replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
             else:
                 print("Could not find element with id [%s]." % (findById))
@@ -203,11 +219,15 @@ async def replaceStyleAttributeForElement(element, attribute, key, value):
     replaceStyleWith = "%s:%s" % (key, value)
     element.set(attribute, replaceStyleWith)
 
-async def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
+async def getScopedValue(scopedValue, studio, game, componentGamedata, pieceGamedata):
     if scopedValue == None:
         print("scopedValue cannot be None.")
         return
-
+    
+    if studio == None:
+        print("studio cannot be None.")
+        return
+    
     if game == None:
         print("game cannot be None.")
         return
@@ -231,6 +251,9 @@ async def getScopedValue(scopedValue, game, componentGamedata, pieceGamedata):
 
     if scope == "piece":
         return pieceGamedata[source]
+
+    if scope == "studio":
+        return studio[source]
 
     return source
 

@@ -9,11 +9,11 @@ async def uploadGame(gameCrafterSession, gameRootDirectoryPath):
         raise Exception("Game root directory path cannot be None")
 
     game = await instructionsLoader.loadGameInstructions(gameRootDirectoryPath)
-    company = await instructionsLoader.loadCompanyInstructions(gameRootDirectoryPath)
+    studio = await instructionsLoader.loadStudioInstructions(gameRootDirectoryPath)
 
-    print("Uploading %s for %s." % (game["displayName"], company["displayName"]))
+    print("Uploading %s for %s." % (game["displayName"], studio["studioDisplayName"]))
 
-    cloudGame = await gameCrafterClient.createGame(gameCrafterSession, game["name"], company["gameCrafterDesignerId"])
+    cloudGame = await gameCrafterClient.createGame(gameCrafterSession, game["name"], studio["gameCrafterDesignerId"])
     await gameCrafterClient.createActionShot(gameCrafterSession, cloudGame["id"])
     cloudGameFolder = await gameCrafterClient.createFolderAtRoot(gameCrafterSession, game["name"])
 
