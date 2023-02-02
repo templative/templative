@@ -9,13 +9,30 @@ baseUrl = "https://www.thegamecrafter.com"
 
 async def createGame(gameCrafterSession, name, designerId):
     game = await gameCrafterOperations.postGame(gameCrafterSession, name, designerId)
-    
     gameName = game["name"]
     gameId = game["id"]
     editUrl = "%s%s%s" % (baseUrl, "/make/games/", gameId)
     print("Created %s. Edit it here %s" % (gameName, editUrl))
 
     return game
+
+advertismentImages = [
+    "C:/Users/User/Documents/git/nextdaygames/templative/templative/gameUploader/gameCrafterClient/testImages/actionShot.png",
+    "C:/Users/User/Documents/git/nextdaygames/templative/templative/gameUploader/gameCrafterClient/testImages/advertisment.png",
+    "C:/Users/User/Documents/git/nextdaygames/templative/templative/gameUploader/gameCrafterClient/testImages/backdrop.png",
+    "C:/Users/User/Documents/git/nextdaygames/templative/templative/gameUploader/gameCrafterClient/testImages/logo.png"
+]
+
+async def createAdvertisementImages(gameCrafterSession):
+    folder = await createFolderAtRoot(gameCrafterSession, "AdvertisementImages")
+    
+    for filepath in advertismentImages:
+        print(filepath)
+        file = await uploadFile(gameCrafterSession, filepath, folder["id"])
+        print(filepath, file["id"])
+
+async def createActionShot(gameCrafterSession, gameId):
+    await gameCrafterOperations.createActionShot(gameCrafterSession, gameId)
 
 async def createFolderAtRoot(gameCrafterSession, name):
     user = await gameCrafterOperations.getUser(gameCrafterSession)

@@ -14,6 +14,7 @@ async def uploadGame(gameCrafterSession, gameRootDirectoryPath):
     print("Uploading %s for %s." % (game["displayName"], company["displayName"]))
 
     cloudGame = await gameCrafterClient.createGame(gameCrafterSession, game["name"], company["gameCrafterDesignerId"])
+    await gameCrafterClient.createActionShot(gameCrafterSession, cloudGame["id"])
     cloudGameFolder = await gameCrafterClient.createFolderAtRoot(gameCrafterSession, game["name"])
 
     tasks = []
