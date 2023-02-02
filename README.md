@@ -20,6 +20,7 @@ Use `templative --help` for more info.
 
 ## Windows Prereqs
 - Install [ImageMagick](https://imagemagick.org/script/download.php#windows).
+- Add ImageMagick bin to path.
 - Install [Inkscape](https://inkscape.org).
 - Add `C:\Program Files\Inkscape\bin` to path AFTER python path or your python gets wrecked.
 - Install [GTK](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases).
