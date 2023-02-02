@@ -130,7 +130,7 @@ async def textReplaceInFile(filepath, textReplacements, game, componentGamedata,
             key = "{%s}" % textReplacement["key"]
             value = await getScopedValue(textReplacement, game, componentGamedata, pieceGamedata)
             value = await processValueFilters(value, textReplacement)
-            contents = contents.replace(key, value)
+            contents = contents.replace(key, str(value))
 
     async with AIOFile(filepath,'w') as f:
         await f.write(contents)

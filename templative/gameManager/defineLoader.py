@@ -40,14 +40,15 @@ async def loadPiecesGamedata(gameRootDirectoryPath, gameCompose, piecesGamedataF
         return {}
 
     piecesGamedataDirectory = gameCompose["piecesGamedataDirectory"]
-    piecesGamedataFilenameWithExtension = "%s.csv" % (piecesGamedataFilename)
+    piecesGamedataFilenameWithExtension = "%s.json" % (piecesGamedataFilename)
     filepath = os.path.join(gameRootDirectoryPath, piecesGamedataDirectory, piecesGamedataFilenameWithExtension)
     with open(filepath) as gamedataFile:
-        reader = csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
+        peices = json.load(gamedataFile)
+        # peices =  csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
 
         gamedata = []
-        for row in reader:
-            gamedata.append(row)
+        for item in peices:
+            gamedata.append(item)
         return gamedata
 
 async def loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentGamedataFilename):
