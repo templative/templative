@@ -32,6 +32,30 @@ async def loadCompany(gameRootDirectoryPath):
     async with AIOFile(os.path.join(gameRootDirectoryPath, "company.json")) as company:
         return json.loads(await company.read())
 
+async def attemptToLoadPieceJsonFile(piecesDirectory, piecesGamedataFilename):
+    filepath = os.path.join(piecesDirectory, "%s.json" % (piecesGamedataFilename))
+    if not os.path.isfile(filepath):
+        return None
+    gamedata = []
+    with open(filepath) as gamedataFile:
+        data = json.load(gamedataFile)
+        for item in data:
+            gamedata.append(item)
+
+        return gamedata
+
+async def attemptToLoadPieceCsvFile(piecesDirectory, piecesGamedataFilename):
+    filepath = os.path.join(piecesDirectory, "%s.csv" % (piecesGamedataFilename))
+    if not os.path.isfile(filepath):
+        return None
+    gamedata = []
+    with open(filepath) as gamedataFile:
+        data = csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
+        for item in data:
+            gamedata.append(item)
+
+        return gamedata
+
 async def loadPiecesGamedata(gameRootDirectoryPath, gameCompose, piecesGamedataFilename):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
@@ -39,17 +63,11 @@ async def loadPiecesGamedata(gameRootDirectoryPath, gameCompose, piecesGamedataF
     if not piecesGamedataFilename:
         return {}
 
-    piecesGamedataDirectory = gameCompose["piecesGamedataDirectory"]
-    piecesGamedataFilenameWithExtension = "%s.json" % (piecesGamedataFilename)
-    filepath = os.path.join(gameRootDirectoryPath, piecesGamedataDirectory, piecesGamedataFilenameWithExtension)
-    with open(filepath) as gamedataFile:
-        peices = json.load(gamedataFile)
-        # peices =  csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
-
-        gamedata = []
-        for item in peices:
-            gamedata.append(item)
-        return gamedata
+    piecesDirectory = os.path.join(gameRootDirectoryPath, gameCompose["piecesGamedataDirectory"])
+    pieces = await attemptToLoadPieceJsonFile(piecesDirectory, piecesGamedataFilename)
+    if pieces != None:
+        return pieces
+    return await attemptToLoadPieceCsvFile(piecesDirectory, piecesGamedataFilename)
 
 async def loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentGamedataFilename):
     if not gameRootDirectoryPath:
