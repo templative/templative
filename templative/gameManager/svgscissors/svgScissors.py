@@ -7,6 +7,7 @@ import subprocess
 componentImageSizePixels = {
     "PokerDeck": { "width": 825, "height":1125 },
     "LargeRing": { "width": 450, "height":450 },
+    "MediumRing": { "width": 375, "height": 375 },
     "LargeSquareChit": { "width": 375, "height": 375 },
     "SmallStoutBox": { "width": 3600, "height": 3000 },
 }

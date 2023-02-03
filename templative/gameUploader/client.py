@@ -52,7 +52,7 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
     elif componentType == "SmallStoutBox":
         await componentCreator.createSmallStoutBox(gameCrafterSession, componentFile, cloudGame["id"], cloudGameFolderId)
         
-    elif componentType == "LargeRing" or componentType == "LargeSquareChit":
+    elif componentType == "LargeRing" or componentType == "LargeSquareChit" or componentType == "MediumRing":
         await componentCreator.createTwoSidedSlugged(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
     else:
         print("Skipping %s. The %s component type is not currently supported." % (componentFile["name"], componentType))
