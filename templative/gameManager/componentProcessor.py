@@ -3,6 +3,48 @@ import asyncio
 from . import defineLoader, outputWriter, rulesMarkdownProcessor, svgscissors
 from datetime import datetime
 
+async def listComponents(gameRootDirectoryPath):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path is invalid.")
+
+    game = await defineLoader.loadGame(gameRootDirectoryPath)
+    gameCompose = await defineLoader.loadGameCompose(gameRootDirectoryPath)
+    studioCompose = await defineLoader.loadStudio(gameRootDirectoryPath)
+    componentCompose = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
+
+    print("%s by %s" % (game["displayName"], studioCompose["displayName"]))
+    await printGameComponentQuantities(gameRootDirectoryPath, gameCompose, componentCompose)
+
+async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, componentCompose):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path is invalid.")
+
+    componentQuantities ={"Document": { "componentQuantity": 1, "pieceQuantity": 1}}
+    for component in componentCompose["components"]:
+        if component["disabled"]:
+            print("Skipping disabled %s component." % (component["name"]))
+            continue
+        piecesGamedata = await defineLoader.loadPiecesGamedata(gameRootDirectoryPath, gameCompose, component["piecesGamedataFilename"])
+        if not piecesGamedata or piecesGamedata == {}:
+            print("Skipping %s component due to missing pieces gamedata." % componentName)
+            continue
+        await addComponentQuantities(componentQuantities, component, piecesGamedata)
+        
+    message = ""
+    for componentType in componentQuantities:
+        message = "%s%s: %s pieces / %s sets   " % (message, componentType, str(componentQuantities[componentType]["pieceQuantity"]), str(componentQuantities[componentType]["componentQuantity"]))
+    print(message)
+
+async def addComponentQuantities(componentQuantities, component, piecesGamedata):
+    if not component["type"] in componentQuantities:
+        componentQuantities[component["type"]] = { "componentQuantity": 0, "pieceQuantity": 0}
+
+    quantity = 0
+    for piece in piecesGamedata:
+        quantity += int(piece["quantity"])
+    componentQuantities[component["type"]]["componentQuantity"] += 1
+    componentQuantities[component["type"]]["pieceQuantity"] += quantity
+
 async def produceGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
