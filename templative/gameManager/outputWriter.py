@@ -29,6 +29,6 @@ async def copyStudioFromGameFolderToOutput(studio, gameFolderPath):
     await dumpInstructions(studioFilepath, studio)
 
 async def copyGameFromGameFolderToOutput(game, gameFolderPath):
-    studioFilepath = os.path.join(gameFolderPath, "studio.json")
+    studioFilepath = os.path.join(gameFolderPath, "game.json")
     await dumpInstructions(studioFilepath, game)
 
