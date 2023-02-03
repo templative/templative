@@ -256,6 +256,9 @@ async def getScopedValue(scopedValue, studio, game, componentGamedata, pieceGame
     if scope == "studio":
         scopeData = studio
 
+    if scope == "global":
+        return source
+
     if not source in scopeData:
         print("Missing key %s not found in %s scope." % (source, scope))
         return source
