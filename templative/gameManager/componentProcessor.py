@@ -19,7 +19,7 @@ async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, compo
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
 
-    componentQuantities ={"Document": { "componentQuantity": 1, "pieceQuantity": 1}}
+    componentQuantities ={"Document": [{ "name":"Rules", "componentQuantity": 1, "pieceQuantity": 1}]}
     for component in componentCompose["components"]:
         if component["disabled"]:
             print("Skipping disabled %s component." % (component["name"]))
@@ -32,18 +32,27 @@ async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, compo
         
     message = ""
     for componentType in componentQuantities:
-        message = "%s%s: %s pieces / %s sets   " % (message, componentType, str(componentQuantities[componentType]["pieceQuantity"]), str(componentQuantities[componentType]["componentQuantity"]))
+        componentExplanations = ""
+        componentQuantity = 0
+        for explanation in componentQuantities[componentType]:
+            quantity = explanation["componentQuantity"] * explanation["pieceQuantity"]
+            componentQuantity += quantity
+            componentExplanations = "%s%s.%sx, " % (componentExplanations, explanation["name"], quantity)
+        message = "%s<%s:%sx from %s>   " % (message, componentType, componentQuantity, componentExplanations)
+        
     print(message)
 
 async def addComponentQuantities(componentQuantities, component, piecesGamedata):
     if not component["type"] in componentQuantities:
-        componentQuantities[component["type"]] = { "componentQuantity": 0, "pieceQuantity": 0}
+        componentQuantities[component["type"]] = []
 
     quantity = 0
     for piece in piecesGamedata:
         quantity += int(piece["quantity"])
-    componentQuantities[component["type"]]["componentQuantity"] += 1
-    componentQuantities[component["type"]]["pieceQuantity"] += quantity
+    
+    componentQuantities[component["type"]].append({
+        "name":component["name"], "componentQuantity": component["quantity"], "pieceQuantity": quantity
+    })
 
 async def produceGame(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
