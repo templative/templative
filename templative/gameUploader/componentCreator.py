@@ -2,6 +2,18 @@ from . import gameCrafterClient
 from os.path import join
 import asyncio
 
+async def createTuckBox(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
+    componentName = component["name"]
+    quantity = component["quantity"]
+    frontInstructions = component["frontInstructions"]
+
+    print("Uploading %s %s %s(s)" % (quantity, componentName, component["type"]))
+
+    cloudComponentFolder = await gameCrafterClient.createFolderAtParent(gameCrafterSession, componentName, cloudGameFolderId)
+
+    imageId = await createFileInFolder(gameCrafterSession, frontInstructions[0]["name"], frontInstructions[0]["filepath"], cloudComponentFolder["id"])
+    cloudPokerDeck = await gameCrafterClient.createTuckBox(gameCrafterSession, componentName, identity, quantity, cloudGameId, imageId)
+
 async def createPokerDeck(gameCrafterSession, component, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
@@ -55,7 +67,7 @@ async def createSmallStoutBox(gameCrafterSession, component, cloudGameId, cloudG
     topImageFileId = await createFileInFolder(gameCrafterSession, frontInstructions[0]["name"], frontInstructions[0]["filepath"], cloudComponentFolder["id"])
     bottomImageFileId = await createFileInFolder(gameCrafterSession, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
 
-    cloudPokerDeck = await gameCrafterClient.createSmallStoutBox(gameCrafterSession, cloudGameId, componentName, quantity, topImageFileId, bottomImageFileId)
+    cloudSmallStoutBox = await gameCrafterClient.createSmallStoutBox(gameCrafterSession, cloudGameId, componentName, quantity, topImageFileId, bottomImageFileId)
 
 async def createRules(gameCrafterSession, gameRootDirectoryPath, cloudGame, folderId):
     name = "rules"

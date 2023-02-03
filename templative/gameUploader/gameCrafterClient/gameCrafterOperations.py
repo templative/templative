@@ -40,6 +40,18 @@ async def getGamesForUser(gameCrafterSession):
         session_id = gameCrafterSession.sessionId
     )
 
+async def postTuckBox(gameCrafterSession, name, identity, quantity, gameId, imageId):
+    url = "%s/tuckbox" % (gameCrafterBaseUrl)
+    return await httpClient.post(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId,
+        name = name,
+        game_id = gameId,
+        quantity = quantity,
+        outside_id = imageId,
+        identity = identity,
+        has_proofed_outside = 1,
+    )
+
 async def createActionShot(gameCrafterSession, gameId):
     url = "%s/actionshot" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,

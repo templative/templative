@@ -68,6 +68,9 @@ async def createSmallStoutBox(gameCrafterSession, gameId, name, quantity, topIma
 async def createDocument(gameCrafterSession, name, quantity, gameId, pdfFileId):
     return await gameCrafterOperations.postDocument(gameCrafterSession, name, quantity, gameId, pdfFileId)
 
+async def createTuckBox(gameCrafterSession, name, identity, quantity, gameId, backImageFileId):
+    return await gameCrafterOperations.postTuckBox(gameCrafterSession, name, identity, quantity, gameId, backImageFileId)
+
 async def printUser(gameCrafterSession):
     print(await gameCrafterOperations.getUser(gameCrafterSession))
 
