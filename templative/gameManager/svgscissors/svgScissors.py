@@ -243,19 +243,24 @@ async def getScopedValue(scopedValue, studio, game, componentGamedata, pieceGame
     scope = scopedValue["scope"]
     source = scopedValue["source"]
 
+    scopeData = None
     if scope == "game":
-        return game[source]
+        scopeData = game
 
     if scope == "component":
-        return componentGamedata[source]
+        scopeData = componentGamedata
 
     if scope == "piece":
-        return pieceGamedata[source]
+        scopeData = pieceGamedata
 
     if scope == "studio":
-        return studio[source]
+        scopeData = studio
 
-    return source
+    if not source in scopeData:
+        print("Missing key %s not found in %s scope." % (source, scope))
+        return source
+
+    return scopeData[source]
 
 def runCommands(commands):
     message = ""
