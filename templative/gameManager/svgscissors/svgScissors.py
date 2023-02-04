@@ -11,6 +11,7 @@ componentImageSizePixels = {
     "LargeSquareChit": { "width": 375, "height": 375 },
     "SmallStoutBox": { "width": 3600, "height": 3000 },
     "PokerTuckBox108": { "width": 3075, "height": 2250 },
+    "PokerFolio": { "width": 3075, "height": 1125 },
 }
 
 async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):

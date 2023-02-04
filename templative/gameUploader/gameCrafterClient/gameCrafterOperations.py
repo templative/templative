@@ -40,6 +40,29 @@ async def getGamesForUser(gameCrafterSession):
         session_id = gameCrafterSession.sessionId
     )
 
+async def postTwoSidedSet(gameCrafterSession, name, identity, quantity, gameId, backImageId):
+    url = "%s/twosidedset" % (gameCrafterBaseUrl)
+    return await httpClient.post(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId,
+        name = name,
+        game_id = gameId,
+        quantity = quantity,
+        identity = identity,
+        back_id = backImageId,
+        has_proofed_back = 1,
+    )
+
+async def postTwoSided(gameCrafterSession, name, setId, quantity, faceImageId):
+    url = "%s/twosided" % (gameCrafterBaseUrl)
+    return await httpClient.post(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId,
+        name = name,
+        set_id = setId,
+        quantity = quantity,
+        face_id = faceImageId,
+        has_proofed_face = 1,
+    )
+
 async def postTuckBox(gameCrafterSession, name, identity, quantity, gameId, imageId):
     url = "%s/tuckbox" % (gameCrafterBaseUrl)
     return await httpClient.post(gameCrafterSession, url,
@@ -115,6 +138,20 @@ async def postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImage
         has_proofed_bottom = 1
     )
 
+async def postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, backImageFileId):
+    url = "%s/twosidedbox" % gameCrafterBaseUrl
+    return await httpClient.post(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId,
+        name = name,
+        game_id = gameId,
+        quantity = quantity,
+        top_id = topImageFileId,
+        has_proofed_top = 1,
+        identity = "SmallStoutBox",
+        bottom_id = backImageFileId,
+        has_proofed_bottom = 1
+    )
+
 async def postDocument(gameCrafterSession, name, quantity, gameId, pdfFileId):
     url = "%s/document" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,
@@ -124,6 +161,7 @@ async def postDocument(gameCrafterSession, name, quantity, gameId, pdfFileId):
         quantity = quantity,
         identity = "Document",
         pdf_id = pdfFileId,
+        use_for = "Download"
     )
 
 async def postFolder(gameCrafterSession, name, folderParentId):

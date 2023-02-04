@@ -58,6 +58,9 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
     elif componentType == "PokerTuckBox108":
         await componentCreator.createTuckBox(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
 
+    elif componentType == "PokerFolio":
+        await componentCreator.createTwoSided(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+
     else:
         print("Skipping %s. The %s component type is not currently supported." % (componentFile["name"], componentType))
         

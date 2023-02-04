@@ -71,6 +71,12 @@ async def createDocument(gameCrafterSession, name, quantity, gameId, pdfFileId):
 async def createTuckBox(gameCrafterSession, name, identity, quantity, gameId, backImageFileId):
     return await gameCrafterOperations.postTuckBox(gameCrafterSession, name, identity, quantity, gameId, backImageFileId)
 
+async def createTwoSidedSet(gameCrafterSession, name, identity, quantity, gameId, backImageFileId):
+    return await gameCrafterOperations.postTwoSidedSet(gameCrafterSession, name, identity, quantity, gameId, backImageFileId)
+
+async def createTwoSided(gameCrafterSession, name, setId, quantity, imageFileId):
+    return await gameCrafterOperations.postTwoSided(gameCrafterSession, name, setId, quantity, imageFileId)
+
 async def printUser(gameCrafterSession):
     print(await gameCrafterOperations.getUser(gameCrafterSession))
 
