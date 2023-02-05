@@ -7,9 +7,10 @@ async def cli():
     pass
 
 @cli.command()
-async def produce():
+@click.option('--component', default=None, help='The component to produce.')
+async def produce(component):
     """Produce the game in the current directory"""
-    await gameManager.produceGame(".")
+    await gameManager.produceGame(".", component)
 
 @cli.command()
 async def components():

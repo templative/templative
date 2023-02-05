@@ -3,8 +3,8 @@ from os import path
 
 from . import componentProcessor
 
-async def produceGame(gameRootDirectoryPath):
-    return await componentProcessor.produceGame(gameRootDirectoryPath)
+async def produceGame(gameRootDirectoryPath, componentFilter):
+    return await componentProcessor.produceGame(gameRootDirectoryPath, componentFilter)
 
 async def listComponents(gameRootDirectoryPath):
     await componentProcessor.listComponents(gameRootDirectoryPath)

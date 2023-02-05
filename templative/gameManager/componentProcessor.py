@@ -54,7 +54,7 @@ async def addComponentQuantities(componentQuantities, component, piecesGamedata)
         "name":component["name"], "componentQuantity": component["quantity"], "pieceQuantity": quantity
     })
 
-async def produceGame(gameRootDirectoryPath):
+async def produceGame(gameRootDirectoryPath, componentFilter):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
 
@@ -79,9 +79,15 @@ async def produceGame(gameRootDirectoryPath):
     componentCompose = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
 
     for component in componentCompose["components"]:
-        if component["disabled"]:
+        isProducingOneComponent = componentFilter != None
+        isMatchingComponentFilter = isProducingOneComponent and component["name"] == componentFilter
+        if not isMatchingComponentFilter and component["disabled"]:
             print("Skipping disabled %s component." % (component["name"]))
             continue
+
+        if isProducingOneComponent and not isMatchingComponentFilter:
+            continue
+
         tasks.append(asyncio.create_task(produceGameComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, component, gameFolderPath)))
 
     rules = await defineLoader.loadRules(gameRootDirectoryPath)
