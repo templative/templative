@@ -1,34 +1,22 @@
-import click
-import asyncio
+import asyncclick as click
 from templative import gameManager, gameUploader
-from functools import wraps
-
-def coro(f):
-    @wraps(f)
-    def wrapper(*args, **kwargs):
-        return asyncio.run(f(*args, **kwargs))
-
-    return wrapper
 
 @click.group()
-def cli():
+async def cli():
     """Templative CLI"""
     pass
 
 @cli.command()
-@coro
 async def produce():
     """Produce the game in the current directory"""
     await gameManager.produceGame(".")
 
 @cli.command()
-@coro
 async def components():
     """Get a list of quantities of the game in the current directory"""
     await gameManager.listComponents(".")
 
 @cli.command()
-@coro
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
 async def upload(input):
     """Upload a produced game in a directory"""
