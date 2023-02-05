@@ -26,7 +26,7 @@ async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, compo
             continue
         piecesGamedata = await defineLoader.loadPiecesGamedata(gameRootDirectoryPath, gameCompose, component["piecesGamedataFilename"])
         if not piecesGamedata or piecesGamedata == {}:
-            print("Skipping %s component due to missing pieces gamedata." % componentName)
+            print("Skipping %s component due to missing pieces gamedata." % component["name"])
             continue
         await addComponentQuantities(componentQuantities, component, piecesGamedata)
         
