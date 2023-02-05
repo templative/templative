@@ -3,6 +3,11 @@ import asyncio
 from . import defineLoader, outputWriter, rulesMarkdownProcessor, svgscissors
 from datetime import datetime
 
+async def convertRulesMdToHtml(gameRootDirectoryPath):
+    rules = await defineLoader.loadRules(gameRootDirectoryPath)
+    await rulesMarkdownProcessor.convertRulesMdToSpan(rules, gameRootDirectoryPath)
+
+
 async def listComponents(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")

@@ -23,6 +23,16 @@ async def upload(input):
     """Upload a produced game in a directory"""
     await gameUploader.uploadGame(input)
 
+@cli.group()
+async def rules():
+    """Rules commands"""
+    pass
+
+@rules.command()
+async def toHtml():
+    """Convert the rules markdown to html"""
+    await gameManager.convertRulesMdToHtml(".")
+
 @cli.command()
 async def init():
     """Deprecated - Create the default game project here"""

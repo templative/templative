@@ -25,3 +25,8 @@ def convertMarkdownToPdf(pdf_file_path, md_content=None, md_file_path=None, css_
         css.append(CSS(filename=css_file_path))
 
     html.write_pdf(pdf_file_path, stylesheets=css)
+
+async def convertRulesMdToSpan(rules, gameFolderPath):
+    htmlContent = markdown(rules)
+    with open(path.join(gameFolderPath, "rules.html"), 'w', encoding="utf-8") as rulesHtmlFile:
+        rulesHtmlFile.write(htmlContent)
