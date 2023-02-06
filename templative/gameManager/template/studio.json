@@ -1,5 +1,5 @@
 {
-    "studioName": "templateStudio",
-    "studioDisplayName": "Template Studio",
+    "name": "templateStudio",
+    "displayName": "Template Studio",
     "gameCrafterDesignerId": ""
 }
