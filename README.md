@@ -109,5 +109,5 @@ It's because you need to update the delegates.xml. Line 113~114 should equal:
 ## Delegates.xml Raw Attempt
 inkscape "C:\Users\User\Documents\git\studio-tyrus\apcw\apcw-defines\output\capsAndHammers_1.2.51_PaxSouth_2023-01-26_06-27-37\capsAction\capsAction-admiral.svg" --export-filename="C:\Users\User\Documents\git\studio-tyrus\apcw\apcw-defines\output\capsAndHammers_1.2.51_PaxSouth_2023-01-26_06-27-37\capsAction\capsAction-admiral.png" --export-dpi="96" --export-background="rgb(100%,100%,100%)" --export-background-opacity="1"
 
-
+# If you find a weird A carrot character, check your svgs for highlighted spaces in VSC.
 
