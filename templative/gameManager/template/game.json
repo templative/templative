@@ -1,6 +1,6 @@
 {
-    "name": "friendGame",
-    "displayName": "Friend Game",
+    "name": "gameName",
+    "displayName": "Game Name",
     "version": "0.0.0",
     "versionName": "Template"
 }

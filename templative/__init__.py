@@ -40,5 +40,5 @@ async def toTspans():
 
 @cli.command()
 async def init():
-    """Deprecated - Create the default game project here"""
-    print("Init is not implemented.")
+    """Create the default game project here"""
+    await gameManager.createTemplate()

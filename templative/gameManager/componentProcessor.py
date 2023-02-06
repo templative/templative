@@ -28,7 +28,7 @@ async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, compo
         raise Exception("Game root directory path is invalid.")
 
     componentQuantities ={"Document": [{ "name":"Rules", "componentQuantity": 1, "pieceQuantity": 1}]}
-    for component in componentCompose["components"]:
+    for component in componentCompose:
         if component["disabled"]:
             print("Skipping disabled %s component." % (component["name"]))
             continue
@@ -86,7 +86,7 @@ async def produceGame(gameRootDirectoryPath, componentFilter):
 
     componentCompose = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
 
-    for component in componentCompose["components"]:
+    for component in componentCompose:
         isProducingOneComponent = componentFilter != None
         isMatchingComponentFilter = isProducingOneComponent and component["name"] == componentFilter
         if not isMatchingComponentFilter and component["disabled"]:
