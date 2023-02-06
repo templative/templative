@@ -5,8 +5,11 @@ from datetime import datetime
 
 async def convertRulesMdToHtml(gameRootDirectoryPath):
     rules = await defineLoader.loadRules(gameRootDirectoryPath)
-    await rulesMarkdownProcessor.convertRulesMdToSpan(rules, gameRootDirectoryPath)
+    await rulesMarkdownProcessor.convertRulesMdToHtml(rules, gameRootDirectoryPath)
 
+async def convertRulesMdToSpans(gameRootDirectoryPath):
+    rules = await defineLoader.loadRules(gameRootDirectoryPath)
+    await rulesMarkdownProcessor.convertRulesMdToSpans(rules, gameRootDirectoryPath)
 
 async def listComponents(gameRootDirectoryPath):
     if not gameRootDirectoryPath:

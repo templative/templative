@@ -33,6 +33,11 @@ async def toHtml():
     """Convert the rules markdown to html"""
     await gameManager.convertRulesMdToHtml(".")
 
+@rules.command()
+async def toTspans():
+    """Convert the rules markdown to svg tspans"""
+    await gameManager.convertRulesMdToSpans(".")
+
 @cli.command()
 async def init():
     """Deprecated - Create the default game project here"""

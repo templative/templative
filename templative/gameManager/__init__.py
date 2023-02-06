@@ -12,6 +12,9 @@ async def listComponents(gameRootDirectoryPath):
 async def convertRulesMdToHtml(gameRootDirectoryPath):
     await componentProcessor.convertRulesMdToHtml(gameRootDirectoryPath)
 
+async def convertRulesMdToSpans(gameRootDirectoryPath):
+    await componentProcessor.convertRulesMdToSpans(gameRootDirectoryPath)
+
 async def createTemplate():
     if(path.exists(".game-compose")):
         print("Error: Existing game compose here.")

@@ -26,7 +26,33 @@ def convertMarkdownToPdf(pdf_file_path, md_content=None, md_file_path=None, css_
 
     html.write_pdf(pdf_file_path, stylesheets=css)
 
-async def convertRulesMdToSpan(rules, gameFolderPath):
+async def convertRulesMdToHtml(rules, gameFolderPath):
     htmlContent = markdown(rules)
+
+    with open(path.join(gameFolderPath, "rules.html"), 'w', encoding="utf-8") as rulesHtmlFile:
+        rulesHtmlFile.write(htmlContent)
+
+async def convertRulesMdToSpans(rules, gameFolderPath):
+    htmlContent = markdown(rules)
+    htmlContent = htmlContent.replace("\n", "\\n")
+    htmlContent = htmlContent.replace("<h1>", "<tspan font-weight='bold' font-size='30px'>")
+    htmlContent = htmlContent.replace("<h2>", "<tspan font-weight='bold' font-size='28px'>")
+    htmlContent = htmlContent.replace("<h3>", "<tspan font-weight='bold' font-size='26px'>")
+    htmlContent = htmlContent.replace("<h4>", "<tspan font-weight='bold' font-size='23px'>")
+    htmlContent = htmlContent.replace("<h5>", "<tspan font-weight='bold' font-size='20px'>")
+
+    htmlContent = htmlContent.replace("/h1", "/tspan")
+    htmlContent = htmlContent.replace("/h2", "/tspan")
+    htmlContent = htmlContent.replace("/h3", "/tspan")
+    htmlContent = htmlContent.replace("/h4", "/tspan")
+    htmlContent = htmlContent.replace("/h5", "/tspan")
+
+    htmlContent = htmlContent.replace("<p>", "<tspan font-size='18px'>")
+    htmlContent = htmlContent.replace("<li>", "<tspan>")
+    htmlContent = htmlContent.replace("<ul>", "<tspan>")
+    htmlContent = htmlContent.replace("</p>", "</tspan>")
+    htmlContent = htmlContent.replace("</li>", "</tspan>")
+    htmlContent = htmlContent.replace("</ul>", "</tspan>")
+
     with open(path.join(gameFolderPath, "rules.html"), 'w', encoding="utf-8") as rulesHtmlFile:
         rulesHtmlFile.write(htmlContent)
