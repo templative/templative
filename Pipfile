@@ -17,6 +17,11 @@ wand = "*"
 mpmath = "*"
 tabulate = "*"
 aiohttp = "*"
+idna-ssl = "*"
+asynctest = "*"
+typing-extensions = "*" 
+asyncclick = "*"
+anyio = "*"
 
 [requires]
 python_version = "3.7.7"
