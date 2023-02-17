@@ -276,12 +276,18 @@ def runCommands(commands):
     subprocess.run(commands, shell=True)
 
 async def exportSvgToImage(filepath, imageSizePixels, name, outputDirectory):
+    absoluteOutputDirectory = os.path.abspath(outputDirectory)
+    pngFilepath = os.path.join(absoluteOutputDirectory, "%s.png" % (name))
+    createPngCommands = [
+        "inkscape", filepath,
+        "--export-filename=" + pngFilepath, 
+        "--export-width=%s" % imageSizePixels["width"], 
+        "--export-height=%s" % imageSizePixels["height"],
+        "--export-background-opacity=0" ]
     
+    runCommands(createPngCommands)
 
-    pngFilepath = os.path.abspath(os.path.join(outputDirectory, "%s.png" % (name))) 
-    runCommands([
-        "inkscape", filepath, "--export-filename=" + pngFilepath, "--export-width=%s" % imageSizePixels["width"], "--export-height=%s" % imageSizePixels["height"],"--export-background-opacity=0" ])
-
-    jpgFilepath = os.path.abspath(os.path.join(outputDirectory, "%s.jpg" % (name))) 
-    runCommands(["convert", pngFilepath, jpgFilepath ])
+    jpgFilepath = os.path.join(absoluteOutputDirectory, "%s.jpg" % (name))
+    convertCommands = [ "convert", pngFilepath, jpgFilepath ]
+    runCommands(convertCommands)
     
