@@ -272,15 +272,18 @@ def runCommands(commands):
     message = ""
     for command in commands:
         message = message + command + " "
-    
-    subprocess.run(commands, shell=True)
+    # print(message)
+    # subprocess.run(commands)
+    os.system(message)
 
 async def exportSvgToImage(filepath, imageSizePixels, name, outputDirectory):
+    absoluteSvgFilepath = os.path.abspath(filepath)
     absoluteOutputDirectory = os.path.abspath(outputDirectory)
     pngFilepath = os.path.join(absoluteOutputDirectory, "%s.png" % (name))
     createPngCommands = [
-        "inkscape", filepath,
-        "--export-filename=" + pngFilepath, 
+        "inkscape", 
+        absoluteSvgFilepath,
+        '--export-filename=%s' % pngFilepath, 
         "--export-width=%s" % imageSizePixels["width"], 
         "--export-height=%s" % imageSizePixels["height"],
         "--export-background-opacity=0" ]
@@ -290,4 +293,6 @@ async def exportSvgToImage(filepath, imageSizePixels, name, outputDirectory):
     jpgFilepath = os.path.join(absoluteOutputDirectory, "%s.jpg" % (name))
     convertCommands = [ "convert", pngFilepath, jpgFilepath ]
     runCommands(convertCommands)
+
+    os.remove(pngFilepath)
     
