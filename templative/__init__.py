@@ -23,6 +23,12 @@ async def upload(input):
     """Upload a produced game in a directory"""
     await gameUploader.uploadGame(input)
 
+@cli.command()
+@click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
+async def playground(input):
+    """Convert a produced game into a tabletop playground game"""
+    await gameUploader.convertToTabletopPlayground(input)
+
 @cli.group()
 async def rules():
     """Rules commands"""

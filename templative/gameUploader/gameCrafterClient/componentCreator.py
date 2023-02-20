@@ -1,4 +1,4 @@
-from . import gameCrafterClient
+from .. import gameCrafterClient
 from os.path import join
 import asyncio
 

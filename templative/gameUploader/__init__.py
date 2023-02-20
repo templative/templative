@@ -1,5 +1,6 @@
+from .gameCrafterClient import client
 from .instructionsLoader import getLastOutputFileDirectory
-from . import client, gameCrafterClient
+from . import gameCrafterClient, tabletopPlayground
 
 async def uploadGame(gameRootDirectoryPath):
     session = await gameCrafterClient.login()
@@ -14,3 +15,8 @@ async def uploadGame(gameRootDirectoryPath):
     await gameCrafterClient.logout(session)
     return result
 
+async def convertToTabletopPlayground(gameRootDirectoryPath):
+    if gameRootDirectoryPath is None:
+        gameRootDirectoryPath = await getLastOutputFileDirectory()
+
+    return await tabletopPlayground.convertToTabletopPlayground(gameRootDirectoryPath)

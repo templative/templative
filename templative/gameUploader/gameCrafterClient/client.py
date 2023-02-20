@@ -1,6 +1,8 @@
 import os
 import asyncio
-from . import instructionsLoader, componentCreator, gameCrafterClient
+
+from . import componentCreator
+from .. import instructionsLoader, gameCrafterClient
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
