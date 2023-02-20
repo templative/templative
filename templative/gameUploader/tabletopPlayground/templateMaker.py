@@ -1,7 +1,8 @@
-def createCardTemplate(guid, name, frontTextureName, cardColumnCount, cardRowCount, backTextureName):
+def createCardTemplate(guid, name, frontTextureName, cardColumnCount, totalCount, cardRowCount, backTextureName):
     indices = []
-    for i in range(cardColumnCount*cardRowCount):
+    for i in range(totalCount):
         indices.append(i)
+        
     return {
         "Type": "Card",
         "GUID": guid,
