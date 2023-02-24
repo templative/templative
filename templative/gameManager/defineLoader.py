@@ -37,7 +37,7 @@ async def attemptToLoadPieceJsonFile(piecesDirectory, piecesGamedataFilename):
     if not os.path.isfile(filepath):
         return None
     gamedata = []
-    with open(filepath) as gamedataFile:
+    with open(filepath, encoding='utf-8') as gamedataFile:
         data = json.load(gamedataFile)
         for item in data:
             gamedata.append(item)

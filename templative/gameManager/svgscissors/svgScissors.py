@@ -64,7 +64,9 @@ async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompo
 
 
 async def assignSize(artFileOutputFilepath, imageSizePixels):
-    elementTree = ElementTree.parse(artFileOutputFilepath)
+    
+    parser = ElementTree.XMLParser(encoding="utf-8")
+    elementTree = ElementTree.parse(artFileOutputFilepath, parser=parser)
     root = elementTree.getroot()
     root.set("width", "%spx" % imageSizePixels["width"])
     root.set("height", "%spx" % imageSizePixels["height"])
