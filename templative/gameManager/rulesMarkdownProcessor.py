@@ -33,26 +33,32 @@ async def convertRulesMdToHtml(rules, gameFolderPath):
         rulesHtmlFile.write(htmlContent)
 
 async def convertRulesMdToSpans(rules, gameFolderPath):
-    htmlContent = markdown(rules)
-    htmlContent = htmlContent.replace("\n", "\\n")
-    htmlContent = htmlContent.replace("<h1>", "<tspan font-weight='bold' font-size='30px'>")
-    htmlContent = htmlContent.replace("<h2>", "<tspan font-weight='bold' font-size='28px'>")
-    htmlContent = htmlContent.replace("<h3>", "<tspan font-weight='bold' font-size='26px'>")
-    htmlContent = htmlContent.replace("<h4>", "<tspan font-weight='bold' font-size='23px'>")
-    htmlContent = htmlContent.replace("<h5>", "<tspan font-weight='bold' font-size='20px'>")
 
-    htmlContent = htmlContent.replace("/h1", "/tspan")
-    htmlContent = htmlContent.replace("/h2", "/tspan")
-    htmlContent = htmlContent.replace("/h3", "/tspan")
-    htmlContent = htmlContent.replace("/h4", "/tspan")
-    htmlContent = htmlContent.replace("/h5", "/tspan")
+    fontSize = 18
+    fontSizeProgression = 4
+
+    htmlContent = markdown(rules)
+    htmlContent = htmlContent.replace("\n", "")
+
+    htmlContent = htmlContent.replace("<h1>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((5*fontSizeProgression)+fontSize))
+    htmlContent = htmlContent.replace("<h2>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((4*fontSizeProgression)+fontSize))
+    htmlContent = htmlContent.replace("<h3>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((3*fontSizeProgression)+fontSize))
+    htmlContent = htmlContent.replace("<h4>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((2*fontSizeProgression)+fontSize))
+    htmlContent = htmlContent.replace("<h5>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((1*fontSizeProgression)+fontSize))
+
+    htmlContent = htmlContent.replace("</h1>", "</tspan>\\n")
+    htmlContent = htmlContent.replace("</h2>", "</tspan>\\n")
+    htmlContent = htmlContent.replace("</h3>", "</tspan>\\n")
+    htmlContent = htmlContent.replace("</h4>", "</tspan>\\n")
+    htmlContent = htmlContent.replace("</h5>", "</tspan>\\n")
 
     htmlContent = htmlContent.replace("<p>", "<tspan font-size='18px'>")
-    htmlContent = htmlContent.replace("<li>", "<tspan>")
-    htmlContent = htmlContent.replace("<ul>", "<tspan>")
-    htmlContent = htmlContent.replace("</p>", "</tspan>")
-    htmlContent = htmlContent.replace("</li>", "</tspan>")
+    htmlContent = htmlContent.replace("</p>", "</tspan>\\n")
+
+    htmlContent = htmlContent.replace("<ul>", "<tspan font-size='%spx'>" % (fontSize))
     htmlContent = htmlContent.replace("</ul>", "</tspan>")
+    htmlContent = htmlContent.replace("<li>", "- ")
+    htmlContent = htmlContent.replace("</li>", "\\n")
 
     with open(path.join(gameFolderPath, "rules.html"), 'w', encoding="utf-8") as rulesHtmlFile:
         rulesHtmlFile.write(htmlContent)
