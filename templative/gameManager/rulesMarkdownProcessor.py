@@ -35,11 +35,12 @@ async def convertRulesMdToHtml(rules, gameFolderPath):
 async def convertRulesMdToSpans(rules, gameFolderPath):
 
     fontSize = 18
-    fontSizeProgression = 4
+    fontSizeProgression = 5
 
     htmlContent = markdown(rules)
     htmlContent = htmlContent.replace("\n", "")
 
+    # This creates a newline at the beginning of doc
     htmlContent = htmlContent.replace("<h1>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((5*fontSizeProgression)+fontSize))
     htmlContent = htmlContent.replace("<h2>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((4*fontSizeProgression)+fontSize))
     htmlContent = htmlContent.replace("<h3>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((3*fontSizeProgression)+fontSize))
@@ -59,6 +60,12 @@ async def convertRulesMdToSpans(rules, gameFolderPath):
     htmlContent = htmlContent.replace("</ul>", "</tspan>")
     htmlContent = htmlContent.replace("<li>", "- ")
     htmlContent = htmlContent.replace("</li>", "\\n")
+
+    htmlContent = htmlContent.replace("<strong>", "<tspan font-weight='bold'>")
+    htmlContent = htmlContent.replace("</strong>", "</tspan>")
+
+    htmlContent = htmlContent.replace("<em>", "<tspan font-style='oblique'>")
+    htmlContent = htmlContent.replace("</em>", "</tspan>")
 
     with open(path.join(gameFolderPath, "rules.html"), 'w', encoding="utf-8") as rulesHtmlFile:
         rulesHtmlFile.write(htmlContent)
