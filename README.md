@@ -3,6 +3,16 @@
 
 Create and manufacture board games using code! Define art and content files, and upload to the gamecrafter.
 
+To create a completed board game run the following commands:
+
+- `templative init`
+- `templative create deckpoker --name potionDeck`
+- `templative produce`
+- `templative upload`
+- `templative playground`
+
+Now you have a complete board game with a rules doc, a potion deck, a package in Tabletop Playground, and a listing on the GameCrafter ready for printing. 
+
 Use `templative --help` for more info.
 
 # Installation
