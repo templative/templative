@@ -22,3 +22,6 @@ async def createTemplate():
 
     fromDirectory = path.join(path.dirname(path.realpath(__file__)), "template")
     copy_tree(fromDirectory, "./")
+
+async def createComponent(name, type):
+    await componentProcessor.createComponent(name, type)

@@ -1,7 +1,5 @@
-import os
-import asyncio
-from . import defineLoader, outputWriter, rulesMarkdownProcessor, svgscissors
-from datetime import datetime
+from . import defineLoader, componentTemplateCreator, rulesMarkdownProcessor
+from os import path
 
 async def convertRulesMdToHtml(gameRootDirectoryPath):
     rules = await defineLoader.loadRules(gameRootDirectoryPath)
@@ -11,6 +9,16 @@ async def convertRulesMdToSpans(gameRootDirectoryPath):
     rules = await defineLoader.loadRules(gameRootDirectoryPath)
     await rulesMarkdownProcessor.convertRulesMdToSpans(rules, gameRootDirectoryPath)
 
+async def createComponent(name, type):
+    gameRootDirectoryPath = "."
+    gameCompose = await defineLoader.loadGameCompose(gameRootDirectoryPath)
+    componentComposeData = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
+    await componentTemplateCreator.addToComponentCompose(name, type, gameRootDirectoryPath, componentComposeData)
+    await componentTemplateCreator.createPiecesCsv(gameCompose["piecesGamedataDirectory"], name)
+    await componentTemplateCreator.createComponentJson(gameCompose["componentGamedataDirectory"], name)
+    await componentTemplateCreator.createArtData(gameCompose["artdataDirectory"], name)
+    await componentTemplateCreator.createComponentArtFiles(gameCompose["artTemplatesDirectory"], name, type)
+
 async def listComponents(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
@@ -19,6 +27,7 @@ async def listComponents(gameRootDirectoryPath):
     gameCompose = await defineLoader.loadGameCompose(gameRootDirectoryPath)
     studioCompose = await defineLoader.loadStudio(gameRootDirectoryPath)
     componentCompose = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
+
 
     print("%s by %s" % (game["displayName"], studioCompose["displayName"]))
     await printGameComponentQuantities(gameRootDirectoryPath, gameCompose, componentCompose)

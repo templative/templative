@@ -17,6 +17,81 @@ async def components():
     """Get a list of quantities of the game in the current directory"""
     await gameManager.listComponents(".")
 
+@cli.group()
+async def create():
+    """Create components from templates"""
+    pass
+
+@create.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def deckPoker(name):
+    """Create a new poker sized deck"""
+    if name == None:
+        print("Missing --name.")
+        return
+    
+    await gameManager.createComponent(name, "PokerDeck")
+
+@create.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def accordionPoker(name):
+    """Create a new poker sized accordion"""
+    if name == None:
+        print("Missing --name.")
+        return
+    
+    await gameManager.createComponent(name, "PokerFolio")
+
+@create.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def stoutBoxSmall(name):
+    """Create a new small cardboard box"""
+    if name == None:
+        print("Missing --name.")
+        return
+    
+    await gameManager.createComponent(name, "SmallStoutBox")
+
+@create.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def tuckBoxPoker108Cards(name):
+    """Create a new poker sized tuckbox fitting 108 cards"""
+    if name == None:
+        print("Missing --name.")
+        return
+    
+    await gameManager.createComponent(name, "PokerTuckBox108")
+
+@create.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def ringLarge(name):
+    """Create a new large ring"""
+    if name == None:
+        print("Missing --name.")
+        return
+    
+    await gameManager.createComponent(name, "LargeRing")
+
+@create.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def ringMedium(name):
+    """Create a new medium ring"""
+    if name == None:
+        print("Missing --name.")
+        return
+    
+    await gameManager.createComponent(name, "MediumRing")
+
+@create.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def chitSquareLarge(name):
+    """Create a new medium ring"""
+    if name == None:
+        print("Missing --name.")
+        return
+    
+    await gameManager.createComponent(name, "LargeSquareChit")
+
 @cli.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
 async def upload(input):
