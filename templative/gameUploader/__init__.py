@@ -15,8 +15,8 @@ async def uploadGame(gameRootDirectoryPath):
     await gameCrafterClient.logout(session)
     return result
 
-async def convertToTabletopPlayground(gameRootDirectoryPath):
+async def convertToTabletopPlayground(gameRootDirectoryPath, playgroundDirectory):
     if gameRootDirectoryPath is None:
         gameRootDirectoryPath = await getLastOutputFileDirectory()
 
-    return await tabletopPlayground.convertToTabletopPlayground(gameRootDirectoryPath)
+    return await tabletopPlayground.convertToTabletopPlayground(gameRootDirectoryPath, playgroundDirectory)

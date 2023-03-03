@@ -7,16 +7,14 @@ from PIL import Image
 from hashlib import md5
 import math
 
-packagesDirectoryPath = "/Users/oliverbarnum/Library/Application Support/Epic/TabletopPlayground/Packages"
-
-async def convertToTabletopPlayground(producedDirectoryPath):
+async def convertToTabletopPlayground(producedDirectoryPath, playgroundPackagesDirectory):
 
     game = await instructionsLoader.loadGameInstructions(producedDirectoryPath)
     studio = await instructionsLoader.loadStudioInstructions(producedDirectoryPath)
 
     print("Convert %s into a Tabletop Playground package for %s." % (game["displayName"], studio["displayName"]))
 
-    packageDirectoryPath = await createPackageDirectories(game["name"], packagesDirectoryPath)
+    packageDirectoryPath = await createPackageDirectories(game["name"], playgroundPackagesDirectory)
     manifestFilepath = await createManifest(game["name"], packageDirectoryPath)
     await copyComponentsToPackage(producedDirectoryPath, packageDirectoryPath)
 
