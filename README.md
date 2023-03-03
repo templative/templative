@@ -34,26 +34,6 @@ Use `templative --help` for more info.
 - `templative init`
 - `templative produce` to create a version of the game in the output folder. 
 
-## Uploading to the GameCrafter
-- Create an account on the [Game Crafter](https://www.thegamecrafter.com)
-- Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
-- Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [user env vars](https://www.schrodinger.com/kb/1842).
-- `templative upload` to upload the last produced version to the Game Crafter.
-- Visit the url generated at the end of uploading.
-
-## Generating a Tabletop Playground Package
-
-Create a Tabletop Playground package using the following command. 
-
-`templative playground --output PACKAGESDIRECTORY`
-
-Replace `PACKAGESDIRECTORY` with your own Tabletop Playground directory.
-
-From the [Tabletop Playground wiki](https://tabletop-playground.com/knowledge-base/packages/), the packages directories are:
-- Mac: `~/Library/Application\ Support/Epic/TabletopPlayground` (Note the `\ `)
-- Linux: `~/.config/Epic/TabletopPlayground/Packages`
-- Windows: Right click the game in Steam, select Properties and then Local Files and Browse… From the directory that opens, go to `TabletopPlayground\Packages`. Copy the directory path.
-
 ## Creating Components
 
 Create a new component in your game using the following command:
@@ -157,5 +137,26 @@ Style updates allow you to update a style attribute of a svg element at a given 
 This command looks for the xml element with the id `background` within the svg and replaces it's `fill` css value with the piece's `colorRGB` value.
 
 Any valid css value for svgs is valid here.
+
+
+## Uploading to the GameCrafter
+- Create an account on the [Game Crafter](https://www.thegamecrafter.com)
+- Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
+- Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [user env vars](https://www.schrodinger.com/kb/1842).
+- `templative upload` to upload the last produced version to the Game Crafter.
+- Visit the url generated at the end of uploading.
+
+## Generating a Tabletop Playground Package
+
+Create a Tabletop Playground package using the following command. 
+
+`templative playground --output PACKAGESDIRECTORY`
+
+Replace `PACKAGESDIRECTORY` with your own Tabletop Playground directory.
+
+From the [Tabletop Playground wiki](https://tabletop-playground.com/knowledge-base/packages/), the packages directories are:
+- Mac: `~/Library/Application\ Support/Epic/TabletopPlayground` (Note the `\ `)
+- Linux: `~/.config/Epic/TabletopPlayground/Packages`
+- Windows: Right click the game in Steam, select Properties and then Local Files and Browse… From the directory that opens, go to `TabletopPlayground\Packages`. Copy the directory path.
 
 
