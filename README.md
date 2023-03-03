@@ -1,3 +1,4 @@
+
 # Templative
 
 Create and manufacture board games using code! Define art and content files, and upload to the gamecrafter.
@@ -6,108 +7,155 @@ Use `templative --help` for more info.
 
 # Installation
 
+- Follow the OS specific prereqs below
 - Install Python3.
-- Install `npm`
+- Install [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - `npm install svgexport`
 
 ## OSX Prereqs
-- Install xcode
+
+- Install [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 - `xcode-select --install`
-- Install [XQuartz](https://www.xquartz.org/) for OSX
-- Install [Inkscape](https://inkscape.org)
+- Install [Inkscape](https://inkscape.org), this make require [XQuartz](https://www.xquartz.org/)
 - Install `Install Certificates.command` located in Python3.* application directory if you haven't already.
-- Update `/usr/local/etc/Imagemagick-7/delegates.yml` or maybe `/usr/local/Cellar/imagemagick/7.0.10-0/etc/ImageMagick-7/delegates.xml`.
 
 ## Windows Prereqs
 - Install [ImageMagick](https://imagemagick.org/script/download.php#windows).
-- Add ImageMagick bin to path.
+- Add ImageMagick bin to your [path](https://stackoverflow.com/questions/44272416/how-to-add-a-folder-to-path-environment-variable-in-windows-10-with-screensho).
 - Install [Inkscape](https://inkscape.org).
-- Add `C:\Program Files\Inkscape\bin` to path AFTER python path or your python gets wrecked.
+- Add `C:\Program Files\Inkscape\bin` to path. Inkscape has a Python installation within it, so take to care to order your Python and Inkscape path declarations.
 - Install [GTK](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases).
 - Add `C:\Program Files\GTK3-Runtime Win64\bin` to path.
-- Update `C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\delegates.xml`
-
-## Installation
-
-- Update `delegates.xml` file to use Inkscape
-```
-<delegate decode="svg:decode" stealth="True" command="&quot;inkscape&quot; &quot;%s&quot; --o=&quot;%s&quot; --export-dpi=&quot;%s&quot; --export-background=&quot;%s&quot; --export-background-opacity=&quot;%s&quot; &gt; &quot;%s&quot; 2&gt;&amp;1"/>
-```
-- `cd` into Templative repo
-- `python setup.py develop`
--	`pip install -e .`
-- `pip show templative`
 
 # Usage
 
-## Create a new Project
+## Create a Project
 - Create and cd into a directory
 - `templative init`
-- `templative produce` to create a version of the game. 
+- `templative produce` to create a version of the game in the output folder. 
 
 ## Uploading to the GameCrafter
 - Create an account on the [Game Crafter](https://www.thegamecrafter.com)
 - Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
 - Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [user env vars](https://www.schrodinger.com/kb/1842).
 - `templative upload` to upload the last produced version to the Game Crafter.
+- Visit the url generated at the end of uploading.
 
-## Why we use the Inkscape delegate
-Inkscape support flow roots, which allows for naturally wrapping text without hyphens. This feature is invaluable as we do not know the length of texts we add to our art templates. This is a svg feature (of SVG 1.2?) that has not been universally adopted. The default wand delegate for svg->png throws out flowroots.
+## Generating a Tabletop Playground Package
 
-### Further Reading
+Create a Tabletop Playground package using the following command. 
 
-- [Auto line-wrapping in SVG Text](https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text)
-- [Multiline SVG Text](https://www.oreilly.com/library/view/svg-text-layout/9781491933817/ch04.html)
-- [Foreign Object SVG Text](https://codepen.io/maxzz/pen/NzBGVE)
+`templative playground --output PACKAGESDIRECTORY`
 
-# Creating Components
+Replace `PACKAGESDIRECTORY` with your own Tabletop Playground directory.
 
-- Create a new csv file within the `piecesGamedataDirectory` defined in the `game-compose`
-- Create a new json file within the `componentGamedataDirectory` defined in the `game-compose`
-- Define an svg template within the `artTemplatesDirectory` defined in the `game-compose`. See the [Artfile Guide](###-Artfile-Guide)
-- Define an art metadata doc within the `artdataDirectory` defined in the `game-compose`. See [Defining Art Metadata](###-Defining-Art-Metadata)
-- Create a new component within `component-compose.json` that specifies in the filesnames of the files created above.
+From the [Tabletop Playground wiki](https://tabletop-playground.com/knowledge-base/packages/), the packages directories are:
+- Mac: `~/Library/Application\ Support/Epic/TabletopPlayground` (Note the `\ `)
+- Linux: `~/.config/Epic/TabletopPlayground/Packages`
+- Windows: Right click the game in Steam, select Properties and then Local Files and Browse… From the directory that opens, go to `TabletopPlayground\Packages`. Copy the directory path.
 
-## Defining Gamedata
+## Creating Components
 
-Gamedata files are csv's that contain rows of piece data. All gamedata files must include the headers `name`, `displayName`, `quantity`.
+Create a new component in your game using the following command:
 
-## Artfiles
+`templative create TYPE --name NAME`
+
+Replace `TYPE` with the type of the component you'd like, and replace `NAME` with the name of your new component.
+
+To see which component types Templative supports, run the following command (the following output may be outdated):
+
+```
+templative create
+
+  Create components from templates
+
+Commands:
+  accordionpoker        Create a new poker sized accordion
+  chitsquarelarge       Create a new medium ring
+  deckpoker             Create a new poker sized deck
+  ringlarge             Create a new large ring
+  ringmedium            Create a new medium ring
+  stoutboxsmall         Create a new small cardboard box
+  tuckboxpoker108cards  Create a new poker sized tuckbox fitting 108 cards
+```
+
+Each component is defined in `component-compose.json`, and has a pieces csv/json file, a component json file, artdata files, template svgs, and overlaid svgs.
+
+### Defining Gamedata
+
+Gamedata files are csv and json files that contain data for each piece of each component. All gamedata files must include the `name`, `displayName`, `quantity`.
+
+### Artfiles
 
 Art files must have a `viewbox` that matches the gamecrafter specifications. For instance if poker cards require 825px by 1125px then the viewbox must be `0 0 825 1125` and the document size must specify px with width at `825px` and height at `1125px`. Viewbox inherits the units of the width and height.
 
-### Defining Art Metadata
+# Using ArtData
 
-Art metadata files are json files that contain instructions for how to assemble a piece jpg from art files.
+ArtData files are json files that contain instructions for how to assemble a piece jpg using art files and metadata.
 
-Data piped into art files using art metadata can come from many sources. Currently data from the `game json blob`, `component json blob`, and `piece csv row` can be used to populate a file.
+Each piece begins as a copy of the template file defined in the `templateFilename` field of the artData file. For instance, a `templateFilename` of `action` would copy `art/templates/action.svg`.
 
-    { "scope": "game", "source": "displayName", "key": "gameName" }
+An art metadata file can perform three types of commands: *text replacements*, *style updates*, and *overlays*.
 
-This would replace all instance of {gameName} in the svg with the game's display name.
+What data Templative uses to perform the command depends on the scope of the command. Each command takes in data from the following supported scopes: `piece` from piece gamedata, `component` from component gamedata, `game` from `game.json`, `studio` from `studio.json`, `global` for literals. See examples of how data is used by each command type below.
 
-#### Text Replacements
+## Text Replacements Commands
 
-Text replacements find instances of the {key} and replace it with the sourced value.
+Text replacements find instances of the `{key}` and replace it with a sourced value.
 
-#### Overlays
+Consider the following text replacements:
 
-Overlays are svgs that are overlaid on top of the template svg.
+```
+  "textReplacements": [
+    { "scope": "game", "source": "displayName", "key": "gameName" },
+    { "scope": "piece", "source": "points", "key": "power",  }
+  ]
+```
 
-#### Style Updates
+The first text replacement command replaces all instances of the text `{gameName}` in the template svg with the value of the `displayName` field in the `game.json` file.
 
-Style updates allow you to update a style attribute of a svg element at a given id.
+The second text replacement replaces all instances of `{power}` with the `points` field of the current piece.
 
-# Troubleshooting
+## Overlays
 
-## Non-Conforming Drawing Primitives
-If you see: `wand.exceptions.DrawError: non-conforming drawing primitive definition `letter-spacing' @ error/draw.c/RenderMVGContent/4434`
-It's because you need to update the delegates.xml. Line 113~114 should equal:
-`  <!-- Change export-png to export-file for inkscape 1.0+ -->
-  <delegate decode="svg:decode" stealth="True" command="&quot;inkscape&quot; &quot;%s&quot; --o=&quot;%s&quot; --export-dpi=&quot;%s&quot; --export-background=&quot;%s&quot; --export-background-opacity=&quot;%s&quot; &gt; &quot;%s&quot; 2&gt;&amp;1"/>`
+Overlays are svgs that we overlay on top of the copied svg template. Consider the two overlay commands below:
 
-## Delegates.xml Raw Attempt
-inkscape "C:\Users\User\Documents\git\studio-tyrus\apcw\apcw-defines\output\capsAndHammers_1.2.51_PaxSouth_2023-01-26_06-27-37\capsAction\capsAction-admiral.svg" --export-filename="C:\Users\User\Documents\git\studio-tyrus\apcw\apcw-defines\output\capsAndHammers_1.2.51_PaxSouth_2023-01-26_06-27-37\capsAction\capsAction-admiral.png" --export-dpi="96" --export-background="rgb(100%,100%,100%)" --export-background-opacity="1"
+```
+  "overlays": [
+    { "scope": "piece", "source": "graphic" },
+    { "scope": "global", "source": "versionQuantity" }
+  ]
+```
 
-# If you find a weird A carrot character, check your svgs for highlighted spaces in VSC.
+The first overlay looks in the `piece` gamedata file for a field called `graphic`. As an example, a piece's `graphic` field is `bossMonsterA`. This instructs Templative to overlay the svg `graphicalInserts/bossMonsterA.svg` on top of the template. 
+
+The second overlay looks for `graphicalInserts/versionQuantity.svg`, as global implies a literal, non-lookup value.
+
+Overlay commands are the first commands to occur. 
+
+### Overlays
+
+Overlays are svgs found in the `art/graphicalInserts` folder.
+
+Overlays must be the same size as the template it is overlaying. For instance, both the poker card template svg and the overlay svg must be `825x1125px`.
+
+## Style Updates
+
+Style updates allow you to update a style attribute of a svg element at a given id. Consider the following style update:
+
+```
+  "styleUpdates":[
+    { 
+      "id": "background", 
+      "cssValue": "fill", 
+      "scope": "piece", 
+      "source": "colorRGB" 
+    }
+  ]
+```
+
+This command looks for the xml element with the id `background` within the svg and replaces it's `fill` css value with the piece's `colorRGB` value.
+
+Any valid css value for svgs is valid here.
+
 

@@ -100,13 +100,13 @@ async def upload(input):
 
 @cli.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
-@click.option('-p', '--playground', default=None, help='The directory of Tabletop Playground packages directory. Such as "/Users/User/Library/Application Support/Epic/TabletopPlayground/Packages"')
-async def playground(input,playground):
+@click.option('-o', '--output', default=None, help='The Tabletop Playground packages directory. Such as "~/Library/Application Support/Epic/TabletopPlayground/Packages"')
+async def playground(input,output):
     """Convert a produced game into a tabletop playground game"""
-    if playground == None:
-        print("Missing --playground directory.")
+    if output == None:
+        print("Missing --output directory.")
         return
-    await gameUploader.convertToTabletopPlayground(input, playground)
+    await gameUploader.convertToTabletopPlayground(input, output)
 
 @cli.group()
 async def rules():
