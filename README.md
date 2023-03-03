@@ -1,9 +1,7 @@
 
 # Templative
 
-Create and manufacture board games using code! Define art and content files, and upload to the gamecrafter.
-
-To create a completed board game run the following commands:
+Templative allows you to assemble board games using json and svgs. To create a complete board game run the following commands:
 
 - `templative init`
 - `templative create deckpoker --name potionDeck`
@@ -11,7 +9,7 @@ To create a completed board game run the following commands:
 - `templative upload`
 - `templative playground`
 
-Now you have a complete board game with a rules doc, a potion deck, a package in Tabletop Playground, and a listing on the GameCrafter ready for printing. 
+Now you have a board game complete with a rules document, a potion deck, a package in Tabletop Playground, and a listing on the GameCrafter ready for printing. 
 
 Use `templative --help` for more info.
 
