@@ -15,7 +15,7 @@ async def addToComponentCompose(name, type, gameRootDirectoryPath, componentComp
         "quantity": 1,
         "piecesGamedataFilename": name,
         "componentGamedataFilename": name,
-        "artdataFilename": name,
+        "artdataFilename": "%sFront" % name,
         "backArtdataFilename": "%sBack" % name,
         "disabled": False
     })
@@ -36,18 +36,29 @@ async def createComponentJson(componentDirectoryPath, name):
         dump(componentJsonData, componentJsonFile, indent=4)
 
 async def createArtData(artDataDirectoryPath, name):
-    artDataJsonData = {
+    
+    with open(path.join(artDataDirectoryPath, '%sFront.json' % name), 'w') as artDataJsonFile:
+        dump({
         "name": name,
-        "templateFilename": name,
+        "templateFilename": "%sFront" % name,
         "textReplacements": [
         ],
         "styleUpdates":[
         ],
         "overlays": [
         ]
-    }
-    with open(path.join(artDataDirectoryPath, '%s.json' % name), 'w') as artDataJsonFile:
-        dump(artDataJsonData, artDataJsonFile, indent=4)
+    }, artDataJsonFile, indent=4)
+    with open(path.join(artDataDirectoryPath, '%sBack.json' % name), 'w') as artDataJsonFile:
+        dump({
+        "name": name,
+        "templateFilename": "%sBack" % name,
+        "textReplacements": [
+        ],
+        "styleUpdates":[
+        ],
+        "overlays": [
+        ]
+    }, artDataJsonFile, indent=4)
 
 async def createComponentArtFiles(artTemplatesDirectoryPath, name, type):
     componentDirectoryPath = path.join(path.dirname(path.realpath(__file__)), "componentTemplates")
