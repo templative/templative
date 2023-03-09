@@ -155,6 +155,7 @@ Any valid css value for svgs is valid here.
 - Create an account on the [Game Crafter](https://www.thegamecrafter.com)
 - Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
 - Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [user env vars](https://www.schrodinger.com/kb/1842).
+- Update `studio.json` with your designer id from the gamecrafter.
 - `templative upload` to upload the last produced version to the Game Crafter.
 - Visit the url generated at the end of uploading.
 
