@@ -19,6 +19,10 @@ Use `templative --help` for more info.
 - Install Python3.
 - Install [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - `npm install svgexport`
+- `git clone https://github.com/templative/templative.git`
+- `cd templative`
+- `python setup.py develop`
+- `pip install -e .`
 
 ## OSX Prereqs
 
