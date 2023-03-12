@@ -8,12 +8,30 @@ async def deck():
 
 @deck.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def pokerDeck(name):
+async def poker(name):
     """Poker Deck"""
     await gameManager.createComponent(name, "PokerDeck")
 
 @deck.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def mintTinDeck(name):
+async def mint(name):
     """Mint Tin Deck"""
     await gameManager.createComponent(name, "MintTinDeck")
+
+@deck.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def hex(name):
+    """Hex Deck"""
+    await gameManager.createComponent(name, "HexDeck")
+
+@deck.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def micro(name):
+    """Micro Deck"""
+    await gameManager.createComponent(name, "MicroDeck")
+
+@deck.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def mini(name):
+    """Mini Deck"""
+    await gameManager.createComponent(name, "MiniDeck")

@@ -2,6 +2,8 @@ componentImageSizePixels = {
     "PokerDeck": { "width": 825, "height": 1125 },
     "MintTinDeck": { "width": 750, "height": 1125 },
     "HexDeck": { "width": 1200, "height": 1050 },
+    "MiniDeck": { "width": 600, "height": 825 },
+    "MicroDeck": { "width": 450, "height": 600 },
 
     "LargeRingChit": { "width": 450, "height": 450 },
     "MediumRingChit": { "width": 375, "height": 375 },

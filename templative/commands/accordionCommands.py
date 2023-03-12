@@ -14,24 +14,24 @@ async def folioPoker(name):
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def folioMintTin(name):
+async def folioMint(name):
     """Mint Tin Folio"""
     await gameManager.createComponent(name, "MintTinFolio")
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def accordionMintTin4(name):
+async def accordionMint4(name):
     """Mint Tin Accordion 4 Panels"""
     await gameManager.createComponent(name, "MintTinAccordion4")
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def accordionMintTin6(name):
+async def accordionMint6(name):
     """Mint Tin Accordion 6 Panels"""
     await gameManager.createComponent(name, "MintTinAccordion6")
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def accordionMintTin8(name):
+async def accordionMint8(name):
     """Mint Tin Accordion 8 Panels"""
     await gameManager.createComponent(name, "MintTinAccordion8")

@@ -8,7 +8,7 @@ async def packaging():
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def mintTin(name):
+async def mint(name):
     """A Mint Tin"""
     await gameManager.createComponent(name, "MintTin")
 
