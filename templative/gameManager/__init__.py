@@ -24,4 +24,8 @@ async def createTemplate():
     copy_tree(fromDirectory, "./")
 
 async def createComponent(name, type):
+    if name == None:
+        print("Missing --name.")
+        return
+    
     await componentProcessor.createComponent(name, type)

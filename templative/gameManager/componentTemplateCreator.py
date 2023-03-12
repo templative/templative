@@ -61,7 +61,8 @@ async def createArtData(artDataDirectoryPath, name):
     }, artDataJsonFile, indent=4)
 
 async def createComponentArtFiles(artTemplatesDirectoryPath, name, type):
-    componentDirectoryPath = path.join(path.dirname(path.realpath(__file__)), "componentTemplates")
+    currentDirectory = path.dirname(path.realpath(__file__))
+    componentDirectoryPath = path.join(currentDirectory, "componentTemplates")
     componentTemplateFilepath = path.join(componentDirectoryPath, "%s.svg" % type)
     frontName = path.join(artTemplatesDirectoryPath, "%sFront.svg" % name)
     copyfile(componentTemplateFilepath, frontName)

@@ -2,17 +2,7 @@ import os
 from xml.etree import ElementTree
 from aiofile import AIOFile
 import svgmanip
-import subprocess
-
-componentImageSizePixels = {
-    "PokerDeck": { "width": 825, "height":1125 },
-    "LargeRing": { "width": 450, "height":450 },
-    "MediumRing": { "width": 375, "height": 375 },
-    "LargeSquareChit": { "width": 375, "height": 375 },
-    "SmallStoutBox": { "width": 3600, "height": 3000 },
-    "PokerTuckBox108": { "width": 3075, "height": 2250 },
-    "PokerFolio": { "width": 3075, "height": 1125 },
-}
+from ..componentStats import componentImageSizePixels
 
 async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
     if game == None:
