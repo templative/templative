@@ -20,18 +20,18 @@ async def folioMint(name):
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def accordionMint4(name):
+async def mint4(name):
     """Mint Tin Accordion 4 Panels"""
     await gameManager.createComponent(name, "MintTinAccordion4")
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def accordionMint6(name):
+async def mint6(name):
     """Mint Tin Accordion 6 Panels"""
     await gameManager.createComponent(name, "MintTinAccordion6")
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def accordionMint8(name):
+async def mint8(name):
     """Mint Tin Accordion 8 Panels"""
     await gameManager.createComponent(name, "MintTinAccordion8")
