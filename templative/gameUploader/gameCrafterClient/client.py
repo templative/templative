@@ -48,21 +48,47 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
     componentFile = await instructionsLoader.loadComponentInstructions(componentDirectoryPath)
 
     componentType = componentFile["type"]
-    if componentType == "PokerDeck":
-        await componentCreator.createPokerDeck(gameCrafterSession, componentFile, cloudGame["id"], cloudGameFolderId)
-        
-    elif componentType == "SmallStoutBox":
-        await componentCreator.createSmallStoutBox(gameCrafterSession, componentFile, cloudGame["id"], cloudGameFolderId)
-        
-    elif componentType == "LargeRing" or componentType == "LargeSquareChit" or componentType == "MediumRing":
-        await componentCreator.createTwoSidedSlugged(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+    createDeckTask = componentCreator.createDeck(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+    createTwoSidedSluggedTask = componentCreator.createTwoSidedSlugged(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+    createTwoSidedBoxTask = componentCreator.createTwoSidedBox(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+    createTuckBoxTask = componentCreator.createTuckBox(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+    createTwoSidedTask = componentCreator.createTwoSided(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
     
-    elif componentType == "PokerTuckBox108":
-        await componentCreator.createTuckBox(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+    componentTasks = {
+        "PokerDeck": createDeckTask,
+        "MicroDeck": createDeckTask,
+        "MiniDeck": createDeckTask,
+        "MintTinDeck": createDeckTask,
+        "HexDeck": createDeckTask,
 
-    elif componentType == "PokerFolio":
-        await componentCreator.createTwoSided(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+        "SmallStoutBox": createTwoSidedBoxTask,
+        "MediumStoutBox": createTwoSidedBoxTask,
+        "LargeStoutBox": createTwoSidedBoxTask,
+        "MintTin": createTwoSidedBoxTask,
 
-    else:
+        "LargeRing": createTwoSidedSluggedTask,
+        "MediumRing": createTwoSidedSluggedTask,
+        "SmallRing": createTwoSidedSluggedTask,
+
+        "LargeSquareChit": createTwoSidedSluggedTask,
+        "LargeSquareChit": createTwoSidedSluggedTask,
+
+        "PokerTuckBox36": createTuckBoxTask,
+        "PokerTuckBox54": createTuckBoxTask,
+        "PokerTuckBox72": createTuckBoxTask,
+        "PokerTuckBox90": createTuckBoxTask,
+        "PokerTuckBox108": createTuckBoxTask,
+
+        "PokerFolio": createTwoSidedTask,
+        "MintTinFolio": createTwoSidedTask,
+        "MintTinAccordion4": createTwoSidedTask,
+        "MintTinAccordion6": createTwoSidedTask,
+        "MintTinAccordion8": createTwoSidedTask,
+    }
+
+    if not componentType in componentTasks:
         print("Skipping %s. The %s component type is not currently supported." % (componentFile["name"], componentType))
+        return
+    
+    await componentTasks[componentType]
         

@@ -50,11 +50,11 @@ async def uploadFile(gameCrafterSession, filepath, folderId):
     with open(filepath, "rb") as fileToUpload:
         return await gameCrafterOperations.postFile(gameCrafterSession, fileToUpload, filename, folderId)
 
-async def createPokerDeck(gameCrafterSession, name, quantity, gameId, imageFileId):
-    return await gameCrafterOperations.postPokerDeck(gameCrafterSession, name, quantity, gameId, imageFileId)
+async def createDeck(gameCrafterSession, name, identity, quantity, gameId, imageFileId):
+    return await gameCrafterOperations.postDeck(gameCrafterSession, name, identity, quantity, gameId, imageFileId)
 
-async def createPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId):
-    return await gameCrafterOperations.postPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId)
+async def createDeckCard(gameCrafterSession, name, deckId, quantity, imageFileId):
+    return await gameCrafterOperations.postDeckCard(gameCrafterSession, name, deckId, quantity, imageFileId)
 
 async def createTwoSidedSluggedSet(gameCrafterSession, name, identity, quantity, gameId, backImageFileId):
     return await gameCrafterOperations.postTwoSidedSluggedSet(gameCrafterSession, name, identity, quantity, gameId, backImageFileId)
@@ -62,8 +62,8 @@ async def createTwoSidedSluggedSet(gameCrafterSession, name, identity, quantity,
 async def createTwoSidedSlugged(gameCrafterSession, name, setId, quantity, imageFileId):
     return await gameCrafterOperations.postTwoSidedSlugged(gameCrafterSession, name, setId, quantity, imageFileId)
 
-async def createSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, bottomImageFileId):
-    return await gameCrafterOperations.postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, bottomImageFileId)
+async def createTwoSidedBox(gameCrafterSession, gameId, name, identity, quantity, topImageFileId, bottomImageFileId):
+    return await gameCrafterOperations.postTwoSidedBox(gameCrafterSession, gameId, name, identity, quantity, topImageFileId, bottomImageFileId)
 
 async def createDocument(gameCrafterSession, name, quantity, gameId, pdfFileId):
     return await gameCrafterOperations.postDocument(gameCrafterSession, name, quantity, gameId, pdfFileId)

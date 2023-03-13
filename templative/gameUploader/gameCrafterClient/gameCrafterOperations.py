@@ -99,19 +99,19 @@ async def postGame(gameCrafterSession, name, designerId):
         advertisement_id="E8BB5536-A293-11ED-BC74-F8C2CB83BB28",
     )
 
-async def postPokerDeck(gameCrafterSession, name, quantity, gameId, backImageFileId):
+async def postDeck(gameCrafterSession, name, identity, quantity, gameId, backImageFileId):
     url = "%s/deck" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId,
         name = name,
         game_id = gameId,
-        identity = "PokerDeck",
+        identity = identity,
         quantity = quantity,
         back_id = backImageFileId,
         has_proofed_back = 1
     )
 
-async def postPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId):
+async def postDeckCard(gameCrafterSession, name, deckId, quantity, imageFileId):
     url = "%s/card" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId,
@@ -124,7 +124,7 @@ async def postPokerCard(gameCrafterSession, name, deckId, quantity, imageFileId)
         has_proofed_back = 1
     )
 
-async def postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, backImageFileId):
+async def postTwoSidedBox(gameCrafterSession, gameId, name, identity, quantity, topImageFileId, backImageFileId):
     url = "%s/twosidedbox" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId,
@@ -133,21 +133,7 @@ async def postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImage
         quantity = quantity,
         top_id = topImageFileId,
         has_proofed_top = 1,
-        identity = "SmallStoutBox",
-        bottom_id = backImageFileId,
-        has_proofed_bottom = 1
-    )
-
-async def postSmallStoutBox(gameCrafterSession, gameId, name, quantity, topImageFileId, backImageFileId):
-    url = "%s/twosidedbox" % gameCrafterBaseUrl
-    return await httpClient.post(gameCrafterSession, url,
-        session_id = gameCrafterSession.sessionId,
-        name = name,
-        game_id = gameId,
-        quantity = quantity,
-        top_id = topImageFileId,
-        has_proofed_top = 1,
-        identity = "SmallStoutBox",
+        identity = identity,
         bottom_id = backImageFileId,
         has_proofed_bottom = 1
     )

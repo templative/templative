@@ -14,7 +14,7 @@ async def createTuckBox(gameCrafterSession, component, identity, cloudGameId, cl
     imageId = await createFileInFolder(gameCrafterSession, frontInstructions[0]["name"], frontInstructions[0]["filepath"], cloudComponentFolder["id"])
     cloudPokerDeck = await gameCrafterClient.createTuckBox(gameCrafterSession, componentName, identity, quantity, cloudGameId, imageId)
 
-async def createPokerDeck(gameCrafterSession, component, cloudGameId, cloudGameFolderId):
+async def createDeck(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
     frontInstructions = component["frontInstructions"]
@@ -26,25 +26,25 @@ async def createPokerDeck(gameCrafterSession, component, cloudGameId, cloudGameF
 
     tasks = []
     backImageId = await createFileInFolder(gameCrafterSession, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
-    cloudPokerDeck = await gameCrafterClient.createPokerDeck(gameCrafterSession, componentName, quantity, cloudGameId, backImageId)
+    cloudPokerDeck = await gameCrafterClient.createDeck(gameCrafterSession, componentName, identity, quantity, cloudGameId, backImageId)
 
     for instructions in frontInstructions:
-        tasks.append(asyncio.create_task(createPokerCardPiece(gameCrafterSession, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])))
+        tasks.append(asyncio.create_task(createDeckCard(gameCrafterSession, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])))
 
     for task in tasks:
         await task
 
-async def createPokerCardPiece(gameCrafterSession, instructions, deckId, cloudComponentFolderId):
+async def createDeckCard(gameCrafterSession, instructions, deckId, cloudComponentFolderId):
     name = instructions["name"]
     filepath = instructions["filepath"]
     quantity = instructions["quantity"]
     print("Uploading %s" % (filepath))
 
     cloudFile = await gameCrafterClient.uploadFile(gameCrafterSession, filepath, cloudComponentFolderId)
-    pokerCard = await gameCrafterClient.createPokerCard(gameCrafterSession, name, deckId, quantity, cloudFile["id"])
+    pokerCard = await gameCrafterClient.createDeckCard(gameCrafterSession, name, deckId, quantity, cloudFile["id"])
 
 
-async def createSmallStoutBox(gameCrafterSession, component, cloudGameId, cloudGameFolderId):
+async def createTwoSidedBox(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
     frontInstructions = component["frontInstructions"]
@@ -57,7 +57,7 @@ async def createSmallStoutBox(gameCrafterSession, component, cloudGameId, cloudG
     topImageFileId = await createFileInFolder(gameCrafterSession, frontInstructions[0]["name"], frontInstructions[0]["filepath"], cloudComponentFolder["id"])
     bottomImageFileId = await createFileInFolder(gameCrafterSession, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
 
-    cloudSmallStoutBox = await gameCrafterClient.createSmallStoutBox(gameCrafterSession, cloudGameId, componentName, quantity, topImageFileId, bottomImageFileId)
+    cloudTwoSidedBox = await gameCrafterClient.createTwoSidedBox(gameCrafterSession, cloudGameId, componentName, identity, quantity, topImageFileId, bottomImageFileId)
 
 async def createRules(gameCrafterSession, gameRootDirectoryPath, cloudGame, folderId):
     name = "rules"
@@ -72,9 +72,6 @@ async def createFileInFolder(gameCrafterSession, name, filepath, cloudComponentF
     print("Uploading %s from %s" % (name, filepath))
     cloudFile = await gameCrafterClient.uploadFile(gameCrafterSession, filepath, cloudComponentFolderId)
     return cloudFile["id"]
-
-
-
 
 async def createTwoSided(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
