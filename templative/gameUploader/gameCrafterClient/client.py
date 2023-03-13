@@ -55,6 +55,10 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
     createTwoSidedTask = componentCreator.createTwoSided(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
     
     componentTasks = {
+        # "CustomColorD4": createDieTask,
+        # "CustomColorD6": createDieTask,
+        # "CustomColorD8": createDieTask,
+        
         "PokerDeck": createDeckTask,
         "MicroDeck": createDeckTask,
         "MiniDeck": createDeckTask,
