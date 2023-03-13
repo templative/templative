@@ -6,17 +6,18 @@ def createCardTemplate(guid, name, componentType, frontTextureName, totalCount, 
     scaleDown = 0.014
 
     componentDimensions = {
-        "PokerDeck": (825 * scaleDown, 1125 * scaleDown),
-        "MiniDeck": (600 * scaleDown, 825 * scaleDown),
-        "MicroDeck": (450 * scaleDown, 600 * scaleDown),
-        "MintTinDeck": (750 * scaleDown, 1125 * scaleDown),
-        "HexDeck": (1200 * scaleDown, 1050 * scaleDown),
+        "PokerDeck": (825 * scaleDown, 1125 * scaleDown, 0.05),
+        "MiniDeck": (600 * scaleDown, 825 * scaleDown, 0.05),
+        "MicroDeck": (450 * scaleDown, 600 * scaleDown, 0.2),
+        "MintTinDeck": (750 * scaleDown, 1125 * scaleDown, 0.05),
+        "HexDeck": (1200 * scaleDown, 1050 * scaleDown, 0.05),
     }
-    dimensions = (6,9)
+    dimensions = (6,9,0.05)
     if componentType in componentDimensions:
         dimensions = componentDimensions[componentType]
     else:
-        print("Missing dimensions for %s, using 6,9." % componentType)
+        print("Missing dimensions for %s, using 6,9,0.05." % componentType)
+
 
     return {
         "Type": "Card",
@@ -67,7 +68,7 @@ def createCardTemplate(guid, name, componentType, frontTextureName, totalCount, 
         "NumVertical": cardRowCount,
         "Width": dimensions[0],
         "Height": dimensions[1],
-        "Thickness": 0.05,
+        "Thickness": dimensions[2],
         "HiddenInHand": True,
         "UsedWithCardHolders": True,
         "CanStack": True,
