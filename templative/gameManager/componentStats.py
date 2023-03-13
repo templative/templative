@@ -45,6 +45,8 @@ componentImageSizePixels = {
     "CustomColorD4": { "width": 300, "height": 300 },
     "CustomColorD6": { "width": 180, "height": 180 },
     "CustomColorD8": { "width": 300, "height": 300 },
+
+    "MintTin": {"width": 750, "height": 1125}
 }
 
 from os import path, getcwd
