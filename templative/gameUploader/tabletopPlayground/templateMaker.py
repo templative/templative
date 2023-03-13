@@ -1,16 +1,18 @@
+gameCrafterScaleToPlaygroundScale = 0.014
+
 def createCardTemplate(guid, name, componentType, frontTextureName, totalCount, cardColumnCount, cardRowCount, backTextureName):
     indices = []
     for i in range(totalCount):
         indices.append(i)
         
-    scaleDown = 0.014
+    
 
     componentDimensions = {
-        "PokerDeck": (825 * scaleDown, 1125 * scaleDown, 0.05),
-        "MiniDeck": (600 * scaleDown, 825 * scaleDown, 0.05),
-        "MicroDeck": (450 * scaleDown, 600 * scaleDown, 0.2),
-        "MintTinDeck": (750 * scaleDown, 1125 * scaleDown, 0.05),
-        "HexDeck": (1200 * scaleDown, 1050 * scaleDown, 0.05),
+        "PokerDeck": (825 * gameCrafterScaleToPlaygroundScale, 1125 * gameCrafterScaleToPlaygroundScale, 0.05),
+        "MiniDeck": (600 * gameCrafterScaleToPlaygroundScale, 825 * gameCrafterScaleToPlaygroundScale, 0.05),
+        "MicroDeck": (450 * gameCrafterScaleToPlaygroundScale, 600 * gameCrafterScaleToPlaygroundScale, 0.2),
+        "MintTinDeck": (750 * gameCrafterScaleToPlaygroundScale, 1125 * gameCrafterScaleToPlaygroundScale, 0.05),
+        "HexDeck": (1200 * gameCrafterScaleToPlaygroundScale, 1050 * gameCrafterScaleToPlaygroundScale, 0.05),
     }
     dimensions = (6,9,0.05)
     if componentType in componentDimensions:
@@ -91,7 +93,7 @@ def createCardTemplate(guid, name, componentType, frontTextureName, totalCount, 
     }
 
 def createBoardTemplate(guid, name, componentType, frontTextureName, backTextureName):
-    scaleDown = 0.014 / 53 * 1.5
+    scaleDown = gameCrafterScaleToPlaygroundScale / 53 * 1.5
     componentDimensions = {
         "MintTinAccordion4": (1125 * scaleDown, 2550 * scaleDown),
         "MintTinAccordion6": (1125 * scaleDown, 3825 * scaleDown),
