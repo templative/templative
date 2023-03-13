@@ -170,6 +170,6 @@ Replace `PACKAGESDIRECTORY` with your own Tabletop Playground directory.
 From the [Tabletop Playground wiki](https://tabletop-playground.com/knowledge-base/packages/), the packages directories are:
 - Mac: `~/Library/Application\ Support/Epic/TabletopPlayground` (Note the `\ `)
 - Linux: `~/.config/Epic/TabletopPlayground/Packages`
-- Windows: Right click the game in Steam, select Properties and then Local Files and Browse… From the directory that opens, go to `TabletopPlayground\Packages`. Copy the directory path.
+- Windows: `C:\Program Files (x86)\Steam\steamapps\common\TabletopPlayground\TabletopPlayground\PersistentDownloadDir`
 
 
