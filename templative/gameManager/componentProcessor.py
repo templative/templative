@@ -34,6 +34,50 @@ async def listComponents(gameRootDirectoryPath):
     print("%s by %s" % (game["displayName"], studioCompose["displayName"]))
     await printGameComponentQuantities(gameRootDirectoryPath, gameCompose, componentCompose)
 
+async def calculateComponentsDepth(gameRootDirectoryPath):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path is invalid.")
+
+    game = await defineLoader.loadGame(gameRootDirectoryPath)
+    gameCompose = await defineLoader.loadGameCompose(gameRootDirectoryPath)
+    studioCompose = await defineLoader.loadStudio(gameRootDirectoryPath)
+    componentCompose = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
+
+    print("%s by %s" % (game["displayName"], studioCompose["displayName"]))
+    await printGameComponentDepth(gameRootDirectoryPath, gameCompose, componentCompose)
+
+componentDepthPerPieceMillimeters = {
+    "MintTinFolio": 1,
+    "MintTinAccordion8": 2,
+    "MintTinAccordion6": 2,
+    "MintTinAccordion4": 1,
+    "MintTinDeck": 0.3,
+    "MicroDeck": 0.15,
+    "MiniDeck": 0.3,
+}
+
+async def printGameComponentDepth(gameRootDirectoryPath, gameCompose, componentCompose):
+    if not gameRootDirectoryPath:
+        raise Exception("Game root directory path is invalid.")
+
+    depthMillimeters = 0
+    for component in componentCompose:
+        if component["disabled"]:
+            print("Skipping disabled %s component." % (component["name"]))
+            continue
+        piecesGamedata = await defineLoader.loadPiecesGamedata(gameRootDirectoryPath, gameCompose, component["piecesGamedataFilename"])
+        if not piecesGamedata or piecesGamedata == {}:
+            print("Skipping %s component due to missing pieces gamedata." % component["name"])
+            continue
+        if not component["type"] in componentDepthPerPieceMillimeters:
+            print("Skipping %s component." % component["name"])
+            continue
+        depthOfPiece = componentDepthPerPieceMillimeters[component["type"]]
+        for piece in piecesGamedata:
+            depthMillimeters += int(piece["quantity"]) * depthOfPiece      
+    print("%smm" % round(depthMillimeters, 2))
+
+
 async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, componentCompose):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")

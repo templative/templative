@@ -9,6 +9,9 @@ async def produceGame(gameRootDirectoryPath, componentFilter):
 async def listComponents(gameRootDirectoryPath):
     await componentProcessor.listComponents(gameRootDirectoryPath)
 
+async def calculateComponentsDepth(gameRootDirectoryPath):
+    await componentProcessor.calculateComponentsDepth(gameRootDirectoryPath)
+
 async def convertRulesMdToHtml(gameRootDirectoryPath):
     await componentProcessor.convertRulesMdToHtml(gameRootDirectoryPath)
 

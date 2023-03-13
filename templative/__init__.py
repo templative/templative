@@ -18,6 +18,11 @@ async def components():
     await gameManager.listComponents(".")
 
 @cli.command()
+async def depth():
+    """Get the depth of all components"""
+    await gameManager.calculateComponentsDepth(".")
+
+@cli.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
 async def upload(input):
     """Upload a produced game in a directory"""
