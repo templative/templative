@@ -47,12 +47,16 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
         componentInstructions = load(componentInstructionsFile)
     
     createDeckTask = createDeck(packageDirectoryPath, componentInstructions)
+    createBoardTask = createBoard(packageDirectoryPath, componentInstructions)
     supportedInstructionTypes = {
         "PokerDeck": createDeckTask,
         "MicroDeck": createDeckTask,
         "MiniDeck": createDeckTask,
         "MintTinDeck": createDeckTask,
         "PokerDeck": createDeckTask,
+        "MintTinAccordion4": createBoardTask,
+        "MintTinAccordion6": createBoardTask,
+        "MintTinAccordion8": createBoardTask,
     }
 
     if not componentInstructions["type"] in supportedInstructionTypes:
@@ -61,11 +65,22 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
 
     await supportedInstructionTypes[componentInstructions["type"]]
     
-async def createDeck(packageDirectoryPath, componentInstructions):
-    totalCount, cardColumnCount, cardRowCount = await copyImages(componentInstructions, path.join(packageDirectoryPath, "Textures"))
+async def createBoard(packageDirectoryPath, componentInstructions):
+    textureDirectory = path.join(packageDirectoryPath, "Textures")
+    await copyFrontImageToTextures(componentInstructions["name"], componentInstructions["frontInstructions"][0], textureDirectory)
+    await copyBackImageToTextures(componentInstructions["name"], componentInstructions["backInstructions"], textureDirectory)
+
     componentGuid = md5(componentInstructions["name"].encode()).hexdigest()
     templateDirectory = path.join(packageDirectoryPath, "Templates")
-    await createTemplateFile(templateDirectory, componentGuid, componentInstructions["name"], componentInstructions["type"], totalCount, cardColumnCount, cardRowCount)
+    await createBoardTemplateFile(templateDirectory, componentGuid, componentInstructions["name"], componentInstructions["type"])
+
+async def createDeck(packageDirectoryPath, componentInstructions):
+    textureDirectory = path.join(packageDirectoryPath, "Textures")
+    totalCount, cardColumnCount, cardRowCount = await createCompositeImageInTextures(componentInstructions["name"], componentInstructions["type"], componentInstructions["frontInstructions"], textureDirectory)
+    await copyBackImageToTextures(componentInstructions["name"], componentInstructions["backInstructions"], textureDirectory)
+    componentGuid = md5(componentInstructions["name"].encode()).hexdigest()
+    templateDirectory = path.join(packageDirectoryPath, "Templates")
+    await createCardTemplateFile(templateDirectory, componentGuid, componentInstructions["name"], componentInstructions["type"], totalCount, cardColumnCount, cardRowCount)
     
 async def createCompositeImageInTextures(componentName, componentType, frontInstructions, textureDirectoryFilepath):
 
@@ -109,19 +124,28 @@ async def createCompositeImageInTextures(componentName, componentType, frontInst
     tiledImage.save(frontImageFilepath,"JPEG")
     return totalCount, columns, rows
 
+async def copyFrontImageToTextures(componentName, frontInstructions, textureDirectoryFilepath):
+    frontImageName = "%s-front.jpeg" % componentName
+    frontImageFilepath = path.join(textureDirectoryFilepath, frontImageName)
+    copyfile(frontInstructions["filepath"], frontImageFilepath)
+
 async def copyBackImageToTextures(componentName, backInstructions, textureDirectoryFilepath):
-    backImageName = "%s-back.jpg" % componentName
+    backImageName = "%s-back.jpeg" % componentName
     backImageFilepath = path.join(textureDirectoryFilepath, backImageName)
     copyfile(backInstructions["filepath"], backImageFilepath)
 
-async def copyImages(componentInstructions, textureDirectoryFilepath):
-    totalCardQuantity = await createCompositeImageInTextures(componentInstructions["name"], componentInstructions["type"], componentInstructions["frontInstructions"], textureDirectoryFilepath)
-    await copyBackImageToTextures(componentInstructions["name"], componentInstructions["backInstructions"], textureDirectoryFilepath)
-    return totalCardQuantity
-
-async def createTemplateFile(templateDirectoryPath, guid, name, componentType, totalCount, cardColumnCount, cardRowCount):
+async def createBoardTemplateFile(templateDirectoryPath, guid, name, componentType):
     frontTextureName = "%s-front.jpeg" % name
-    backTextureName = "%s-back.jpg" % name
+    backTextureName = "%s-back.jpeg" % name
+    cardTemplateData = templateMaker.createBoardTemplate(guid, name, componentType, frontTextureName, backTextureName)
+    templateFilepath = path.join(templateDirectoryPath, "%s.json" % guid)
+    with open(templateFilepath, "w") as templateFile:
+        dump(cardTemplateData, templateFile, indent=2)
+    return templateFilepath
+
+async def createCardTemplateFile(templateDirectoryPath, guid, name, componentType, totalCount, cardColumnCount, cardRowCount):
+    frontTextureName = "%s-front.jpeg" % name
+    backTextureName = "%s-back.jpeg" % name
     cardTemplateData = templateMaker.createCardTemplate(guid, name, componentType, frontTextureName, totalCount, cardColumnCount, cardRowCount, backTextureName)
     templateFilepath = path.join(templateDirectoryPath, "%s.json" % guid)
     with open(templateFilepath, "w") as templateFile:
