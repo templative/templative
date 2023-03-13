@@ -46,14 +46,28 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
     with open(componentInstructionsFilepath, "r") as componentInstructionsFile:
         componentInstructions = load(componentInstructionsFile)
     
-    if componentInstructions["type"] != "PokerDeck":
+    createDeckTask = createDeck(packageDirectoryPath, componentInstructions)
+    supportedInstructionTypes = {
+        "PokerDeck": createDeckTask,
+        "MicroDeck": createDeckTask,
+        "MiniDeck": createDeckTask,
+        "MintTinDeck": createDeckTask,
+        "PokerDeck": createDeckTask,
+    }
+
+    if not componentInstructions["type"] in supportedInstructionTypes:
+        print("Skipping unsupported %s named %s" %(componentInstructions["type"],componentInstructions["name"]))
         return
+
+    await supportedInstructionTypes[componentInstructions["type"]]
     
+async def createDeck(packageDirectoryPath, componentInstructions):
     totalCount, cardColumnCount, cardRowCount = await copyImages(componentInstructions, path.join(packageDirectoryPath, "Textures"))
     componentGuid = md5(componentInstructions["name"].encode()).hexdigest()
-    await createTemplateFile(path.join(packageDirectoryPath, "Templates"), componentGuid, componentInstructions["name"], totalCount, cardColumnCount, cardRowCount)
+    templateDirectory = path.join(packageDirectoryPath, "Templates")
+    await createTemplateFile(templateDirectory, componentGuid, componentInstructions["name"], componentInstructions["type"], totalCount, cardColumnCount, cardRowCount)
     
-async def createCompositeImageInTextures(componentName, frontInstructions, textureDirectoryFilepath):
+async def createCompositeImageInTextures(componentName, componentType, frontInstructions, textureDirectoryFilepath):
 
     totalCount = 0
     for instruction in frontInstructions:
@@ -64,14 +78,27 @@ async def createCompositeImageInTextures(componentName, frontInstructions, textu
     while columns * rows < totalCount:
         rows += 1
 
-    tiledImage = Image.new('RGB',(825*columns, 1125*rows))
+    componentDimensions = {
+        "PokerDeck": (825, 1125),
+        "MiniDeck": (600, 825),
+        "MicroDeck": (450, 600),
+        "MintTinDeck": (750, 1125),
+        "HexDeck": (1200, 1050),
+    }
+    dimensions = (825, 1125)
+    if componentType in componentDimensions:
+        dimensions = componentDimensions[componentType]
+    else:
+        print("Missing dimensions for %s, using 6,9." % componentType)
+
+    tiledImage = Image.new('RGB',(dimensions[0]*columns, dimensions[1]*rows))
     
     xIndex = 0
     yIndex = 0
     for instruction in frontInstructions:
         image = Image.open(instruction["filepath"])
         for _ in range(int(instruction["quantity"])):
-            tiledImage.paste(image,(xIndex*825,yIndex*1125))
+            tiledImage.paste(image,(xIndex*dimensions[0],yIndex*dimensions[1]))
             xIndex += 1
             if xIndex == columns:
                 xIndex = 0
@@ -88,14 +115,14 @@ async def copyBackImageToTextures(componentName, backInstructions, textureDirect
     copyfile(backInstructions["filepath"], backImageFilepath)
 
 async def copyImages(componentInstructions, textureDirectoryFilepath):
-    totalCardQuantity = await createCompositeImageInTextures(componentInstructions["name"], componentInstructions["frontInstructions"], textureDirectoryFilepath)
+    totalCardQuantity = await createCompositeImageInTextures(componentInstructions["name"], componentInstructions["type"], componentInstructions["frontInstructions"], textureDirectoryFilepath)
     await copyBackImageToTextures(componentInstructions["name"], componentInstructions["backInstructions"], textureDirectoryFilepath)
     return totalCardQuantity
 
-async def createTemplateFile(templateDirectoryPath, guid, name, totalCount, cardColumnCount, cardRowCount):
+async def createTemplateFile(templateDirectoryPath, guid, name, componentType, totalCount, cardColumnCount, cardRowCount):
     frontTextureName = "%s-front.jpeg" % name
     backTextureName = "%s-back.jpg" % name
-    cardTemplateData = templateMaker.createCardTemplate(guid, name, frontTextureName, totalCount, cardColumnCount, cardRowCount, backTextureName)
+    cardTemplateData = templateMaker.createCardTemplate(guid, name, componentType, frontTextureName, totalCount, cardColumnCount, cardRowCount, backTextureName)
     templateFilepath = path.join(templateDirectoryPath, "%s.json" % guid)
     with open(templateFilepath, "w") as templateFile:
         dump(cardTemplateData, templateFile, indent=2)
