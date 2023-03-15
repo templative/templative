@@ -46,8 +46,8 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
     with open(componentInstructionsFilepath, "r") as componentInstructionsFile:
         componentInstructions = load(componentInstructionsFile)
     
-    createDeckTask = createDeck(packageDirectoryPath, componentInstructions)
-    createBoardTask = createBoard(packageDirectoryPath, componentInstructions)
+    createDeckTask = createDeck
+    createBoardTask = createBoard
     supportedInstructionTypes = {
         "PokerDeck": createDeckTask,
         "MicroDeck": createDeckTask,
@@ -63,7 +63,7 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
         print("Skipping unsupported %s named %s" %(componentInstructions["type"],componentInstructions["name"]))
         return
 
-    await supportedInstructionTypes[componentInstructions["type"]]
+    await supportedInstructionTypes[componentInstructions["type"]](packageDirectoryPath, componentInstructions)
     
 async def createBoard(packageDirectoryPath, componentInstructions):
     textureDirectory = path.join(packageDirectoryPath, "Textures")

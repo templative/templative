@@ -48,11 +48,11 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
     componentFile = await instructionsLoader.loadComponentInstructions(componentDirectoryPath)
 
     componentType = componentFile["type"]
-    createDeckTask = componentCreator.createDeck(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
-    createTwoSidedSluggedTask = componentCreator.createTwoSidedSlugged(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
-    createTwoSidedBoxTask = componentCreator.createTwoSidedBox(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
-    createTuckBoxTask = componentCreator.createTuckBox(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
-    createTwoSidedTask = componentCreator.createTwoSided(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+    createDeckTask = componentCreator.createDeck
+    createTwoSidedSluggedTask = componentCreator.createTwoSidedSlugged
+    createTwoSidedBoxTask = componentCreator.createTwoSidedBox
+    createTuckBoxTask = componentCreator.createTuckBox
+    createTwoSidedTask = componentCreator.createTwoSided
     
     componentTasks = {
         # "CustomColorD4": createDieTask,
@@ -94,5 +94,5 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
         print("Skipping %s. The %s component type is not currently supported." % (componentFile["name"], componentType))
         return
     
-    await componentTasks[componentType]
+    await componentTasks[componentType](gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
         
