@@ -5,7 +5,7 @@ import asyncio
 async def createTuckBox(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
-    if quantity == 0:
+    if int(quantity) == 0:
         return
     frontInstructions = component["frontInstructions"]
 
@@ -19,7 +19,7 @@ async def createTuckBox(gameCrafterSession, component, identity, cloudGameId, cl
 async def createDeck(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
-    if quantity == 0:
+    if int(quantity) == 0:
         return
     frontInstructions = component["frontInstructions"]
     backInstructions = component["backInstructions"]
@@ -42,7 +42,7 @@ async def createDeckCard(gameCrafterSession, instructions, deckId, cloudComponen
     name = instructions["name"]
     filepath = instructions["filepath"]
     quantity = instructions["quantity"]
-    if quantity == 0:
+    if int(quantity) == 0:
         return
     print("Uploading %s" % (filepath))
 
@@ -53,7 +53,7 @@ async def createDeckCard(gameCrafterSession, instructions, deckId, cloudComponen
 async def createTwoSidedBox(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
-    if quantity == 0:
+    if int(quantity) == 0:
         return
     frontInstructions = component["frontInstructions"]
     backInstructions = component["backInstructions"]
@@ -84,7 +84,7 @@ async def createFileInFolder(gameCrafterSession, name, filepath, cloudComponentF
 async def createTwoSided(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
-    if quantity == 0:
+    if int(quantity) == 0:
         return
     frontInstructions = component["frontInstructions"]
     backInstructions = component["backInstructions"]
@@ -107,7 +107,7 @@ async def createTwoSidedPiece(gameCrafterSession, instructions, setId, cloudComp
     name = instructions["name"]
     filepath = instructions["filepath"]
     quantity = instructions["quantity"]
-    if quantity == 0:
+    if int(quantity) == 0:
         return
     print("Uploading %s" % (filepath))
 
@@ -117,7 +117,7 @@ async def createTwoSidedPiece(gameCrafterSession, instructions, setId, cloudComp
 async def createTwoSidedSlugged(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]
-    if quantity == 0:
+    if int(quantity) == 0:
         return
     frontInstructions = component["frontInstructions"]
     backInstructions = component["backInstructions"]
@@ -140,7 +140,7 @@ async def createTwoSidedSluggedPiece(gameCrafterSession, instructions, setId, cl
     name = instructions["name"]
     filepath = instructions["filepath"]
     quantity = instructions["quantity"]
-    if quantity == 0:
+    if int(quantity) == 0:
         return
     print("Uploading %s" % (filepath))
 
