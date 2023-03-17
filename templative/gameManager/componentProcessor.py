@@ -30,7 +30,6 @@ async def listComponents(gameRootDirectoryPath):
     studioCompose = await defineLoader.loadStudio(gameRootDirectoryPath)
     componentCompose = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
 
-
     print("%s by %s" % (game["displayName"], studioCompose["displayName"]))
     await printGameComponentQuantities(gameRootDirectoryPath, gameCompose, componentCompose)
 
@@ -100,8 +99,8 @@ async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, compo
         for explanation in componentQuantities[componentType]:
             quantity = explanation["componentQuantity"] * explanation["pieceQuantity"]
             componentQuantity += quantity
-            componentExplanations = "%s%s.%sx, " % (componentExplanations, explanation["name"], quantity)
-        message = "%s<%s:%sx from %s>   " % (message, componentType, componentQuantity, componentExplanations)
+            componentExplanations = "%s\n    %sx %s" % (componentExplanations, quantity, explanation["name"])
+        message = "%s\n%sx %s Pieces: %s" % (message, componentQuantity, componentType, componentExplanations)
         
     print(message)
 
