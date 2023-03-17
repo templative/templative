@@ -48,6 +48,10 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
     componentFile = await instructionsLoader.loadComponentInstructions(componentDirectoryPath)
 
     componentType = componentFile["type"]
+    
+    if componentFile["quantity"] == 0:
+        return
+    
     createDeckTask = componentCreator.createDeck
     createTwoSidedSluggedTask = componentCreator.createTwoSidedSlugged
     createTwoSidedBoxTask = componentCreator.createTwoSidedBox
