@@ -1,5 +1,5 @@
 import asyncclick as click
-from templative import gameManager, gameUploader, commands
+from templative import gameManager, gameUploader, commands, zettelkasten
 
 @click.group()
 async def cli():
@@ -40,7 +40,7 @@ async def playground(input,output):
 
 @cli.group()
 async def rules():
-    """Rules commands"""
+    """Rules Commands"""
     pass
 
 @rules.command()
@@ -59,3 +59,4 @@ async def init():
     await gameManager.createTemplate()
 
 cli.add_command(commands.create)
+cli.add_command(zettelkasten.zk)
