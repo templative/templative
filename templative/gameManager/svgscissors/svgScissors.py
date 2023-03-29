@@ -49,9 +49,20 @@ async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompo
         raise Exception("No image size for %s", componentCompose["type"]) 
     imageSizePixels = componentImageSizePixels[componentCompose["type"]]
     await assignSize(artFileOutputFilepath, imageSizePixels)
+    await addNewlines(artFileOutputFilepath)
     await exportSvgToImage(artFileOutputFilepath, imageSizePixels, artFileOutputName, outputDirectory)
     print("Produced %s." % (pieceGamedata["name"]))
 
+async def addNewlines(artFileOutputFilepath):
+    file = open(artFileOutputFilepath, "r")
+    contents = file.read()
+    file.close()
+    fixedContents = contents.replace("NEWLINE", "\n")
+    if fixedContents == contents:
+        return
+    file = open(artFileOutputFilepath, "w")
+    file.write(fixedContents)
+    file.close()
 
 async def assignSize(artFileOutputFilepath, imageSizePixels):
     
