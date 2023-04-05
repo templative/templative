@@ -81,6 +81,15 @@ Gamedata files are csv and json files that contain data for each piece of each c
 
 Art files must have a `viewbox` that matches the gamecrafter specifications. For instance if poker cards require 825px by 1125px then the viewbox must be `0 0 825 1125` and the document size must specify px with width at `825px` and height at `1125px`. Viewbox inherits the units of the width and height.
 
+Add the cmyk color profile in the Document Setup of Inkscape. This adds the following color file to the `<defs>` tag:
+```
+<color-profile
+  name="Generic-CMYK-Profile"
+  xlink:href="file:///System/Library/ColorSync/Profiles/Generic%20CMYK%20Profile.icc"
+  id="color-profile161" />
+</defs>
+```
+
 # Using ArtData
 
 ArtData files are json files that contain instructions for how to assemble a piece jpg using art files and metadata.
