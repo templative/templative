@@ -10,8 +10,9 @@ Templative allows you to assemble board games using json and svgs. To create a c
 - `templative produce`
 - `templative upload`
 - `templative playground`
+- `templative printout frontback`
 
-Now you have a board game complete with a rules document, a potion deck, a package in Tabletop Playground, and a listing on the GameCrafter ready for printing. 
+Now you have a board game complete with a rules document, a potion deck, a package in Tabletop Playground, a listing on the GameCrafter ready for purchase, and a pdf ready for print-and-play. It's that powerful.
 
 Use `templative --help` for more info.
 
