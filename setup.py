@@ -11,7 +11,7 @@ setup(
     install_requires=[
         "asyncio", "aiofile", "click", "markdown2", "WeasyPrint", "ensure", 
         "svgutils", "wand", "mpmath", "tabulate", "aiohttp", "svgmanip", "idna-ssl", 
-        "asynctest", "typing-extensions", "asyncclick", "anyio"
+        "asynctest", "typing-extensions", "asyncclick", "anyio", "fpdf2", "defusedxml"
     ],
     entry_points = {
         "console_scripts": [

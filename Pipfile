@@ -22,6 +22,8 @@ asynctest = "*"
 typing-extensions = "*" 
 asyncclick = "*"
 anyio = "*"
+fpdf2 = "*"
+defusedxml = "*"
 
 [requires]
 python_version = "3.7.7"
