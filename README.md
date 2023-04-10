@@ -1,6 +1,8 @@
 
 # Templative
 
+[Watch the explanation video!](https://youtu.be/cfaSQqnhyrE)
+
 Templative allows you to assemble board games using json and svgs. To create a complete board game run the following commands:
 
 - `templative init`
