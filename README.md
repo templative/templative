@@ -6,7 +6,7 @@
 Templative allows you to assemble board games using json and svgs. To create a complete board game run the following commands:
 
 - `templative init`
-- `templative create deckpoker --name potionDeck`
+- `templative create deck poker --name potionDeck`
 - `templative produce`
 - `templative upload`
 - `templative playground`
