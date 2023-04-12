@@ -182,4 +182,8 @@ From the [Tabletop Playground wiki](https://tabletop-playground.com/knowledge-ba
 - Linux: `~/.config/Epic/TabletopPlayground/Packages`
 - Windows: `C:\Program Files (x86)\Steam\steamapps\common\TabletopPlayground\TabletopPlayground\PersistentDownloadDir`
 
+## Create a Letter Printout (Experimental)
 
+Create a print out of your game using `templative printout front` or `templative printout frontback`.
+
+Front back includes back images on the back page. Components are grouped together to make cutting easy. The sizing and dpi of cards is in test at the moment. Please help out by submitting issues.
