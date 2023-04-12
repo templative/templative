@@ -65,13 +65,11 @@ templative create
   Create components from templates
 
 Commands:
-  accordionpoker        Create a new poker sized accordion
-  chitsquarelarge       Create a new medium ring
-  deckpoker             Create a new poker sized deck
-  ringlarge             Create a new large ring
-  ringmedium            Create a new medium ring
-  stoutboxsmall         Create a new small cardboard box
-  tuckboxpoker108cards  Create a new poker sized tuckbox fitting 108 cards
+  accordion  Create a new Accordion
+  deck       Create a new Decks
+  die        Create a new Die
+  packaging  Create Packaging
+  punchout   Create a new Punchout
 ```
 
 Each component is defined in `component-compose.json`, and has a pieces csv/json file, a component json file, artdata files, template svgs, and overlaid svgs.
