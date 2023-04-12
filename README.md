@@ -139,7 +139,7 @@ Overlay commands are the first commands to occur.
 
 Overlays are svgs found in the `art/graphicalInserts` folder.
 
-Overlays must be the same size as the template it is overlaying. For instance, both the poker card template svg and the overlay svg must be `825x1125px`.
+Overlays must be the same size as the template it is overlaying. For instance, both the poker card template svg and the overlay svg must be `825x1125px`. Overlay svg documents are placed at the top left corner of your base svg document. This should place it correctly in your image if they are both the same size. 
 
 ## Style Updates
 
