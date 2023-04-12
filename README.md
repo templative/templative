@@ -174,7 +174,7 @@ Upload your last `templative produce`'d game using the following steps.
 
 ## Generating a Tabletop Playground Package
 
-Create a Tabletop Playground `templative produce`'d of your last produced game using the following command. 
+Create a Tabletop Playground package of your last `templative produce`'d game using the following command. 
 
 `templative playground --output PACKAGESDIRECTORY`
 
