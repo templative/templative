@@ -162,6 +162,9 @@ Any valid css value for svgs is valid here.
 
 
 ## Uploading to the GameCrafter
+
+Upload your last `templative produce`'d game using the following steps.
+
 - Create an account on the [Game Crafter](https://www.thegamecrafter.com)
 - Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
 - Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [user env vars](https://www.schrodinger.com/kb/1842).
@@ -171,7 +174,7 @@ Any valid css value for svgs is valid here.
 
 ## Generating a Tabletop Playground Package
 
-Create a Tabletop Playground package using the following command. 
+Create a Tabletop Playground `templative produce`'d of your last produced game using the following command. 
 
 `templative playground --output PACKAGESDIRECTORY`
 
@@ -184,6 +187,6 @@ From the [Tabletop Playground wiki](https://tabletop-playground.com/knowledge-ba
 
 ## Create a Letter Printout (Experimental)
 
-Create a print out of your game using `templative printout front` or `templative printout frontback`.
+Create a print out your last `templative produce`'d game using `templative printout front` or `templative printout frontback`.
 
 Front back includes back images on the back page. Components are grouped together to make cutting easy. The sizing and dpi of cards is in test at the moment. Please help out by submitting issues.
