@@ -6,7 +6,7 @@
 Templative allows you to assemble board games using json and svgs. To create a complete board game run the following commands:
 
 - `templative init`
-- `templative create deckpoker --name potionDeck`
+- `templative create deck poker --name potionDeck`
 - `templative produce`
 - `templative upload`
 - `templative playground`
@@ -65,13 +65,11 @@ templative create
   Create components from templates
 
 Commands:
-  accordionpoker        Create a new poker sized accordion
-  chitsquarelarge       Create a new medium ring
-  deckpoker             Create a new poker sized deck
-  ringlarge             Create a new large ring
-  ringmedium            Create a new medium ring
-  stoutboxsmall         Create a new small cardboard box
-  tuckboxpoker108cards  Create a new poker sized tuckbox fitting 108 cards
+  accordion  Create a new Accordion
+  deck       Create a new Decks
+  die        Create a new Die
+  packaging  Create Packaging
+  punchout   Create a new Punchout
 ```
 
 Each component is defined in `component-compose.json`, and has a pieces csv/json file, a component json file, artdata files, template svgs, and overlaid svgs.
@@ -141,7 +139,7 @@ Overlay commands are the first commands to occur.
 
 Overlays are svgs found in the `art/graphicalInserts` folder.
 
-Overlays must be the same size as the template it is overlaying. For instance, both the poker card template svg and the overlay svg must be `825x1125px`.
+Overlays must be the same size as the template it is overlaying. For instance, both the poker card template svg and the overlay svg must be `825x1125px`. Overlay svg documents are placed at the top left corner of your base svg document. This should place it correctly in your image if they are both the same size. 
 
 ## Style Updates
 
@@ -164,6 +162,9 @@ Any valid css value for svgs is valid here.
 
 
 ## Uploading to the GameCrafter
+
+Upload your last `templative produce`'d game using the following steps.
+
 - Create an account on the [Game Crafter](https://www.thegamecrafter.com)
 - Get an [api key](https://www.thegamecrafter.com/account/apikeys) from the Game Crafter
 - Add the `THEGAMECRAFTER_PUBLIC_KEY`, `THEGAMECRAFTER_USERNAME`, and `THEGAMECRAFTER_PASSWORD` to your [user env vars](https://www.schrodinger.com/kb/1842).
@@ -173,7 +174,7 @@ Any valid css value for svgs is valid here.
 
 ## Generating a Tabletop Playground Package
 
-Create a Tabletop Playground package using the following command. 
+Create a Tabletop Playground package of your last `templative produce`'d game using the following command. 
 
 `templative playground --output PACKAGESDIRECTORY`
 
@@ -184,4 +185,8 @@ From the [Tabletop Playground wiki](https://tabletop-playground.com/knowledge-ba
 - Linux: `~/.config/Epic/TabletopPlayground/Packages`
 - Windows: `C:\Program Files (x86)\Steam\steamapps\common\TabletopPlayground\TabletopPlayground\PersistentDownloadDir`
 
+## Create a Letter Printout (Experimental)
 
+Create a print out your last `templative produce`'d game using `templative printout front` or `templative printout frontback`.
+
+Front back includes back images on the back page. Components are grouped together to make cutting easy. The sizing and dpi of cards is in test at the moment. Please help out by submitting issues.
