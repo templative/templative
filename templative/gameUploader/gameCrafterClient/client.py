@@ -79,7 +79,17 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
         "SmallRing": createTwoSidedSluggedTask,
 
         "LargeSquareChit": createTwoSidedSluggedTask,
-        "LargeSquareChit": createTwoSidedSluggedTask,
+        "MediumSquareChit": createTwoSidedSluggedTask,
+        "SmallSquareChit": createTwoSidedSluggedTask,
+
+        "LargeHexTile": createTwoSidedSluggedTask,
+        "MediumHexTile": createTwoSidedSluggedTask,
+        "SmallHexTile": createTwoSidedSluggedTask,
+
+        "LargeCircleChit": createTwoSidedSluggedTask,
+        "MediumCircleChit": createTwoSidedSluggedTask,
+        "SmallCircleChit": createTwoSidedSluggedTask,
+
 
         "PokerTuckBox36": createTuckBoxTask,
         "PokerTuckBox54": createTuckBoxTask,

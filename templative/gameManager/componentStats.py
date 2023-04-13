@@ -13,9 +13,9 @@ componentImageSizePixels = {
     "MediumSquareChit": { "width": 300, "height": 300 },
     "SmallSquareChit": { "width": 225, "height": 225 },
 
-    "LargeHexChit": { "width": 1200, "height": 1050 },
-    "MediumHexChit": { "width": 825, "height": 750 },
-    "SmallHexChit": { "width": 675, "height": 600 },
+    "LargeHexTile": { "width": 1200, "height": 1050 },
+    "MediumHexTile": { "width": 825, "height": 750 },
+    "SmallHexTile": { "width": 675, "height": 600 },
 
     "HexShard": { "width": 300, "height": 300 },
     "CircleShard": { "width": 300, "height": 300 },

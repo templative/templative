@@ -9,7 +9,69 @@
 		c1.261-2.185,4.328-3.955,6.85-3.955h82.205c2.521,0,5.589,1.771,6.85,3.955l41.103,71.19c1.261,2.185,1.261,5.726,0,7.91
 		l-41.103,71.19c-1.261,2.186-4.328,3.955-6.85,3.955H57.897C55.376,169.101,52.309,167.331,51.048,165.146z"/>
 	<polygon fill="none" stroke="#2DA6DE" stroke-dasharray="1.3324" points="58.527,160.101 18.054,90 58.527,19.899 139.473,19.899 
-		179.946,90 139.473,160.101 	"/>
+		179.946,90 139.473,160.101 	"/><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+		<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+		
+		<svg
+			 version="1.1"
+			 x="0px"
+			 y="0px"
+			 width="198px"
+			 height="180px"
+			 viewBox="0 0 198 180"
+			 enable-background="new 0 0 198 180"
+			 xml:space="preserve"
+			 id="svg2576"
+			 sodipodi:docname="catholicProvinceHexTilesBack.svg"
+			 inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+			 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+			 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+			 xmlns="http://www.w3.org/2000/svg"
+			 xmlns:svg="http://www.w3.org/2000/svg"><defs
+			 id="defs2580">
+			
+			
+			
+		</defs><sodipodi:namedview
+			 id="namedview2578"
+			 pagecolor="#ffffff"
+			 bordercolor="#999999"
+			 borderopacity="1"
+			 inkscape:showpageshadow="0"
+			 inkscape:pageopacity="0"
+			 inkscape:pagecheckerboard="0"
+			 inkscape:deskcolor="#d1d1d1"
+			 showgrid="false"
+			 inkscape:zoom="5.7055556"
+			 inkscape:cx="78.607595"
+			 inkscape:cy="90"
+			 inkscape:window-width="2400"
+			 inkscape:window-height="1261"
+			 inkscape:window-x="4691"
+			 inkscape:window-y="1025"
+			 inkscape:window-maximized="1"
+			 inkscape:current-layer="svg2576" />
+		<polygon
+			 fill="#929497"
+			 points="198,180 198,0 0,0 0,180 "
+			 id="polygon2091" /><path
+			 fill="white"
+			 stroke="#eb242b"
+			 d="M 51.048,165.146 9.945,93.955 c -1.261,-2.185 -1.261,-5.726 0,-7.91 L 51.048,14.855 C 52.309,12.67 55.376,10.9 57.898,10.9 h 82.205 c 2.521,0 5.589,1.771 6.85,3.955 l 41.103,71.19 c 1.261,2.185 1.261,5.726 0,7.91 l -41.103,71.19 c -1.261,2.186 -4.328,3.955 -6.85,3.955 H 57.897 c -2.521,0.001 -5.588,-1.769 -6.849,-3.954 z"
+			 id="path2093"
+			 style="stroke:none;fill:#ee8b00;fill-opacity:1" /><polygon
+			 fill="none"
+			 stroke="#2da6de"
+			 stroke-dasharray="1.3324"
+			 points="58.527,19.899 139.473,19.899 179.946,90 139.473,160.101 58.527,160.101 18.054,90 "
+			 id="polygon2095"
+			 style="fill:black;fill-opacity:1;stroke:none" />
+		
+		<g
+			 id="Your_Artwork_Here">
+		</g>
+		</svg>
+		
 </g>
 <g id="Text">
 	<rect x="62.825" y="22.667" fill="#E8E7E7" width="72.351" height="12.237"/>

@@ -69,19 +69,19 @@ async def circleSmall(name):
 @click.option("-n", "--name", default=None, help="The name of the new component.")
 async def hexLarge(name):
     """Create a Large Hex"""
-    await gameManager.createComponent(name, "LargeHexChit")
+    await gameManager.createComponent(name, "LargeHexTile")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
 async def hexMedium(name):
     """Create a Medium Hex"""
-    await gameManager.createComponent(name, "MediumHexChit")
+    await gameManager.createComponent(name, "MediumHexTile")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
 async def hexSmall(name):
     """Create a Small Hex"""
-    await gameManager.createComponent(name, "SmallHexChit")
+    await gameManager.createComponent(name, "SmallHexTile")
 
 @punchout.group()
 async def shard():
