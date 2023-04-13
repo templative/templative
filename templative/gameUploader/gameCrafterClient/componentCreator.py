@@ -2,6 +2,19 @@ from .. import gameCrafterClient
 from os.path import join
 import asyncio
 
+async def createStockPart(gameCrafterSession, component, cloudGameId):
+    componentName = component["name"]
+    componentType = component["type"]
+    componentTypeTokens = componentType.split("_")
+    isStockComponent = componentTypeTokens[0].upper() == "STOCK" 
+    if not isStockComponent:
+        print("%s is not a stock part!" % componentName)
+        return
+    stockPartId = componentTypeTokens[1]
+    quantity = component["quantity"]
+
+    await gameCrafterClient.createStockPart(gameCrafterSession, stockPartId, quantity, cloudGameId)
+
 async def createTuckBox(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
     quantity = component["quantity"]

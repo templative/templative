@@ -104,8 +104,17 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
         "MintTinAccordion8": createTwoSidedTask,
     }
 
-    if not componentType in componentTasks:
-        print("Skipping %s. The %s component type is not currently supported." % (componentFile["name"], componentType))
+    missingDirectComponentMatch = not componentType in componentTasks
+
+    componentTypeTokens = componentType.split("_")
+    isStockComponent = componentTypeTokens[0].upper() == "STOCK" 
+
+    if missingDirectComponentMatch and not isStockComponent:
+        print("!!! Skipping %s. The %s component type is not currently supported." % (componentFile["name"], componentType))
+        return
+    
+    if isStockComponent:
+        await componentCreator.createStockPart(gameCrafterSession, componentFile, cloudGame["id"])
         return
     
     await componentTasks[componentType](gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)

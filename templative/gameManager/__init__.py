@@ -32,3 +32,14 @@ async def createComponent(name, type):
         return
     
     await componentProcessor.createComponent(name, type)
+
+async def createStockComponent(name, stockPartId):
+    if name == None:
+        print("Missing name.")
+        return
+    
+    if stockPartId == None:
+        print("Missing stockPartId.")
+        return
+    
+    await componentProcessor.createStockComponent(name, stockPartId)

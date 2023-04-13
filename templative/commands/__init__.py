@@ -4,6 +4,7 @@ from .deckCommands import deck
 from .dieCommands import die
 from .packagingCommands import packaging
 from .punchoutCommands import punchout
+from .stockpartCommands import stockpart
 
 @click.group()
 async def create():
@@ -15,6 +16,7 @@ create.add_command(deck)
 create.add_command(die)
 create.add_command(packaging)
 create.add_command(punchout)
+create.add_command(stockpart)
 
 
 

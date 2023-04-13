@@ -50,6 +50,9 @@ async def uploadFile(gameCrafterSession, filepath, folderId):
     with open(filepath, "rb") as fileToUpload:
         return await gameCrafterOperations.postFile(gameCrafterSession, fileToUpload, filename, folderId)
 
+async def createStockPart(gameCrafterSession, stockPartId, quantity, gameId):
+    return await gameCrafterOperations.postStockPart(gameCrafterSession, stockPartId, quantity, gameId)
+
 async def createDeck(gameCrafterSession, name, identity, quantity, gameId, imageFileId):
     return await gameCrafterOperations.postDeck(gameCrafterSession, name, identity, quantity, gameId, imageFileId)
 

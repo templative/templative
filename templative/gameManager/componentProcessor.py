@@ -21,6 +21,13 @@ async def createComponent(name, type):
     await componentTemplateCreator.createArtData(gameCompose["artdataDirectory"], name)
     await componentTemplateCreator.createComponentArtFiles(gameCompose["artTemplatesDirectory"], name, type)
 
+async def createStockComponent(name, stockPartId):
+    gameRootDirectoryPath = "."
+    gameCompose = await defineLoader.loadGameCompose(gameRootDirectoryPath)
+    componentComposeData = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
+    await componentTemplateCreator.addStockComponentToComponentCompose(name, stockPartId, gameRootDirectoryPath, componentComposeData)
+    await componentTemplateCreator.createComponentJson(gameCompose["componentGamedataDirectory"], name)
+
 async def listComponents(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
@@ -61,21 +68,26 @@ async def printGameComponentDepth(gameRootDirectoryPath, gameCompose, componentC
 
     depthMillimeters = 0
     for component in componentCompose:
-        if component["disabled"]:
+        
+        if component["disabled"] == "True":
             print("Skipping disabled %s component." % (component["name"]))
             continue
+        
+        if component["type"].startswith("STOCK"):
+            print("Skipping stock %s component." % (component["name"]))
+            continue
+        
         piecesGamedata = await defineLoader.loadPiecesGamedata(gameRootDirectoryPath, gameCompose, component["piecesGamedataFilename"])
         if not piecesGamedata or piecesGamedata == {}:
             print("Skipping %s component due to missing pieces gamedata." % component["name"])
             continue
         if not component["type"] in componentDepthPerPieceMillimeters:
-            print("Skipping %s component." % component["name"])
+            print("Skipping %s component as we don't have a millimeter measurement for it." % component["name"])
             continue
         depthOfPiece = componentDepthPerPieceMillimeters[component["type"]]
         for piece in piecesGamedata:
             depthMillimeters += int(piece["quantity"]) * depthOfPiece      
     print("%smm" % round(depthMillimeters, 2))
-
 
 async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, componentCompose):
     if not gameRootDirectoryPath:
@@ -83,9 +95,14 @@ async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, compo
 
     componentQuantities ={"Document": [{ "name":"Rules", "componentQuantity": 1, "pieceQuantity": 1}]}
     for component in componentCompose:
-        if component["disabled"]:
+        if component["disabled"] == "True":
             print("Skipping disabled %s component." % (component["name"]))
             continue
+        
+        if component["type"].startswith("STOCK"):
+            await addStockComponentQuantities(componentQuantities, component)
+            continue
+        
         piecesGamedata = await defineLoader.loadPiecesGamedata(gameRootDirectoryPath, gameCompose, component["piecesGamedataFilename"])
         if not piecesGamedata or piecesGamedata == {}:
             print("Skipping %s component due to missing pieces gamedata." % component["name"])
@@ -103,6 +120,15 @@ async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, compo
         message = "%s\n%sx %s Pieces: %s" % (message, componentQuantity, componentType, componentExplanations)
         
     print(message)
+
+
+async def addStockComponentQuantities(componentQuantities, component):
+    if not component["type"] in componentQuantities:
+        componentQuantities[component["type"]] = []
+
+    componentQuantities[component["type"]].append({
+        "name": component["name"], "componentQuantity": component["quantity"], "pieceQuantity": 1
+    })
 
 async def addComponentQuantities(componentQuantities, component, piecesGamedata):
     if not component["type"] in componentQuantities:
@@ -166,8 +192,35 @@ async def produceGameComponent(gameRootDirectoryPath, game, studioCompose, gameC
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
+    componentType = componentCompose["type"]
+    componentTypeTokens = componentType.split("_")
+    isStockComponent = componentTypeTokens[0].upper() == "STOCK" 
+    
+    if isStockComponent:
+        await produceStockComponent(componentCompose, outputDirectory)
+        return
+    
+    await produceCustomComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, componentCompose, outputDirectory)
+        
+async def produceStockComponent(componentCompose, outputDirectory):
     componentName = componentCompose["name"]
 
+    print("Outputing stock parts for %s component." % (componentName))
+
+    componentDirectory = await outputWriter.createComponentFolder(componentName, outputDirectory)
+
+    stockPartInstructions = {
+        "name": componentCompose["name"],
+        "quantity": componentCompose["quantity"],
+        "type": componentCompose["type"],
+    }
+
+    componentInstructionFilepath = os.path.join(componentDirectory, "component.json")
+    await outputWriter.dumpInstructions(componentInstructionFilepath, stockPartInstructions)
+
+async def produceCustomComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, componentCompose, outputDirectory):
+    componentName = componentCompose["name"]
+    
     componentGamedata = await defineLoader.loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentCompose["componentGamedataFilename"])
     if not componentGamedata or componentGamedata == {}:
         print("Skipping %s component due to missing component gamedata." % componentName)

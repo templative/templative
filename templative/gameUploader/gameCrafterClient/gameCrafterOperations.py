@@ -40,6 +40,15 @@ async def getGamesForUser(gameCrafterSession):
         session_id = gameCrafterSession.sessionId
     )
 
+async def postStockPart(gameCrafterSession, stockPartId, quantity, gameId):
+    url = "%s/gamepart" % (gameCrafterBaseUrl)
+    return await httpClient.post(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId,
+        game_id = gameId,
+        quantity = quantity,
+        part_id = stockPartId
+    )
+
 async def postTwoSidedSet(gameCrafterSession, name, identity, quantity, gameId, backImageId):
     url = "%s/twosidedset" % (gameCrafterBaseUrl)
     return await httpClient.post(gameCrafterSession, url,

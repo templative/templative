@@ -22,6 +22,22 @@ async def addToComponentCompose(name, type, gameRootDirectoryPath, componentComp
     with open(path.join(gameRootDirectoryPath, 'component-compose.json'), 'w') as componentComposeFile:
         dump(componentComposeData, componentComposeFile, indent=4)
 
+async def addStockComponentToComponentCompose(name, stockPartId, gameRootDirectoryPath, componentComposeData):    
+    for component in componentComposeData:
+        if component["name"] != name:
+            continue
+        componentComposeData.remove(component)
+        break
+
+    componentComposeData.append({
+        "name": name,
+        "type": "STOCK_%s" % stockPartId,
+        "quantity": 1,
+        "disabled": False
+    })
+    with open(path.join(gameRootDirectoryPath, 'component-compose.json'), 'w') as componentComposeFile:
+        dump(componentComposeData, componentComposeFile, indent=4)
+
 async def createPiecesCsv(piecesDirectoryPath, name):
     piecesCsvData = """name,displayName,quantity\n%s,%s,1""" % (name, name)
     with open(path.join(piecesDirectoryPath, '%s.csv' % name), 'w') as piecesCsvFile:
