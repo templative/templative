@@ -18,7 +18,7 @@ componentDimensionsInches = {
 printoutSizeType = "Letter"
 marginsInches = 0.5
 printoutPlayAreaInches = (8.5-(marginsInches*2), 11 - (marginsInches*2))
-inchToPixelConversion = 80
+inchToPixelConversion = 96
 pieceMarginInches = 0.11811 * 1/3
 
 @click.group()
