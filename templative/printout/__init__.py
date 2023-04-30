@@ -151,7 +151,12 @@ async def createPageImagesForComponentTypeImages(componentType, componentTypeIma
             pageImage.paste(pieceImage, position)
 
             if printBack:
-                pageImages[frontBackPageIndex+1].paste(backImage, position)
+                reversedYAxisXIndex = columns-1 - xIndex
+                backPosition = (
+                    halfAreaPixels[0] + int(reversedYAxisXIndex * pieceSizeInches[0] * inchToPixelConversion),
+                    position[1]
+                )
+                pageImages[frontBackPageIndex+1].paste(backImage, backPosition)
 
             pieceIndex+=1
 
