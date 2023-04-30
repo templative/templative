@@ -6,11 +6,13 @@ async def cli():
     """Templative CLI"""
     pass
 
+# Add "reduce complexity for youtube videos"
 @cli.command()
 @click.option('--component', default=None, help='The component to produce.')
-async def produce(component):
+@click.option('-s/-c', '--simple/--complex', default=False, required=False, type=bool, help='The component to produce.')
+async def produce(component, simple):
     """Produce the game in the current directory"""
-    await gameManager.produceGame(".", component)
+    await gameManager.produceGame(".", component, simple)
 
 @cli.command()
 async def components():

@@ -4,7 +4,7 @@ from aiofile import AIOFile
 import svgmanip
 from ..componentStats import componentImageSizePixels
 
-async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory):
+async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory, isSimple):
     if game == None:
         print("game cannot be None.")
         return
@@ -37,12 +37,12 @@ async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompo
     artFilename = "%s.svg" % (artMetaData["templateFilename"])
     artFile = svgmanip.Element(os.path.join(templateFilesDirectory, artFilename))
 
-    await addOverlays(artFile, artMetaData["overlays"], studioCompose, game, gameCompose, componentGamedata, pieceGamedata)
+    await addOverlays(artFile, artMetaData["overlays"], studioCompose, game, gameCompose, componentGamedata, pieceGamedata, isSimple)
 
     artFileOutputName = ("%s-%s" % (componentCompose["name"], pieceGamedata["name"]))
     artFileOutputFilepath = await createArtfile(artFile, artFileOutputName, outputDirectory)
 
-    await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], studioCompose, game, componentGamedata, pieceGamedata)
+    await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], studioCompose, game, componentGamedata, pieceGamedata, isSimple)
     await updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], studioCompose, game, componentGamedata, pieceGamedata)
     
     if not componentCompose["type"] in componentImageSizePixels:
@@ -81,7 +81,7 @@ async def createArtfile(artFile, artFileOutputName, outputDirectory):
     artFile.dump(artFileOutputFilepath)
     return artFileOutputFilepath
 
-async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGamedata, pieceGamedata):
+async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGamedata, pieceGamedata, isSimplifiedGraphic):
     if artFile == None:
         print("artFile cannot be None.")
         return
@@ -109,6 +109,10 @@ async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGam
     overlayFilesDirectory = gameCompose["artInsertsDirectory"]
 
     for overlay in overlays:
+        isComplex = overlay["isComplex"] if "isComplex" in overlay else False
+        if isComplex and isSimplifiedGraphic:
+            continue
+
         overlayName = await getScopedValue(overlay, studio, game, componentGamedata, pieceGamedata)
         if overlayName != None and overlayName != "":
             overlayFilename = "%s.svg" % (overlayName)
@@ -116,7 +120,7 @@ async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGam
             graphicsInsert = svgmanip.Element(overlayFilepath)
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 
-async def textReplaceInFile(filepath, textReplacements, studio, game, componentGamedata, pieceGamedata):
+async def textReplaceInFile(filepath, textReplacements, studio, game, componentGamedata, pieceGamedata, isSimplifiedGraphic):
     if filepath == None:
         print("filepath cannot be None.")
         return
@@ -148,6 +152,9 @@ async def textReplaceInFile(filepath, textReplacements, studio, game, componentG
             key = "{%s}" % textReplacement["key"]
             value = await getScopedValue(textReplacement, studio, game, componentGamedata, pieceGamedata)
             value = await processValueFilters(value, textReplacement)
+            isComplex = textReplacement["isComplex"] if "isComplex" in textReplacement else False
+            if isComplex and isSimplifiedGraphic:
+                value = ""
             contents = contents.replace(key, str(value))
 
     async with AIOFile(filepath,'w') as f:
