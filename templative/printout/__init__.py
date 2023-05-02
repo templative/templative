@@ -166,7 +166,7 @@ async def createPageImagesForComponentTypeImages(componentType, componentTypeIma
     return pageImages
 
 async def createBlankImagesForComponent(imageFilepaths, columns, rows, printBack):
-    whiteColorRGB = (255,255,255)
+    whiteColorRGB = (240,240,240)
 
     totalCount = 0
     for instruction in imageFilepaths:
