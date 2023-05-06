@@ -149,6 +149,15 @@ async def postTwoSidedBox(gameCrafterSession, gameId, name, identity, quantity, 
         has_proofed_bottom = 1
     )
 
+async def postDownloadableDocument(gameCrafterSession, gameId, pdfFileId):
+    url = "%s/gamedownload" % gameCrafterBaseUrl
+    return await httpClient.post(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId,
+        game_id = gameId,
+        file_id = pdfFileId,
+        name = "rules.pdf"
+    )
+
 async def postDocument(gameCrafterSession, name, quantity, gameId, pdfFileId):
     url = "%s/document" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,

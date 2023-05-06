@@ -87,7 +87,7 @@ async def createRules(gameCrafterSession, gameRootDirectoryPath, cloudGame, fold
     print("Uploading %s" % (filepath))
 
     cloudFile = await gameCrafterClient.uploadFile(gameCrafterSession, filepath, folderId)
-    document = await gameCrafterClient.createDocument(gameCrafterSession, name, quantity, cloudGame["id"], cloudFile["id"])
+    document = await gameCrafterClient.createDownloadableDocument(gameCrafterSession, cloudGame["id"], cloudFile["id"])
 
 async def createFileInFolder(gameCrafterSession, name, filepath, cloudComponentFolderId):
     print("Uploading %s from %s" % (name, filepath))
