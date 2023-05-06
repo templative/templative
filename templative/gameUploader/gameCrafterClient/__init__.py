@@ -7,14 +7,14 @@ from .gameCrafterSession import GameCrafterSession
 
 baseUrl = "https://www.thegamecrafter.com"
 
-async def createGame(gameCrafterSession, name, designerId):
-    game = await gameCrafterOperations.postGame(gameCrafterSession, name, designerId)
-    gameName = game["name"]
-    gameId = game["id"]
+async def createGame(gameCrafterSession, gameInfo, designerId, isPublish):
+    gameName = gameInfo["displayName"] if isPublish else gameInfo["name"]
+    uploadedGame = await gameCrafterOperations.postGame(gameCrafterSession, gameName, designerId)
+    gameId = uploadedGame["id"]
     editUrl = "%s%s%s" % (baseUrl, "/make/games/", gameId)
     print("Created %s. Edit it here %s" % (gameName, editUrl))
 
-    return game
+    return uploadedGame
 
 advertismentImages = [
     "C:/Users/User/Documents/git/nextdaygames/templative/templative/gameUploader/gameCrafterClient/testImages/actionShot.png",

@@ -27,9 +27,10 @@ async def depth():
 
 @cli.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
-async def upload(input):
+@click.option('-p/-d', '--publish/--debug', default=False, required=False, type=bool, help='Whether to treat this as the official release.')
+async def upload(input, publish):
     """Upload a produced game in a directory"""
-    await gameUploader.uploadGame(input)
+    await gameUploader.uploadGame(input, publish)
 
 @cli.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')

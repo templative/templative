@@ -6,7 +6,7 @@ from .. import instructionsLoader, gameCrafterClient
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
-async def uploadGame(gameCrafterSession, gameRootDirectoryPath):
+async def uploadGame(gameCrafterSession, gameRootDirectoryPath, isPublish):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
@@ -15,7 +15,7 @@ async def uploadGame(gameCrafterSession, gameRootDirectoryPath):
 
     print("Uploading %s for %s." % (game["displayName"], studio["displayName"]))
 
-    cloudGame = await gameCrafterClient.createGame(gameCrafterSession, game["name"], studio["gameCrafterDesignerId"])
+    cloudGame = await gameCrafterClient.createGame(gameCrafterSession, game, studio["gameCrafterDesignerId"], isPublish)
     await gameCrafterClient.createActionShot(gameCrafterSession, cloudGame["id"])
     cloudGameFolder = await gameCrafterClient.createFolderAtRoot(gameCrafterSession, game["name"])
 
