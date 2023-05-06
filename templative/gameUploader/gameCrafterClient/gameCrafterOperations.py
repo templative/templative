@@ -106,6 +106,8 @@ async def postGame(gameCrafterSession, name, designerId):
         logo_id="E9933564-A293-11ED-BC74-E1C2CB83BB28",
         backdrop_id="E934D622-A293-11ED-986D-8A972A49FC29",
         advertisement_id="E8BB5536-A293-11ED-BC74-F8C2CB83BB28",
+        private_sales=1,
+        private_viewing=1,
     )
 
 async def postDeck(gameCrafterSession, name, identity, quantity, gameId, backImageFileId):
