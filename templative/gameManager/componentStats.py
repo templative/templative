@@ -35,7 +35,7 @@ componentImageSizePixels = {
     "PokerTuckBox90": { "width": 2775, "height": 2100 },
     "PokerTuckBox108": { "width": 3075, "height": 2250 },
 
-    "PokerFolio": { "width": 2625, "height": 1050 },
+    "PokerFolio": { "width": 3075, "height": 1125 },
     "MintTinFolio": { "width": 2625, "height": 1050 },
 
     "MintTinAccordion4": { "width": 2550, "height": 1125 },

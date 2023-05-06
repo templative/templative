@@ -20,7 +20,7 @@ async def uploadGame(gameCrafterSession, gameRootDirectoryPath, isPublish):
     cloudGameFolder = await gameCrafterClient.createFolderAtRoot(gameCrafterSession, game["name"])
 
     tasks = []
-    tasks.append(asyncio.create_task(createComponents(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))
+    tasks.append(asyncio.create_task(createComponents(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"], isPublish)))
     tasks.append(asyncio.create_task(componentCreator.createRules(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))
     for task in tasks:
         await task
@@ -29,23 +29,28 @@ async def uploadGame(gameCrafterSession, gameRootDirectoryPath, isPublish):
     print("Uploads finished for %s, visit %s" % (cloudGame["name"], gameUrl))
     return gameUrl
 
-async def createComponents(gameCrafterSession, outputDirectory, cloudGame, cloudGameFolderId):
+async def createComponents(gameCrafterSession, outputDirectory, cloudGame, cloudGameFolderId, isPublish):
     if not outputDirectory:
         raise Exception("outputDirectory cannot be None")
 
     tasks = []
     for directoryPath in next(os.walk(outputDirectory))[1]:
         componentDirectoryPath = "%s/%s" % (outputDirectory, directoryPath)
-        tasks.append(asyncio.create_task(createComponent(gameCrafterSession, componentDirectoryPath, cloudGame, cloudGameFolderId)))
+        tasks.append(asyncio.create_task(createComponent(gameCrafterSession, componentDirectoryPath, cloudGame, cloudGameFolderId, isPublish)))
 
     for task in tasks:
         await task
 
-async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame, cloudGameFolderId):
+async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame, cloudGameFolderId, isPublish):
     if not componentDirectoryPath:
         raise Exception("componentDirectoryPath cannot be None")
 
     componentFile = await instructionsLoader.loadComponentInstructions(componentDirectoryPath)
+
+    isDebugInfo = False if not "isDebugInfo" in componentFile else componentFile["isDebugInfo"]
+    if isDebugInfo and isPublish:
+        print("!!! Skipping %s. It is debug only and we are publishing." % (componentFile["name"]))
+        return
 
     componentType = componentFile["type"]
     

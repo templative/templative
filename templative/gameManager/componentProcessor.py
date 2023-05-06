@@ -170,7 +170,13 @@ async def produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublis
         isProducingOneComponent = componentFilter != None
         isMatchingComponentFilter = isProducingOneComponent and component["name"] == componentFilter
         if not isMatchingComponentFilter and component["disabled"]:
-            print("Skipping disabled %s component." % (component["name"]))
+            if not isProducingOneComponent:
+                print("Skipping disabled %s component." % (component["name"]))
+            continue
+        
+        isDebugInfo = False if not "isDebugInfo" in component else component["isDebugInfo"]
+        if isDebugInfo and isPublish:
+            print("Skipping debug only %s component as we are publishing." % (component["name"]))
             continue
 
         if isProducingOneComponent and not isMatchingComponentFilter:
@@ -251,6 +257,7 @@ async def produceCustomComponent(gameRootDirectoryPath, game, studioCompose, gam
     backInstructionSet = await getBackInstructionSet(componentCompose, componentDirectory)
     componentInstructions = {
         "name": componentName,
+        "isDebugInfo": False if not "isDebugInfo" in componentCompose else componentCompose["isDebugInfo"],
         "type": componentCompose["type"],
         "quantity": componentCompose["quantity"],
         "frontInstructions": frontInstructionSets,
