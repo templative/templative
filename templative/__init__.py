@@ -9,10 +9,11 @@ async def cli():
 # Add "reduce complexity for youtube videos"
 @cli.command()
 @click.option('--component', default=None, help='The component to produce.')
-@click.option('-s/-c', '--simple/--complex', default=False, required=False, type=bool, help='The component to produce.')
-async def produce(component, simple):
+@click.option('-s/-c', '--simple/--complex', default=False, required=False, type=bool, help='Whether complex information is shown. Used for videos.')
+@click.option('-p/-d', '--publish/--debug', default=False, required=False, type=bool, help='Where debug information is included.')
+async def produce(component, simple, publish):
     """Produce the game in the current directory"""
-    await gameManager.produceGame(".", component, simple)
+    await gameManager.produceGame(".", component, simple, publish)
 
 @cli.command()
 async def components():

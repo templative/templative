@@ -3,8 +3,8 @@ from distutils.dir_util import copy_tree
 
 from . import componentProcessor
 
-async def produceGame(gameRootDirectoryPath, componentFilter, isSimple):
-    return await componentProcessor.produceGame(gameRootDirectoryPath, componentFilter, isSimple)
+async def produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublish):
+    return await componentProcessor.produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublish)
 
 async def listComponents(gameRootDirectoryPath):
     await componentProcessor.listComponents(gameRootDirectoryPath)

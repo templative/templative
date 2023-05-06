@@ -4,7 +4,7 @@ from aiofile import AIOFile
 import svgmanip
 from ..componentStats import componentImageSizePixels
 
-async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory, isSimple):
+async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory, isSimple, isPublish):
     if game == None:
         print("game cannot be None.")
         return
@@ -37,12 +37,12 @@ async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompo
     artFilename = "%s.svg" % (artMetaData["templateFilename"])
     artFile = svgmanip.Element(os.path.join(templateFilesDirectory, artFilename))
 
-    await addOverlays(artFile, artMetaData["overlays"], studioCompose, game, gameCompose, componentGamedata, pieceGamedata, isSimple)
+    await addOverlays(artFile, artMetaData["overlays"], studioCompose, game, gameCompose, componentGamedata, pieceGamedata, isSimple, isPublish)
 
     artFileOutputName = ("%s-%s" % (componentCompose["name"], pieceGamedata["name"]))
     artFileOutputFilepath = await createArtfile(artFile, artFileOutputName, outputDirectory)
 
-    await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], studioCompose, game, componentGamedata, pieceGamedata, isSimple)
+    await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], studioCompose, game, componentGamedata, pieceGamedata, isSimple, isPublish)
     await updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], studioCompose, game, componentGamedata, pieceGamedata)
     
     if not componentCompose["type"] in componentImageSizePixels:
@@ -81,7 +81,7 @@ async def createArtfile(artFile, artFileOutputName, outputDirectory):
     artFile.dump(artFileOutputFilepath)
     return artFileOutputFilepath
 
-async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGamedata, pieceGamedata, isSimplifiedGraphic):
+async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGamedata, pieceGamedata, isSimplifiedGraphic, isPublish):
     if artFile == None:
         print("artFile cannot be None.")
         return
@@ -113,6 +113,10 @@ async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGam
         if isComplex and isSimplifiedGraphic:
             continue
 
+        isDebug = overlay["isDebugInfo"] if "isDebugInfo" in overlay else False
+        if isDebug and isPublish:
+            continue
+
         overlayName = await getScopedValue(overlay, studio, game, componentGamedata, pieceGamedata)
         if overlayName != None and overlayName != "":
             overlayFilename = "%s.svg" % (overlayName)
@@ -120,7 +124,7 @@ async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGam
             graphicsInsert = svgmanip.Element(overlayFilepath)
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 
-async def textReplaceInFile(filepath, textReplacements, studio, game, componentGamedata, pieceGamedata, isSimplifiedGraphic):
+async def textReplaceInFile(filepath, textReplacements, studio, game, componentGamedata, pieceGamedata, isSimplifiedGraphic, isPublish):
     if filepath == None:
         print("filepath cannot be None.")
         return
@@ -152,9 +156,15 @@ async def textReplaceInFile(filepath, textReplacements, studio, game, componentG
             key = "{%s}" % textReplacement["key"]
             value = await getScopedValue(textReplacement, studio, game, componentGamedata, pieceGamedata)
             value = await processValueFilters(value, textReplacement)
+
             isComplex = textReplacement["isComplex"] if "isComplex" in textReplacement else False
             if isComplex and isSimplifiedGraphic:
                 value = ""
+
+            isDebug = textReplacement["isDebugInfo"] if "isDebugInfo" in textReplacement else False
+            if isDebug and isPublish:
+                value = ""
+
             contents = contents.replace(key, str(value))
 
     async with AIOFile(filepath,'w') as f:

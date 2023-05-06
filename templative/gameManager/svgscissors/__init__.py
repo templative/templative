@@ -1,7 +1,7 @@
 from . import svgScissors
 import asyncio
 
-async def createArtFilesForComponent(game, studioCompose, gameCompose, componentCompose, frontMetaData, backMetaData, componentGameData, piecesGamedata, outputDirectory, isSimple):
+async def createArtFilesForComponent(game, studioCompose, gameCompose, componentCompose, frontMetaData, backMetaData, componentGameData, piecesGamedata, outputDirectory, isSimple, isPublish):
     if game == None:
         print("game cannot be None.")
         return
@@ -32,8 +32,8 @@ async def createArtFilesForComponent(game, studioCompose, gameCompose, component
 
     tasks = []
     for pieceGamedata in piecesGamedata:
-        tasks.append(asyncio.create_task(svgScissors.createArtFileOfPiece(game, studioCompose, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory, isSimple)))
-    tasks.append(asyncio.create_task(svgScissors.createArtFileOfPiece(game, studioCompose, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory, isSimple)))
+        tasks.append(asyncio.create_task(svgScissors.createArtFileOfPiece(game, studioCompose, gameCompose, componentCompose, componentGameData, pieceGamedata, frontMetaData, outputDirectory, isSimple, isPublish)))
+    tasks.append(asyncio.create_task(svgScissors.createArtFileOfPiece(game, studioCompose, gameCompose, componentCompose, componentGameData, {"name":"back"}, backMetaData, outputDirectory, isSimple, isPublish)))
 
     for task in tasks:
         await task

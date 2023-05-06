@@ -142,7 +142,7 @@ async def addComponentQuantities(componentQuantities, component, piecesGamedata)
         "name":component["name"], "componentQuantity": component["quantity"], "pieceQuantity": quantity
     })
 
-async def produceGame(gameRootDirectoryPath, componentFilter, isSimple):
+async def produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublish):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
 
@@ -176,7 +176,7 @@ async def produceGame(gameRootDirectoryPath, componentFilter, isSimple):
         if isProducingOneComponent and not isMatchingComponentFilter:
             continue
 
-        tasks.append(asyncio.create_task(produceGameComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, component, gameFolderPath, isSimple)))
+        tasks.append(asyncio.create_task(produceGameComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, component, gameFolderPath, isSimple, isPublish)))
 
     rules = await defineLoader.loadRules(gameRootDirectoryPath)
     tasks.append(asyncio.create_task(rulesMarkdownProcessor.produceRulebook(rules, gameFolderPath)))
@@ -188,7 +188,7 @@ async def produceGame(gameRootDirectoryPath, componentFilter, isSimple):
 
     return gameFolderPath
 
-async def produceGameComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, componentCompose, outputDirectory, isSimple):
+async def produceGameComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, componentCompose, outputDirectory, isSimple, isPublish):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
@@ -200,7 +200,7 @@ async def produceGameComponent(gameRootDirectoryPath, game, studioCompose, gameC
         await produceStockComponent(componentCompose, outputDirectory)
         return
     
-    await produceCustomComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, componentCompose, outputDirectory, isSimple)
+    await produceCustomComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, componentCompose, outputDirectory, isSimple, isPublish)
         
 async def produceStockComponent(componentCompose, outputDirectory):
     componentName = componentCompose["name"]
@@ -218,7 +218,7 @@ async def produceStockComponent(componentCompose, outputDirectory):
     componentInstructionFilepath = os.path.join(componentDirectory, "component.json")
     await outputWriter.dumpInstructions(componentInstructionFilepath, stockPartInstructions)
 
-async def produceCustomComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, componentCompose, outputDirectory, isSimple):
+async def produceCustomComponent(gameRootDirectoryPath, game, studioCompose, gameCompose, componentCompose, outputDirectory, isSimple, isPublish):
     componentName = componentCompose["name"]
     
     componentGamedata = await defineLoader.loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentCompose["componentGamedataFilename"])
@@ -258,7 +258,7 @@ async def produceCustomComponent(gameRootDirectoryPath, game, studioCompose, gam
     }
     await outputWriter.dumpInstructions(componentInstructionFilepath, componentInstructions)
 
-    await svgscissors.createArtFilesForComponent(game, studioCompose, gameCompose, componentCompose, componentArtdata, componentBackArtdata, componentGamedata, piecesGamedata, componentDirectory, isSimple)
+    await svgscissors.createArtFilesForComponent(game, studioCompose, gameCompose, componentCompose, componentArtdata, componentBackArtdata, componentGamedata, piecesGamedata, componentDirectory, isSimple, isPublish)
 
 async def getInstructionSetsForFiles(game, componentCompose, componentGamedata, componentFilepath):
     if game == None:
