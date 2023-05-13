@@ -3,6 +3,7 @@ from json import dump, load
 from shutil import copyfile
 from templative.gameUploader import instructionsLoader
 from . import templateMaker
+from .gameStateMaker import createGameStateVts
 from PIL import Image
 from hashlib import md5
 import math
@@ -15,8 +16,12 @@ async def convertToTabletopPlayground(producedDirectoryPath, playgroundPackagesD
     print("Convert %s into a Tabletop Playground package for %s." % (game["displayName"], studio["displayName"]))
 
     packageDirectoryPath = await createPackageDirectories(game["name"], playgroundPackagesDirectory)
-    manifestFilepath = await createManifest(game["name"], packageDirectoryPath)
-    await copyComponentsToPackage(producedDirectoryPath, packageDirectoryPath)
+    packageGuid = await createManifest(game["name"], packageDirectoryPath)
+    templates = await copyComponentsToPackage(producedDirectoryPath, packageDirectoryPath)
+
+    print("!!! Using default player count 2.")
+    defaultPlayerCount = 2
+    gameStateJson = await createGameStateVts(game["name"], packageGuid, templates, defaultPlayerCount, packageDirectoryPath)
 
 async def createPackageDirectories(gameName, packagesDirectoryPath):
     packageDirectoryPath = path.join(packagesDirectoryPath, gameName)
@@ -36,9 +41,14 @@ async def createPackageDirectories(gameName, packagesDirectoryPath):
     return packageDirectoryPath
 
 async def copyComponentsToPackage(producedDirectoryPath, packageDirectoryPath):
+    templates = []
     for directoryPath in next(walk(producedDirectoryPath))[1]:
         componentDirectoryPath = "%s/%s" % (producedDirectoryPath, directoryPath)
-        await copyComponentToPackage(componentDirectoryPath, packageDirectoryPath)
+        templateJson = await copyComponentToPackage(componentDirectoryPath, packageDirectoryPath)
+        if templateJson == None:
+            continue
+        templates.append(templateJson)
+    return templates
 
 async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
     componentInstructions = None
@@ -46,24 +56,22 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
     with open(componentInstructionsFilepath, "r") as componentInstructionsFile:
         componentInstructions = load(componentInstructionsFile)
     
-    createDeckTask = createDeck
-    createBoardTask = createBoard
     supportedInstructionTypes = {
-        "PokerDeck": createDeckTask,
-        "MicroDeck": createDeckTask,
-        "MiniDeck": createDeckTask,
-        "MintTinDeck": createDeckTask,
-        "PokerDeck": createDeckTask,
-        "MintTinAccordion4": createBoardTask,
-        "MintTinAccordion6": createBoardTask,
-        "MintTinAccordion8": createBoardTask,
+        "PokerDeck": createDeck,
+        "MicroDeck": createDeck,
+        "MiniDeck": createDeck,
+        "MintTinDeck": createDeck,
+        "PokerDeck": createDeck,
+        "MintTinAccordion4": createBoard,
+        "MintTinAccordion6": createBoard,
+        "MintTinAccordion8": createBoard,
     }
 
     if not componentInstructions["type"] in supportedInstructionTypes:
         print("Skipping unsupported %s named %s" %(componentInstructions["type"],componentInstructions["name"]))
-        return
+        return None
 
-    await supportedInstructionTypes[componentInstructions["type"]](packageDirectoryPath, componentInstructions)
+    return await supportedInstructionTypes[componentInstructions["type"]](packageDirectoryPath, componentInstructions)
     
 async def createBoard(packageDirectoryPath, componentInstructions):
     textureDirectory = path.join(packageDirectoryPath, "Textures")
@@ -72,7 +80,7 @@ async def createBoard(packageDirectoryPath, componentInstructions):
 
     componentGuid = md5(componentInstructions["name"].encode()).hexdigest()
     templateDirectory = path.join(packageDirectoryPath, "Templates")
-    await createBoardTemplateFile(templateDirectory, componentGuid, componentInstructions["name"], componentInstructions["type"])
+    return await createBoardTemplateFile(templateDirectory, componentGuid, componentInstructions["name"], componentInstructions["type"])
 
 async def createDeck(packageDirectoryPath, componentInstructions):
     textureDirectory = path.join(packageDirectoryPath, "Textures")
@@ -80,7 +88,7 @@ async def createDeck(packageDirectoryPath, componentInstructions):
     await copyBackImageToTextures(componentInstructions["name"], componentInstructions["backInstructions"], textureDirectory)
     componentGuid = md5(componentInstructions["name"].encode()).hexdigest()
     templateDirectory = path.join(packageDirectoryPath, "Templates")
-    await createCardTemplateFile(templateDirectory, componentGuid, componentInstructions["name"], componentInstructions["type"], totalCount, cardColumnCount, cardRowCount)
+    return await createCardTemplateFile(templateDirectory, componentGuid, componentInstructions["name"], componentInstructions["type"], totalCount, cardColumnCount, cardRowCount)
     
 async def createCompositeImageInTextures(componentName, componentType, frontInstructions, textureDirectoryFilepath):
 
@@ -141,7 +149,7 @@ async def createBoardTemplateFile(templateDirectoryPath, guid, name, componentTy
     templateFilepath = path.join(templateDirectoryPath, "%s.json" % guid)
     with open(templateFilepath, "w") as templateFile:
         dump(cardTemplateData, templateFile, indent=2)
-    return templateFilepath
+    return cardTemplateData
 
 async def createCardTemplateFile(templateDirectoryPath, guid, name, componentType, totalCount, cardColumnCount, cardRowCount):
     frontTextureName = "%s-front.jpeg" % name
@@ -150,15 +158,16 @@ async def createCardTemplateFile(templateDirectoryPath, guid, name, componentTyp
     templateFilepath = path.join(templateDirectoryPath, "%s.json" % guid)
     with open(templateFilepath, "w") as templateFile:
         dump(cardTemplateData, templateFile, indent=2)
-    return templateFilepath
+    return cardTemplateData
 
 async def createManifest(gameName, packageDirectoryPath):
+    packageGuid = md5(gameName.encode()).hexdigest()
     manifestData = {
         "Name": gameName,
         "Version": "1",
-        "GUID": md5(gameName.encode()).hexdigest()
+        "GUID": packageGuid
     }
     manifestFilepath = path.join(packageDirectoryPath, "manifest.json")
     with open(manifestFilepath, "w") as manifestFile:
         dump(manifestData, manifestFile, indent=2)
-    return manifestFilepath
+    return packageGuid
