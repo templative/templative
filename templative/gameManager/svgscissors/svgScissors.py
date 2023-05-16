@@ -1,4 +1,4 @@
-import os
+import os, subprocess, time
 from xml.etree import ElementTree
 from aiofile import AIOFile
 import svgmanip
@@ -288,7 +288,7 @@ async def getScopedValue(scopedValue, studio, game, componentGamedata, pieceGame
 
     return scopeData[source]
 
-def runCommands(commands):
+def runCommands(commands):   
     message = ""
     for command in commands:
         message = message + command + " "
@@ -311,7 +311,10 @@ async def exportSvgToImage(filepath, imageSizePixels, name, outputDirectory):
     runCommands(createPngCommands)
 
     jpgFilepath = os.path.join(absoluteOutputDirectory, "%s.jpg" % (name))
-    convertCommands = [ "convert", pngFilepath, jpgFilepath ]
+    convertCommands = [ 
+        "magick convert", 
+        '"%s"' % pngFilepath, 
+        '"%s"' % jpgFilepath ]
     runCommands(convertCommands)
 
     os.remove(pngFilepath)
