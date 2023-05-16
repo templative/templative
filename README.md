@@ -37,6 +37,7 @@ Use `templative --help` for more info.
 ## Windows Prereqs
 - Install [ImageMagick](https://imagemagick.org/script/download.php#windows).
 - Add ImageMagick bin to your [path](https://stackoverflow.com/questions/44272416/how-to-add-a-folder-to-path-environment-variable-in-windows-10-with-screensho).
+- Add `C:\Program Files\ImageMagick-7.1.1-Q16-HDRI` to path.
 - Install [Inkscape](https://inkscape.org).
 - Add `C:\Program Files\Inkscape\bin` to path. Inkscape has a Python installation within it, so take to care to order your Python and Inkscape path declarations.
 - Install [GTK](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases).
@@ -48,6 +49,7 @@ Use `templative --help` for more info.
 - Create and cd into a directory
 - `templative init`
 - `templative produce` to create a version of the game in the output folder. 
+- Create `./output` folder.
 
 ## Creating Components
 
