@@ -8,6 +8,7 @@ from fpdf import FPDF
 from templative.gameUploader.instructionsLoader import getLastOutputFileDirectory
 
 componentDimensionsInches = {
+    "BusinessDeck": (2, 3.5),
     "PokerDeck": (2.45, 3.45),
     "MiniDeck": (1.75, 2.5),
     "MicroDeck": (1.25, 1.75),

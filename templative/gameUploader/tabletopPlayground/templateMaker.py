@@ -6,6 +6,7 @@ def createCardTemplate(guid, name, componentType, frontTextureName, totalCount, 
         indices.append(i)
         
     componentDimensions = {
+        "BusinessDeck": (675 * gameCrafterScaleToPlaygroundScale, 1125 * gameCrafterScaleToPlaygroundScale, 0.05),
         "PokerDeck": (825 * gameCrafterScaleToPlaygroundScale, 1125 * gameCrafterScaleToPlaygroundScale, 0.05),
         "MiniDeck": (600 * gameCrafterScaleToPlaygroundScale, 825 * gameCrafterScaleToPlaygroundScale, 0.05),
         "MicroDeck": (450 * gameCrafterScaleToPlaygroundScale, 600 * gameCrafterScaleToPlaygroundScale, 0.2),

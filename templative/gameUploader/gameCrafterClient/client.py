@@ -69,6 +69,7 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
         # "CustomColorD8": createDieTask,
         
         "PokerDeck": createDeckTask,
+        "BusinessDeck": createDeckTask,
         "MicroDeck": createDeckTask,
         "MiniDeck": createDeckTask,
         "MintTinDeck": createDeckTask,

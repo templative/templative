@@ -57,7 +57,7 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
         componentInstructions = load(componentInstructionsFile)
     
     supportedInstructionTypes = {
-        "PokerDeck": createDeck,
+        "BusinessDeck": createDeck,
         "MicroDeck": createDeck,
         "MiniDeck": createDeck,
         "MintTinDeck": createDeck,
@@ -103,6 +103,7 @@ async def createCompositeImageInTextures(componentName, componentType, frontInst
 
     componentDimensions = {
         "PokerDeck": (825, 1125),
+        "BusinessDeck": (675, 1125),
         "MiniDeck": (600, 825),
         "MicroDeck": (450, 600),
         "MintTinDeck": (750, 1125),
