@@ -1,3 +1,4 @@
 output/*
 !.last
+printout.pdf
 .playground
