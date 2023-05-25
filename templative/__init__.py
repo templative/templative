@@ -34,12 +34,9 @@ async def upload(input, publish):
 
 @cli.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
-@click.option('-o', '--output', default=None, help='The Tabletop Playground packages directory. Such as "~/Library/Application Support/Epic/TabletopPlayground/Packages"')
+@click.option('-o', '--output', default=None, help='The Tabletop Playground packages directory. Such as "~/Library/Application Support/Epic/TabletopPlayground/Packages" or "C:\Program Files (x86)\Steam\steamapps\common\TabletopPlayground\TabletopPlayground\PersistentDownloadDir"')
 async def playground(input,output):
-    """Convert a produced game into a tabletop playground game"""
-    if output == None:
-        print("Missing --output directory.")
-        return
+    """Convert a produced game into a tabletop playground game"""    
     await gameUploader.convertToTabletopPlayground(input, output)
 
 @cli.group()

@@ -1,3 +1,5 @@
+import os
+from aiofile import AIOFile
 from .gameCrafterClient import client
 from .instructionsLoader import getLastOutputFileDirectory
 from . import gameCrafterClient, tabletopPlayground
@@ -15,8 +17,33 @@ async def uploadGame(gameRootDirectoryPath, isPublish):
     await gameCrafterClient.logout(session)
     return result
 
-async def convertToTabletopPlayground(gameRootDirectoryPath, playgroundDirectory):
+async def lookForPlaygroundFile():
+    playgroundFileLocation = "./.playground"
+    if not os.path.exists(playgroundFileLocation):
+        return None
+    
+    async with AIOFile(playgroundFileLocation, mode="r") as playground:
+        return await playground.read()
+    
+async def writePlaygroundFile(outputPath):
+    playgroundFileLocation = os.path.join("./", ".playground")
+    async with AIOFile(playgroundFileLocation, mode="w") as playground:
+        await playground.write(outputPath)
+
+async def getPlaygroundDirectory(inputedPlaygroundDirectory):
+    if inputedPlaygroundDirectory != None:
+        return inputedPlaygroundDirectory
+    
+    return await lookForPlaygroundFile()  
+
+async def convertToTabletopPlayground(gameRootDirectoryPath, inputedPlaygroundDirectory):
     if gameRootDirectoryPath is None:
         gameRootDirectoryPath = await getLastOutputFileDirectory()
+
+    playgroundDirectory = getPlaygroundDirectory(inputedPlaygroundDirectory)
+    if playgroundDirectory == None:
+        print("Missing --output directory.")
+        return
+    await writePlaygroundFile(playgroundDirectory)
 
     return await tabletopPlayground.convertToTabletopPlayground(gameRootDirectoryPath, playgroundDirectory)
