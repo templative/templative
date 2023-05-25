@@ -12,6 +12,9 @@ def createCardTemplate(guid, name, componentType, frontTextureName, totalCount, 
         "MicroDeck": (450 * gameCrafterScaleToPlaygroundScale, 600 * gameCrafterScaleToPlaygroundScale, 0.2),
         "MintTinDeck": (750 * gameCrafterScaleToPlaygroundScale, 1125 * gameCrafterScaleToPlaygroundScale, 0.05),
         "HexDeck": (1200 * gameCrafterScaleToPlaygroundScale, 1050 * gameCrafterScaleToPlaygroundScale, 0.05),
+        "SmallSquareChit": (225 * gameCrafterScaleToPlaygroundScale, 225 * gameCrafterScaleToPlaygroundScale, 0.2),
+        "MediumSquareChit": (300 * gameCrafterScaleToPlaygroundScale, 300 * gameCrafterScaleToPlaygroundScale, 0.2),
+        "LargeSquareChit": (375 * gameCrafterScaleToPlaygroundScale, 375 * gameCrafterScaleToPlaygroundScale, 0.2),
     }
     dimensions = (6,9,0.05)
     if componentType in componentDimensions:

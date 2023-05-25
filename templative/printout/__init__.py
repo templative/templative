@@ -14,6 +14,9 @@ componentDimensionsInches = {
     "MicroDeck": (1.25, 1.75),
     "MintTinDeck": (2.05, 3.43),
     "HexDeck": (3.75, 3.25),
+    "SmallSquareChit": (0.5, 0.5),
+    "MediumSquareChit": (0.75, 0.75),
+    "LargeSquareChit": (1, 1),
 }
 
 printoutSizeType = "Letter"

@@ -62,6 +62,9 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
         "MiniDeck": createDeck,
         "MintTinDeck": createDeck,
         "PokerDeck": createDeck,
+        "SmallSquareChit": createDeck,
+        "MediumSquareChit": createDeck,
+        "LargeSquareChit": createDeck,
         "MintTinAccordion4": createBoard,
         "MintTinAccordion6": createBoard,
         "MintTinAccordion8": createBoard,
@@ -104,6 +107,7 @@ async def createCompositeImageInTextures(componentName, componentType, frontInst
     componentDimensions = {
         "PokerDeck": (825, 1125),
         "BusinessDeck": (675, 1125),
+        "MediumSquareChit": (300,300),
         "MiniDeck": (600, 825),
         "MicroDeck": (450, 600),
         "MintTinDeck": (750, 1125),
