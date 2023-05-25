@@ -40,7 +40,7 @@ async def convertToTabletopPlayground(gameRootDirectoryPath, inputedPlaygroundDi
     if gameRootDirectoryPath is None:
         gameRootDirectoryPath = await getLastOutputFileDirectory()
 
-    playgroundDirectory = getPlaygroundDirectory(inputedPlaygroundDirectory)
+    playgroundDirectory = await getPlaygroundDirectory(inputedPlaygroundDirectory)
     if playgroundDirectory == None:
         print("Missing --output directory.")
         return
