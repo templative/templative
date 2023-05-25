@@ -107,7 +107,9 @@ async def createCompositeImageInTextures(componentName, componentType, frontInst
     componentDimensions = {
         "PokerDeck": (825, 1125),
         "BusinessDeck": (675, 1125),
+        "SmallSquareChit": (225,225),
         "MediumSquareChit": (300,300),
+        "LargeSquareChit": (325,325),
         "MiniDeck": (600, 825),
         "MicroDeck": (450, 600),
         "MintTinDeck": (750, 1125),
