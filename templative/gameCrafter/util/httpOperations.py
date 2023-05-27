@@ -50,6 +50,10 @@ async def postGame(gameCrafterSession, name, designerId):
         private_viewing=1,
     )
 
+async def deleteGame(gameCrafterSession, id):
+    url = "%s/game/%s" % (gameCrafterBaseUrl, id)
+    return await httpClient.delete(gameCrafterSession, url)
+
 async def getUser(gameCrafterSession):
     url = "%s/user/%s" % (gameCrafterBaseUrl, gameCrafterSession.userId)
 
