@@ -5,13 +5,13 @@
      version="1.1"
      x="0px"
      y="0px"
-     width="90px"
-     height="90px"
-     viewBox="0 0 90 90"
+     width="375"
+     height="375"
+     viewBox="0 0 375 375"
      enable-background="new 0 0 90 90"
      xml:space="preserve"
      id="svg759"
-     sodipodi:docname="principalityControlCircleChitsFront.svg"
+     sodipodi:docname="LargeCircleChit.svg"
      inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
      xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
      xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -35,12 +35,12 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="11.411111"
-     inkscape:cx="34.746835"
-     inkscape:cy="45"
-     inkscape:window-width="2400"
-     inkscape:window-height="1261"
-     inkscape:window-x="4691"
-     inkscape:window-y="1025"
+     inkscape:cx="21.163583"
+     inkscape:cy="45.087634"
+     inkscape:window-width="2560"
+     inkscape:window-height="1351"
+     inkscape:window-x="1491"
+     inkscape:window-y="585"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg759" />
 <pattern
@@ -504,24 +504,26 @@
 		</g>
 	</g>
 </pattern>
-<polygon
-     fill="#929497"
-     points="90,90 90,0 0,0 0,90 "
-     id="polygon235" /><circle
-     fill="white"
-     stroke="#ec1e28"
-     cx="45"
-     cy="45"
-     r="36"
-     id="circle237"
-     style="stroke:none;fill:#414141;fill-opacity:1" /><circle
-     fill="none"
-     stroke="#2ba6de"
-     stroke-dasharray="0.533"
-     cx="45"
-     cy="45"
-     r="27"
-     id="circle239"
-     style="fill:#f93;fill-opacity:1;stroke:none" />
+<g
+     id="g359"
+     transform="scale(4.1666667)"><polygon
+         fill="#929497"
+         points="0,90 90,90 90,0 0,0 "
+         id="polygon235" /><circle
+         fill="white"
+         stroke="#ec1e28"
+         cx="45"
+         cy="45"
+         r="36"
+         id="circle237"
+         style="fill:#414141;fill-opacity:1;stroke:none" /><circle
+         fill="none"
+         stroke="#2ba6de"
+         stroke-dasharray="0.533"
+         cx="45"
+         cy="45"
+         r="27"
+         id="circle239"
+         style="fill:#f93;fill-opacity:1;stroke:none" /></g>
 
 </svg>

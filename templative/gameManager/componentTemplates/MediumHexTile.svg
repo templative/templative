@@ -16,46 +16,8 @@
      xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
      xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
      xmlns="http://www.w3.org/2000/svg"
-     xmlns:svg="http://www.w3.org/2000/svg"><defs
-     id="defs497" />
-<g
-     id="Outlines"
-     transform="scale(4.1666667)">
-	<polygon
-     fill="#929497"
-     points="0,0 0,180 198,180 198,0 "
-     id="polygon2" />
-	<path
-     fill="white"
-     stroke="#eb242b"
-     d="M 51.048,165.146 9.945,93.955 c -1.261,-2.185 -1.261,-5.726 0,-7.91 L 51.048,14.855 C 52.309,12.67 55.376,10.9 57.898,10.9 h 82.205 c 2.521,0 5.589,1.771 6.85,3.955 l 41.103,71.19 c 1.261,2.185 1.261,5.726 0,7.91 l -41.103,71.19 c -1.261,2.186 -4.328,3.955 -6.85,3.955 H 57.897 c -2.521,0.001 -5.588,-1.769 -6.849,-3.954 z"
-     id="path4" />
-	<polygon
-     fill="none"
-     stroke="#2da6de"
-     stroke-dasharray="1.3324"
-     points="179.946,90 139.473,160.101 58.527,160.101 18.054,90 58.527,19.899 139.473,19.899 "
-     id="polygon6" /><?xml version="1.0" encoding="UTF-8" standalone="no"?>
-		<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-		
-		<svg
-     version="1.1"
-     x="0px"
-     y="0px"
-     width="198"
-     height="180"
-     viewBox="0 0 198 180"
-     enable-background="new 0 0 198 180"
-     xml:space="preserve"
-     id="svg2576"
-     sodipodi:docname="catholicProvinceHexTilesBack.svg"
-     inkscape:version="1.2.2 (732a01da63, 2022-12-09)"><defs
-     id="defs2580">
-			
-			
-			
-		</defs><sodipodi:namedview
-     id="namedview2578"
+     xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview15"
      pagecolor="#ffffff"
      bordercolor="#999999"
      borderopacity="1"
@@ -64,40 +26,51 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.0086093"
-     inkscape:cx="494.24491"
-     inkscape:cy="386.17531"
+     inkscape:zoom="1.3693333"
+     inkscape:cx="277.14216"
+     inkscape:cy="375.73028"
      inkscape:window-width="2560"
      inkscape:window-height="1351"
      inkscape:window-x="1491"
      inkscape:window-y="585"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg495" />
-		<polygon
+     inkscape:current-layer="svg495" /><defs
+     id="defs497">
+	
+	
+	
+		
+		
+		
+		
+<defs
+     id="defs2580">
+			
+			
+			
+		</defs>
+		
+		
+		
+		
+		</defs>
+
+
+
+<polygon
      fill="#929497"
      points="198,180 198,0 0,0 0,180 "
-     id="polygon2091" /><path
+     id="polygon2"
+     transform="matrix(4.1666667,0,0,4.1666667,-3.3000001e-6,-3e-6)" /><path
      fill="white"
      stroke="#eb242b"
-     d="M 51.048,165.146 9.945,93.955 c -1.261,-2.185 -1.261,-5.726 0,-7.91 L 51.048,14.855 C 52.309,12.67 55.376,10.9 57.898,10.9 h 82.205 c 2.521,0 5.589,1.771 6.85,3.955 l 41.103,71.19 c 1.261,2.185 1.261,5.726 0,7.91 l -41.103,71.19 c -1.261,2.186 -4.328,3.955 -6.85,3.955 H 57.897 c -2.521,0.001 -5.588,-1.769 -6.849,-3.954 z"
-     id="path2093"
-     style="fill:#ee8b00;fill-opacity:1;stroke:none" /><polygon
+     d="M 212.69791,688.10833 41.435415,391.47916 c -5.25417,-9.10417 -5.25417,-23.85833 0,-32.95833 L 212.69791,61.895824 c 5.25417,-9.10416 18.03334,-16.47916 28.54167,-16.47916 h 342.52083 c 10.50417,0 23.2875,7.37916 28.54167,16.47916 l 171.2625,296.625006 c 5.25417,9.10416 5.25417,23.85833 0,32.95833 l -171.2625,296.625 c -5.25417,9.10834 -18.03333,16.47917 -28.54167,16.47917 h -342.525 c -10.50416,0.004 -23.28333,-7.37083 -28.5375,-16.475 z"
+     id="path4"
+     style="fill:none;stroke-width:4.16667" /><polygon
      fill="none"
      stroke="#2da6de"
      stroke-dasharray="1.3324"
-     points="58.527,160.101 18.054,90 58.527,19.899 139.473,19.899 179.946,90 139.473,160.101 "
-     id="polygon2095"
-     style="fill:black;fill-opacity:1;stroke:none" />
-		
-		<g
-     id="Your_Artwork_Here">
-		</g>
-		</svg>
-		
-</g>
-
-<g
-     id="g493"
-     transform="scale(4.1666667)">
-</g>
-</svg>
+     points="58.527,19.899 139.473,19.899 179.946,90 139.473,160.101 58.527,160.101 18.054,90 "
+     id="polygon6"
+     transform="matrix(4.1666667,0,0,4.1666667,0.90210556,-3e-6)"
+     style="fill:none" /></svg>

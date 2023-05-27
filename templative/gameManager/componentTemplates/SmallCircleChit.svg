@@ -6,9 +6,9 @@
      id="YOUR_ARTWORK_HERE"
      x="0px"
      y="0px"
-     width="54px"
-     height="54px"
-     viewBox="0 0 54 54"
+     width="225"
+     height="225"
+     viewBox="0 0 225 225"
      enable-background="new 0 0 54 54"
      xml:space="preserve"
      sodipodi:docname="SmallCircleChit.svg"
@@ -27,13 +27,13 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="19.018519"
-     inkscape:cx="20.848101"
-     inkscape:cy="27"
-     inkscape:window-width="2400"
-     inkscape:window-height="1261"
-     inkscape:window-x="4691"
-     inkscape:window-y="1025"
+     inkscape:zoom="2.3773149"
+     inkscape:cx="157.95131"
+     inkscape:cy="64.989287"
+     inkscape:window-width="2560"
+     inkscape:window-height="1351"
+     inkscape:window-x="1491"
+     inkscape:window-y="585"
      inkscape:window-maximized="1"
      inkscape:current-layer="YOUR_ARTWORK_HERE" />
 <pattern
@@ -497,30 +497,32 @@
 		</g>
 	</g>
 </pattern>
-<polygon
-     fill="#929497"
-     points="0.002,0.016 0.002,54.016 54.002,54.016 54.002,0.016 0.002,0.016 "
-     id="polygon235" />
-<circle
-     fill="#FFFFFF"
-     stroke="#EC1C24"
-     stroke-width="0.5"
-     cx="27"
-     cy="27.001"
-     r="18"
-     id="circle237"
-     style="fill:#ffc334;fill-opacity:1;stroke:none" />
 
 
 
-<circle
-     fill="none"
-     stroke="#00ADEE"
-     stroke-width="0.625"
-     stroke-dasharray="0.2498"
-     cx="27"
-     cy="27"
-     r="9"
-     id="circle629"
-     style="stroke:none;fill:#e6e7e8;fill-opacity:1" />
+
+
+<g
+     id="g409"
+     transform="matrix(4.1666667,0,0,4.1666667,-0.00833333,-0.06666667)"><polygon
+         fill="#929497"
+         points="54.002,0.016 0.002,0.016 0.002,54.016 54.002,54.016 "
+         id="polygon235" /><circle
+         fill="#FFFFFF"
+         stroke="#EC1C24"
+         stroke-width="0.5"
+         cx="27"
+         cy="27.000999"
+         r="18"
+         id="circle237"
+         style="fill:#ffc334;fill-opacity:1;stroke:none" /><circle
+         fill="none"
+         stroke="#00ADEE"
+         stroke-width="0.625"
+         stroke-dasharray="0.2498"
+         cx="27"
+         cy="27"
+         r="9"
+         id="circle629"
+         style="fill:#e6e7e8;fill-opacity:1;stroke:none" /></g>
 </svg>

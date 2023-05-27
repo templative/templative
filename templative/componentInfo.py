@@ -119,24 +119,24 @@ COMPONENT_INFO = {
         "GameCrafterPackagingDepthMillimeters": 1
     },
     "SmallCircleChit": {
-        "DimensionsPixels": [300, 300],
-        "DimensionsInches": [0.5, 0.5],
+        "DimensionsPixels": [225, 225],
+        "DimensionsInches": [0.5,0.5],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
     "MediumCircleChit": {
-        "DimensionsPixels": [375, 375],
-        "DimensionsInches": [0.75, 0.75],
+        "DimensionsPixels": [300, 300],
+        "DimensionsInches": [0.75,0.75],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
     "LargeCircleChit": {
-        "DimensionsPixels": [450, 450],
-        "DimensionsInches": [1, 1],
+        "DimensionsPixels": [375, 375],
+        "DimensionsInches": [1,1],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
