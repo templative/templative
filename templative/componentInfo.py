@@ -191,14 +191,20 @@ COMPONENT_INFO = {
         "GameCrafterPackagingDepthMillimeters": 2
     },
     "PokerFolio": {
-        "DimensionsPixels": [10, 3.5],
-        "DimensionsInches": [8.19, 3.43],
-        "PlaygroundThickness": 0.2,
-        "GameCrafterUploadTask": "TWOSIDEDBOX"
+        "DimensionsPixels": [3075,1125],
+        "DimensionsInches": [10, 3.5],
+        "PlaygroundThickness": 0.05,
+        "PlaygroundCreationTask": "DECK",
+        "GameCrafterUploadTask": "TWOSIDED",
+        "GameCrafterPackagingDepthMillimeters": 1
     },
     "MintTinFolio": {
         "DimensionsPixels": [2625, 1050],
-        "GameCrafterUploadTask": "TWOSIDEDBOX"
+        "DimensionsInches": [8.5, 3.13],
+        "PlaygroundThickness": 0.05,
+        "PlaygroundCreationTask": "DECK",
+        "GameCrafterUploadTask": "TWOSIDED",
+        "GameCrafterPackagingDepthMillimeters": 1
     },
     "MintTin": {
         "DimensionsPixels": [750, 1125]
