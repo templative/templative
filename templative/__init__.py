@@ -8,10 +8,14 @@ async def cli():
 
 
 cli.add_command(gameCrafter.upload)
+cli.add_command(gameCrafter.list)
+cli.add_command(gameCrafter.deletegames)
+
 cli.add_command(gameManager.init)
 cli.add_command(gameManager.produce)
 cli.add_command(gameManager.depth)
 cli.add_command(gameManager.components)
+
 cli.add_command(rules.rules)
 cli.add_command(commands.create)
 cli.add_command(zettelkasten.zk)

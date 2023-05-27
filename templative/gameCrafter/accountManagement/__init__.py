@@ -1,4 +1,4 @@
-import os
+import os, asyncio
 from tabulate import tabulate
 from ..util import httpOperations
 
@@ -8,6 +8,15 @@ async def printUser(gameCrafterSession):
 async def listGames(gameCrafterSession):
     gamesResponse = await httpOperations.getGamesForUser(gameCrafterSession)
     await printGames(gamesResponse["items"])
+
+async def deletePageOfGames(gameCrafterSession):
+    gamesResponse = await httpOperations.getGamesForUser(gameCrafterSession)
+    deleted = ""
+    tasks = []
+    for game in gamesResponse["items"]:
+        deleted = deleted + game["name"] + " "
+        asyncio.create_task((httpOperations.deleteGame(gameCrafterSession, game["id"])))
+    res = await asyncio.gather(*tasks, return_exceptions=True)
 
 async def listGamesForUserDesigners(gameCrafterSession):
     designersResponse = await httpOperations.getDesigners(gameCrafterSession)

@@ -20,8 +20,7 @@ async def createComponents(gameCrafterSession, outputDirectory, cloudGame, cloud
         componentDirectoryPath = "%s/%s" % (outputDirectory, directoryPath)
         tasks.append(asyncio.create_task(createComponent(gameCrafterSession, componentDirectoryPath, cloudGame, cloudGameFolderId, isPublish)))
 
-    for task in tasks:
-        await task
+    res = await asyncio.gather(*tasks, return_exceptions=True)
 
 async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame, cloudGameFolderId, isPublish):
     if not componentDirectoryPath:
@@ -116,8 +115,7 @@ async def createTwoSided(gameCrafterSession, component, identity, cloudGameId, c
     for instructions in frontInstructions:
         tasks.append(asyncio.create_task(createTwoSidedPiece(gameCrafterSession, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])))
 
-    for task in tasks:
-        await task
+    res = await asyncio.gather(*tasks, return_exceptions=True)
 
 async def createTwoSidedPiece(gameCrafterSession, instructions, setId, cloudComponentFolderId):
     name = instructions["name"]
@@ -149,8 +147,7 @@ async def createTwoSidedSlugged(gameCrafterSession, component, identity, cloudGa
     for instructions in frontInstructions:
         tasks.append(asyncio.create_task(createTwoSidedSluggedPiece(gameCrafterSession, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])))
 
-    for task in tasks:
-        await task
+    res = await asyncio.gather(*tasks, return_exceptions=True)
 
 async def createTwoSidedSluggedPiece(gameCrafterSession, instructions, setId, cloudComponentFolderId):
     name = instructions["name"]
@@ -213,8 +210,7 @@ async def createDeck(gameCrafterSession, component, identity, cloudGameId, cloud
     for instructions in frontInstructions:
         tasks.append(asyncio.create_task(createDeckCard(gameCrafterSession, instructions, cloudPokerDeck["id"], cloudComponentFolder["id"])))
 
-    for task in tasks:
-        await task
+    res = await asyncio.gather(*tasks, return_exceptions=True)
 
 async def createDeckCard(gameCrafterSession, instructions, deckId, cloudComponentFolderId):
     name = instructions["name"]

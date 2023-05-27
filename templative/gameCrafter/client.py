@@ -23,8 +23,7 @@ async def uploadGame(gameCrafterSession, gameRootDirectoryPath, isPublish):
     tasks.append(asyncio.create_task(createComponents(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"], isPublish)))
     tasks.append(asyncio.create_task(createRules(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))
     # tasks.append(asyncio.create_task(createAdvertisementImages(gameCrafterSession)))
-    for task in tasks:
-        await task
+    res = await asyncio.gather(*tasks, return_exceptions=True)
 
     gameUrl = "%s%s%s"%(gameCrafterBaseUrl, "/make/games/", cloudGame["id"])
     print("Uploads finished for %s, visit %s" % (cloudGame["name"], gameUrl))

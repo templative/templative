@@ -8,7 +8,8 @@ async def loadGameCompose(gameRootDirectoryPath):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
-    async with AIOFile(os.path.join(gameRootDirectoryPath, "game-compose.json")) as gameCompose:
+    gameComposePath = os.path.join(gameRootDirectoryPath, "game-compose.json")
+    async with AIOFile(gameComposePath, "r") as gameCompose:
         return json.loads(await gameCompose.read())
 
 async def loadComponentCompose(gameRootDirectoryPath):
