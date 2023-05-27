@@ -7,7 +7,7 @@ from templative.gameManager.instructionsLoader import getLastOutputFileDirectory
 baseUrl = "https://www.thegamecrafter.com"
 
 @click.command()
-@click.option('-i', '--input', default="None", help='The directory of the produced game. Defaults to last produced directory.')
+@click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
 @click.option('-p/-d', '--publish/--debug', default=False, required=False, type=bool, help='Whether to treat this as the official release.')
 async def upload(input, publish):
     """Upload a produced game in a directory"""
