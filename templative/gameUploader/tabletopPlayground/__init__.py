@@ -69,9 +69,9 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
     if not "PlaygroundCreationTask" in component:
         print("Skipping %s that has no PlaygroundCreationTask." % componentInstructions["type"])
         return None
-    playgroundTask = COMPONENT_INFO[componentInstructions["type"]]["PlaygroundCreationTask"]
+    playgroundTask = component["PlaygroundCreationTask"]
 
-    if playgroundTask in supportedInstructionTypes:
+    if not playgroundTask in supportedInstructionTypes:
         print("Skipping unsupported %s." % playgroundTask)
         return None
     instruction = supportedInstructionTypes[playgroundTask]

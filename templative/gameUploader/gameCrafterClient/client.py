@@ -3,7 +3,6 @@ import asyncio
 
 from . import componentCreator
 from .. import instructionsLoader, gameCrafterClient
-from templative.componentInfo import COMPONENT_INFO
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
@@ -54,46 +53,15 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
         return
 
     componentType = componentFile["type"]
-    
     if componentFile["quantity"] == 0:
         return
     
-    createDeckTask = componentCreator.createDeck
-    createTwoSidedSluggedTask = componentCreator.createTwoSidedSlugged
-    createTwoSidedBoxTask = componentCreator.createTwoSidedBox
-    createTuckBoxTask = componentCreator.createTuckBox
-    createTwoSidedTask = componentCreator.createTwoSided
-    
-    if not component["type"] in component["type"]:
-        print("Missing component info for %s." % component["name"])
-        return
-    component = COMPONENT_INFO[component["type"]]
-
-    if not "GameCrafterUploadTask" in component:
-        print("No upload task for %s." % component["type"])
-        return
-    
-    componentTasks = {        
-        "DECK": createDeckTask,
-        "TWOSIDEDBOX": createTwoSidedBoxTask,
-        "TWOSIDEDSLUG": createTwoSidedSluggedTask,
-        "TUCKBOX": createTuckBoxTask,
-        "TWOSIDED": createTwoSidedTask,
-    }
-
-    missingDirectComponentMatch = not component["GameCrafterUploadTask"] in componentTasks
-
     componentTypeTokens = componentType.split("_")
     isStockComponent = componentTypeTokens[0].upper() == "STOCK" 
 
-    if missingDirectComponentMatch and not isStockComponent:
-        print("!!! Skipping %s. The %s component type is not currently supported." % (componentFile["name"], componentType))
-        return
-    
     if isStockComponent:
         await componentCreator.createStockPart(gameCrafterSession, componentFile, cloudGame["id"])
         return
-    
-    uploadTask = componentTasks[component["GameCrafterUploadTask"]]
-    await uploadTask(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+
+    await componentCreator.createCustomComponent(gameCrafterSession, componentType, componentFile, cloudGame["id"], cloudGameFolderId)
         

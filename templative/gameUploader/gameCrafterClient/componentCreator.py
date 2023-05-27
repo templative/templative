@@ -1,6 +1,33 @@
 from .. import gameCrafterClient
 from os.path import join
 import asyncio
+from templative.componentInfo import COMPONENT_INFO
+
+async def createCustomComponent(gameCrafterSession, componentType, componentFile, cloudGameId, cloudGameFolderId):
+    if not componentType in COMPONENT_INFO:
+        print("Missing component info for %s." % component["name"])
+        return
+    component = COMPONENT_INFO[componentType]
+
+    createDeckTask = createDeck
+    createTwoSidedSluggedTask = createTwoSidedSlugged
+    createTwoSidedBoxTask = createTwoSidedBox
+    createTuckBoxTask = createTuckBox
+    createTwoSidedTask = createTwoSided
+    
+    componentTasks = {        
+        "DECK": createDeckTask,
+        "TWOSIDEDBOX": createTwoSidedBoxTask,
+        "TWOSIDEDSLUG": createTwoSidedSluggedTask,
+        "TUCKBOX": createTuckBoxTask,
+        "TWOSIDED": createTwoSidedTask,
+    }
+
+    if not component["GameCrafterUploadTask"] in componentTasks:
+        print("Missing component info for %s." % component["name"])
+        return
+    uploadTask = componentTasks[component["GameCrafterUploadTask"]]
+    await uploadTask(gameCrafterSession, componentFile, componentType, cloudGameId, cloudGameFolderId)
 
 async def createStockPart(gameCrafterSession, component, cloudGameId):
     componentName = component["name"]
