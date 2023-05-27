@@ -215,7 +215,6 @@ COMPONENT_INFO = {
         "DimensionsPixels": [5925, 5925],
         "GameCrafterUploadTask": "TWOSIDEDBOX"
     },
-
     "PokerTuckBox36": {
         "DimensionsPixels": [2100, 1800],
         "GameCrafterUploadTask": "TUCKBOX"
