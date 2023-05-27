@@ -240,5 +240,5 @@ COMPONENT_INFO = {
     "PokerTuckBox108": {
         "DimensionsPixels": [3075, 2250],
         "GameCrafterUploadTask": "TUCKBOX"
-    },
+    }
 }

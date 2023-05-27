@@ -1,5 +1,5 @@
 def createGameState(name, slotTeams, slotIds):
-    {
+    return {
         "notes": "This is a Templative generated game state of %s." % (name),
         "mapName": "HDRI_GranCanyon", "backgroundTexture": { "resourceName": "", "packageGuid": "00000000000000000000000000000000" },
         "physicsLocked": False,  "measureUnit": 2.5399999618530273, "rotationStep": 90, "measureAngles": "None", "alwaysSnap": False, "liftOverRegular": True, "gravityMultiplier": 1,

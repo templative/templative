@@ -1,7 +1,7 @@
 import uuid
 
 def createCardHolder(playerIndex, ownerColor, locationX, locationY, rotationQuaternion):
-    {
+    return {
         "uniqueId": str(uuid.uuid4()),
         "objectName": "CardHolder",
         "objectDescription": "",

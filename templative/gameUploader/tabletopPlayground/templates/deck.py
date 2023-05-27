@@ -1,7 +1,7 @@
 import uuid
 
 def createDeck(name, componentTemplateGuid, ownerIndex, translation, stackSerialization):
-    {
+    return {
         "uniqueId": str(uuid.uuid4()),
         "objectName": name,
         "objectDescription": "",

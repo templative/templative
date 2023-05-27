@@ -1,7 +1,7 @@
 import uuid
 
 def createTable():
-    {
+    return {
         "uniqueId": str(uuid.uuid4()),
         "objectName": "Table",
         "objectDescription": "Knock on wood.",

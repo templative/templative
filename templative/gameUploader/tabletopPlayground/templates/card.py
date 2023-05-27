@@ -1,5 +1,5 @@
 def createCard(guid, name, frontTextureName, backTextureName, cardColumnCount, cardRowCount, dimensions, indices):
-    {
+    return {
         "Type": "Card",
         "GUID": guid,
         "Name": name,
