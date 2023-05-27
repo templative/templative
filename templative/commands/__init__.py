@@ -8,7 +8,7 @@ from .stockpartCommands import stock
 
 @click.group()
 async def create():
-    """Create components from templates"""
+    """Component Creation Commands"""
     pass
 
 create.add_command(accordion)

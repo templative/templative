@@ -1,15 +1,53 @@
 from os import path, mkdir, walk
 from json import dump, load
 from shutil import copyfile
-from templative.gameUploader import instructionsLoader
+from templative.gameManager import instructionsLoader
 from . import templateMaker
-from templative.gameUploader.tabletopPlayground.templates import stockModel
+from templative.playground.templates import stockModel
 from .gameStateMaker import createGameStateVts
 from PIL import Image
 from hashlib import md5
 import math
+from aiofile import AIOFile
+import asyncclick as click
 from templative.componentInfo import COMPONENT_INFO
 from templative.stockComponentInfo import STOCK_COMPONENT_INFO
+from templative.gameManager.instructionsLoader import getLastOutputFileDirectory
+
+@click.command()
+@click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
+@click.option('-o', '--output', default=None, help='The Tabletop Playground packages directory. Such as "~/Library/Application Support/Epic/TabletopPlayground/Packages" or "C:\Program Files (x86)\Steam\steamapps\common\TabletopPlayground\TabletopPlayground\PersistentDownloadDir"')
+async def playground(input, output):
+    """Convert a produced game into a tabletop playground game"""    
+    if input is None:
+        input = await getLastOutputFileDirectory()
+
+    playgroundDirectory = await getPlaygroundDirectory(output)
+    if playgroundDirectory == None:
+        print("Missing --output directory.")
+        return
+    await writePlaygroundFile(playgroundDirectory)
+
+    return await convertToTabletopPlayground(input, playgroundDirectory)
+
+async def lookForPlaygroundFile():
+    playgroundFileLocation = "./.playground"
+    if not path.exists(playgroundFileLocation):
+        return None
+    
+    async with AIOFile(playgroundFileLocation, mode="r") as playground:
+        return await playground.read()
+    
+async def writePlaygroundFile(outputPath):
+    playgroundFileLocation = path.join("./", ".playground")
+    async with AIOFile(playgroundFileLocation, mode="w") as playground:
+        await playground.write(outputPath)
+
+async def getPlaygroundDirectory(inputedPlaygroundDirectory):
+    if inputedPlaygroundDirectory != None:
+        return inputedPlaygroundDirectory
+    
+    return await lookForPlaygroundFile()  
 
 async def convertToTabletopPlayground(producedDirectoryPath, playgroundPackagesDirectory):
 

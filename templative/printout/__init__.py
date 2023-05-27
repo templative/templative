@@ -5,7 +5,7 @@ from json import dump, load
 import math
 from fpdf import FPDF
 from templative.componentInfo import COMPONENT_INFO
-from templative.gameUploader.instructionsLoader import getLastOutputFileDirectory
+from templative.gameManager.instructionsLoader import getLastOutputFileDirectory
 
 printoutSizeType = "Letter"
 marginsInches = 0.5

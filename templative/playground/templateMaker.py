@@ -1,4 +1,4 @@
-from templative.gameUploader.tabletopPlayground.templates import board, card
+from templative.playground.templates import board, card
 from templative.componentInfo import COMPONENT_INFO
 gameCrafterScaleToPlaygroundScale = 0.014
 

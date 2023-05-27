@@ -1,30 +1,45 @@
 from os import path
 from distutils.dir_util import copy_tree
-
+import asyncclick as click
+from .instructionsLoader import getLastOutputFileDirectory
 from . import componentProcessor
 
-async def produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublish):
-    return await componentProcessor.produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublish)
-
-async def listComponents(gameRootDirectoryPath):
-    await componentProcessor.listComponents(gameRootDirectoryPath)
-
-async def calculateComponentsDepth(gameRootDirectoryPath):
-    await componentProcessor.calculateComponentsDepth(gameRootDirectoryPath)
-
-async def convertRulesMdToHtml(gameRootDirectoryPath):
-    await componentProcessor.convertRulesMdToHtml(gameRootDirectoryPath)
-
-async def convertRulesMdToSpans(gameRootDirectoryPath):
-    await componentProcessor.convertRulesMdToSpans(gameRootDirectoryPath)
-
-async def createTemplate():
+@click.command()
+async def init():
+    """Create the default game project here"""
     if(path.exists("./game-compose.json")):
         print("This directory already contains a gameExisting game compose here.")
         return
 
     fromDirectory = path.join(path.dirname(path.realpath(__file__)), "template")
     copy_tree(fromDirectory, "./")
+
+@click.command()
+@click.option('--name', default=None, help='The component to produce.')
+@click.option('-s/-c', '--simple/--complex', default=False, required=False, type=bool, help='Whether complex information is shown. Used for videos.')
+@click.option('-p/-d', '--publish/--debug', default=False, required=False, type=bool, help='Where debug information is included.')
+@click.option('--input', default=None, required=False, help='The directory of the templative project.')
+async def produce(name, simple, publish, input):
+    """Produce the game in the current directory"""
+    if input is None:
+        input = await getLastOutputFileDirectory()
+    return await componentProcessor.produceGame(input, name, simple, publish)
+
+@click.command()
+@click.option('--input', default=None, required=False, help='The directory of the templative project.')
+async def components(input):
+    """Get a list of quantities of the game in the current directory"""
+    if input is None:
+        input = await getLastOutputFileDirectory()
+    await componentProcessor.listComponents(input)
+
+@click.command()
+@click.option('--input', default=None, required=False, help='The directory of the templative project.')
+async def depth(input):
+    """Get the depth of all components"""
+    if input is None:
+        input = await getLastOutputFileDirectory()
+    await componentProcessor.calculateComponentsDepth(input)
 
 async def createComponent(name, type):
     if name == None:
