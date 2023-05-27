@@ -2,6 +2,7 @@ from .. import gameCrafterClient
 from os.path import join
 import asyncio
 from templative.componentInfo import COMPONENT_INFO
+from templative.stockComponentInfo import STOCK_COMPONENT_INFO
 
 async def createCustomComponent(gameCrafterSession, componentType, componentFile, cloudGameId, cloudGameFolderId):
     if not componentType in COMPONENT_INFO:
@@ -40,7 +41,17 @@ async def createStockPart(gameCrafterSession, component, cloudGameId):
     stockPartId = componentTypeTokens[1]
     quantity = component["quantity"]
 
-    await gameCrafterClient.createStockPart(gameCrafterSession, stockPartId, quantity, cloudGameId)
+    if not stockPartId in STOCK_COMPONENT_INFO:
+        print("Skipping missing stock component %s." % stockPartId)
+        return
+    stockComponentInfo = STOCK_COMPONENT_INFO[stockPartId]
+
+    if not "GameCrafterGuid" in stockComponentInfo:
+        print("Skipping stock part %s with missing GameCrafterGuid." % stockPartId)
+        return
+    gameCrafterGuid = stockComponentInfo["GameCrafterGuid"]
+
+    await gameCrafterClient.createStockPart(gameCrafterSession, gameCrafterGuid, quantity, cloudGameId)
 
 async def createTuckBox(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]

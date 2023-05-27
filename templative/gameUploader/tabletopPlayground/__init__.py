@@ -3,11 +3,13 @@ from json import dump, load
 from shutil import copyfile
 from templative.gameUploader import instructionsLoader
 from . import templateMaker
+from templative.gameUploader.tabletopPlayground.templates import stockModel
 from .gameStateMaker import createGameStateVts
 from PIL import Image
 from hashlib import md5
 import math
 from templative.componentInfo import COMPONENT_INFO
+from templative.stockComponentInfo import STOCK_COMPONENT_INFO
 
 async def convertToTabletopPlayground(producedDirectoryPath, playgroundPackagesDirectory):
 
@@ -61,6 +63,19 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
         "DECK": createDeck,
         "BOARD": createBoard
     }
+
+    componentTypeTokens = componentInstructions["type"].split("_")
+    isStockComponent = componentTypeTokens[0].upper() == "STOCK" 
+    if isStockComponent:
+        if not componentTypeTokens[1] in STOCK_COMPONENT_INFO:
+            print("Missing stock info for %s." % componentTypeTokens[1])
+            return None
+        stockComponentInfo = STOCK_COMPONENT_INFO[componentTypeTokens[1]]
+        if not "PlaygroundModelFile" in stockComponentInfo:
+            print("Skipping %s as it doesn't have a PlaygroundModelFile." % componentTypeTokens[1])
+            return None
+        return await createStock(packageDirectoryPath, componentInstructions, stockComponentInfo)
+
     if not componentInstructions["type"] in COMPONENT_INFO:
         print("Missing component info for %s." % componentInstructions["type"])
         return None
@@ -89,12 +104,31 @@ async def createBoard(packageDirectoryPath, componentInstructions):
 
 async def createDeck(packageDirectoryPath, componentInstructions):
     textureDirectory = path.join(packageDirectoryPath, "Textures")
+
     totalCount, cardColumnCount, cardRowCount = await createCompositeImageInTextures(componentInstructions["name"], componentInstructions["type"], componentInstructions["frontInstructions"], textureDirectory)
     await copyBackImageToTextures(componentInstructions["name"], componentInstructions["backInstructions"], textureDirectory)
     componentGuid = md5(componentInstructions["name"].encode()).hexdigest()
     templateDirectory = path.join(packageDirectoryPath, "Templates")
     return await createCardTemplateFile(templateDirectory, componentGuid, componentInstructions["name"], componentInstructions["type"], totalCount, cardColumnCount, cardRowCount)
+
+async def createStock(packageDirectoryPath, componentInstructions, stockPartInfo):
+    guid = md5(componentInstructions["name"].encode()).hexdigest()
+
+    normalMap = stockPartInfo["PlaygroundNormalMap"] if "PlaygroundNormalMap" in stockPartInfo else ""
+    extraMap = stockPartInfo["PlaygroundExtraMap"] if "PlaygroundExtraMap" in stockPartInfo else ""
+    stockTemplateData = stockModel.createStockModel(componentInstructions["name"], guid, stockPartInfo["PlaygroundModelFile"], stockPartInfo["PlaygroundColor"], normalMap, extraMap)
+
+    if "PlaygroundDieFaces" in stockPartInfo:
+        stockTemplateData["Faces"] = stockPartInfo["PlaygroundDieFaces"]
+
+    templateDirectory = path.join(packageDirectoryPath, "Templates")
+    templateFilepath = path.join(templateDirectory, "%s.json" % guid)
+
+    with open(templateFilepath, "w") as templateFile:
+        dump(stockTemplateData, templateFile, indent=2)
     
+    return stockTemplateData
+
 async def createCompositeImageInTextures(componentName, componentType, frontInstructions, textureDirectoryFilepath):
 
     totalCount = 0

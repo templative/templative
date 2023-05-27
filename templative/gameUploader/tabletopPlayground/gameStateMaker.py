@@ -58,16 +58,23 @@ def createGameObjects(components, totalPlayerCount):
     yTranslationEachComponent = 15
     noOwnerConstant = -1
 
+    skippedGameStateComponents = []
     for c, component in enumerate(components):
         if component == None:
             continue
         newYPosition = startingYTranslation + (c*yTranslationEachComponent) - (len(components)*yTranslationEachComponent/2)
         gameObjectTranslation = { "x": -5, "y": newYPosition, "z": 90 }
         # print(component)
+        if not "Indices" in component:
+            skippedGameStateComponents.append(component["Name"])
+            continue
         totalPieceQuantity = len(component["Indices"])
         # print(totalPieceQuantity)
         gameObject = createPokerDeck(component["Name"], c, component["GUID"], noOwnerConstant, gameObjectTranslation, totalPieceQuantity)
         gameObjects.append(gameObject)
+
+    if len(skippedGameStateComponents) > 0: 
+        print("Skipping components for missing indices:", skippedGameStateComponents)
 
     return gameObjects 
 

@@ -1,10 +1,16 @@
 import asyncclick as click
 from templative import gameManager
+from templative.stockComponentInfo import STOCK_COMPONENT_INFO
 
-@click.command()
+@click.group()
+async def stock():
+    """Create a Stock Part"""
+    pass
+
+@stock.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
 @click.option("-i", "--id", default=None, help="The ID of the stockpart.")
-async def stockpart(name, id):
+async def part(name, id):
     """Create a Stock Part by ID"""
 
     if name == None:
@@ -16,3 +22,11 @@ async def stockpart(name, id):
         return
 
     await gameManager.createStockComponent(name, id)
+
+@stock.command()
+async def options():
+    """Show avaiable stock parts"""
+    partNames = ""
+    for key in STOCK_COMPONENT_INFO.keys():
+        partNames = partNames + key + "\n"
+    print(partNames)

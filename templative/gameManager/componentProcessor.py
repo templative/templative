@@ -216,7 +216,7 @@ async def produceStockComponent(componentCompose, outputDirectory):
     stockPartInstructions = {
         "name": componentCompose["name"],
         "quantity": componentCompose["quantity"],
-        "type": componentCompose["type"],
+        "type": componentCompose["type"]
     }
 
     componentInstructionFilepath = os.path.join(componentDirectory, "component.json")
