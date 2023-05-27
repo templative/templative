@@ -2,7 +2,7 @@ import os, subprocess, time
 from xml.etree import ElementTree
 from aiofile import AIOFile
 import svgmanip
-from ..componentStats import componentImageSizePixels
+from templative.componentInfo import COMPONENT_INFO
 
 async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory, isSimple, isPublish):
     if game == None:
@@ -45,9 +45,11 @@ async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompo
     await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], studioCompose, game, componentGamedata, pieceGamedata, isSimple, isPublish)
     await updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], studioCompose, game, componentGamedata, pieceGamedata)
     
-    if not componentCompose["type"] in componentImageSizePixels:
+    if not componentCompose["type"] in COMPONENT_INFO:
         raise Exception("No image size for %s", componentCompose["type"]) 
-    imageSizePixels = componentImageSizePixels[componentCompose["type"]]
+    component = COMPONENT_INFO[componentCompose["type"]]
+
+    imageSizePixels = component["DimensionsPixels"]
     await assignSize(artFileOutputFilepath, imageSizePixels)
     await addNewlines(artFileOutputFilepath)
     await exportSvgToImage(artFileOutputFilepath, imageSizePixels, artFileOutputName, outputDirectory)
@@ -69,9 +71,9 @@ async def assignSize(artFileOutputFilepath, imageSizePixels):
     parser = ElementTree.XMLParser(encoding="utf-8")
     elementTree = ElementTree.parse(artFileOutputFilepath, parser=parser)
     root = elementTree.getroot()
-    root.set("width", "%spx" % imageSizePixels["width"])
-    root.set("height", "%spx" % imageSizePixels["height"])
-    root.set("viewbox", "0 0 %s %s" % (imageSizePixels["width"], imageSizePixels["height"]))
+    root.set("width", "%spx" % imageSizePixels[0])
+    root.set("height", "%spx" % imageSizePixels[1])
+    root.set("viewbox", "0 0 %s %s" % (imageSizePixels[0], imageSizePixels[1]))
     async with AIOFile(artFileOutputFilepath,'wb') as f:
         await f.write(ElementTree.tostring(root))
     
@@ -304,8 +306,8 @@ async def exportSvgToImage(filepath, imageSizePixels, name, outputDirectory):
         "inkscape", 
         absoluteSvgFilepath,
         '--export-filename=%s' % pngFilepath, 
-        "--export-width=%s" % imageSizePixels["width"], 
-        "--export-height=%s" % imageSizePixels["height"],
+        "--export-width=%s" % imageSizePixels[0], 
+        "--export-height=%s" % imageSizePixels[1],
         "--export-background-opacity=0" ]
     
     runCommands(createPngCommands)

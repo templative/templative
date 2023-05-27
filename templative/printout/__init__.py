@@ -4,20 +4,8 @@ from os import path, walk
 from json import dump, load
 import math
 from fpdf import FPDF
-
+from templative.componentInfo import COMPONENT_INFO
 from templative.gameUploader.instructionsLoader import getLastOutputFileDirectory
-
-componentDimensionsInches = {
-    "BusinessDeck": (2, 3.5),
-    "PokerDeck": (2.45, 3.45),
-    "MiniDeck": (1.75, 2.5),
-    "MicroDeck": (1.25, 1.75),
-    "MintTinDeck": (2.05, 3.43),
-    "HexDeck": (3.75, 3.25),
-    "SmallSquareChit": (0.5, 0.5),
-    "MediumSquareChit": (0.75, 0.75),
-    "LargeSquareChit": (1, 1),
-}
 
 printoutSizeType = "Letter"
 marginsInches = 0.5
@@ -71,11 +59,7 @@ async def loadFilepathsForComponent(componentTypeFilepathAndQuantity, producedDi
     await collectFilepathQuantitiesForComponent(componentTypeFilepathAndQuantity, componentInstructions)
     componentInstructionsFile.close()
 
-async def collectFilepathQuantitiesForComponent(componentTypeFilepathAndQuantity, componentInstructions):
-    if not componentInstructions["type"] in componentDimensionsInches:
-        print("Skipping unsupported %s named %s" %(componentInstructions["type"],componentInstructions["name"]))
-        return []
-    
+async def collectFilepathQuantitiesForComponent(componentTypeFilepathAndQuantity, componentInstructions):    
     if not componentInstructions["type"] in componentTypeFilepathAndQuantity:
         componentTypeFilepathAndQuantity[componentInstructions["type"]] = []
 
@@ -94,11 +78,16 @@ async def addPageImagesToPdf(pdf, pageImages):
         pdf.image(image,marginsInches,marginsInches,printoutPlayAreaInches[0],printoutPlayAreaInches[1])
 
 async def createPageImagesForComponentTypeImages(componentType, componentTypeImageList, printBack):
-    if not componentType in componentDimensionsInches:
-        print("Skipping unsupported %s" %(componentType))
+    if not componentType in COMPONENT_INFO:
+        print("Missing %s in COMPONENT_INFO" % componentType)
         return []
-    
-    componentSizeInches = componentDimensionsInches[componentType]
+    component = COMPONENT_INFO[componentType]
+
+    if not "DimensionsInches" in component:
+        print("Skipping %s because it's DimensionsInches isn't defined." %(componentType))
+        return []
+    componentSizeInches = component["DimensionsInches"]
+
     pieceSizeInches = (componentSizeInches[0] + pieceMarginInches, componentSizeInches[1] + pieceMarginInches)
 
     columns = math.floor(printoutPlayAreaInches[0] / pieceSizeInches[0])

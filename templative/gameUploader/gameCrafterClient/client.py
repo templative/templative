@@ -3,6 +3,7 @@ import asyncio
 
 from . import componentCreator
 from .. import instructionsLoader, gameCrafterClient
+from templative.componentInfo import COMPONENT_INFO
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
@@ -63,54 +64,24 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
     createTuckBoxTask = componentCreator.createTuckBox
     createTwoSidedTask = componentCreator.createTwoSided
     
-    componentTasks = {
-        # "CustomColorD4": createDieTask,
-        # "CustomColorD6": createDieTask,
-        # "CustomColorD8": createDieTask,
-        
-        "PokerDeck": createDeckTask,
-        "BusinessDeck": createDeckTask,
-        "MicroDeck": createDeckTask,
-        "MiniDeck": createDeckTask,
-        "MintTinDeck": createDeckTask,
-        "HexDeck": createDeckTask,
+    if not component["type"] in component["type"]:
+        print("Missing component info for %s." % component["name"])
+        return
+    component = COMPONENT_INFO[component["type"]]
 
-        "SmallStoutBox": createTwoSidedBoxTask,
-        "MediumStoutBox": createTwoSidedBoxTask,
-        "LargeStoutBox": createTwoSidedBoxTask,
-        "MintTin": createTwoSidedBoxTask,
-
-        "LargeRing": createTwoSidedSluggedTask,
-        "MediumRing": createTwoSidedSluggedTask,
-        "SmallRing": createTwoSidedSluggedTask,
-
-        "LargeSquareChit": createTwoSidedSluggedTask,
-        "MediumSquareChit": createTwoSidedSluggedTask,
-        "SmallSquareChit": createTwoSidedSluggedTask,
-
-        "LargeHexTile": createTwoSidedSluggedTask,
-        "MediumHexTile": createTwoSidedSluggedTask,
-        "SmallHexTile": createTwoSidedSluggedTask,
-
-        "LargeCircleChit": createTwoSidedSluggedTask,
-        "MediumCircleChit": createTwoSidedSluggedTask,
-        "SmallCircleChit": createTwoSidedSluggedTask,
-
-
-        "PokerTuckBox36": createTuckBoxTask,
-        "PokerTuckBox54": createTuckBoxTask,
-        "PokerTuckBox72": createTuckBoxTask,
-        "PokerTuckBox90": createTuckBoxTask,
-        "PokerTuckBox108": createTuckBoxTask,
-
-        "PokerFolio": createTwoSidedTask,
-        "MintTinFolio": createTwoSidedTask,
-        "MintTinAccordion4": createTwoSidedTask,
-        "MintTinAccordion6": createTwoSidedTask,
-        "MintTinAccordion8": createTwoSidedTask,
+    if not "GameCrafterUploadTask" in component:
+        print("No upload task for %s." % component["type"])
+        return
+    
+    componentTasks = {        
+        "DECK": createDeckTask,
+        "TWOSIDEDBOX": createTwoSidedBoxTask,
+        "TWOSIDEDSLUG": createTwoSidedSluggedTask,
+        "TUCKBOX": createTuckBoxTask,
+        "TWOSIDED": createTwoSidedTask,
     }
 
-    missingDirectComponentMatch = not componentType in componentTasks
+    missingDirectComponentMatch = not component["GameCrafterUploadTask"] in componentTasks
 
     componentTypeTokens = componentType.split("_")
     isStockComponent = componentTypeTokens[0].upper() == "STOCK" 
@@ -123,5 +94,6 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
         await componentCreator.createStockPart(gameCrafterSession, componentFile, cloudGame["id"])
         return
     
-    await componentTasks[componentType](gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
+    uploadTask = componentTasks[component["GameCrafterUploadTask"]]
+    await uploadTask(gameCrafterSession, componentFile, componentType, cloudGame["id"], cloudGameFolderId)
         

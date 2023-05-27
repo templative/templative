@@ -7,6 +7,7 @@ from .gameStateMaker import createGameStateVts
 from PIL import Image
 from hashlib import md5
 import math
+from templative.componentInfo import COMPONENT_INFO
 
 async def convertToTabletopPlayground(producedDirectoryPath, playgroundPackagesDirectory):
 
@@ -57,24 +58,25 @@ async def copyComponentToPackage(componentDirectoryPath, packageDirectoryPath):
         componentInstructions = load(componentInstructionsFile)
     
     supportedInstructionTypes = {
-        "BusinessDeck": createDeck,
-        "MicroDeck": createDeck,
-        "MiniDeck": createDeck,
-        "MintTinDeck": createDeck,
-        "PokerDeck": createDeck,
-        "SmallSquareChit": createDeck,
-        "MediumSquareChit": createDeck,
-        "LargeSquareChit": createDeck,
-        "MintTinAccordion4": createBoard,
-        "MintTinAccordion6": createBoard,
-        "MintTinAccordion8": createBoard,
+        "DECK": createDeck,
+        "BOARD": createBoard
     }
-
-    if not componentInstructions["type"] in supportedInstructionTypes:
-        print("Skipping unsupported %s named %s" %(componentInstructions["type"],componentInstructions["name"]))
+    if not componentInstructions["type"] in COMPONENT_INFO:
+        print("Missing component info for %s." % componentInstructions["type"])
         return None
+    component = COMPONENT_INFO[componentInstructions["type"]]
 
-    return await supportedInstructionTypes[componentInstructions["type"]](packageDirectoryPath, componentInstructions)
+    if not "PlaygroundCreationTask" in component:
+        print("Skipping %s that has no PlaygroundCreationTask." % componentInstructions["type"])
+        return None
+    playgroundTask = COMPONENT_INFO[componentInstructions["type"]]["PlaygroundCreationTask"]
+
+    if playgroundTask in supportedInstructionTypes:
+        print("Skipping unsupported %s." % playgroundTask)
+        return None
+    instruction = supportedInstructionTypes[playgroundTask]
+
+    return await instruction(packageDirectoryPath, componentInstructions)
     
 async def createBoard(packageDirectoryPath, componentInstructions):
     textureDirectory = path.join(packageDirectoryPath, "Textures")
@@ -104,31 +106,24 @@ async def createCompositeImageInTextures(componentName, componentType, frontInst
     while columns * rows < totalCount:
         rows += 1
 
-    componentDimensions = {
-        "PokerDeck": (825, 1125),
-        "BusinessDeck": (675, 1125),
-        "SmallSquareChit": (225,225),
-        "MediumSquareChit": (300,300),
-        "LargeSquareChit": (325,325),
-        "MiniDeck": (600, 825),
-        "MicroDeck": (450, 600),
-        "MintTinDeck": (750, 1125),
-        "HexDeck": (1200, 1050),
-    }
-    dimensions = (825, 1125)
-    if componentType in componentDimensions:
-        dimensions = componentDimensions[componentType]
-    else:
-        print("Missing dimensions for %s, using 6,9." % componentType)
+    if not componentType in COMPONENT_INFO:
+        print("Missing component info for %s." % componentType)
+        return None
+    component = COMPONENT_INFO[componentType]
 
-    tiledImage = Image.new('RGB',(dimensions[0]*columns, dimensions[1]*rows))
+    if not "DimensionsPixels" in component:
+        print("Skipping %s that has no DimensionsPixels." % componentType)
+        return None
+    pixelDimensions = COMPONENT_INFO[componentType]["DimensionsPixels"]
+
+    tiledImage = Image.new('RGB',(pixelDimensions[0]*columns, pixelDimensions[1]*rows))
     
     xIndex = 0
     yIndex = 0
     for instruction in frontInstructions:
         image = Image.open(instruction["filepath"])
         for _ in range(int(instruction["quantity"])):
-            tiledImage.paste(image,(xIndex*dimensions[0],yIndex*dimensions[1]))
+            tiledImage.paste(image,(xIndex*pixelDimensions[0],yIndex*pixelDimensions[1]))
             xIndex += 1
             if xIndex == columns:
                 xIndex = 0

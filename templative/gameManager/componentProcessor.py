@@ -2,6 +2,7 @@ import os
 import asyncio
 from . import defineLoader, componentTemplateCreator, outputWriter, rulesMarkdownProcessor, svgscissors
 from datetime import datetime
+from templative.componentInfo import COMPONENT_INFO
 
 async def convertRulesMdToHtml(gameRootDirectoryPath):
     rules = await defineLoader.loadRules(gameRootDirectoryPath)
@@ -52,16 +53,6 @@ async def calculateComponentsDepth(gameRootDirectoryPath):
     print("%s by %s" % (game["displayName"], studioCompose["displayName"]))
     await printGameComponentDepth(gameRootDirectoryPath, gameCompose, componentCompose)
 
-componentDepthPerPieceMillimeters = {
-    "MintTinFolio": 1,
-    "MintTinAccordion8": 2,
-    "MintTinAccordion6": 2,
-    "MintTinAccordion4": 1,
-    "MintTinDeck": 0.3,
-    "MicroDeck": 0.15,
-    "MiniDeck": 0.3,
-}
-
 async def printGameComponentDepth(gameRootDirectoryPath, gameCompose, componentCompose):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
@@ -81,10 +72,17 @@ async def printGameComponentDepth(gameRootDirectoryPath, gameCompose, componentC
         if not piecesGamedata or piecesGamedata == {}:
             print("Skipping %s component due to missing pieces gamedata." % component["name"])
             continue
-        if not component["type"] in componentDepthPerPieceMillimeters:
+        
+        if not component["type"] in component["type"]:
+            print("Missing component info for %s." % component["name"])
+            continue
+
+        component = COMPONENT_INFO[component["type"]]
+        if not "GameCrafterPackagingDepthMillimeters" in component:
             print("Skipping %s component as we don't have a millimeter measurement for it." % component["name"])
             continue
-        depthOfPiece = componentDepthPerPieceMillimeters[component["type"]]
+
+        depthOfPiece = component["GameCrafterPackagingDepthMillimeters"]
         for piece in piecesGamedata:
             depthMillimeters += int(piece["quantity"]) * depthOfPiece      
     print("%smm" % round(depthMillimeters, 2))
