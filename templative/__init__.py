@@ -1,5 +1,5 @@
 import asyncclick as click
-from templative import gameManager, playground, zettelkasten, printout, rules, commands, gameCrafter
+from templative import gameManager, playground, zettelkasten, printout, rules, commands, gameCrafter, animation
 
 @click.group()
 async def cli():
@@ -10,6 +10,8 @@ async def cli():
 cli.add_command(gameCrafter.upload)
 cli.add_command(gameCrafter.list)
 cli.add_command(gameCrafter.deletegames)
+
+cli.add_command(animation.animation)
 
 cli.add_command(gameManager.init)
 cli.add_command(gameManager.produce)

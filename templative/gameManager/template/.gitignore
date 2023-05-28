@@ -2,3 +2,4 @@ output/*
 !.last
 printout.pdf
 .playground
+.animation
