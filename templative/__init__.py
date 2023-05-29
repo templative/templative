@@ -1,5 +1,33 @@
 import asyncclick as click
+import os, sys
 from templative import gameManager, playground, zettelkasten, printout, rules, commands, gameCrafter, animation
+
+def find_executable(executable):
+    """Tries to find 'executable' in the directories listed in 'path'.
+
+    A string listing directories separated by 'os.pathsep'; defaults to
+    os.environ['PATH'].  Returns the complete filename or None if not found.
+    """
+    _, ext = os.path.splitext(executable)
+    if (sys.platform == 'win32') and (ext != '.exe'):
+        executable = executable + '.exe'
+
+    if os.path.isfile(executable):
+        return executable
+
+    path = os.environ.get('PATH', None)
+    if path is None:
+        try:
+            path = os.confstr("CS_PATH")
+        except (AttributeError, ValueError):
+            # os.confstr() or CS_PATH is not available
+            path = os.defpath
+        
+    return None
+
+if not find_executable("inkscape"):
+    print("Install inkscape.")
+    exit()
 
 @click.group()
 async def cli():
