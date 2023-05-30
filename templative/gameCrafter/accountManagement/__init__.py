@@ -30,14 +30,14 @@ async def listGamesForUserDesigners(gameCrafterSession):
     printGames(games)
 
 async def printGames(games):
-    headers = ["name", "id", "link"]
+    headers = ["name", "skuId", "link"]
     data = []
 
     for game in games:
         gameName = game["name"]
-        gameId = game["id"]
-        gameLink = os.path.join("https://www.thegamecrafter.com", game["edit_uri"])
-        data.append([gameName, gameId, gameLink])
+        skuId = game["sku_id"]
+        gameLink = "https://www.thegamecrafter.com" + game["edit_uri"]
+        data.append([gameName, skuId, gameLink])
 
     print(tabulate(data, headers=headers, tablefmt='orgtbl'))
 
