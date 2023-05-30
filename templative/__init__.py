@@ -1,7 +1,11 @@
 import asyncclick as click
 import os, sys
 from templative import gameManager, playground, zettelkasten, printout, rules, commands, gameCrafter, animation
+import distutils.spawn
 
+if distutils.spawn.find_executable("inkscape") == None:
+    print("Missing inkscape.")
+    exit() 
 
 @click.group()
 async def cli():
