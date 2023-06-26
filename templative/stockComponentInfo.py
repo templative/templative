@@ -111,12 +111,12 @@ STOCK_COMPONENT_INFO = {
         "PlaygroundColor": { "R": 255, "G": 255, "B": 255 }
     },
     "HouseWoodRed": {
-        "GameCrafterGuid": "C8616066-48B9-11E8-BA56-8DBB1EA37D3B",
+        "GameCrafterGuid": "B696B44E-48B9-11E8-BA56-3DBB1EA37D3B",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/House.House'",
         "PlaygroundColor": { "R": 255, "G": 0, "B": 0 }
     },
     "HouseWoodPurple": {
-        "GameCrafterGuid": "B696B44E-48B9-11E8-BA56-3DBB1EA37D3B",
+        "GameCrafterGuid": "E36DCC20-4EFC-11E8-8111-F6A03D012D85",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/House.House'",
         "PlaygroundColor": { "R": 128, "G": 0, "B": 128 }
     },
