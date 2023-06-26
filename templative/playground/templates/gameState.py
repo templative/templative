@@ -13,9 +13,9 @@ def createGameState(name, slotTeams, slotIds):
         "persistentData": "", "persistentKeyData": { },
         "permissions":
         {
-            "delete": 0, "objectLibrary": 0, "copyPaste": 0, "cardPeek": -1, 
-            "cardExplorer": 0, "containerExplorer": 0,
-            "changeOwner": 0, "changeTeam": -1,
+            "delete": -1, "objectLibrary": -1, "copyPaste": -1, "cardPeek": -1, 
+            "cardExplorer": 0, "containerExplorer": -1,
+            "changeOwner": -1, "changeTeam": -1,
             "editZones": 0, "draw": 0,
             "ground": -1, "throw": 0,
             "editLabels": 0,
