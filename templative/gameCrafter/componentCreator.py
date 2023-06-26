@@ -94,7 +94,7 @@ async def createStockPart(gameCrafterSession, component, cloudGameId):
         return
     gameCrafterGuid = stockComponentInfo["GameCrafterGuid"]
 
-    await httpOperations.postStockPart(gameCrafterSession, stockPartId, quantity, cloudGameId)
+    await httpOperations.postStockPart(gameCrafterSession, gameCrafterGuid, quantity, cloudGameId)
 
 async def createTwoSided(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId):
     componentName = component["name"]
