@@ -30,6 +30,18 @@ STOCK_COMPONENT_INFO = {
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Cube.Cube'",
         "PlaygroundColor": { "R": 255, "G": 255, "B": 255 }
     },
+    "Cube8mmRed": {
+        "GameCrafterGuid": "A6645AAE-8335-11E1-9143-C692DC194F78",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Cube.Cube'",
+        "PlaygroundColor": { "R": 255, "G": 0, "B": 0 }
+    },
+    "Cube8mmPurple": {
+        "GameCrafterGuid": "4045D568-4D3E-11E1-A14C-40B1921A1C03",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Cube.Cube'",
+        "PlaygroundColor": { "R": 128, "G": 0, "B": 128 }
+    },
+
+
 
     "VictorianMiniatureYellow": {
         "GameCrafterGuid": "75DF064C-2EC7-11ED-9CBC-E8F95EE382A3",
@@ -98,7 +110,16 @@ STOCK_COMPONENT_INFO = {
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/House.House'",
         "PlaygroundColor": { "R": 255, "G": 255, "B": 255 }
     },
-
+    "HouseWoodRed": {
+        "GameCrafterGuid": "C8616066-48B9-11E8-BA56-8DBB1EA37D3B",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/House.House'",
+        "PlaygroundColor": { "R": 255, "G": 0, "B": 0 }
+    },
+    "HouseWoodPurple": {
+        "GameCrafterGuid": "B696B44E-48B9-11E8-BA56-3DBB1EA37D3B",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/House.House'",
+        "PlaygroundColor": { "R": 128, "G": 0, "B": 128 }
+    },
     "BagSmallBlack": {
         "GameCrafterGuid": "E5873AF0-9A04-11E0-AACC-432941C43697"
     },
@@ -106,4 +127,14 @@ STOCK_COMPONENT_INFO = {
     "StoutBoxBlankLarge": {
         "GameCrafterGuid": "3A3FE71C-F7FF-11E8-8362-F645227DF0B6"
     },
+    "ChurchSilver": {
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Pyramid.Pyramid'",
+        "PlaygroundColor": { "R": 192, "G": 192, "B": 192 },
+        "GameCrafterGuid": "E610F444-814B-11E8-827A-A6DFD1EB5668"
+    },
+    "HouseSilver": {
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/House.House'",
+        "PlaygroundColor": { "R": 192, "G": 192, "B": 192 },
+        "GameCrafterGuid": "A0BC60B2-8133-11E8-AF99-0FD0CD1076AC"
+    }
 }
