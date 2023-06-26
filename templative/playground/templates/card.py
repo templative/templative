@@ -1,4 +1,4 @@
-def createCard(guid, name, frontTextureName, backTextureName, cardColumnCount, cardRowCount, dimensions, indices):
+def createCard(guid, name, frontTextureName, backTextureName, cardColumnCount, cardRowCount, dimensions, model, indices):
     return {
         "Type": "Card",
         "GUID": guid,
@@ -57,7 +57,7 @@ def createCard(guid, name, frontTextureName, backTextureName, cardColumnCount, c
         "AllowFlippedInStack": False,
         "MirrorBack": True,
         "EmissiveFront": False,
-        "Model": "Rounded",
+        "Model": model,
         "Indices": indices,
         "CardNames":
         {

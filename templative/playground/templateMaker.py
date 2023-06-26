@@ -21,7 +21,7 @@ def createCardTemplate(guid, name, componentType, frontTextureName, totalCount, 
     for i in range(totalCount):
         indices.append(i)
 
-    return card.createCard(guid, name, frontTextureName, backTextureName, cardColumnCount, cardRowCount, dimensions, indices)
+    return card.createCard(guid, name, frontTextureName, backTextureName, cardColumnCount, cardRowCount, dimensions, component["PlaygroundModel"], indices)
 
 def createBoardTemplate(guid, name, componentType, frontTextureName, backTextureName):
     if not componentType in COMPONENT_INFO:

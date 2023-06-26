@@ -2,8 +2,9 @@ COMPONENT_INFO = {
     "HexShard": {
         "DimensionsPixels": [300, 300],
         "DimensionsInches": [2, 3.5],
-        "PlaygroundThickness": 0.05,
+        "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Hexagonal",
         "GameCrafterUploadTask": "DECK",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -12,6 +13,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [2, 3.5],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "DECK",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -20,6 +22,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [2, 3.5],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "DECK",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -28,6 +31,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [2, 3.5],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "DECK",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -36,6 +40,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [2.45, 3.45],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "DECK",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -44,6 +49,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [1.75, 2.5],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "DECK",
         "GameCrafterPackagingDepthMillimeters": 0.3
     },
@@ -52,6 +58,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [1.25, 1.75],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "DECK",
         "GameCrafterPackagingDepthMillimeters": 0.15
     },
@@ -60,6 +67,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [2.05, 3.43],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "DECK",
         "GameCrafterPackagingDepthMillimeters": 0.3
     },
@@ -68,6 +76,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [3.75, 3.25],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Hexagonal",
         "GameCrafterPackagingDepthMillimeters": 1
     },
     "SmallSquareChit": {
@@ -75,6 +84,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [0.5, 0.5],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -83,6 +93,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [0.75, 0.75],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -91,6 +102,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [1, 1],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -99,6 +111,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [0.5, 0.5],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -107,6 +120,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [0.75, 0.75],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -115,6 +129,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [1, 1],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -123,6 +138,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [0.5,0.5],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -131,6 +147,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [0.75,0.75],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -139,30 +156,34 @@ COMPONENT_INFO = {
         "DimensionsInches": [1,1],
         "PlaygroundThickness": 0.2,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
     "SmallHexTile": {
         "DimensionsPixels": [675, 600],
         "DimensionsInches": [2, 1.75],
-        "PlaygroundThickness": 0.2,
+        "PlaygroundThickness": 0.4,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Hexagonal",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 2
     },
     "MediumHexTile": {
         "DimensionsPixels": [825, 750],
         "DimensionsInches": [2.5, 2.22],
-        "PlaygroundThickness": 0.2,
+        "PlaygroundThickness": 0.4,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Hexagonal",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 2
     },
     "LargeHexTile": {
         "DimensionsPixels": [1200, 1050],
         "DimensionsInches": [3.75, 3.25],
-        "PlaygroundThickness": 0.2,
+        "PlaygroundThickness": 0.4,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Hexagonal",
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 2
     },
@@ -195,6 +216,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [10, 3.5],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDED",
         "GameCrafterPackagingDepthMillimeters": 1
     },
@@ -203,6 +225,7 @@ COMPONENT_INFO = {
         "DimensionsInches": [8.5, 3.13],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
         "GameCrafterUploadTask": "TWOSIDED",
         "GameCrafterPackagingDepthMillimeters": 1
     },
