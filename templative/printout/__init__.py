@@ -19,15 +19,19 @@ async def printout():
     pass
 
 @printout.command()
-@click.option('-i', '--input', default="./", help='The directory of the produced game. Defaults to last produced directory.')
+@click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
 async def front(input):
     """Create a pdf for printing on the front only"""
+    if input is None:
+        input = await getLastOutputFileDirectory()
     await createPdfForPrinting(input, False)
 
 @printout.command()
-@click.option('-i', '--input', default="./", help='The directory of the produced game. Defaults to last produced directory.')
+@click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
 async def frontback(input):
     """Create a pdf for printing on the front and back"""
+    if input is None:
+        input = await getLastOutputFileDirectory()
     await createPdfForPrinting(input, True)
 
 async def createPdfForPrinting(producedDirectoryPath, printBack):
