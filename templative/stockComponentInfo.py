@@ -84,6 +84,14 @@ STOCK_COMPONENT_INFO = {
 		"PlaygroundExtraMap": "Texture2D'/Game/Textures/Dice/T_D12.T_D12'",
         "PlaygroundDieFaces": [{"X":0,"Y":-0.850651,"Z":0.525731,"Name":"1","Metadata":""},{"X":0.525731,"Y":0,"Z":0.850651,"Name":"2","Metadata":""},{"X":0.850651,"Y":-0.525731,"Z":0,"Name":"3","Metadata":""},{"X":0.525731,"Y":0,"Z":-0.850651,"Name":"4","Metadata":""},{"X":-0.850651,"Y":-0.525731,"Z":0,"Name":"5","Metadata":""},{"X":0,"Y":0.850651,"Z":0.525731,"Name":"6","Metadata":""},{"X":0,"Y":-0.850651,"Z":-0.525731,"Name":"7","Metadata":""},{"X":0.850651,"Y":0.525731,"Z":0,"Name":"8","Metadata":""},{"X":-0.525731,"Y":0,"Z":0.850651,"Name":"9","Metadata":""},{"X":-0.850651,"Y":0.525731,"Z":0,"Name":"10","Metadata":""},{"X":-0.525731,"Y":0,"Z":-0.850651,"Name":"11","Metadata":""},{"X":0,"Y":0.850651,"Z":-0.525731,"Name":"12","Metadata":""}]
     },
+    "D20White": {
+        "GameCrafterGuid": "4984D10A-09D6-11E3-AE02-40087740BD4B",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Dice/Dice_D20.Dice_D20'",
+        "PlaygroundColor": { "R": 255, "G": 255, "B": 255 },
+        "PlaygroundNormalMap": "Texture2D'/Game/Textures/Dice/T_D20_N.T_D20_N'",
+		"PlaygroundExtraMap": "Texture2D'/Game/Textures/Dice/T_D20.T_D20'",
+        "PlaygroundDieFaces": [{ "X": -0.57735, "Y": 0.57735, "Z": 0.57735, "Name": "1", "Metadata": "" }, { "X": 0, "Y": -0.356822, "Z": -0.934173, "Name": "2", "Metadata": "" }, { "X": 0, "Y": -0.356822, "Z": 0.934173, "Name": "3", "Metadata": "" }, { "X": 0.57735, "Y": 0.57735, "Z": -0.57735, "Name": "4", "Metadata": "" }, { "X": -0.57735, "Y": 0.57735, "Z": -0.57735, "Name": "5", "Metadata": "" }, { "X": 0.934173, "Y": 0, "Z": 0.356822, "Name": "6", "Metadata": "" }, { "X": -0.934173, "Y": 0, "Z": 0.356822, "Name": "7", "Metadata": "" }, { "X": 0.356822, "Y": -0.934173, "Z": 0, "Name": "8", "Metadata": "" }, { "X": 0.57735, "Y": 0.57735, "Z": 0.57735, "Name": "9", "Metadata": "" }, { "X": -0.356822, "Y": -0.934173, "Z": 0, "Name": "10", "Metadata": "" }, { "X": 0.356822, "Y": 0.934173, "Z": 0, "Name": "11", "Metadata": "" }, { "X": -0.57735, "Y": -0.57735, "Z": -0.57735, "Name": "12", "Metadata": "" }, { "X": -0.356822, "Y": 0.934173, "Z": 0, "Name": "13", "Metadata": "" }, { "X": 0.934173, "Y": 0, "Z": -0.356822, "Name": "14", "Metadata": "" }, { "X": -0.934173, "Y": 0, "Z": -0.356822, "Name": "15", "Metadata": "" }, { "X": 0.57735, "Y": -0.57735, "Z": 0.57735, "Name": "16", "Metadata": "" }, { "X": -0.57735, "Y": -0.57735, "Z": 0.57735, "Name": "17", "Metadata": "" }, { "X": 0, "Y": 0.356822, "Z": -0.934173, "Name": "18", "Metadata": "" }, { "X": 0, "Y": 0.356822, "Z": 0.934173, "Name": "19", "Metadata": "" }, { "X": 0.57735, "Y": -0.57735, "Z": -0.57735, "Name": "20", "Metadata": "" }]
+    },
 
     "HouseWoodBlack": {
         "GameCrafterGuid": "FD85F422-2EA2-11E8-B873-9D2AC78910BA",
