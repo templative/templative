@@ -8,7 +8,7 @@ from templative.componentInfo import COMPONENT_INFO
 from templative.gameManager.instructionsLoader import getLastOutputFileDirectory
 
 printoutSizeType = "Letter"
-marginsInches = 0.5
+marginsInches = 0.25
 printoutPlayAreaInches = (8.5-(marginsInches*2), 11 - (marginsInches*2))
 inchToPixelConversion = 96
 pieceMarginInches = 0.11811 * 1/3
@@ -93,13 +93,17 @@ async def createPageImagesForComponentTypeImages(componentType, componentTypeIma
     rotatedColumns = math.floor(printoutPlayAreaInches[0] / pieceSizeInches[1])
     rotatedRows = math.floor(printoutPlayAreaInches[1] / pieceSizeInches[0])
 
+
     isImageRotated = rotatedColumns*rotatedRows > columns*rows
     if isImageRotated:
         columns = rotatedColumns
         rows = rotatedRows
         pieceSizeInches = (pieceSizeInches[1], pieceSizeInches[0])
         componentSizeInches = (componentSizeInches[1], componentSizeInches[0])
-
+    if rows == 0 or columns == 0:
+        message = "%s %sx%s\" is too large for a %sx%s\" print space." % (componentType, pieceSizeInches[0], pieceSizeInches[1], printoutPlayAreaInches[0], printoutPlayAreaInches[1])
+        raise Exception(message)
+    
     halfAreaPixels = (
         int((printoutPlayAreaInches[0] - (pieceSizeInches[0] * columns)) / 2 * inchToPixelConversion), 
         int((printoutPlayAreaInches[1] - (pieceSizeInches[1] * rows)) / 2 * inchToPixelConversion)
@@ -157,6 +161,9 @@ async def createPageImagesForComponentTypeImages(componentType, componentTypeIma
 
 async def createBlankImagesForComponent(imageFilepaths, columns, rows, printBack):
     whiteColorRGB = (240,240,240)
+
+    if columns == 0 or rows == 0:
+        raise Exception("Rows and columns must be non zero.")
 
     totalCount = 0
     for instruction in imageFilepaths:
