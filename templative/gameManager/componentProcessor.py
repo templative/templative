@@ -59,8 +59,7 @@ async def printGameComponentDepth(gameRootDirectoryPath, gameCompose, componentC
 
     depthMillimeters = 0
     for component in componentCompose:
-        
-        if component["disabled"] == "True":
+        if str(component["disabled"]) == "True":
             print("Skipping disabled %s component." % (component["name"]))
             continue
         
@@ -93,7 +92,7 @@ async def printGameComponentQuantities(gameRootDirectoryPath, gameCompose, compo
 
     componentQuantities ={"Document": [{ "name":"Rules", "componentQuantity": 1, "pieceQuantity": 1}]}
     for component in componentCompose:
-        if component["disabled"] == "True":
+        if str(component["disabled"]) == "True":
             print("Skipping disabled %s component." % (component["name"]))
             continue
         
