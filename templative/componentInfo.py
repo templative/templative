@@ -230,7 +230,8 @@ COMPONENT_INFO = {
         "GameCrafterPackagingDepthMillimeters": 1
     },
     "MintTin": {
-        "DimensionsPixels": [750, 1125]
+        "DimensionsPixels": [750, 1125],
+        "GameCrafterUploadTask": "TWOSIDEDBOX"
     },
     "SmallStoutBox": {
         "DimensionsPixels": [3600, 3000],
