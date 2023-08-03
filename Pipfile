@@ -24,6 +24,7 @@ asyncclick = "*"
 anyio = "*"
 fpdf2 = "*"
 defusedxml = "*"
+gitpython = "*"
 
 [requires]
-python_version = "3.7.7"
+python_version = "3"
