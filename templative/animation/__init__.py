@@ -3,6 +3,9 @@ from aiofile import AIOFile
 import asyncclick as click
 from templative.gameManager.instructionsLoader import getLastOutputFileDirectory
 from .packageBuilder import createPackage
+import json
+from wand.image import Image
+from templative.animation import shearRenderer
 
 @click.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
@@ -19,6 +22,17 @@ async def animation(input, output):
     await writeAnimationFile(animationDirectory)
 
     await createPackage(input, animationDirectory)
+
+@click.command()
+@click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
+async def shear(input):
+    if input is None:
+        input = await getLastOutputFileDirectory()
+    showcaseInstructionsFile = await AIOFile("./showcase/showcases.json")
+    showcaseInstructions = json.loads(await showcaseInstructionsFile.read())
+    await shearRenderer.renderShearInstructions(showcaseInstructions, input)
+    
+    await showcaseInstructionsFile.close()
 
 async def lookForAnimationFile():
     animationFileLocation = "./.animation"
