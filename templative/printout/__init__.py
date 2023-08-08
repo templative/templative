@@ -8,7 +8,7 @@ from templative.componentInfo import COMPONENT_INFO
 from templative.gameManager.instructionsLoader import getLastOutputFileDirectory
 
 printoutSizeType = "Letter"
-marginsInches = 0.25
+marginsInches = 0.5 # or 0.25
 printoutPlayAreaInches = (8.5-(marginsInches*2), 11 - (marginsInches*2))
 inchToPixelConversion = 96
 pieceMarginInches = 0.11811 * 1/3
@@ -101,8 +101,8 @@ async def createPageImagesForComponentTypeImages(componentType, componentTypeIma
         pieceSizeInches = (pieceSizeInches[1], pieceSizeInches[0])
         componentSizeInches = (componentSizeInches[1], componentSizeInches[0])
     if rows == 0 or columns == 0:
-        message = "%s %sx%s\" is too large for a %sx%s\" print space." % (componentType, pieceSizeInches[0], pieceSizeInches[1], printoutPlayAreaInches[0], printoutPlayAreaInches[1])
-        raise Exception(message)
+        print("Skipping the %sx%s\" %s as it's too large for a %sx%s\" print space." % (pieceSizeInches[0], pieceSizeInches[1], componentType, printoutPlayAreaInches[0], printoutPlayAreaInches[1]))
+        return []
     
     halfAreaPixels = (
         int((printoutPlayAreaInches[0] - (pieceSizeInches[0] * columns)) / 2 * inchToPixelConversion), 
