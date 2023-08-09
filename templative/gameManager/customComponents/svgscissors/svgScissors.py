@@ -5,67 +5,45 @@ import svgmanip
 from templative.componentInfo import COMPONENT_INFO
 import git
 
-async def createArtFileOfPiece(game, studioCompose,  gameCompose, componentCompose, componentGamedata, pieceGamedata, artMetaData, outputDirectory, isSimple, isPublish):
-    if game == None:
-        print("game cannot be None.")
-        return
+from templative.gameManager.models.produceProperties import ProduceProperties
+from templative.gameManager.models.gamedata import StudioData, GameData, ComponentData, ComponentBackData, PieceData
+from templative.gameManager.models.composition import ComponentComposition
+from templative.gameManager.models.artdata import ComponentArtdata
 
-    if studioCompose == None:
-        print("studioCompose cannot be None.")
-        return
-
-    if componentCompose == None:
-        print("componentCompose cannot be None.")
-        return
-
-    if artMetaData == None:
-        print("artMetaData cannot be None.")
-        return
-
-    if componentGamedata == None:
-        print("componentGamedata cannot be None.")
-        return
-
-    if pieceGamedata == None:
-        print("pieceGamedata cannot be None.")
-        return
-
-    if outputDirectory == None:
-        print("outputDirectory cannot be None.")
-        return
-
-    templateFilesDirectory = gameCompose["artTemplatesDirectory"]
-    artFilename = "%s.svg" % (artMetaData["templateFilename"])
+async def createArtFileOfPiece(compositions:ComponentComposition, artdata:any, gamedata:PieceData|ComponentBackData, componentBackOutputDirectory:str, produceProperties:ProduceProperties) -> None:
+    
+    templateFilesDirectory = compositions.gameCompose["artTemplatesDirectory"]
+    artFilename = "%s.svg" % (artdata["templateFilename"])
     artFile = svgmanip.Element(os.path.join(templateFilesDirectory, artFilename))
 
-    await addOverlays(artFile, artMetaData["overlays"], studioCompose, game, gameCompose, componentGamedata, pieceGamedata, isSimple, isPublish)
+    await addOverlays(artFile, artdata["overlays"], compositions, gamedata, produceProperties.isSimple, produceProperties.isPublish)
+    pieceName = gamedata.pieceData["name"] if isinstance(gamedata, PieceData) else gamedata.componentBackDataBlob["name"]
 
-    artFileOutputName = ("%s-%s" % (componentCompose["name"], pieceGamedata["name"]))
-    artFileOutputFilepath = await createArtfile(artFile, artFileOutputName, outputDirectory)
+    artFileOutputName = ("%s%s-%s" % (compositions.componentCompose["name"], gamedata.pieceUniqueBackHash, pieceName))
+    artFileOutputFilepath = await createArtfile(artFile, artFileOutputName, componentBackOutputDirectory)
 
-    await textReplaceInFile(artFileOutputFilepath, artMetaData["textReplacements"], studioCompose, game, componentGamedata, pieceGamedata, isSimple, isPublish)
-    await updateStylesInFile(artFileOutputFilepath, artMetaData["styleUpdates"], studioCompose, game, componentGamedata, pieceGamedata)
+    await textReplaceInFile(artFileOutputFilepath, artdata["textReplacements"], gamedata, produceProperties.isSimple, produceProperties.isPublish)
+    await updateStylesInFile(artFileOutputFilepath, artdata["styleUpdates"], gamedata)
     
-    if not componentCompose["type"] in COMPONENT_INFO:
-        raise Exception("No image size for %s", componentCompose["type"]) 
-    component = COMPONENT_INFO[componentCompose["type"]]
+    if not compositions.componentCompose["type"] in COMPONENT_INFO:
+        raise Exception("No image size for %s", compositions.componentCompose["type"]) 
+    component = COMPONENT_INFO[compositions.componentCompose["type"]]
 
     imageSizePixels = component["DimensionsPixels"]
     await assignSize(artFileOutputFilepath, imageSizePixels)
     await addNewlines(artFileOutputFilepath)
-    await exportSvgToImage(artFileOutputFilepath, imageSizePixels, artFileOutputName, outputDirectory)
-    print("Produced %s." % (pieceGamedata["name"]))
+    await exportSvgToImage(artFileOutputFilepath, imageSizePixels, artFileOutputName, componentBackOutputDirectory)
+    print("Produced %s." % (pieceName))
 
 async def addNewlines(artFileOutputFilepath):
-    file = open(artFileOutputFilepath, "r")
-    contents = file.read()
-    file.close()
+    contents = ""
+    async with AIOFile(artFileOutputFilepath, 'r') as f:
+        contents = await f.read()
     fixedContents = contents.replace("NEWLINE", "\n")
     if fixedContents == contents:
         return
-    file = open(artFileOutputFilepath, "w")
-    file.write(fixedContents)
-    file.close()
+    async with AIOFile(artFileOutputFilepath, 'w') as f:
+        f.write(fixedContents)
 
 async def assignSize(artFileOutputFilepath, imageSizePixels):
     
@@ -84,7 +62,7 @@ async def createArtfile(artFile, artFileOutputName, outputDirectory):
     artFile.dump(artFileOutputFilepath)
     return artFileOutputFilepath
 
-async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGamedata, pieceGamedata, isSimplifiedGraphic, isPublish):
+async def addOverlays(artFile, overlays, compositions:ComponentComposition, pieceGamedata:PieceData, isSimplifiedGraphic, isPublish):
     if artFile == None:
         print("artFile cannot be None.")
         return
@@ -93,23 +71,7 @@ async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGam
         print("overlays cannot be None.")
         return
 
-    if studio == None:
-        print("studio cannot be None.")
-        return
-
-    if game == None:
-        print("game cannot be None.")
-        return
-
-    if componentGamedata == None:
-        print("componentGamedata cannot be None.")
-        return
-
-    if pieceGamedata == None:
-        print("pieceGamedata cannot be None.")
-        return
-
-    overlayFilesDirectory = gameCompose["artInsertsDirectory"]
+    overlayFilesDirectory = compositions.gameCompose["artInsertsDirectory"]
 
     for overlay in overlays:
         isComplex = overlay["isComplex"] if "isComplex" in overlay else False
@@ -120,14 +82,14 @@ async def addOverlays(artFile, overlays, studio, game, gameCompose, componentGam
         if isDebug and isPublish:
             continue
 
-        overlayName = await getScopedValue(overlay, studio, game, componentGamedata, pieceGamedata)
+        overlayName = await getScopedValue(overlay, pieceGamedata)
         if overlayName != None and overlayName != "":
             overlayFilename = "%s.svg" % (overlayName)
             overlayFilepath = os.path.join(overlayFilesDirectory, overlayFilename)
             graphicsInsert = svgmanip.Element(overlayFilepath)
             artFile.placeat(graphicsInsert, 0.0, 0.0)
 
-async def textReplaceInFile(filepath, textReplacements, studio, game, componentGamedata, pieceGamedata, isSimplifiedGraphic, isPublish):
+async def textReplaceInFile(filepath, textReplacements, gamedata:PieceData|ComponentBackData, isSimplifiedGraphic, isPublish):
     if filepath == None:
         print("filepath cannot be None.")
         return
@@ -136,28 +98,12 @@ async def textReplaceInFile(filepath, textReplacements, studio, game, componentG
         print("textReplacements cannot be None.")
         return
 
-    if studio == None:
-        print("studio cannot be None.")
-        return
-
-    if game == None:
-        print("game cannot be None.")
-        return
-
-    if componentGamedata == None:
-        print("componentGamedata cannot be None.")
-        return
-
-    if pieceGamedata == None:
-        print("pieceGamedata cannot be None.")
-        return
-
     contents = ""
     async with AIOFile(filepath, 'r') as f:
         contents = await f.read()
         for textReplacement in textReplacements:
             key = "{%s}" % textReplacement["key"]
-            value = await getScopedValue(textReplacement, studio, game, componentGamedata, pieceGamedata)
+            value = await getScopedValue(textReplacement, gamedata)
             value = await processValueFilters(value, textReplacement)
 
             isComplex = textReplacement["isComplex"] if "isComplex" in textReplacement else False
@@ -169,7 +115,6 @@ async def textReplaceInFile(filepath, textReplacements, studio, game, componentG
                 value = ""
 
             contents = contents.replace(key, str(value))
-
     async with AIOFile(filepath,'w') as f:
         await f.write(contents)
 
@@ -180,30 +125,14 @@ async def processValueFilters(value, textReplacement):
                 value = value.upper()
     return value
 
-async def updateStylesInFile(filepath, styleUpdates, studio, game, componentGamedata, pieceGamedata):
+async def updateStylesInFile(filepath, styleUpdates, pieceGamedata: PieceData):
     if filepath == None:
         print("filepath cannot be None.")
         return
 
     if styleUpdates == None:
         print("styleUpdates cannot be None.")
-        return
-
-    if studio == None:
-        print("studio cannot be None.")
-        return
-
-    if game == None:
-        print("game cannot be None.")
-        return
-
-    if componentGamedata == None:
-        print("componentGamedata cannot be None.")
-        return
-
-    if pieceGamedata == None:
-        print("pieceGamedata cannot be None.")
-        return
+        return    
 
     try:
         parsedTree = ElementTree.parse(filepath)
@@ -213,7 +142,7 @@ async def updateStylesInFile(filepath, styleUpdates, studio, game, componentGame
             findById = styleUpdate["id"]
             elementToUpdate = tree.find(".//*[@id='%s']" % findById)
             if (elementToUpdate != None):
-                value = await getScopedValue(styleUpdate, studio, game, componentGamedata, pieceGamedata)
+                value = await getScopedValue(styleUpdate, pieceGamedata)
                 await replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
             else:
                 print("Could not find element with id [%s]." % (findById))
@@ -245,42 +174,26 @@ async def replaceStyleAttributeForElement(element, attribute, key, value):
     replaceStyleWith = "%s:%s" % (key, value)
     element.set(attribute, replaceStyleWith)
 
-async def getScopedValue(scopedValue, studio, game, componentGamedata, pieceGamedata):
+async def getScopedValue(scopedValue, pieceGameData: PieceData|ComponentBackData):
     if scopedValue == None:
         print("scopedValue cannot be None.")
-        return
-    
-    if studio == None:
-        print("studio cannot be None.")
-        return
-    
-    if game == None:
-        print("game cannot be None.")
-        return
-
-    if componentGamedata == None:
-        print("componentGamedata cannot be None.")
-        return
-
-    if pieceGamedata == None:
-        print("pieceGamedata cannot be None.")
         return
 
     scope = scopedValue["scope"]
     source = scopedValue["source"]
 
     scopeData = None
+    if scope == "studio":
+        scopeData = pieceGameData.studioDataBlob
+
     if scope == "game":
-        scopeData = game
+        scopeData = pieceGameData.gameDataBlob
 
     if scope == "component":
-        scopeData = componentGamedata
+        scopeData = pieceGameData.componentDataBlob
 
     if scope == "piece":
-        scopeData = pieceGamedata
-
-    if scope == "studio":
-        scopeData = studio
+        scopeData = pieceGameData.pieceData if isinstance(pieceGameData, PieceData) else pieceGameData.componentBackDataBlob 
 
     if scope == "global":
         return source

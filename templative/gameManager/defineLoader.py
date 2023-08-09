@@ -83,14 +83,13 @@ async def loadComponentGamedata(gameRootDirectoryPath, gameCompose, componentGam
     async with AIOFile(filepath) as componentGamedata:
         return json.loads(await componentGamedata.read())
 
-async def loadArtdata(gameRootDirectoryPath, gameCompose, artdataFilename):
+async def loadArtdata(gameRootDirectoryPath, artdataDirectory, artdataFilename):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
     if not artdataFilename:
         return {}
 
-    artdataDirectory = gameCompose["artdataDirectory"]
     artdataFilenameWithExtension = "%s.json" % (artdataFilename)
     filepath = os.path.join(gameRootDirectoryPath, artdataDirectory, artdataFilenameWithExtension)
     async with AIOFile(filepath) as metadataFile:
