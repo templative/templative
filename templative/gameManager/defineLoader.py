@@ -43,7 +43,12 @@ async def attemptToLoadPieceJsonFile(piecesDirectory, piecesGamedataFilename):
         for item in data:
             gamedata.append(item)
 
-        return gamedata
+    varNames = set({})
+    for piece in gamedata:
+        if piece["name"] in varNames:
+            print("!!! Duplicate piece %s." % piece["name"])
+        varNames.add(piece["name"])
+    return gamedata
 
 async def attemptToLoadPieceCsvFile(piecesDirectory, piecesGamedataFilename):
     filepath = os.path.join(piecesDirectory, "%s.csv" % (piecesGamedataFilename))
@@ -55,7 +60,13 @@ async def attemptToLoadPieceCsvFile(piecesDirectory, piecesGamedataFilename):
         for item in data:
             gamedata.append(item)
 
-        return gamedata
+    varNames = set({})
+    for piece in gamedata:
+        if piece["name"] in varNames:
+            print("!!! Duplicate piece %s." % piece["name"])
+        varNames.add(piece["name"])
+    return gamedata
+    
 
 async def loadPiecesGamedata(gameRootDirectoryPath, gameCompose, piecesGamedataFilename):
     if not gameRootDirectoryPath:
