@@ -59,6 +59,13 @@ async def loadFilepathsForComponent(componentTypeFilepathAndQuantity, producedDi
 async def collectFilepathQuantitiesForComponent(componentTypeFilepathAndQuantity, componentInstructions):    
     if not componentInstructions["type"] in componentTypeFilepathAndQuantity:
         componentTypeFilepathAndQuantity[componentInstructions["type"]] = []
+    
+    if "STOCK_" in componentInstructions["type"]:
+        return 
+
+    if not "frontInstructions" in componentInstructions:
+        print("Skipping %s for lacking frontInstructions" % componentInstructions["name"])
+        return
 
     for instruction in componentInstructions["frontInstructions"]:
         frontBack = {
@@ -75,6 +82,9 @@ async def addPageImagesToPdf(pdf, pageImages):
         pdf.image(image,marginsInches,marginsInches,printoutPlayAreaInches[0],printoutPlayAreaInches[1])
 
 async def createPageImagesForComponentTypeImages(componentType, componentTypeImageList, printBack):
+    if "STOCK_" in componentType:
+        return []
+
     if not componentType in COMPONENT_INFO:
         print("Missing %s in COMPONENT_INFO" % componentType)
         return []
