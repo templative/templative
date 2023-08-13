@@ -229,6 +229,15 @@ COMPONENT_INFO = {
         "GameCrafterUploadTask": "TWOSIDED",
         "GameCrafterPackagingDepthMillimeters": 1
     },
+    "BoardDomino": {
+        "DimensionsPixels": [1275, 2475],
+        "DimensionsInches": [4, 8],
+        "PlaygroundThickness": 0.4,
+        "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
+        "GameCrafterUploadTask": "TWOSIDED",
+        "GameCrafterPackagingDepthMillimeters": 2
+    },
     "MintTin": {
         "DimensionsPixels": [750, 1125],
         "GameCrafterUploadTask": "TWOSIDEDBOX"
