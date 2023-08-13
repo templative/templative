@@ -166,12 +166,11 @@ async def replaceStyleAttributeForElement(element, attribute, key, value):
             found = True
         else:
             replaceStyleWith += cssKeyValuePair + ';'
-
     if (not found):
         newCss = "%s:%s;" % (key, value)
         replaceStyleWith += newCss
 
-    replaceStyleWith = "%s:%s" % (key, value)
+    replaceStyleWith = replaceStyleWith[:len(replaceStyleWith)-1]
     element.set(attribute, replaceStyleWith)
 
 async def getScopedValue(scopedValue, pieceGameData: PieceData|ComponentBackData):
