@@ -170,7 +170,8 @@ async def replaceStyleAttributeForElement(element, attribute, key, value):
         newCss = "%s:%s;" % (key, value)
         replaceStyleWith += newCss
 
-    replaceStyleWith = replaceStyleWith[:len(replaceStyleWith)-1]
+    if replaceStyleWith[len(replaceStyleWith)-1] == ";":
+        replaceStyleWith = replaceStyleWith[:len(replaceStyleWith)-1]
     element.set(attribute, replaceStyleWith)
 
 async def getScopedValue(scopedValue, pieceGameData: PieceData|ComponentBackData):
