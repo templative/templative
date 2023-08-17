@@ -7,6 +7,17 @@ async def punchout():
     pass
 
 @punchout.group()
+async def custom():
+    """Create a new Custom Punchout"""
+    pass
+
+@custom.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def customsmall(name):
+    """Create a Small Custom Punchout"""
+    await gameManager.createComponent(name, "PunchoutCustomSmall")
+
+@punchout.group()
 async def chit():
     """Create a new Chit"""
     pass

@@ -238,6 +238,15 @@ COMPONENT_INFO = {
         "GameCrafterUploadTask": "TWOSIDED",
         "GameCrafterPackagingDepthMillimeters": 2
     },
+    "PunchoutCustomSmall": {
+        "DimensionsPixels": [975,1575],
+        "DimensionsInches": [3.25, 5.25],
+        "PlaygroundThickness": 0.4,
+        "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
+        "GameCrafterUploadTask": "CUSTOMCUTTWOSIDEDSLUGGED",
+        "GameCrafterPackagingDepthMillimeters": 2
+    },
     "MintTin": {
         "DimensionsPixels": [750, 1125],
         "GameCrafterUploadTask": "TWOSIDEDBOX"
