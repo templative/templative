@@ -161,6 +161,7 @@ async def createPageImagesForComponentTypeImages(componentType, componentTypeIma
 
         pieceImage = Image.open(instruction["filepath"])
         backImage = Image.open(instruction["backFilepath"])
+        backImage = backImage.rotate(180, expand=True)
 
         if isImageRotated:
             pieceImage = pieceImage.rotate(-90, expand=True)
