@@ -15,7 +15,16 @@ async def createArtFileOfPiece(compositions:ComponentComposition, artdata:any, g
     templateFilesDirectory = compositions.gameCompose["artTemplatesDirectory"]
     artFilename = "%s.svg" % (artdata["templateFilename"])
     artFilepath = os.path.join(templateFilesDirectory, artFilename)
-    artFile = svgmanip.Element(artFilepath)
+    if not os.path.exists(artFilepath):
+        print("!!! Template art file %s does not exist." % artFilepath)
+        return
+    
+    artFile = None
+    try:
+        artFile = svgmanip.Element(artFilepath)
+    except:
+        print("!!! Template art file %s cannot be parsed." % artFilepath)
+        return
 
     await addOverlays(artFile, artdata["overlays"], compositions, gamedata, produceProperties.isSimple, produceProperties.isPublish)
     pieceName = gamedata.pieceData["name"] if isinstance(gamedata, PieceData) else gamedata.componentBackDataBlob["name"]
@@ -84,11 +93,24 @@ async def addOverlays(artFile, overlays, compositions:ComponentComposition, piec
             continue
 
         overlayName = await getScopedValue(overlay, pieceGamedata)
-        if overlayName != None and overlayName != "":
-            overlayFilename = "%s.svg" % (overlayName)
-            overlayFilepath = os.path.join(overlayFilesDirectory, overlayFilename)
+        if overlayName == None or overlayName == "":
+            continue
+    
+        overlayFilename = "%s.svg" % (overlayName)
+        overlayFilepath = os.path.join(overlayFilesDirectory, overlayFilename)
+
+        if not os.path.exists(overlayFilepath):
+            print("!!! Overlay %s does not exist." % overlayFilepath)
+            continue
+
+        graphicsInsert = None
+        try:
             graphicsInsert = svgmanip.Element(overlayFilepath)
-            artFile.placeat(graphicsInsert, 0.0, 0.0)
+        except:
+            print("!!! Cannot parse %s." % overlayFilepath)
+            continue
+
+        artFile.placeat(graphicsInsert, 0.0, 0.0)
 
 async def textReplaceInFile(filepath, textReplacements, gamedata:PieceData|ComponentBackData, isSimplifiedGraphic, isPublish):
     if filepath == None:
@@ -116,6 +138,7 @@ async def textReplaceInFile(filepath, textReplacements, gamedata:PieceData|Compo
                 value = ""
 
             contents = contents.replace(key, str(value))
+            
     async with AIOFile(filepath,'w') as f:
         await f.write(contents)
 
