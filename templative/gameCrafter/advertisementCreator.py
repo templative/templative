@@ -1,19 +1,20 @@
 from .util import httpOperations
-from .fileFolderManager import createFolderAtRoot, createFileInFolder
+from os import path
+from .fileFolderManager import createFileInFolder
+import pathlib
 
-advertismentImages = [
-    "C:/Users/User/Documents/git/nextdaygames/templative/templative/gameCrafter/testImages/actionShot.png",
-    "C:/Users/User/Documents/git/nextdaygames/templative/templative/gameCrafter/testImages/advertisment.png",
-    "C:/Users/User/Documents/git/nextdaygames/templative/templative/gameCrafter/testImages/backdrop.png",
-    "C:/Users/User/Documents/git/nextdaygames/templative/templative/gameCrafter/testImages/logo.png"
-]
-async def createAdvertisementImages(gameCrafterSession):
-    folder = await createFolderAtRoot(gameCrafterSession, "AdvertisementImages")
+async def createAdvertisementFolder(gameCrafterSession, rootFolderId):
+    folder = await httpOperations.postFolder(gameCrafterSession, "Advertisements", rootFolderId)
+    return folder["id"]
     
-    for filepath in advertismentImages:
-        print(filepath)
-        file = await createFileInFolder(gameCrafterSession, filepath, "advertisement.png", folder["id"])
-        print(filepath, file["id"])
+async def createAdvertismentImageInFolder(gameCrafterSession, filepath, backupFilepath, folderId):
+    filepathUsed = filepath
+    if not path.exists(filepath):
+        filepathUsed = backupFilepath
+        print("!!! Advertising file %s doesn't exist, using default %s" % (filepath, backupFilepath))
+    filenameWithoutExtension = pathlib.Path(filepathUsed).stem
+    fileId = await createFileInFolder(gameCrafterSession, filenameWithoutExtension, filepathUsed, folderId)
+    return fileId
 
-async def createActionShot(gameCrafterSession, gameId):
-    await httpOperations.createActionShot(gameCrafterSession, gameId)
+async def createActionShot(gameCrafterSession, gameId, fileId):
+    await httpOperations.createActionShot(gameCrafterSession, gameId, fileId)

@@ -1,9 +1,10 @@
 import os
 from .util import httpOperations
 
-async def createGame(gameCrafterSession, gameInfo, designerId, isPublish):
+async def createGame(gameCrafterSession, gameInfo, designerId, isPublish, shortDescription, longDescription, coolFactors, logoFileId, backdropFileId, advertisementFileId, websiteUrl, category, minAge:str, playTime:str, minPlayers:str, maxPlayers:str):
     gameName = gameInfo["displayName"] if isPublish else gameInfo["name"]
-    uploadedGame = await httpOperations.postGame(gameCrafterSession, gameName, designerId)
+
+    uploadedGame = await httpOperations.postGame(gameCrafterSession, gameName, designerId, shortDescription, longDescription, coolFactors, logoFileId, backdropFileId, advertisementFileId, websiteUrl, category, minAge, playTime, minPlayers, maxPlayers)
     gameId = uploadedGame["id"]
     editUrl = "%s%s%s" % ("https://www.thegamecrafter.com", "/make/games/", gameId)
     print("Created %s. Edit it here %s" % (gameName, editUrl))
