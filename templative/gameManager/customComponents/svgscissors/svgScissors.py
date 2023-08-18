@@ -14,7 +14,8 @@ async def createArtFileOfPiece(compositions:ComponentComposition, artdata:any, g
     
     templateFilesDirectory = compositions.gameCompose["artTemplatesDirectory"]
     artFilename = "%s.svg" % (artdata["templateFilename"])
-    artFile = svgmanip.Element(os.path.join(templateFilesDirectory, artFilename))
+    artFilepath = os.path.join(templateFilesDirectory, artFilename)
+    artFile = svgmanip.Element(artFilepath)
 
     await addOverlays(artFile, artdata["overlays"], compositions, gamedata, produceProperties.isSimple, produceProperties.isPublish)
     pieceName = gamedata.pieceData["name"] if isinstance(gamedata, PieceData) else gamedata.componentBackDataBlob["name"]
