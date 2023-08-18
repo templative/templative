@@ -7,9 +7,7 @@ from fpdf import FPDF
 from templative.componentInfo import COMPONENT_INFO
 from templative.gameManager.instructionsLoader import getLastOutputFileDirectory
 
-printoutSizeType = "Letter"
 marginsInches = 0.5 # or 0.25
-printoutPlayAreaInches = (8.5-(marginsInches*2), 11 - (marginsInches*2))
 inchToPixelConversion = 96
 pieceMarginInches = 0.11811 * 1/3
 
@@ -20,30 +18,61 @@ async def printout():
 
 @printout.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
-async def front(input):
+@click.option('-s', '--size', default="Letter", help='The size of the file, either `Letter` or `Tabloid`.')
+async def front(input, size):
     """Create a pdf for printing on the front only"""
     if input is None:
         input = await getLastOutputFileDirectory()
-    await createPdfForPrinting(input, False)
+
+    if size != "Letter" and size != "Tabloid":
+        print("You must choose either `Letter` or `Tabloid` for size.")
+        return
+
+    await createPdfForPrinting(input, False, size)
 
 @printout.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
-async def frontback(input):
+@click.option('-s', '--size', default="Letter", help='The size of the file, either `Letter` or `Tabloid`.')
+async def frontback(input, size):
     """Create a pdf for printing on the front and back"""
     if input is None:
         input = await getLastOutputFileDirectory()
-    await createPdfForPrinting(input, True)
 
-async def createPdfForPrinting(producedDirectoryPath, printBack):
-    pdf = FPDF("P", "in", "Letter")
+    if size != "Letter" and size != "Tabloid":
+        print("You must choose either `Letter` or `Tabloid` for size.")
+        return
+    
+    await createPdfForPrinting(input, True, size)
+
+async def createPdfForPrinting(producedDirectoryPath, isBackIncluded, size):
+    fpdfSizes = {
+        "Letter": "letter",
+        "Tabloid": "a3",
+    }
+    if not size in fpdfSizes:
+        print("Cannot create size %s." % size)
+        return
+    
+    pdf = FPDF("P", "in", fpdfSizes[size])
 
     componentTypeFilepathAndQuantity = {}
     for directoryPath in next(walk(producedDirectoryPath))[1]:
         await loadFilepathsForComponent(componentTypeFilepathAndQuantity, producedDirectoryPath, directoryPath)
     
+    printoutPlayAreaChoices = {
+        "Letter": (8.5-(marginsInches*2), 11-(marginsInches*2)),
+        "Tabloid": (11-(marginsInches*2), 17-(marginsInches*2))
+    }
+
+    if not size in printoutPlayAreaChoices:
+        print("Cannot create size %s." % size)
+        return
+    
+    printoutPlayAreaChoice = printoutPlayAreaChoices[size]
+
     for componentType in componentTypeFilepathAndQuantity.keys():
-        createdPageImages = await createPageImagesForComponentTypeImages(componentType, componentTypeFilepathAndQuantity[componentType], printBack)
-        await addPageImagesToPdf(pdf, createdPageImages)
+        createdPageImages = await createPageImagesForComponentTypeImages(componentType, componentTypeFilepathAndQuantity[componentType], isBackIncluded, printoutPlayAreaChoice)
+        await addPageImagesToPdf(pdf, createdPageImages, printoutPlayAreaChoice)
 
     pdf.output("./printout.pdf", "F")
 
@@ -76,12 +105,12 @@ async def collectFilepathQuantitiesForComponent(componentTypeFilepathAndQuantity
         }
         componentTypeFilepathAndQuantity[componentInstructions["type"]].append(frontBack)
 
-async def addPageImagesToPdf(pdf, pageImages):
+async def addPageImagesToPdf(pdf, pageImages, printoutPlayAreaInches):
     for image in pageImages:
         pdf.add_page()
         pdf.image(image,marginsInches,marginsInches,printoutPlayAreaInches[0],printoutPlayAreaInches[1])
 
-async def createPageImagesForComponentTypeImages(componentType, componentTypeImageList, printBack):
+async def createPageImagesForComponentTypeImages(componentType, componentTypeImageList, printBack, printoutPlayAreaInches):
     if "STOCK_" in componentType:
         return []
 
@@ -119,7 +148,7 @@ async def createPageImagesForComponentTypeImages(componentType, componentTypeIma
         int((printoutPlayAreaInches[1] - (pieceSizeInches[1] * rows)) / 2 * inchToPixelConversion)
     )
 
-    pageImages = await createBlankImagesForComponent(componentTypeImageList, columns, rows, printBack)
+    pageImages = await createBlankImagesForComponent(componentTypeImageList, columns, rows, printBack, printoutPlayAreaInches)
     
     resizedSizePixels = (
         int(componentSizeInches[0] * inchToPixelConversion), 
@@ -169,7 +198,7 @@ async def createPageImagesForComponentTypeImages(componentType, componentTypeIma
 
     return pageImages
 
-async def createBlankImagesForComponent(imageFilepaths, columns, rows, printBack):
+async def createBlankImagesForComponent(imageFilepaths, columns, rows, printBack, printoutPlayAreaInches):
     whiteColorRGB = (240,240,240)
 
     if columns == 0 or rows == 0:
