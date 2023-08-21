@@ -1,6 +1,7 @@
 from . import svgscissors
 import asyncio
 import os 
+import urllib
 
 from ..models.produceProperties import ProduceProperties
 from ..models.gamedata import StudioData, GameData, ComponentData, ComponentBackData, PieceData
@@ -53,7 +54,7 @@ def getSourcedVariableNamesSpecificToPieceOnBackArtdata(componentBackArtdata:any
 
 async def getComponentArtdata(componentName, inputDirectoryPath, componentComposition: ComponentComposition) -> ComponentArtdata:
     componentArtdata = await defineLoader.loadArtdata(inputDirectoryPath, componentComposition.gameCompose["artdataDirectory"], componentComposition.componentCompose["artdataFilename"])
-    if not componentArtdata or componentArtdata == {}:
+    if not componentArtdata or componentArtdata == None:
         print("Skipping %s component due to missing front art metadata." % componentName)
         return None
 
@@ -82,7 +83,7 @@ def createUniqueBackHashForPiece(pieceSpecificBackArtDataSources: [str], pieceGa
     return pieceBackSourceHash
 
 async def createComponentBackDataPieces(uniqueComponentBackData:ComponentBackData, sourcedVariableNamesSpecificToPieceOnBackArtData: [str], compositions:ComponentComposition, produceProperties:ProduceProperties, componentArtdata:ComponentArtdata, piecesDataBlob: [any]):
-    componentFolderName = compositions.componentCompose["name"] + uniqueComponentBackData.pieceUniqueBackHash
+    componentFolderName = compositions.componentCompose["name"] + uniqueComponentBackData.pieceUniqueBackHash.strip()
     
     componentBackOutputDirectory = await outputWriter.createComponentFolder(componentFolderName, produceProperties.outputDirectoryPath)
     await createUniqueComponentBackInstructions(uniqueComponentBackData, sourcedVariableNamesSpecificToPieceOnBackArtData, compositions, componentBackOutputDirectory, componentFolderName, piecesDataBlob)

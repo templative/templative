@@ -99,10 +99,14 @@ async def loadArtdata(gameRootDirectoryPath, artdataDirectory, artdataFilename):
         raise Exception("Game root directory path cannot be None")
 
     if not artdataFilename:
-        return {}
+        return None
 
     artdataFilenameWithExtension = "%s.json" % (artdataFilename)
     filepath = os.path.join(gameRootDirectoryPath, artdataDirectory, artdataFilenameWithExtension)
+    
+    if not os.path.exists(filepath):
+        return None
+    
     async with AIOFile(filepath) as metadataFile:
         return json.loads(await metadataFile.read())
 
