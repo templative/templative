@@ -1,6 +1,5 @@
-from . import svgScissors
 import asyncio
-import os 
+import hashlib 
 
 from .svgScissors import createArtFileOfPiece
 
@@ -9,10 +8,11 @@ from templative.gameManager.models.gamedata import StudioData, GameData, Compone
 from templative.gameManager.models.composition import ComponentComposition
 from templative.gameManager.models.artdata import ComponentArtdata
 
+# Duplicated
 def createUniqueBackHashForPiece(pieceSpecificBackArtDataSources: [str], pieceGamedata: any) -> str:
     pieceBackSourceHash = ""
     for pieceSpecificSource in pieceSpecificBackArtDataSources:
-        pieceBackSourceHash = pieceBackSourceHash + pieceGamedata[pieceSpecificSource]
+        pieceBackSourceHash += pieceGamedata[pieceSpecificSource].replace(" ","") # hashlib.md5(pieceGamedata[pieceSpecificSource].encode("utf")).hexdigest()
     return pieceBackSourceHash
 
 async def createArtFilesForComponent(compositions:ComponentComposition, componentArtdata:ComponentArtdata, uniqueComponentBackData:ComponentBackData, piecesDataBlob:[any], componentBackOutputDirectory:str, produceProperties:ProduceProperties):

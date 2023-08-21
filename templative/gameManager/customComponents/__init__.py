@@ -1,7 +1,7 @@
 from . import svgscissors
 import asyncio
 import os 
-import urllib
+import hashlib
 
 from ..models.produceProperties import ProduceProperties
 from ..models.gamedata import StudioData, GameData, ComponentData, ComponentBackData, PieceData
@@ -79,14 +79,15 @@ def createNewComponentBackPerUniqueBackGamedata(sourcedVariableNamesSpecificToPi
           
     return uniqueComponentBackDatas
 
+# Duplicated
 def createUniqueBackHashForPiece(pieceSpecificBackArtDataSources: [str], pieceGamedata: any) -> str:
     pieceBackSourceHash = ""
     for pieceSpecificSource in pieceSpecificBackArtDataSources:
-        pieceBackSourceHash = pieceBackSourceHash + pieceGamedata[pieceSpecificSource]
+        pieceBackSourceHash += pieceGamedata[pieceSpecificSource].replace(" ","")# hashlib.md5(pieceGamedata[pieceSpecificSource].encode("utf")).hexdigest()
     return pieceBackSourceHash
 
 async def createComponentBackDataPieces(uniqueComponentBackData:ComponentBackData, sourcedVariableNamesSpecificToPieceOnBackArtData: [str], compositions:ComponentComposition, produceProperties:ProduceProperties, componentArtdata:ComponentArtdata, piecesDataBlob: [any]):
-    componentFolderName = compositions.componentCompose["name"] + uniqueComponentBackData.pieceUniqueBackHash.strip()
+    componentFolderName = compositions.componentCompose["name"] + uniqueComponentBackData.pieceUniqueBackHash
     
     componentBackOutputDirectory = await outputWriter.createComponentFolder(componentFolderName, produceProperties.outputDirectoryPath)
     await createUniqueComponentBackInstructions(uniqueComponentBackData, sourcedVariableNamesSpecificToPieceOnBackArtData, compositions, componentBackOutputDirectory, componentFolderName, piecesDataBlob)
