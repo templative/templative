@@ -29,7 +29,9 @@ async def produceCustomComponent(produceProperties:ProduceProperties, gamedata:G
     componentData = ComponentData(gamedata.studioDataBlob, gamedata.gameDataBlob, componentDataBlob)
 
     sourcedVariableNamesSpecificToPieceOnBackArtData = getSourcedVariableNamesSpecificToPieceOnBackArtdata(componentArtdata.backArtdataBlob)
+    
     uniqueComponentBackDatas = createNewComponentBackPerUniqueBackGamedata(sourcedVariableNamesSpecificToPieceOnBackArtData, componentData, piecesDataBlob)
+    
     for uniqueComponentBackData in uniqueComponentBackDatas:
         await createComponentBackDataPieces(uniqueComponentBackDatas[uniqueComponentBackData], sourcedVariableNamesSpecificToPieceOnBackArtData, componentComposition, produceProperties, componentArtdata, piecesDataBlob)
 
@@ -72,6 +74,7 @@ def createNewComponentBackPerUniqueBackGamedata(sourcedVariableNamesSpecificToPi
         componentBackDataBlob = {}
         for sourcedVariable in sourcedVariableNamesSpecificToPieceOnBackArtData:
             componentBackDataBlob[sourcedVariable] = pieceGamedata[sourcedVariable]
+
         uniqueComponentBackDatas[uniqueHashOfSourceData] = ComponentBackData(componentData.studioDataBlob, componentData.gameDataBlob, componentData.componentDataBlob, componentBackDataBlob, sourcedVariableNamesSpecificToPieceOnBackArtData, uniqueHashOfSourceData)
           
     return uniqueComponentBackDatas
