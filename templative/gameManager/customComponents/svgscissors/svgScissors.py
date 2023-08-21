@@ -1,10 +1,10 @@
-import os, subprocess, time
+import os
 from xml.etree import ElementTree
 from aiofile import AIOFile
 import svgmanip
-from templative.componentInfo import COMPONENT_INFO
 import git
 
+from templative.componentInfo import COMPONENT_INFO
 from templative.gameManager.models.produceProperties import ProduceProperties
 from templative.gameManager.models.gamedata import StudioData, GameData, ComponentData, ComponentBackData, PieceData
 from templative.gameManager.models.composition import ComponentComposition
