@@ -23,6 +23,7 @@ typing-extensions = "*"
 asyncclick = "*"
 anyio = "*"
 fpdf2 = "*"
+GitPython = "*"
 defusedxml = "*"
 gitpython = "*"
 
