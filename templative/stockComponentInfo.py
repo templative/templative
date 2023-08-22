@@ -1,4 +1,19 @@
 STOCK_COMPONENT_INFO = {
+    "Flame": {
+        "GameCrafterGuid": "BD076528-F6F1-11EB-9EF2-D69822502F64"
+    },
+    "CardStandWhite": {
+        "GameCrafterGuid": "E558DDD6-9A04-11E0-AACC-432941C43697",
+    },
+    "JewelClear": {
+        "GameCrafterGuid": "98801240-FC4C-11E5-99B4-4D46B620570A",
+    },
+    "JewelYellow": {
+        "GameCrafterGuid": "25B25052-FC4C-11E5-ACDB-EEBE1CA95DD6",
+    },
+    "JewelGreen": {
+        "GameCrafterGuid": "CE78BACE-FC4B-11E5-A27F-4D46B620570A",
+    },
     "Dubloon": {
         "GameCrafterGuid": "046C84C8-0CF6-11E8-BD5F-814C94A6FE1D",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Poker_Chip_Whole.Poker_Chip_Whole'",
