@@ -160,6 +160,15 @@ COMPONENT_INFO = {
         "GameCrafterUploadTask": "TWOSIDEDSLUG",
         "GameCrafterPackagingDepthMillimeters": 1
     },
+    "MiniHexTile": {
+        "DimensionsPixels": [450, 450],
+        "DimensionsInches": [1.25, 1.08],
+        "PlaygroundThickness": 0.4,
+        "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Hexagonal",
+        "GameCrafterUploadTask": "TWOSIDEDSLUG",
+        "GameCrafterPackagingDepthMillimeters": 2
+    },
     "SmallHexTile": {
         "DimensionsPixels": [675, 600],
         "DimensionsInches": [2, 1.75],

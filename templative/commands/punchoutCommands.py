@@ -94,6 +94,12 @@ async def hexSmall(name):
     """Create a Small Hex"""
     await gameManager.createComponent(name, "SmallHexTile")
 
+@chit.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def hexMini(name):
+    """Create a Mini Hex"""
+    await gameManager.createComponent(name, "MiniHexTile")
+
 @punchout.group()
 async def shard():
     """Create a new Shard"""
