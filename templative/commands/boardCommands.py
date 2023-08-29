@@ -10,4 +10,4 @@ async def board():
 @click.option("-n", "--name", default=None, help="The name of the new component.")
 async def domino(name):
     """Domino Board"""
-    await gameManager.createComponent(name, "BoardDomino")
+    await gameManager.createComponent(name, "DominoBoard")

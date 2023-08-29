@@ -238,7 +238,7 @@ COMPONENT_INFO = {
         "GameCrafterUploadTask": "TWOSIDED",
         "GameCrafterPackagingDepthMillimeters": 1
     },
-    "BoardDomino": {
+    "DominoBoard": {
         "DimensionsPixels": [1275, 2475],
         "DimensionsInches": [4, 8],
         "PlaygroundThickness": 0.4,
