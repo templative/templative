@@ -46,12 +46,12 @@ STOCK_COMPONENT_INFO = {
         "PlaygroundColor": { "R": 255, "G": 255, "B": 255 }
     },
     "Cube8mmRed": {
-        "GameCrafterGuid": "A6645AAE-8335-11E1-9143-C692DC194F78",
+        "GameCrafterGuid": "A664456E-8335-11E1-9143-C692DC194F78",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Cube.Cube'",
         "PlaygroundColor": { "R": 255, "G": 0, "B": 0 }
     },
     "Cube8mmPurple": {
-        "GameCrafterGuid": "4045D568-4D3E-11E1-A14C-40B1921A1C03",
+        "GameCrafterGuid": "4045BFC4-4D3E-11E1-A14C-40B1921A1C03",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Cube.Cube'",
         "PlaygroundColor": { "R": 128, "G": 0, "B": 128 }
     },
@@ -107,7 +107,7 @@ STOCK_COMPONENT_INFO = {
         "PlaygroundDieFaces": [{"X":0,"Y":-0.850651,"Z":0.525731,"Name":"1","Metadata":""},{"X":0.525731,"Y":0,"Z":0.850651,"Name":"2","Metadata":""},{"X":0.850651,"Y":-0.525731,"Z":0,"Name":"3","Metadata":""},{"X":0.525731,"Y":0,"Z":-0.850651,"Name":"4","Metadata":""},{"X":-0.850651,"Y":-0.525731,"Z":0,"Name":"5","Metadata":""},{"X":0,"Y":0.850651,"Z":0.525731,"Name":"6","Metadata":""},{"X":0,"Y":-0.850651,"Z":-0.525731,"Name":"7","Metadata":""},{"X":0.850651,"Y":0.525731,"Z":0,"Name":"8","Metadata":""},{"X":-0.525731,"Y":0,"Z":0.850651,"Name":"9","Metadata":""},{"X":-0.850651,"Y":0.525731,"Z":0,"Name":"10","Metadata":""},{"X":-0.525731,"Y":0,"Z":-0.850651,"Name":"11","Metadata":""},{"X":0,"Y":0.850651,"Z":-0.525731,"Name":"12","Metadata":""}]
     },
     "D20White": {
-        "GameCrafterGuid": "4984D10A-09D6-11E3-AE02-40087740BD4B",
+        "GameCrafterGuid": "49849758-09D6-11E3-AE02-40087740BD4B",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Dice/Dice_D20.Dice_D20'",
         "PlaygroundColor": { "R": 255, "G": 255, "B": 255 },
         "PlaygroundNormalMap": "Texture2D'/Game/Textures/Dice/T_D20_N.T_D20_N'",
@@ -141,12 +141,12 @@ STOCK_COMPONENT_INFO = {
         "PlaygroundColor": { "R": 255, "G": 255, "B": 255 }
     },
     "HouseWoodRed": {
-        "GameCrafterGuid": "B696B44E-48B9-11E8-BA56-3DBB1EA37D3B",
+        "GameCrafterGuid": "B6949542-48B9-11E8-BA56-3DBB1EA37D3B",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/House.House'",
         "PlaygroundColor": { "R": 255, "G": 0, "B": 0 }
     },
     "HouseWoodPurple": {
-        "GameCrafterGuid": "E36DCC20-4EFC-11E8-8111-F6A03D012D85",
+        "GameCrafterGuid": "E36B2C18-4EFC-11E8-8111-F6A03D012D85",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/House.House'",
         "PlaygroundColor": { "R": 128, "G": 0, "B": 128 }
     },
@@ -160,11 +160,11 @@ STOCK_COMPONENT_INFO = {
     "ChurchSilver": {
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Pyramid.Pyramid'",
         "PlaygroundColor": { "R": 192, "G": 192, "B": 192 },
-        "GameCrafterGuid": "E610F444-814B-11E8-827A-A6DFD1EB5668"
+        "GameCrafterGuid": "E60D7FD0-814B-11E8-827A-A6DFD1EB5668"
     },
     "HouseSilver": {
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/House.House'",
         "PlaygroundColor": { "R": 192, "G": 192, "B": 192 },
-        "GameCrafterGuid": "A0BC60B2-8133-11E8-AF99-0FD0CD1076AC"
+        "GameCrafterGuid": "A0B8DD34-8133-11E8-AF99-0FD0CD1076AC"
     }
 }
