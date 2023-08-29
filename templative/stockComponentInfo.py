@@ -65,7 +65,14 @@ STOCK_COMPONENT_INFO = {
         "PlaygroundNormalMap": "Texture2D'/Game/Textures/Dice/T_D12_N.T_D12_N'",
 		"PlaygroundExtraMap": "Texture2D'/Game/Textures/Dice/T_D12.T_D12'",
     },
-
+    "D68mmWhite": {
+        "GameCrafterGuid": "251A0858-59C0-11EA-A896-F5FE59BF7666",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Dice/Dice_D6.Dice_D6'",
+        "PlaygroundColor": { "R": 255, "G": 255, "B": 255 },
+        "PlaygroundNormalMap": "Texture2D'/Game/Textures/Dice/T_D6_N.T_D6_N'",
+		"PlaygroundExtraMap": "Texture2D'/Game/Textures/Dice/T_D6.T_D6'",
+        "PlaygroundDieFaces": [{"X":0,"Y":0,"Z":1,"Name":"1","Metadata":""},{"X":-1,"Y":0,"Z":0,"Name":"2","Metadata":""},{"X":0,"Y":1,"Z":0,"Name":"3","Metadata":""},{"X":0,"Y":-1,"Z":0,"Name":"4","Metadata":""},{"X":1,"Y":0,"Z":0,"Name":"5","Metadata":""},{"X":0,"Y":0,"Z":-1,"Name":"6","Metadata":""}]
+    },
     "D616mmYellow": {
         "GameCrafterGuid": "E4F90956-9A04-11E0-AACC-432941C43697",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Dice/Dice_D6.Dice_D6'",
