@@ -19,6 +19,11 @@ STOCK_COMPONENT_INFO = {
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Poker_Chip_Whole.Poker_Chip_Whole'",
         "PlaygroundColor": { "R": 255, "G": 255, "B": 0 }
     },
+    "CoinTimelessOne": {
+        "GameCrafterGuid": "91B2C8A8-5C37-11EC-BDB8-BF781E5F5B50",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Poker_Chip_Whole.Poker_Chip_Whole'",
+        "PlaygroundColor": { "R": 255, "G": 255, "B": 0 }
+    },
 
     "Cube8mmGreen": {
         "GameCrafterGuid": "5E179AEA-8335-11E1-B714-C692DC194F78",
