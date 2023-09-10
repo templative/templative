@@ -1,2 +1,2 @@
-include templative/lib/gameManager/templative/*
-include templative/lib/gameManager/pdfStyles.css
+include templative/lib/manage/templative/*
+include templative/lib/manage/pdfStyles.css
