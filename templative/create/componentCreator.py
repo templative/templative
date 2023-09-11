@@ -22,7 +22,7 @@ async def createCustomComponent(name, type):
     await templateComponentProjectUpdater.addToComponentCompose(name, type, gameRootDirectoryPath, componentComposeData, componentInfo)
 
     if componentInfo["HasPieceData"]:
-        await templateComponentProjectUpdater.createPiecesCsv(gameCompose["piecesGamedataDirectory"], name, hasPieceQuantity=True)
+        await templateComponentProjectUpdater.createPiecesCsv(gameCompose["piecesGamedataDirectory"], name, hasPieceQuantity=componentInfo["HasPieceQuantity"])
 
     await templateComponentProjectUpdater.createComponentJson(gameCompose["componentGamedataDirectory"], name)
     await templateComponentProjectUpdater.createArtDataFiles(gameCompose["artdataDirectory"], name, componentInfo["ArtDataTypeNames"])
