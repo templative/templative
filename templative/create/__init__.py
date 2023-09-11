@@ -24,3 +24,12 @@ async def init():
 
     fromDirectory = path.join(path.dirname(path.realpath(__file__)), "template")
     copy_tree(fromDirectory, "./")
+
+create.add_command(accordion)
+create.add_command(deck)
+create.add_command(board)
+create.add_command(die)
+create.add_command(packaging)
+create.add_command(punchout)
+create.add_command(stock)
+
