@@ -13,6 +13,10 @@ async def uploadGame(gameCrafterSession, gameRootDirectoryPath, isPublish):
     game = await instructionsLoader.loadGameInstructions(gameRootDirectoryPath)
     studio = await instructionsLoader.loadStudioInstructions(gameRootDirectoryPath)
 
+    if not "gameCrafterDesignerId" in studio or studio["gameCrafterDesignerId"] == "":
+        print("!!! Missing 'gameCrafterDesignerId' in outputted studio.json.", studio)
+        return
+
     print("Uploading %s for %s." % (game["displayName"], studio["displayName"]))
 
     cloudGameFolder = await createFolderAtRoot(gameCrafterSession, game["name"])
