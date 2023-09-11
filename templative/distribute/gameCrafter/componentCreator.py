@@ -58,21 +58,22 @@ async def createCustomComponent(gameCrafterSession, componentType, componentFile
     createTwoSidedBoxTask = createTwoSidedBox
     createTuckBoxTask = createTuckBox
     createTwoSidedTask = createTwoSided
-    
+    createCustomPlasticDieTask = createCustomPlasticDie
     componentTasks = {        
         "DECK": createDeckTask,
         "TWOSIDEDBOX": createTwoSidedBoxTask,
         "TWOSIDEDSLUG": createTwoSidedSluggedTask,
         "TUCKBOX": createTuckBoxTask,
         "TWOSIDED": createTwoSidedTask,
-        "D4Plastic": createCustomPlasticDie,
-        "D6Plastic": createCustomPlasticDie,
-        "D8Plastic": createCustomPlasticDie,
+        "CustomColorD6": createCustomPlasticDieTask,
+        "CustomColorD4": createCustomPlasticDieTask,
+        "CustomColorD8": createCustomPlasticDieTask,
     }
 
     if not component["GameCrafterUploadTask"] in componentTasks:
-        print("Missing component info for %s." % component["name"])
+        print("!!! Missing component info for %s." % component["name"])
         return
+    
     uploadTask = componentTasks[component["GameCrafterUploadTask"]]
     await uploadTask(gameCrafterSession, componentFile, componentType, cloudGameId, cloudGameFolderId)
 
@@ -231,24 +232,25 @@ async def createCustomPlasticDie(gameCrafterSession, componentInstructionsOutput
     quantity = componentInstructionsOutput["quantity"]
     if int(quantity) == 0:
         return
-    sideInstructions = componentInstructionsOutput["sideInstructions"]
+    dieFaceFilepaths = componentInstructionsOutput["dieFaceFilepaths"]
 
     print("Uploading %s %s %s(s)" % (quantity, componentName, identity))
 
     cloudComponentFolder = await httpOperations.postFolder(gameCrafterSession, componentName, cloudGameFolderId)
 
     imageFileIds = []
-    for sideInstruction in sideInstructions:
-        imageFileIds.append(await fileFolderManager.createFileInFolder(gameCrafterSession, sideInstruction["name"], sideInstruction["filepath"], cloudComponentFolder["id"])
-    )
+    for dieFaceFilepath in dieFaceFilepaths:
+        fileId = await fileFolderManager.createFileInFolder(gameCrafterSession, os.path.basename(dieFaceFilepath), dieFaceFilepath, cloudComponentFolder["id"])
+        imageFileIds.append(fileId)
+    
     dieCreationFunctions = {
         "4": httpOperations.postCustomD4,
         "6": httpOperations.postCustomD6,
         "8": httpOperations.postCustomD8,
     }
     
-    if not str(len(sideInstructions)) in dieCreationFunctions:
-        raise Exception("Cannot create %s sided die for %s." % (len(sideInstructions), componentName))
+    if not str(len(dieFaceFilepaths)) in dieCreationFunctions:
+        raise Exception("Cannot create %s sided die for %s." % (len(dieFaceFilepaths), componentName))
     
-    dieCreationFunction = dieCreationFunctions[str(len(sideInstructions))]
-    dieId = await dieCreationFunction(gameCrafterSession, cloudGameId, componentName, quantity, componentInstructionsOutput["color"], imageFileIds)
+    dieCreationFunction = dieCreationFunctions[str(len(dieFaceFilepaths))]
+    await dieCreationFunction(gameCrafterSession,componentName, cloudGameId, quantity, "white", imageFileIds)

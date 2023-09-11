@@ -259,6 +259,7 @@ async def postCustomD4(gameCrafterSession, name, gameId, quantity, color, sideFi
         game_id = gameId,
         quantity = quantity,
         diecolor = color,
+        identity = "CustomColorD4",
         side1_id = sideFileIds[0],
         side2_id = sideFileIds[1],
         side3_id = sideFileIds[2],
@@ -270,10 +271,8 @@ async def postCustomD4(gameCrafterSession, name, gameId, quantity, color, sideFi
     )
 
 async def postCustomD6(gameCrafterSession, name, gameId, quantity, color, sideFileIds):
- 
     if len(sideFileIds) != 6:
         raise Exception("A D6 needs 6 sides, but only %s were given." % (len(sideFileIds)))
-    
     url = "%s/customcolord6" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId,
@@ -281,6 +280,7 @@ async def postCustomD6(gameCrafterSession, name, gameId, quantity, color, sideFi
         game_id = gameId,
         quantity = quantity,
         color = color,
+        identity = "CustomColorD6",
         side1_id = sideFileIds[0],
         side2_id = sideFileIds[1],
         side3_id = sideFileIds[2],
@@ -304,8 +304,10 @@ async def postCustomD8(gameCrafterSession, name, gameId, quantity, color, sideFi
     return await httpClient.post(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId,
         name = name,
+        game_id = gameId,
         quantity = quantity,
         color = color,
+        identity = "CustomColorD8",
         side1_id = sideFileIds[0],
         side2_id = sideFileIds[1],
         side3_id = sideFileIds[2],
