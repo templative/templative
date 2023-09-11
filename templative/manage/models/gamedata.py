@@ -13,7 +13,7 @@ class ComponentData(GameData):
         self.componentDataBlob = componentDataBlob
 
 class ComponentBackData(ComponentData):
-    def __init__(self, studioDataBlob, gameDataBlob, componentDataBlob, componentBackDataBlob, sourcedVariableNamesSpecificToPieceOnBackArtData, pieceUniqueBackHash):
+    def __init__(self, studioDataBlob, gameDataBlob, componentDataBlob, componentBackDataBlob={}, sourcedVariableNamesSpecificToPieceOnBackArtData=[], pieceUniqueBackHash=""):
         super().__init__(studioDataBlob, gameDataBlob, componentDataBlob)
         self.componentBackDataBlob = componentBackDataBlob
         self.pieceUniqueBackHash = pieceUniqueBackHash
