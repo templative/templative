@@ -2,6 +2,7 @@ import os
 from xml.etree import ElementTree
 from aiofile import AIOFile
 import svgmanip
+import svgutils
 import git
 
 from templative.componentInfo import COMPONENT_INFO
@@ -40,6 +41,7 @@ async def createArtFileOfPiece(compositions:ComponentComposition, artdata:any, g
     component = COMPONENT_INFO[compositions.componentCompose["type"]]
 
     imageSizePixels = component["DimensionsPixels"]
+    await scaleContent(artFileOutputFilepath, imageSizePixels, 0.3203944444444444)
     await assignSize(artFileOutputFilepath, imageSizePixels)
     await addNewlines(artFileOutputFilepath)
     await exportSvgToImage(artFileOutputFilepath, imageSizePixels, artFileOutputName, componentBackOutputDirectory)
@@ -55,14 +57,27 @@ async def addNewlines(artFileOutputFilepath):
     async with AIOFile(artFileOutputFilepath, 'w') as f:
         f.write(fixedContents)
 
+async def scaleContent(artFileOutputFilepath, imageSizePixels, scale):
+    original = svgutils.transform.fromfile(artFileOutputFilepath)    
+    newSvgDocument = svgutils.transform.SVGFigure(imageSizePixels[0] * scale, imageSizePixels[1] * scale,)
+    
+    svg = original.getroot()
+    svg.scale(scale)
+    newSvgDocument.append(svg)
+    
+    newSvgDocument.save(artFileOutputFilepath)
+
 async def assignSize(artFileOutputFilepath, imageSizePixels):
     
     parser = ElementTree.XMLParser(encoding="utf-8")
     elementTree = ElementTree.parse(artFileOutputFilepath, parser=parser)
     root = elementTree.getroot()
-    root.set("width", "%spx" % imageSizePixels[0])
-    root.set("height", "%spx" % imageSizePixels[1])
-    root.set("viewbox", "0 0 %s %s" % (imageSizePixels[0], imageSizePixels[1]))
+    toThreeHundredDpi = 0.319975619047619
+    shrunkWidth = (imageSizePixels[0] * toThreeHundredDpi, imageSizePixels[1] * toThreeHundredDpi)
+    root.set("width", "%spx" % shrunkWidth[0])
+    root.set("height", "%spx" % shrunkWidth[1])
+
+    root.set("viewbox", "0 0 %s %s" % (shrunkWidth[0], shrunkWidth[1]))
     async with AIOFile(artFileOutputFilepath,'wb') as f:
         await f.write(ElementTree.tostring(root))
     
@@ -253,8 +268,10 @@ async def exportSvgToImage(filepath, imageSizePixels, name, outputDirectory):
         "inkscape", 
         absoluteSvgFilepath,
         '--export-filename=%s' % pngFilepath, 
-        "--export-width=%s" % imageSizePixels[0], 
-        "--export-height=%s" % imageSizePixels[1],
+        # "--with-gui",
+        "--export-dpi=%s" % 300, 
+        # "--export-width=%s" % imageSizePixels[0], 
+        # "--export-height=%s" % imageSizePixels[1],
         "--export-background-opacity=0" ]
     
     runCommands(createPngCommands)
