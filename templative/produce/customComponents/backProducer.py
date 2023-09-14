@@ -98,7 +98,7 @@ class BackProducer(Producer):
             isPieceInComponentBack = uniqueComponentBackHash == pieceUniqueBackHash
             if not isPieceInComponentBack:
                 continue
-            filename = "%s-%s.jpg" % (componentBackName, pieceGamedata["name"])
+            filename = "%s-%s.png" % (componentBackName, pieceGamedata["name"])
             artFilepath = os.path.join(componentBackFilepath, filename)
             instructionSets.append({"name": pieceGamedata["name"], "filepath": artFilepath, "quantity": pieceGamedata["quantity"]})
 
@@ -106,6 +106,6 @@ class BackProducer(Producer):
 
     @staticmethod
     async def getBackInstructionSetFilepath(componentName, componentFilepath):
-        filename = "%s-back.jpg" % componentName
+        filename = "%s-back.png" % componentName
         backFilepath = os.path.join(componentFilepath, filename)
         return {"name": filename, "filepath": backFilepath}

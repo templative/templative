@@ -275,15 +275,14 @@ async def exportSvgToImage(filepath, imageSizePixels, name, outputDirectory):
         "--export-background-opacity=0" ]
     
     runCommands(createPngCommands)
-
     jpgFilepath = os.path.join(absoluteOutputDirectory, "%s.jpg" % (name))
     convertCommands = [ 
         "magick convert", 
         '"%s"' % pngFilepath, 
         '"%s"' % jpgFilepath ]
-    runCommands(convertCommands)
+    # runCommands(convertCommands)
 
-    os.remove(pngFilepath)
+    # os.remove(pngFilepath)
 
 def getCurrentGitSha():
     repo = git.Repo(search_parent_directories=True)

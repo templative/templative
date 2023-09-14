@@ -51,7 +51,7 @@ class DiceProducer(Producer):
     async def getDieFaceFilepaths(componentName:str, piecesGamedata:[any], componentArtDirectoryPath:str):
         filepaths = []
         for pieceGamedata in piecesGamedata:
-            filename = "%s-%s.jpg" % (componentName, pieceGamedata["name"])
+            filename = "%s-%s.png" % (componentName, pieceGamedata["name"])
             artFilepath = os.path.join(componentArtDirectoryPath, filename)
             filepaths.append(artFilepath)
 
