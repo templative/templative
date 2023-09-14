@@ -12,9 +12,9 @@ async def convertRulesMdToHtml(gameRootDirectoryPath):
 
 async def convertRulesMdToSpans(gameRootDirectoryPath):
     rules = await defineLoader.loadRules(gameRootDirectoryPath)
-    await convertRulesMdToSpans(rules, gameRootDirectoryPath)
+    await convertRulesMdToSpansRaw(rules, gameRootDirectoryPath)
 
-async def convertRulesMdToSpans(rules, gameFolderPath):
+async def convertRulesMdToSpansRaw(rules, gameFolderPath):
 
     fontSize = 18
     fontSizeProgression = 5
@@ -23,17 +23,19 @@ async def convertRulesMdToSpans(rules, gameFolderPath):
     htmlContent = htmlContent.replace("\n", "")
 
     # This creates a newline at the beginning of doc
-    htmlContent = htmlContent.replace("<h1>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((5*fontSizeProgression)+fontSize))
-    htmlContent = htmlContent.replace("<h2>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((4*fontSizeProgression)+fontSize))
-    htmlContent = htmlContent.replace("<h3>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((3*fontSizeProgression)+fontSize))
-    htmlContent = htmlContent.replace("<h4>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((2*fontSizeProgression)+fontSize))
-    htmlContent = htmlContent.replace("<h5>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((1*fontSizeProgression)+fontSize))
+    htmlContent = htmlContent.replace("<h1>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((6*fontSizeProgression)+fontSize))
+    htmlContent = htmlContent.replace("<h2>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((5*fontSizeProgression)+fontSize))
+    htmlContent = htmlContent.replace("<h3>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((4*fontSizeProgression)+fontSize))
+    htmlContent = htmlContent.replace("<h4>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((3*fontSizeProgression)+fontSize))
+    htmlContent = htmlContent.replace("<h5>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((2*fontSizeProgression)+fontSize))
+    htmlContent = htmlContent.replace("<h6>", "<tspan font-weight='bold' font-size='%spx'>\\n" % ((1*fontSizeProgression)+fontSize))
 
     htmlContent = htmlContent.replace("</h1>", "</tspan>\\n")
     htmlContent = htmlContent.replace("</h2>", "</tspan>\\n")
     htmlContent = htmlContent.replace("</h3>", "</tspan>\\n")
     htmlContent = htmlContent.replace("</h4>", "</tspan>\\n")
     htmlContent = htmlContent.replace("</h5>", "</tspan>\\n")
+    htmlContent = htmlContent.replace("</h6>", "</tspan>\\n")
 
     htmlContent = htmlContent.replace("<p>", "<tspan font-size='18px'>")
     htmlContent = htmlContent.replace("</p>", "</tspan>\\n")
