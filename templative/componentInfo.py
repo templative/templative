@@ -95,6 +95,18 @@ COMPONENT_INFO = {
         "HasPieceQuantity": True,
         "ArtDataTypeNames": ["Front", "Back"],
     },
+    "JumboDeck": {
+        "DimensionsPixels": [1125, 1725],
+        "DimensionsInches": [3.5, 5.5],
+        "PlaygroundThickness": 0.05,
+        "PlaygroundCreationTask": "DECK",
+        "PlaygroundModel": "Rounded",
+        "GameCrafterUploadTask": "DECK",
+        "GameCrafterPackagingDepthMillimeters": 1,
+        "HasPieceData": True,
+        "HasPieceQuantity": True,
+        "ArtDataTypeNames": ["Front", "Back"],
+    },
     "MiniDeck": {
         "DimensionsPixels": [600, 825],
         "DimensionsInches": [1.75, 2.5],

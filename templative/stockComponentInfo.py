@@ -24,7 +24,33 @@ STOCK_COMPONENT_INFO = {
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Poker_Chip_Whole.Poker_Chip_Whole'",
         "PlaygroundColor": { "R": 255, "G": 255, "B": 0 }
     },
-
+    "D616mmWhitePearl": {
+        "GameCrafterGuid": "A0496F74-F63E-11E7-9250-EB857C2CF47C",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Dice/Dice_D6.Dice_D6'",
+        "PlaygroundColor": { "R": 193, "G": 187, "B": 163 },
+        "PlaygroundNormalMap": "Texture2D'/Game/Textures/Dice/T_D6_N.T_D6_N'",
+		"PlaygroundExtraMap": "Texture2D'/Game/Textures/Dice/T_D6.T_D6'",
+        "PlaygroundDieFaces": [{"X":0,"Y":0,"Z":1,"Name":"1","Metadata":""},{"X":-1,"Y":0,"Z":0,"Name":"2","Metadata":""},{"X":0,"Y":1,"Z":0,"Name":"3","Metadata":""},{"X":0,"Y":-1,"Z":0,"Name":"4","Metadata":""},{"X":1,"Y":0,"Z":0,"Name":"5","Metadata":""},{"X":0,"Y":0,"Z":-1,"Name":"6","Metadata":""}]
+    },
+    "D616mmBrownPearl": {
+        "GameCrafterGuid": "E15801AE-F636-11E7-AFA0-9D245953F07E",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Dice/Dice_D6.Dice_D6'",
+        "PlaygroundColor": { "R": 159, "G": 109, "B": 37 },
+        "PlaygroundNormalMap": "Texture2D'/Game/Textures/Dice/T_D6_N.T_D6_N'",
+		"PlaygroundExtraMap": "Texture2D'/Game/Textures/Dice/T_D6.T_D6'",
+        "PlaygroundDieFaces": [{"X":0,"Y":0,"Z":1,"Name":"1","Metadata":""},{"X":-1,"Y":0,"Z":0,"Name":"2","Metadata":""},{"X":0,"Y":1,"Z":0,"Name":"3","Metadata":""},{"X":0,"Y":-1,"Z":0,"Name":"4","Metadata":""},{"X":1,"Y":0,"Z":0,"Name":"5","Metadata":""},{"X":0,"Y":0,"Z":-1,"Name":"6","Metadata":""}]
+    },
+    
+    "Cube12mmTransparentBlue": {
+        "GameCrafterGuid": "444187C0-337E-11E8-8537-14821EA37D3B",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Cube.Cube'",
+        "PlaygroundColor": { "R": 0, "G": 0, "B": 255 }
+    },
+    "Cube12mmTransparentYellow": {
+        "GameCrafterGuid": "01F04862-3431-11E8-A623-E3771FE331BC",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Cube.Cube'",
+        "PlaygroundColor": { "R": 255, "G": 242, "B": 0 }
+    },
     "Cube8mmGreen": {
         "GameCrafterGuid": "5E179AEA-8335-11E1-B714-C692DC194F78",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Cube.Cube'",
@@ -111,6 +137,22 @@ STOCK_COMPONENT_INFO = {
 		"PlaygroundExtraMap": "Texture2D'/Game/Textures/Dice/T_D12.T_D12'",
         "PlaygroundDieFaces": [{"X":0,"Y":-0.850651,"Z":0.525731,"Name":"1","Metadata":""},{"X":0.525731,"Y":0,"Z":0.850651,"Name":"2","Metadata":""},{"X":0.850651,"Y":-0.525731,"Z":0,"Name":"3","Metadata":""},{"X":0.525731,"Y":0,"Z":-0.850651,"Name":"4","Metadata":""},{"X":-0.850651,"Y":-0.525731,"Z":0,"Name":"5","Metadata":""},{"X":0,"Y":0.850651,"Z":0.525731,"Name":"6","Metadata":""},{"X":0,"Y":-0.850651,"Z":-0.525731,"Name":"7","Metadata":""},{"X":0.850651,"Y":0.525731,"Z":0,"Name":"8","Metadata":""},{"X":-0.525731,"Y":0,"Z":0.850651,"Name":"9","Metadata":""},{"X":-0.850651,"Y":0.525731,"Z":0,"Name":"10","Metadata":""},{"X":-0.525731,"Y":0,"Z":-0.850651,"Name":"11","Metadata":""},{"X":0,"Y":0.850651,"Z":-0.525731,"Name":"12","Metadata":""}]
     },
+    "D20Black": {
+        "GameCrafterGuid": "E52E1696-9A04-11E0-AACC-432941C43697",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Dice/Dice_D20.Dice_D20'",
+        "PlaygroundColor": { "R": 0, "G": 0, "B": 0 },
+        "PlaygroundNormalMap": "Texture2D'/Game/Textures/Dice/T_D20_N.T_D20_N'",
+		"PlaygroundExtraMap": "Texture2D'/Game/Textures/Dice/T_D20.T_D20'",
+        "PlaygroundDieFaces": [{ "X": -0.57735, "Y": 0.57735, "Z": 0.57735, "Name": "1", "Metadata": "" }, { "X": 0, "Y": -0.356822, "Z": -0.934173, "Name": "2", "Metadata": "" }, { "X": 0, "Y": -0.356822, "Z": 0.934173, "Name": "3", "Metadata": "" }, { "X": 0.57735, "Y": 0.57735, "Z": -0.57735, "Name": "4", "Metadata": "" }, { "X": -0.57735, "Y": 0.57735, "Z": -0.57735, "Name": "5", "Metadata": "" }, { "X": 0.934173, "Y": 0, "Z": 0.356822, "Name": "6", "Metadata": "" }, { "X": -0.934173, "Y": 0, "Z": 0.356822, "Name": "7", "Metadata": "" }, { "X": 0.356822, "Y": -0.934173, "Z": 0, "Name": "8", "Metadata": "" }, { "X": 0.57735, "Y": 0.57735, "Z": 0.57735, "Name": "9", "Metadata": "" }, { "X": -0.356822, "Y": -0.934173, "Z": 0, "Name": "10", "Metadata": "" }, { "X": 0.356822, "Y": 0.934173, "Z": 0, "Name": "11", "Metadata": "" }, { "X": -0.57735, "Y": -0.57735, "Z": -0.57735, "Name": "12", "Metadata": "" }, { "X": -0.356822, "Y": 0.934173, "Z": 0, "Name": "13", "Metadata": "" }, { "X": 0.934173, "Y": 0, "Z": -0.356822, "Name": "14", "Metadata": "" }, { "X": -0.934173, "Y": 0, "Z": -0.356822, "Name": "15", "Metadata": "" }, { "X": 0.57735, "Y": -0.57735, "Z": 0.57735, "Name": "16", "Metadata": "" }, { "X": -0.57735, "Y": -0.57735, "Z": 0.57735, "Name": "17", "Metadata": "" }, { "X": 0, "Y": 0.356822, "Z": -0.934173, "Name": "18", "Metadata": "" }, { "X": 0, "Y": 0.356822, "Z": 0.934173, "Name": "19", "Metadata": "" }, { "X": 0.57735, "Y": -0.57735, "Z": -0.57735, "Name": "20", "Metadata": "" }]
+    },
+    "D20Yellow": {
+        "GameCrafterGuid": "5F1BF8EA-09D6-11E3-A83D-40087740BD4B",
+        "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Dice/Dice_D20.Dice_D20'",
+        "PlaygroundColor": { "R": 206, "G": 163, "B": 38 },
+        "PlaygroundNormalMap": "Texture2D'/Game/Textures/Dice/T_D20_N.T_D20_N'",
+		"PlaygroundExtraMap": "Texture2D'/Game/Textures/Dice/T_D20.T_D20'",
+        "PlaygroundDieFaces": [{ "X": -0.57735, "Y": 0.57735, "Z": 0.57735, "Name": "1", "Metadata": "" }, { "X": 0, "Y": -0.356822, "Z": -0.934173, "Name": "2", "Metadata": "" }, { "X": 0, "Y": -0.356822, "Z": 0.934173, "Name": "3", "Metadata": "" }, { "X": 0.57735, "Y": 0.57735, "Z": -0.57735, "Name": "4", "Metadata": "" }, { "X": -0.57735, "Y": 0.57735, "Z": -0.57735, "Name": "5", "Metadata": "" }, { "X": 0.934173, "Y": 0, "Z": 0.356822, "Name": "6", "Metadata": "" }, { "X": -0.934173, "Y": 0, "Z": 0.356822, "Name": "7", "Metadata": "" }, { "X": 0.356822, "Y": -0.934173, "Z": 0, "Name": "8", "Metadata": "" }, { "X": 0.57735, "Y": 0.57735, "Z": 0.57735, "Name": "9", "Metadata": "" }, { "X": -0.356822, "Y": -0.934173, "Z": 0, "Name": "10", "Metadata": "" }, { "X": 0.356822, "Y": 0.934173, "Z": 0, "Name": "11", "Metadata": "" }, { "X": -0.57735, "Y": -0.57735, "Z": -0.57735, "Name": "12", "Metadata": "" }, { "X": -0.356822, "Y": 0.934173, "Z": 0, "Name": "13", "Metadata": "" }, { "X": 0.934173, "Y": 0, "Z": -0.356822, "Name": "14", "Metadata": "" }, { "X": -0.934173, "Y": 0, "Z": -0.356822, "Name": "15", "Metadata": "" }, { "X": 0.57735, "Y": -0.57735, "Z": 0.57735, "Name": "16", "Metadata": "" }, { "X": -0.57735, "Y": -0.57735, "Z": 0.57735, "Name": "17", "Metadata": "" }, { "X": 0, "Y": 0.356822, "Z": -0.934173, "Name": "18", "Metadata": "" }, { "X": 0, "Y": 0.356822, "Z": 0.934173, "Name": "19", "Metadata": "" }, { "X": 0.57735, "Y": -0.57735, "Z": -0.57735, "Name": "20", "Metadata": "" }]
+    },
     "D20White": {
         "GameCrafterGuid": "49849758-09D6-11E3-AE02-40087740BD4B",
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Dice/Dice_D20.Dice_D20'",
@@ -161,6 +203,9 @@ STOCK_COMPONENT_INFO = {
 
     "StoutBoxBlankLarge": {
         "GameCrafterGuid": "3A3FE71C-F7FF-11E8-8362-F645227DF0B6"
+    },
+    "RetailBoxBlankLarge": {
+        "GameCrafterGuid": "16DBBD58-56FB-11E5-B857-1DCFFE149099"
     },
     "ChurchSilver": {
         "PlaygroundModelFile": "StaticMesh'/Game/Meshes/Basic/Pyramid.Pyramid'",

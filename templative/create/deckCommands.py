@@ -14,6 +14,12 @@ async def poker(name):
 
 @deck.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
+async def jumbo(name):
+    """Jumbo Deck"""
+    await componentCreator.createCustomComponent(name, "JumboDeck")
+
+@deck.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
 async def business(name):
     """Business Deck"""
     await componentCreator.createCustomComponent(name, "BusinessDeck")
