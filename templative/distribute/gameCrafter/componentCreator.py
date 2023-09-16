@@ -32,9 +32,10 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
     if isDebugInfo and isPublish:
         print("!!! Skipping %s. It is debug only and we are publishing." % (componentFile["name"]))
         return
-
+    
     componentType = componentFile["type"]
     if componentFile["quantity"] == 0:
+        print("%s has 0 quantity, skipping." % componentFile["name"])
         return
     
     componentTypeTokens = componentType.split("_")
@@ -49,8 +50,10 @@ async def createComponent(gameCrafterSession, componentDirectoryPath, cloudGame,
 
 async def createCustomComponent(gameCrafterSession, componentType, componentFile, cloudGameId, cloudGameFolderId):
     if not componentType in COMPONENT_INFO:
-        print("Missing component info for %s." % component["name"])
+        print("Missing component info for %s." % componentType)
         return
+    
+    
     component = COMPONENT_INFO[componentType]
 
     createDeckTask = createDeck
@@ -70,8 +73,12 @@ async def createCustomComponent(gameCrafterSession, componentType, componentFile
         "CustomColorD8": createCustomPlasticDieTask,
     }
 
+    if not "GameCrafterUploadTask" in component:
+        print("Skipping %s with undefined 'GameCrafterUploadTask'"% componentType)
+        return
+
     if not component["GameCrafterUploadTask"] in componentTasks:
-        print("!!! Missing component info for %s." % component["name"])
+        print("!!! Missing component info for %s." % componentType)
         return
     
     uploadTask = componentTasks[component["GameCrafterUploadTask"]]
@@ -199,6 +206,8 @@ async def createDeck(gameCrafterSession, component, identity, cloudGameId, cloud
     componentName = component["name"]
     quantity = component["quantity"]
     if int(quantity) == 0:
+        print(component)
+        print("Deck has no quantity, skipping.")
         return
     frontInstructions = component["frontInstructions"]
     backInstructions = component["backInstructions"]

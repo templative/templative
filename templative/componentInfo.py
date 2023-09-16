@@ -149,6 +149,7 @@ COMPONENT_INFO = {
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
         "PlaygroundModel": "Hexagonal",
+        "GameCrafterUploadTask": "DECK",
         "GameCrafterPackagingDepthMillimeters": 1,
         "HasPieceData": True,
         "HasPieceQuantity": True,
