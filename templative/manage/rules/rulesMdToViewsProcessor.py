@@ -16,7 +16,7 @@ async def convertRulesMdToSpans(gameRootDirectoryPath):
 
 async def convertRulesMdToSpansRaw(rules, gameFolderPath):
 
-    fontSize = 18
+    fontSize = 24
     fontSizeProgression = 5
 
     htmlContent = markdown(rules)
@@ -37,7 +37,7 @@ async def convertRulesMdToSpansRaw(rules, gameFolderPath):
     htmlContent = htmlContent.replace("</h5>", "</tspan>\\n")
     htmlContent = htmlContent.replace("</h6>", "</tspan>\\n")
 
-    htmlContent = htmlContent.replace("<p>", "<tspan font-size='18px'>")
+    htmlContent = htmlContent.replace("<p>", "<tspan font-size='%spx'>" % (fontSize))
     htmlContent = htmlContent.replace("</p>", "</tspan>\\n")
 
     htmlContent = htmlContent.replace("<ul>", "<tspan font-size='%spx'>" % (fontSize))
