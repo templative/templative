@@ -2,6 +2,8 @@ from templative.distribute.gameCrafter.util import httpClient
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com/api"
 
+isProofedByDefault = 1
+
 async def login(gameCrafterSession, publicApiKey, userName, userPassword):
     url = "%s/session" % gameCrafterBaseUrl
     return await httpClient.post(gameCrafterSession, url,
@@ -112,7 +114,7 @@ async def postTwoSidedSet(gameCrafterSession, name, identity, quantity, gameId, 
         quantity = quantity,
         identity = identity,
         back_id = backImageId,
-        has_proofed_back = 1,
+        has_proofed_back = isProofedByDefault,
     )
 
 async def postTwoSided(gameCrafterSession, name, setId, quantity, faceImageId):
@@ -123,7 +125,7 @@ async def postTwoSided(gameCrafterSession, name, setId, quantity, faceImageId):
         set_id = setId,
         quantity = quantity,
         face_id = faceImageId,
-        has_proofed_face = 1,
+        has_proofed_face = isProofedByDefault,
     )
 
 async def postTuckBox(gameCrafterSession, name, identity, quantity, gameId, imageId):
@@ -135,7 +137,7 @@ async def postTuckBox(gameCrafterSession, name, identity, quantity, gameId, imag
         quantity = quantity,
         outside_id = imageId,
         identity = identity,
-        has_proofed_outside = 1,
+        has_proofed_outside = isProofedByDefault,
     )
 
 async def postDeck(gameCrafterSession, name, identity, quantity, gameId, backImageFileId):
@@ -147,7 +149,7 @@ async def postDeck(gameCrafterSession, name, identity, quantity, gameId, backIma
         identity = identity,
         quantity = quantity,
         back_id = backImageFileId,
-        has_proofed_back = 1
+        has_proofed_back = isProofedByDefault
     )
 
 async def postDeckCard(gameCrafterSession, name, deckId, quantity, imageFileId):
@@ -159,8 +161,8 @@ async def postDeckCard(gameCrafterSession, name, deckId, quantity, imageFileId):
         quantity = quantity,
         face_id = imageFileId,
         back_from = "Deck",
-        has_proofed_face = 1,
-        has_proofed_back = 1
+        has_proofed_face = isProofedByDefault,
+        has_proofed_back = isProofedByDefault
     )
 
 async def postTwoSidedBox(gameCrafterSession, gameId, name, identity, quantity, topImageFileId, backImageFileId):
@@ -171,10 +173,10 @@ async def postTwoSidedBox(gameCrafterSession, gameId, name, identity, quantity, 
         game_id = gameId,
         quantity = quantity,
         top_id = topImageFileId,
-        has_proofed_top = 1,
+        has_proofed_top = isProofedByDefault,
         identity = identity,
         bottom_id = backImageFileId,
-        has_proofed_bottom = 1
+        has_proofed_bottom = isProofedByDefault
     )
 
 async def postTwoSidedSluggedSet(gameCrafterSession, name, identity, quantity, gameId, backImageFileId):
@@ -186,7 +188,7 @@ async def postTwoSidedSluggedSet(gameCrafterSession, name, identity, quantity, g
         identity = identity,
         quantity = quantity,
         back_id = backImageFileId,
-        has_proofed_back = 1
+        has_proofed_back = isProofedByDefault
     )
 
 async def postTwoSidedSlugged(gameCrafterSession, name, setId, quantity, imageFileId):
@@ -197,8 +199,8 @@ async def postTwoSidedSlugged(gameCrafterSession, name, setId, quantity, imageFi
         set_id = setId,
         quantity = quantity,
         face_id = imageFileId,
-        has_proofed_face = 1,
-        has_proofed_back = 1
+        has_proofed_face = isProofedByDefault,
+        has_proofed_back = isProofedByDefault
     )
 
 async def postDownloadableDocument(gameCrafterSession, gameId, pdfFileId):
@@ -239,12 +241,12 @@ async def postCustomWoodenDie(gameCrafterSession, gameId, name, quantity, sideFi
         side4_id = sideFileIds[3],
         side5_id = sideFileIds[4],
         side6_id = sideFileIds[5],
-        has_proofed_side1 = 1,
-        has_proofed_side2 = 1,
-        has_proofed_side3 = 1,
-        has_proofed_side4 = 1,
-        has_proofed_side5 = 1,
-        has_proofed_side6 = 1,
+        has_proofed_side1 = isProofedByDefault,
+        has_proofed_side2 = isProofedByDefault,
+        has_proofed_side3 = isProofedByDefault,
+        has_proofed_side4 = isProofedByDefault,
+        has_proofed_side5 = isProofedByDefault,
+        has_proofed_side6 = isProofedByDefault,
     )
 
 async def postCustomD4(gameCrafterSession, name, gameId, quantity, color, sideFileIds):
@@ -264,10 +266,10 @@ async def postCustomD4(gameCrafterSession, name, gameId, quantity, color, sideFi
         side2_id = sideFileIds[1],
         side3_id = sideFileIds[2],
         side4_id = sideFileIds[3],
-        has_proofed_side1 = 1,
-        has_proofed_side2 = 1,
-        has_proofed_side3 = 1,
-        has_proofed_side4 = 1
+        has_proofed_side1 = isProofedByDefault,
+        has_proofed_side2 = isProofedByDefault,
+        has_proofed_side3 = isProofedByDefault,
+        has_proofed_side4 = isProofedByDefault
     )
 
 async def postCustomD6(gameCrafterSession, name, gameId, quantity, color, sideFileIds):
@@ -287,12 +289,12 @@ async def postCustomD6(gameCrafterSession, name, gameId, quantity, color, sideFi
         side4_id = sideFileIds[3],
         side5_id = sideFileIds[4],
         side6_id = sideFileIds[5],
-        has_proofed_side1 = 1,
-        has_proofed_side2 = 1,
-        has_proofed_side3 = 1,
-        has_proofed_side4 = 1,
-        has_proofed_side5 = 1,
-        has_proofed_side6 = 1,
+        has_proofed_side1 = isProofedByDefault,
+        has_proofed_side2 = isProofedByDefault,
+        has_proofed_side3 = isProofedByDefault,
+        has_proofed_side4 = isProofedByDefault,
+        has_proofed_side5 = isProofedByDefault,
+        has_proofed_side6 = isProofedByDefault,
     )
 
 async def postCustomD8(gameCrafterSession, name, gameId, quantity, color, sideFileIds):
@@ -316,12 +318,12 @@ async def postCustomD8(gameCrafterSession, name, gameId, quantity, color, sideFi
         side6_id = sideFileIds[5],
         side7_id = sideFileIds[6],
         side8_id = sideFileIds[7],
-        has_proofed_side1 = 1,
-        has_proofed_side2 = 1,
-        has_proofed_side3 = 1,
-        has_proofed_side4 = 1,
-        has_proofed_side5 = 1,
-        has_proofed_side6 = 1,
-        has_proofed_side7 = 1,
-        has_proofed_side8 = 1,
+        has_proofed_side1 = isProofedByDefault,
+        has_proofed_side2 = isProofedByDefault,
+        has_proofed_side3 = isProofedByDefault,
+        has_proofed_side4 = isProofedByDefault,
+        has_proofed_side5 = isProofedByDefault,
+        has_proofed_side6 = isProofedByDefault,
+        has_proofed_side7 = isProofedByDefault,
+        has_proofed_side8 = isProofedByDefault,
     )
