@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+     width="100%"
+     height="100%"
+     viewBox="0 0 2475 2475"
+     version="1.1"
+     xml:space="preserve"
+     style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;"
+     id="svg1162"
+     sodipodi:docname="MatBiFold.svg"
+     inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns:serif="http://www.serif.com/"><defs
+     id="defs1166">
+        
+        
+        
+        
+        
+    </defs><sodipodi:namedview
+     id="namedview1164"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.2934136"
+     inkscape:cx="650.95823"
+     inkscape:cy="1518.3345"
+     inkscape:window-width="2560"
+     inkscape:window-height="1351"
+     inkscape:window-x="1491"
+     inkscape:window-y="585"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1162" />
+    <g
+     id="g3182"><path
+         id="Bleed-Zone"
+         serif:id="Bleed Zone"
+         d="M 2474.9999,0 H 0 v 2474.9999 h 2474.9999 z m -37.5,37.499998 V 2437.4999 H 37.499998 V 37.499998 Z"
+         style="fill-opacity:0.5;stroke-width:4.16667;fill:none" /><g
+         id="Trim-Line"
+         serif:id="Trim Line"
+         transform="matrix(4.1666665,0,0,4.1666665,2437.4999,1237.5)"
+         style="fill:none;stroke:black;stroke-opacity:1">
+            <path
+     d="M 0,-288 V 288 H -576 V -288 Z"
+     style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;stroke-opacity:1"
+     id="path3" />
+        </g><g
+         id="Safe-Zone"
+         serif:id="Safe Zone"
+         transform="matrix(4.0364582,0,0,4.0364582,2399.9999,1237.5)"
+         style="fill:none;stroke:black;stroke-opacity:1">
+            <path
+     d="M 0,-288 V 288 H -576 V -288 Z"
+     style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1.03px;stroke-dasharray:2.06, 2.06, 0, 0;stroke-opacity:1"
+     id="path6" />
+        </g><g
+         id="Fold"
+         transform="matrix(4.1666665,0,0,4.1666665,37.499998,1237.5)"
+         style="fill:none;stroke:black;stroke-opacity:1">
+            <path
+     d="M 0,0 H 576"
+     style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;stroke-opacity:1"
+     id="path9" />
+        </g></g>
+</svg>

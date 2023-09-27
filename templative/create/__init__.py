@@ -9,6 +9,7 @@ from .dieCommands import die
 from .packagingCommands import packaging
 from .punchoutCommands import punchout
 from .stockpartCommands import stock
+from .matCommands import mat
 
 @click.group()
 async def create():
@@ -32,4 +33,5 @@ create.add_command(die)
 create.add_command(packaging)
 create.add_command(punchout)
 create.add_command(stock)
+create.add_command(mat)
 
