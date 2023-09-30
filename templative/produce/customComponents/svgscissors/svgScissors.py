@@ -58,14 +58,15 @@ async def addNewlines(artFileOutputFilepath):
         f.write(fixedContents)
 
 async def scaleContent(artFileOutputFilepath, imageSizePixels, scale):
-    original = svgutils.transform.fromfile(artFileOutputFilepath)    
-    newSvgDocument = svgutils.transform.SVGFigure(imageSizePixels[0] * scale, imageSizePixels[1] * scale,)
-    
-    svg = original.getroot()
-    svg.scale(scale)
-    newSvgDocument.append(svg)
-    
-    newSvgDocument.save(artFileOutputFilepath)
+    async with AIOFile(artFileOutputFilepath, encoding='utf-8') as svgFile:
+        original = svgutils.transform.fromstring(await svgFile.read())    
+        newSvgDocument = svgutils.transform.SVGFigure(imageSizePixels[0] * scale, imageSizePixels[1] * scale,)
+        
+        svg = original.getroot()
+        svg.scale(scale)
+        newSvgDocument.append(svg)
+        
+        newSvgDocument.save(artFileOutputFilepath)
 
 async def assignSize(artFileOutputFilepath, imageSizePixels):
     
@@ -174,20 +175,20 @@ async def updateStylesInFile(filepath, styleUpdates, pieceGamedata: PieceData):
         return    
 
     try:
-        parsedTree = ElementTree.parse(filepath)
-        tree = parsedTree.getroot()
+        async with AIOFile(filepath, encoding='utf-8') as svgFile:
+            tree = ElementTree.fromstring(await svgFile.read())
+        
+            for styleUpdate in styleUpdates:
+                findById = styleUpdate["id"]
+                elementToUpdate = tree.find(".//*[@id='%s']" % findById)
+                if (elementToUpdate != None):
+                    value = await getScopedValue(styleUpdate, pieceGamedata)
+                    await replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
+                else:
+                    print("Could not find element with id [%s]." % (findById))
 
-        for styleUpdate in styleUpdates:
-            findById = styleUpdate["id"]
-            elementToUpdate = tree.find(".//*[@id='%s']" % findById)
-            if (elementToUpdate != None):
-                value = await getScopedValue(styleUpdate, pieceGamedata)
-                await replaceStyleAttributeForElement(elementToUpdate, "style", styleUpdate["cssValue"], value)
-            else:
-                print("Could not find element with id [%s]." % (findById))
-
-        async with AIOFile(filepath,'wb') as f:
-            await f.write(ElementTree.tostring(tree))
+            async with AIOFile(filepath,'wb', encoding='utf-8') as f:
+                await f.write(ElementTree.tostring(tree))
     except ElementTree.ParseError as pe:
         print("Production failed!", pe, filepath)
 

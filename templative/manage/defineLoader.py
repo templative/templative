@@ -54,13 +54,17 @@ async def attemptToLoadPieceCsvFile(piecesDirectory, piecesGamedataFilename):
     if not os.path.isfile(filepath):
         return None
     gamedata = []
-    with open(filepath) as gamedataFile:
+    with open(filepath, encoding='utf-8') as gamedataFile:
         data = csv.DictReader(gamedataFile, delimiter=',', quotechar='"')
         for item in data:
             gamedata.append(item)
 
     varNames = set({})
     for piece in gamedata:
+        if not "name" in piece:
+            print("!!! Error parsing piece.")
+            print(piece)
+            return None
         if piece["name"] in varNames:
             print("!!! Duplicate piece %s." % piece["name"])
         varNames.add(piece["name"])
