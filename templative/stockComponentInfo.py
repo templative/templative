@@ -1,4 +1,7 @@
 STOCK_COMPONENT_INFO = {
+    "MarkerDryEraseBlack": {
+        "GameCrafterGuid": "D399BCF0-BAF7-11E5-B309-9BA3A22D79F0",
+    },
     "Flame": {
         "GameCrafterGuid": "BD076528-F6F1-11EB-9EF2-D69822502F64"
     },
