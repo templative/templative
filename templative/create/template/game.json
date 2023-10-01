@@ -2,5 +2,19 @@
     "name": "gameName",
     "displayName": "Game Name",
     "version": "0.0.0",
-    "versionName": "Template"
+    "versionName": "Template",
+    "shortDescription": "Tagline",
+    "longDescription": "Long description.",
+    "coolFactors": [
+        "First",
+        "Second",
+        "Third"
+    ],
+    "tags": [],
+    "websiteUrl": "",
+    "category": "Card Games",
+    "minAge": "12+",
+    "playTime": "30-60",
+    "minPlayers": "2",
+    "maxPlayers": "2"
 }
