@@ -26,6 +26,7 @@ fpdf2 = "*"
 GitPython = "*"
 defusedxml = "*"
 gitpython = "*"
+googletrans = "3.1.0a0"
 
 [requires]
 python_version = "3"

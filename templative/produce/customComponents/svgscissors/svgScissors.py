@@ -8,6 +8,7 @@ import git
 from templative.componentInfo import COMPONENT_INFO
 from templative.manage.models.produceProperties import ProduceProperties
 from templative.manage.models.gamedata import StudioData, GameData, ComponentData, ComponentBackData, PieceData
+from templative.produce.translation import getTranslation
 from templative.manage.models.composition import ComponentComposition
 from templative.manage.models.artdata import ComponentArtdata
 
@@ -33,7 +34,7 @@ async def createArtFileOfPiece(compositions:ComponentComposition, artdata:any, g
     artFileOutputName = ("%s%s-%s" % (compositions.componentCompose["name"], gamedata.pieceUniqueBackHash, pieceName))
     artFileOutputFilepath = await createArtfile(artFile, artFileOutputName, componentBackOutputDirectory)
 
-    await textReplaceInFile(artFileOutputFilepath, artdata["textReplacements"], gamedata, produceProperties.isSimple, produceProperties.isPublish)
+    await textReplaceInFile(artFileOutputFilepath, artdata["textReplacements"], gamedata, produceProperties)
     await updateStylesInFile(artFileOutputFilepath, artdata["styleUpdates"], gamedata)
     
     if not compositions.componentCompose["type"] in COMPONENT_INFO:
@@ -128,7 +129,7 @@ async def addOverlays(artFile, overlays, compositions:ComponentComposition, piec
 
         artFile.placeat(graphicsInsert, 0.0, 0.0)
 
-async def textReplaceInFile(filepath, textReplacements, gamedata:PieceData|ComponentBackData, isSimplifiedGraphic, isPublish):
+async def textReplaceInFile(filepath, textReplacements, gamedata:PieceData|ComponentBackData, produceProperties: ProduceProperties):
     if filepath == None:
         print("filepath cannot be None.")
         return
@@ -146,14 +147,22 @@ async def textReplaceInFile(filepath, textReplacements, gamedata:PieceData|Compo
             value = await processValueFilters(value, textReplacement)
 
             isComplex = textReplacement["isComplex"] if "isComplex" in textReplacement else False
-            if isComplex and isSimplifiedGraphic:
+            if isComplex and produceProperties.isSimple:
                 value = ""
 
             isDebug = textReplacement["isDebugInfo"] if "isDebugInfo" in textReplacement else False
-            if isDebug and isPublish:
+            if isDebug and produceProperties.isPublish:
                 value = ""
 
-            contents = contents.replace(key, str(value))
+            isTranslateable = "isTranslateable" in textReplacement and textReplacement["isTranslateable"]
+            if produceProperties.targetLanguage != "en" and isTranslateable and value != None and value != "":
+                translation = getTranslation("./", value, produceProperties.targetLanguage)
+                if translation != None:
+                    value = translation
+                else:
+                    print("Could not translate %s" % value)
+
+            contents = contents.replace(key, value)
             
     async with AIOFile(filepath,'w') as f:
         await f.write(contents)
@@ -163,7 +172,7 @@ async def processValueFilters(value, textReplacement):
         for filter in textReplacement["filters"]:
             if filter == "toUpper":
                 value = value.upper()
-    return value
+    return str(value)
 
 async def updateStylesInFile(filepath, styleUpdates, pieceGamedata: PieceData):
     if filepath == None:

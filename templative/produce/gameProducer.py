@@ -11,7 +11,7 @@ from templative.manage.models.produceProperties import ProduceProperties
 from templative.manage.models.gamedata import GameData
 from templative.manage.models.composition import ComponentComposition
 
-async def produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublish):
+async def produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublish, targetLanguage):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path is invalid.")
 
@@ -36,7 +36,7 @@ async def produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublis
     componentsCompose = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
 
     gameData = GameData(studioDataBlob, gameDataBlob)
-    produceProperties = ProduceProperties(gameRootDirectoryPath, outputDirectoryPath, isPublish, isSimple)
+    produceProperties = ProduceProperties(gameRootDirectoryPath, outputDirectoryPath, isPublish, isSimple, targetLanguage)
 
     for componentCompose in componentsCompose:
         isProducingOneComponent = componentFilter != None
