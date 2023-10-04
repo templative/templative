@@ -3,6 +3,7 @@ from templative.produce.customComponents.producer import Producer
 from .. import outputWriter
 from . import svgscissors
 import os 
+from hashlib import md5
 
 from templative.manage.models.produceProperties import ProduceProperties
 from templative.manage.models.gamedata import StudioData, GameData, ComponentData, ComponentBackData, PieceData
@@ -64,7 +65,7 @@ class BackProducer(Producer):
         pieceBackSourceHash = ""
         for pieceSpecificSource in pieceSpecificBackArtDataSources:
             pieceBackSourceHash += pieceGamedata[pieceSpecificSource].replace(" ","")# hashlib.md5(pieceGamedata[pieceSpecificSource].encode("utf")).hexdigest()
-        return pieceBackSourceHash
+        return md5(pieceBackSourceHash.encode()).hexdigest()[:8]
 
     @staticmethod
     async def createComponentBackDataPieces(uniqueComponentBackData:ComponentBackData, sourcedVariableNamesSpecificToPieceOnBackArtData: [str], compositions:ComponentComposition, produceProperties:ProduceProperties, componentArtdata:ComponentArtdata, piecesDataBlob: [any]):
