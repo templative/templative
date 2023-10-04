@@ -59,12 +59,13 @@ class BackProducer(Producer):
             
         return uniqueComponentBackDatas
 
-    # Duplicated
     @staticmethod
     def createUniqueBackHashForPiece(pieceSpecificBackArtDataSources: [str], pieceGamedata: any) -> str:
         pieceBackSourceHash = ""
         for pieceSpecificSource in pieceSpecificBackArtDataSources:
-            pieceBackSourceHash += pieceGamedata[pieceSpecificSource].replace(" ","")# hashlib.md5(pieceGamedata[pieceSpecificSource].encode("utf")).hexdigest()
+            pieceBackSourceHash += pieceGamedata[pieceSpecificSource].replace(" ","")
+        if pieceBackSourceHash == "":
+            return pieceBackSourceHash
         return md5(pieceBackSourceHash.encode()).hexdigest()[:8]
 
     @staticmethod
