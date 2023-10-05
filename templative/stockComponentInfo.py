@@ -1,4 +1,13 @@
 STOCK_COMPONENT_INFO = {
+    "StickerPawnTransparent": {
+        "GameCrafterGuid": "FE657252-ED6A-11E6-8290-8629B5F93AEC"
+    },
+    "StickerPawnYellow": {
+        "GameCrafterGuid": "834AC86C-26A0-11E4-B5D6-396C984ED8ED"
+    },
+    "StickerPawnOrange": {
+        "GameCrafterGuid": "C74456A6-2668-11E4-8B2A-811F984ED8ED"
+    },
     "MarkerDryEraseBlack": {
         "GameCrafterGuid": "D399BCF0-BAF7-11E5-B309-9BA3A22D79F0",
     },
