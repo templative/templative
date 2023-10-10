@@ -6,7 +6,7 @@ from templative.distribute.gameCrafter.fileFolderManager import createGame, crea
 
 gameCrafterBaseUrl = "https://www.thegamecrafter.com"
 
-async def uploadGame(gameCrafterSession, gameRootDirectoryPath, isPublish):
+async def uploadGame(gameCrafterSession, gameRootDirectoryPath, isPublish, isStock, isAsynchronous, isProofed):
     if not gameRootDirectoryPath:
         raise Exception("Game root directory path cannot be None")
 
@@ -38,7 +38,7 @@ async def uploadGame(gameCrafterSession, gameRootDirectoryPath, isPublish):
     await advertisementCreator.createActionShot(gameCrafterSession, cloudGame["id"], actionShotImageFileId)
 
     tasks = []
-    tasks.append(asyncio.create_task(createComponents(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"], isPublish)))
+    tasks.append(asyncio.create_task(createComponents(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"], isPublish, isStock, isAsynchronous, isProofed)))
     tasks.append(asyncio.create_task(createRules(gameCrafterSession, gameRootDirectoryPath, cloudGame, cloudGameFolder["id"])))
     res = await asyncio.gather(*tasks, return_exceptions=True)
 
