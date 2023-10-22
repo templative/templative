@@ -60,6 +60,8 @@ async def addComponentQuantities(componentQuantities, component, piecesGamedata)
 
     quantity = 0
     for piece in piecesGamedata:
+        if not "quantity" in piece:
+            continue
         quantity += int(piece["quantity"])
     
     componentQuantities[component["type"]].append({
