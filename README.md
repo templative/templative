@@ -42,6 +42,8 @@ Use `templative --help` for more info.
 - Add `C:\Program Files\Inkscape\bin` to path. Inkscape has a Python installation within it, so take to care to order your Python and Inkscape path declarations.
 - Install [GTK](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases).
 - Add `C:\Program Files\GTK3-Runtime Win64\bin` to path.
+- Run `Get-AppxPackage *Microsoft.ScreenSketch* -AllUsers | Remove-AppxPackage` in an Admin Powershell
+- Run `Get-AppxPackage *Clipchamp.Clipchamp* -AllUsers | Remove-AppxPackage` in an Admin Powershell
 
 # Usage
 
