@@ -91,7 +91,7 @@ async def createActionShot(gameCrafterSession, gameId, advertisementFileId:str):
     return await httpClient.post(gameCrafterSession, url,
         session_id = gameCrafterSession.sessionId,
         game_id=gameId,
-        advertisement_id=advertisementFileId,
+        image_id=advertisementFileId,
     )
 
 async def postStockPart(gameCrafterSession, stockPartId, quantity, gameId):

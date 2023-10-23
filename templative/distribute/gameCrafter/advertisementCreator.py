@@ -17,4 +17,6 @@ async def createAdvertismentImageInFolder(gameCrafterSession, filepath, backupFi
     return fileId
 
 async def createActionShot(gameCrafterSession, gameId, fileId):
+    if fileId == "" or fileId == None:
+        raise Exception("File id invalid.")
     await httpOperations.createActionShot(gameCrafterSession, gameId, fileId)
