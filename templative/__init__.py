@@ -17,7 +17,6 @@ cli.add_command(gameCrafter.list)
 cli.add_command(gameCrafter.deletegames)
 
 cli.add_command(animation.animation)
-cli.add_command(animation.shear)
 
 cli.add_command(create.init)
 cli.add_command(produce.produce)
