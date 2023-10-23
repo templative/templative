@@ -65,7 +65,7 @@ async def createComponentPackage(componentSourceDirectoryPath, outputDirectoryPa
     backInstructions = componentInstructions["backInstructions"]
     backFilepath = backInstructions["filepath"]
     backFilename = os.path.basename(backFilepath)
-    backNewFilepath = os.path.join(componentOutputDirectory, filename)
+    backNewFilepath = os.path.join(componentOutputDirectory, backFilename)
     shutil.copyfile(backFilepath, backNewFilepath)
     backImageInclusion = 'import back from "./%s"' % backFilename
     componentImageInclusions = componentImageInclusions + backImageInclusion
