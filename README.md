@@ -194,3 +194,7 @@ From the [Tabletop Playground wiki](https://tabletop-playground.com/knowledge-ba
 Create a print out your last `templative produce`'d game using `templative printout front` or `templative printout frontback`.
 
 Front back includes back images on the back page. Components are grouped together to make cutting easy. The sizing and dpi of cards is in test at the moment. Please help out by submitting issues.
+
+## Using newlines in gamedata
+
+Newlines only work when the text area used is flowed into a frame.
