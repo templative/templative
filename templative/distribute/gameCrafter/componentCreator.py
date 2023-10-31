@@ -70,12 +70,16 @@ async def createCustomComponent(gameCrafterSession, componentType, componentFile
     createTuckBoxTask = createTuckBox
     createTwoSidedTask = createTwoSided
     createCustomPlasticDieTask = createCustomPlasticDie
+    createHookboxTask = createHookbox
+    createBoxFaceTask = createBoxface
     componentTasks = {        
         "DECK": createDeckTask,
         "TWOSIDEDBOX": createTwoSidedBoxTask,
         "TWOSIDEDSLUG": createTwoSidedSluggedTask,
         "TUCKBOX": createTuckBoxTask,
         "TWOSIDED": createTwoSidedTask,
+        "HOOKBOX": createHookboxTask,
+        "BOXFACE": createBoxFaceTask,
         "CustomColorD6": createCustomPlasticDieTask,
         "CustomColorD4": createCustomPlasticDieTask,
         "CustomColorD8": createCustomPlasticDieTask,
@@ -136,6 +140,7 @@ async def createTwoSided(gameCrafterSession, component, identity, cloudGameId, c
 
     res = await asyncio.gather(*tasks, return_exceptions=True)
 
+
 async def createTwoSidedPiece(gameCrafterSession, instructions, setId, cloudComponentFolderId, isProofed):
     name = instructions["name"]
     filepath = instructions["filepath"]
@@ -195,6 +200,41 @@ async def createTwoSidedBox(gameCrafterSession, component, identity, cloudGameId
     bottomImageFileId = await fileFolderManager.createFileInFolder(gameCrafterSession, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
 
     cloudTwoSidedBox = await httpOperations.postTwoSidedBox(gameCrafterSession, cloudGameId, componentName, identity, quantity, topImageFileId, bottomImageFileId, isProofed)
+
+
+async def createHookbox(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId, isProofed):
+    componentName = component["name"]
+    quantity = component["quantity"]
+    if int(quantity) == 0:
+        return
+    frontInstructions = component["frontInstructions"]
+    backInstructions = component["backInstructions"]
+
+    print("Uploading %s %s %s(s)" % (quantity, componentName, component["type"]))
+
+    cloudComponentFolder = await httpOperations.postFolder(gameCrafterSession, componentName, cloudGameFolderId)
+
+    topImageFileId = await fileFolderManager.createFileInFolder(gameCrafterSession, frontInstructions[0]["name"], frontInstructions[0]["filepath"], cloudComponentFolder["id"])
+    bottomImageFileId = await fileFolderManager.createFileInFolder(gameCrafterSession, backInstructions["name"], backInstructions["filepath"], cloudComponentFolder["id"])
+
+    cloudHookbox = await httpOperations.postHookBox(gameCrafterSession, cloudGameId, componentName, identity, quantity, topImageFileId, bottomImageFileId, isProofed)
+
+
+async def createBoxface(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId, isProofed):
+    componentName = component["name"]
+    quantity = component["quantity"]
+    if int(quantity) == 0:
+        return
+    frontInstructions = component["frontInstructions"]
+
+    print("Uploading %s %s %s(s)" % (quantity, componentName, component["type"]))
+
+    cloudComponentFolder = await httpOperations.postFolder(gameCrafterSession, componentName, cloudGameFolderId)
+
+    topImageFileId = await fileFolderManager.createFileInFolder(gameCrafterSession, frontInstructions[0]["name"], frontInstructions[0]["filepath"], cloudComponentFolder["id"])
+
+    cloudBoxface = await httpOperations.postBoxFace(gameCrafterSession, cloudGameId, componentName, identity, quantity, topImageFileId, isProofed)
+
 
 async def createTuckBox(gameCrafterSession, component, identity, cloudGameId, cloudGameFolderId, isProofed):
     componentName = component["name"]

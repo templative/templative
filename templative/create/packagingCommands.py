@@ -59,3 +59,9 @@ async def tuckBoxPoker90Cards(name):
 async def tuckBoxPoker108Cards(name):
     """Poker Tuckbox 108x Cards"""
     await componentCreator.createCustomComponent(name, "PokerTuckBox108")
+
+@packaging.command()
+@click.option("-n", "--name", default=None, help="The name of the new component.")
+async def boosterPack(name):
+    """Poker Booster Pack"""
+    await componentCreator.createCustomComponent(name, "PokerBooster")

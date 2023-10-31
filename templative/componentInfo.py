@@ -414,6 +414,12 @@ COMPONENT_INFO = {
         "HasPieceQuantity": True,
         "ArtDataTypeNames": ["Front", "Back", "Overlay"],
     },
+    "PokerHookbox36": {
+        "DimensionsPixels": [2700, 1125],
+        "GameCrafterUploadTask": "HOOKBOX",
+        "HasPieceData": False,
+        "ArtDataTypeNames": ["Front", "Back"],
+    },
     "MintTin": {
         "DimensionsPixels": [750, 1125],
         "GameCrafterUploadTask": "TWOSIDEDBOX",
@@ -439,34 +445,42 @@ COMPONENT_INFO = {
         "HasPieceQuantity": True,
         "ArtDataTypeNames": ["Front", "Back"],
     },
+    "PokerBooster": {
+        "DimensionsPixels": [975, 1350],
+        "GameCrafterUploadTask": "BOXFACE",
+        "HasPieceData": True,
+        "HasPieceQuantity": True,
+        "ArtDataTypeNames": ["Front", "Back"],
+    },
     "PokerTuckBox36": {
         "DimensionsPixels": [2100, 1800],
+        "DimensionsInches": [8.1,6.9],#[15.6,13.37],
         "GameCrafterUploadTask": "TUCKBOX",
-        "HasPieceData": False,
-        "ArtDataTypeNames": ["Front", "Back"],
+        "HasPieceData": True,
+        "ArtDataTypeNames": ["Front"],
     },
     "PokerTuckBox54": {
         "DimensionsPixels": [2325, 1950],
         "GameCrafterUploadTask": "TUCKBOX",
         "HasPieceData": False,
-        "ArtDataTypeNames": ["Front", "Back"],
+        "ArtDataTypeNames": ["Front"],
     },
     "PokerTuckBox72": {
         "DimensionsPixels": [2550, 1950],
         "GameCrafterUploadTask": "TUCKBOX",
         "HasPieceData": False,
-        "ArtDataTypeNames": ["Front", "Back"],
+        "ArtDataTypeNames": ["Front"],
     },
     "PokerTuckBox90": {
         "DimensionsPixels": [2775, 2100],
         "GameCrafterUploadTask": "TUCKBOX",
         "HasPieceData": False,
-        "ArtDataTypeNames": ["Front", "Back"],
+        "ArtDataTypeNames": ["Front"],
     },
     "PokerTuckBox108": {
         "DimensionsPixels": [3075, 2250],
         "GameCrafterUploadTask": "TUCKBOX",
         "HasPieceData": False,
-        "ArtDataTypeNames": ["Front", "Back"],
+        "ArtDataTypeNames": ["Front"],
     }
 }

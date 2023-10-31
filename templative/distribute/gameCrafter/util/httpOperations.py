@@ -126,6 +126,30 @@ async def postTwoSided(gameCrafterSession, name, setId, quantity, faceImageId, i
         has_proofed_face = isProofed,
     )
 
+async def postHookBox(gameCrafterSession, name, identity, quantity, gameId, imageId, isProofed):
+    url = "%s/hookbox" % (gameCrafterBaseUrl)
+    return await httpClient.post(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId,
+        name = name,
+        game_id = gameId,
+        quantity = quantity,
+        outside_id = imageId,
+        identity = identity,
+        has_proofed_outside = isProofed,
+    )
+
+async def postBoxFace(gameCrafterSession,gameId, name, identity, quantity,  frontImageId, isProofed):
+    url = "%s/boxface" % (gameCrafterBaseUrl)
+    return await httpClient.post(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId,
+        name = name,
+        game_id = gameId,
+        quantity = quantity,
+        top_id = frontImageId,
+        has_proofed_top = isProofed,
+        identity = identity,
+    )
+
 async def postTuckBox(gameCrafterSession, name, identity, quantity, gameId, imageId, isProofed):
     url = "%s/tuckbox" % (gameCrafterBaseUrl)
     return await httpClient.post(gameCrafterSession, url,
@@ -172,9 +196,9 @@ async def postTwoSidedBox(gameCrafterSession, gameId, name, identity, quantity, 
         quantity = quantity,
         top_id = topImageFileId,
         has_proofed_top = isProofed,
-        identity = identity,
         bottom_id = backImageFileId,
-        has_proofed_bottom = isProofed
+        has_proofed_bottom = isProofed,
+        identity = identity
     )
 
 async def postTwoSidedSluggedSet(gameCrafterSession, name, identity, quantity, gameId, backImageFileId, isProofed):
