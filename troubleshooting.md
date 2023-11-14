@@ -30,3 +30,7 @@ inkscape "C:\Users\User\Documents\git\studio-tyrus\apcw\apcw-defines\output\caps
 
 ## Why we use the Inkscape delegate
 Inkscape support flow roots, which allows for naturally wrapping text without hyphens. This feature is invaluable as we do not know the length of texts we add to our art templates. This is a svg feature (of SVG 1.2?) that has not been universally adopted. The default wand delegate for svg->png throws out flowroots.
+
+# Off Centered Text
+
+Adding images sometimes messes with your svg. There isn't a consistent fix for this. Consider deleting images and remaking the text, testing that, then readding the image.

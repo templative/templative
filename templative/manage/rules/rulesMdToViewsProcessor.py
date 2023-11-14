@@ -16,7 +16,7 @@ async def convertRulesMdToSpans(gameRootDirectoryPath):
 
 async def convertRulesMdToSpansRaw(rules, gameFolderPath):
 
-    fontSize = 24
+    fontSize = 20
     fontSizeProgression = 5
 
     htmlContent = markdown(rules)

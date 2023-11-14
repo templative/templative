@@ -26,6 +26,7 @@ Use `templative --help` for more info.
 - `cd templative`
 - `python setup.py develop`
 - `pip install -e .`
+- 
 
 ## OSX Prereqs
 

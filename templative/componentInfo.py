@@ -85,6 +85,7 @@ COMPONENT_INFO = {
     },
     "PokerDeck": {
         "DimensionsPixels": [825, 1125],
+        "MarginsPixels": [40,40],
         "DimensionsInches": [2.45, 3.45],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
@@ -121,6 +122,7 @@ COMPONENT_INFO = {
     },
     "MicroDeck": {
         "DimensionsPixels": [450, 600],
+        "MarginsPixels": [40,40],
         "DimensionsInches": [1.25, 1.75],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
@@ -133,6 +135,7 @@ COMPONENT_INFO = {
     },
     "MintTinDeck": {
         "DimensionsPixels": [750, 1125],
+        "MarginsPixels": [70,50],
         "DimensionsInches": [2.05, 3.43],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
@@ -380,6 +383,7 @@ COMPONENT_INFO = {
     },
     "MintTinFolio": {
         "DimensionsPixels": [2625, 1050],
+        "MarginsPixels": [45, 40],
         "DimensionsInches": [8.5, 3.13],
         "PlaygroundThickness": 0.05,
         "PlaygroundCreationTask": "DECK",
