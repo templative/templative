@@ -22,9 +22,9 @@ async def produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublis
     gameDataBlob["name"] = uniqueGameName
 
     gameCompose = await defineLoader.loadGameCompose(gameRootDirectoryPath)
-
-    outputDirectoryPath = await outputWriter.createGameFolder(gameDataBlob["name"], gameCompose["outputDirectory"])
-    await outputWriter.updateLastOutputFolder(gameCompose["outputDirectory"], outputDirectoryPath)
+    
+    outputDirectoryPath = await outputWriter.createGameFolder(gameRootDirectoryPath, gameCompose["outputDirectory"], gameDataBlob["name"])
+    await outputWriter.updateLastOutputFolder(gameRootDirectoryPath, gameCompose["outputDirectory"], outputDirectoryPath)
     print("Producing %s" % outputDirectoryPath)
 
     tasks = []

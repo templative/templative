@@ -9,13 +9,13 @@ async def dumpInstructions(filepath, data):
     with open(filepath, 'w') as outfile:
         json.dump(data, outfile, indent=4, separators=(',', ': '))
 
-async def createGameFolder(name, outputDirectory):
-    gameFolderPath = os.path.join(outputDirectory, name)
+async def createGameFolder(gameRootDirectoryPath, outputDirectory, name):
+    gameFolderPath = os.path.join(gameRootDirectoryPath, outputDirectory, name)
     os.mkdir(gameFolderPath)
     return gameFolderPath
 
-async def updateLastOutputFolder(outputDirectory, gameFolderPath):
-    lastFilepath = os.path.join(outputDirectory, ".last")
+async def updateLastOutputFolder(gameRootDirectoryPath, outputDirectory, gameFolderPath):
+    lastFilepath = os.path.join(gameRootDirectoryPath, outputDirectory, ".last")
     async with AIOFile(lastFilepath, "w") as lastFile:
         await lastFile.write(gameFolderPath)
 

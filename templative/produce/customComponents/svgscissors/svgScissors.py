@@ -16,7 +16,7 @@ async def createArtFileOfPiece(compositions:ComponentComposition, artdata:any, g
     
     templateFilesDirectory = compositions.gameCompose["artTemplatesDirectory"]
     artFilename = "%s.svg" % (artdata["templateFilename"])
-    artFilepath = os.path.join(templateFilesDirectory, artFilename)
+    artFilepath = os.path.join(produceProperties.inputDirectoryPath, templateFilesDirectory, artFilename)
     if not os.path.exists(artFilepath):
         print("!!! Template art file %s does not exist." % artFilepath)
         return
@@ -28,7 +28,7 @@ async def createArtFileOfPiece(compositions:ComponentComposition, artdata:any, g
         print("!!! Template art file %s cannot be parsed." % artFilepath)
         return
 
-    await addOverlays(artFile, artdata["overlays"], compositions, gamedata, produceProperties.isSimple, produceProperties.isPublish)
+    await addOverlays(artFile, artdata["overlays"], compositions, gamedata, produceProperties)
     pieceName = gamedata.pieceData["name"] if isinstance(gamedata, PieceData) else gamedata.componentBackDataBlob["name"]
 
     artFileOutputName = ("%s%s-%s" % (compositions.componentCompose["name"], gamedata.pieceUniqueBackHash, pieceName))
@@ -89,7 +89,7 @@ async def createArtfile(artFile, artFileOutputName, outputDirectory):
     artFile.dump(artFileOutputFilepath)
     return artFileOutputFilepath
 
-async def addOverlays(artFile, overlays, compositions:ComponentComposition, pieceGamedata:PieceData, isSimplifiedGraphic, isPublish):
+async def addOverlays(artFile, overlays, compositions:ComponentComposition, pieceGamedata:PieceData, produceProperties:ProduceProperties):
     if artFile == None:
         print("artFile cannot be None.")
         return
@@ -102,11 +102,11 @@ async def addOverlays(artFile, overlays, compositions:ComponentComposition, piec
 
     for overlay in overlays:
         isComplex = overlay["isComplex"] if "isComplex" in overlay else False
-        if isComplex and isSimplifiedGraphic:
+        if isComplex and produceProperties.isSimple:
             continue
 
         isDebug = overlay["isDebugInfo"] if "isDebugInfo" in overlay else False
-        if isDebug and isPublish:
+        if isDebug and produceProperties.isPublish:
             continue
 
         overlayName = await getScopedValue(overlay, pieceGamedata)
@@ -114,7 +114,7 @@ async def addOverlays(artFile, overlays, compositions:ComponentComposition, piec
             continue
     
         overlayFilename = "%s.svg" % (overlayName)
-        overlayFilepath = os.path.join(overlayFilesDirectory, overlayFilename)
+        overlayFilepath = os.path.join(produceProperties.inputDirectoryPath, overlayFilesDirectory, overlayFilename)
 
         if not os.path.exists(overlayFilepath):
             print("!!! Overlay %s does not exist." % overlayFilepath)
