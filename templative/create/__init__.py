@@ -1,6 +1,5 @@
 import asyncclick as click
-from os import path
-from distutils.dir_util import copy_tree
+
 
 from .accordionCommands import accordion
 from .deckCommands import deck
@@ -10,6 +9,7 @@ from .packagingCommands import packaging
 from .punchoutCommands import punchout
 from .stockpartCommands import stock
 from .matCommands import mat
+from templative.create import projectCreator
 
 @click.group()
 async def create():
@@ -17,14 +17,11 @@ async def create():
     pass
 
 @click.command()
-async def init():
+@click.option("-p", "--path", default="./", help="The name of the new component.")
+async def init(path):
     """Create the default game project here"""
-    if(path.exists("./game-compose.json")):
-        print("This directory already contains a gameExisting game compose here.")
-        return
+    return await projectCreator.createProjectInDirectory(path)
 
-    fromDirectory = path.join(path.dirname(path.realpath(__file__)), "template")
-    copy_tree(fromDirectory, "./")
 
 create.add_command(accordion)
 create.add_command(deck)
