@@ -1,8 +1,9 @@
 from templative.create import templateComponentProjectUpdater
 from templative.manage import defineLoader
 from templative.componentInfo import COMPONENT_INFO
+from os.path import join
 
-async def createCustomComponent(name, type):
+async def createCustomComponent(gameRootDirectoryPath, name, type):
 
     if name == None or name == "":
         print("Must include a name.")
@@ -16,17 +17,20 @@ async def createCustomComponent(name, type):
         return
     componentInfo = COMPONENT_INFO[type]
 
-    gameRootDirectoryPath = "."
     gameCompose = await defineLoader.loadGameCompose(gameRootDirectoryPath)
     componentComposeData = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
     await templateComponentProjectUpdater.addToComponentCompose(name, type, gameRootDirectoryPath, componentComposeData, componentInfo)
 
+    piecesDirectoryPath = join(gameRootDirectoryPath, gameCompose["piecesGamedataDirectory"])
+    componentGamedataDirectoryPath = join(gameRootDirectoryPath, gameCompose["componentGamedataDirectory"])
+    artdataDirectoryPath = join(gameRootDirectoryPath, gameCompose["artdataDirectory"])
+    artTemplatesDirectoryPath = join(gameRootDirectoryPath, gameCompose["artTemplatesDirectory"])
     if componentInfo["HasPieceData"]:
-        await templateComponentProjectUpdater.createPiecesCsv(gameCompose["piecesGamedataDirectory"], name, hasPieceQuantity=componentInfo["HasPieceQuantity"])
+        await templateComponentProjectUpdater.createPiecesCsv(piecesDirectoryPath, name, hasPieceQuantity=componentInfo["HasPieceQuantity"])
 
-    await templateComponentProjectUpdater.createComponentJson(gameCompose["componentGamedataDirectory"], name)
-    await templateComponentProjectUpdater.createArtDataFiles(gameCompose["artdataDirectory"], name, componentInfo["ArtDataTypeNames"])
-    await templateComponentProjectUpdater.createArtFiles(gameCompose["artTemplatesDirectory"], name, type, componentInfo["ArtDataTypeNames"])
+    await templateComponentProjectUpdater.createComponentJson(componentGamedataDirectoryPath, name)
+    await templateComponentProjectUpdater.createArtDataFiles(artdataDirectoryPath, name, componentInfo["ArtDataTypeNames"])
+    await templateComponentProjectUpdater.createArtFiles(artTemplatesDirectoryPath, name, type, componentInfo["ArtDataTypeNames"])
 
 async def createStockComponent(name, stockPartId):
     gameRootDirectoryPath = "."

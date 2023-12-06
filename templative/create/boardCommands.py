@@ -8,6 +8,7 @@ async def board():
 
 @board.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def domino(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def domino(name, input):
     """Domino Board"""
-    await componentCreator.createCustomComponent(name, "DominoBoard")
+    await componentCreator.createCustomComponent(input, name, "DominoBoard")

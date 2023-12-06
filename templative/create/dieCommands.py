@@ -8,18 +8,21 @@ async def die():
 
 @die.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def d4(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def d4(name, input):
     """Create an Acrylic D4"""
-    await componentCreator.createCustomComponent(name, "D4Plastic")
+    await componentCreator.createCustomComponent(input, name, "D4Plastic")
 
 @die.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def d6(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def d6(name, input):
     """Create an Acrylic D6"""
-    await componentCreator.createCustomComponent(name, "D6Plastic")
+    await componentCreator.createCustomComponent(input, name, "D6Plastic")
 
 @die.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def d8(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def d8(name, input):
     """Create an Acrylic D8"""
-    await componentCreator.createCustomComponent(name, "D8Plastic")
+    await componentCreator.createCustomComponent(input, name, "D8Plastic")

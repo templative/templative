@@ -8,60 +8,70 @@ async def packaging():
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def mint(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def mint(name, input):
     """A Mint Tin"""
-    await componentCreator.createCustomComponent(name, "MintTin")
+    await componentCreator.createCustomComponent(input, name, "MintTin")
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def stoutBoxSmall(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def stoutBoxSmall(name, input):
     """Small Cardboard Box"""
-    await componentCreator.createCustomComponent(name, "SmallStoutBox")
+    await componentCreator.createCustomComponent(input, name, "SmallStoutBox")
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def stoutBoxMedium(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def stoutBoxMedium(name, input):
     """Medium Cardboard Box"""
-    await componentCreator.createCustomComponent(name, "MediumStoutBox")
+    await componentCreator.createCustomComponent(input, name, "MediumStoutBox")
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def stoutBoxLarge(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def stoutBoxLarge(name, input):
     """Large Cardboard Box"""
-    await componentCreator.createCustomComponent(name, "LargeStoutBox")
+    await componentCreator.createCustomComponent(input, name, "LargeStoutBox")
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def tuckBoxPoker36Cards(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def tuckBoxPoker36Cards(name, input):
     """Poker Tuckbox 36x Cards"""
-    await componentCreator.createCustomComponent(name, "PokerTuckBox36")
+    await componentCreator.createCustomComponent(input, name, "PokerTuckBox36")
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def tuckBoxPoker54Cards(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def tuckBoxPoker54Cards(name, input):
     """Poker Tuckbox 54x Cards"""
-    await componentCreator.createCustomComponent(name, "PokerTuckBox54")
+    await componentCreator.createCustomComponent(input, name, "PokerTuckBox54")
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def tuckBoxPoker72Cards(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def tuckBoxPoker72Cards(name, input):
     """Poker Tuckbox 72x Cards"""
-    await componentCreator.createCustomComponent(name, "PokerTuckBox72")
+    await componentCreator.createCustomComponent(input, name, "PokerTuckBox72")
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def tuckBoxPoker90Cards(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def tuckBoxPoker90Cards(name, input):
     """Poker Tuckbox 90x Cards"""
-    await componentCreator.createCustomComponent(name, "PokerTuckBox90")
+    await componentCreator.createCustomComponent(input, name, "PokerTuckBox90")
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def tuckBoxPoker108Cards(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def tuckBoxPoker108Cards(name, input):
     """Poker Tuckbox 108x Cards"""
-    await componentCreator.createCustomComponent(name, "PokerTuckBox108")
+    await componentCreator.createCustomComponent(input, name, "PokerTuckBox108")
 
 @packaging.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def boosterPack(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def boosterPack(name, input):
     """Poker Booster Pack"""
-    await componentCreator.createCustomComponent(name, "PokerBooster")
+    await componentCreator.createCustomComponent(input, name, "PokerBooster")

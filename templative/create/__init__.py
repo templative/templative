@@ -17,10 +17,10 @@ async def create():
     pass
 
 @click.command()
-@click.option("-p", "--path", default="./", help="The name of the new component.")
-async def init(path):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def init(input):
     """Create the default game project here"""
-    return await projectCreator.createProjectInDirectory(path)
+    return await projectCreator.createProjectInDirectory(input)
 
 
 create.add_command(accordion)

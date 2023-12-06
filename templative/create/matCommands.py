@@ -8,12 +8,14 @@ async def mat():
 
 @mat.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def bifold(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def bifold(name, input):
     """Bi-Fold"""
-    await componentCreator.createCustomComponent(name, "BiFoldMat")
+    await componentCreator.createCustomComponent(input, name, "BiFoldMat")
 
 @mat.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def domino(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def domino(name, input):
     """Domino"""
-    await componentCreator.createCustomComponent(name, "DominoMat")
+    await componentCreator.createCustomComponent(input, name, "DominoMat")

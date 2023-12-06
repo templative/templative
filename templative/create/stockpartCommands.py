@@ -10,6 +10,7 @@ async def stock():
 @stock.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
 @click.option("-i", "--id", default=None, help="The ID of the stockpart.")
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
 async def part(name, id):
     """Create a Stock Part by ID"""
 

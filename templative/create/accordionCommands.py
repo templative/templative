@@ -8,30 +8,35 @@ async def accordion():
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def folioPoker(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def folioPoker(name, input):
     """Poker Folio"""
-    await componentCreator.createCustomComponent(name, "PokerFolio")
+    await componentCreator.createCustomComponent(input, name, "PokerFolio")
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def folioMint(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def folioMint(name, input):
     """Mint Tin Folio"""
-    await componentCreator.createCustomComponent(name, "MintTinFolio")
+    await componentCreator.createCustomComponent(input, name, "MintTinFolio")
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def mint4(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def mint4(name, input):
     """Mint Tin Accordion 4 Panels"""
-    await componentCreator.createCustomComponent(name, "MintTinAccordion4")
+    await componentCreator.createCustomComponent(input, name, "MintTinAccordion4")
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def mint6(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def mint6(name, input):
     """Mint Tin Accordion 6 Panels"""
-    await componentCreator.createCustomComponent(name, "MintTinAccordion6")
+    await componentCreator.createCustomComponent(input, name, "MintTinAccordion6")
 
 @accordion.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def mint8(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def mint8(name, input):
     """Mint Tin Accordion 8 Panels"""
-    await componentCreator.createCustomComponent(name, "MintTinAccordion8")
+    await componentCreator.createCustomComponent(input, name, "MintTinAccordion8")

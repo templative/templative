@@ -13,9 +13,10 @@ async def custom():
 
 @custom.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def customsmall(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def customsmall(name, input):
     """Create a Small Custom Punchout"""
-    await componentCreator.createCustomComponent(name, "PunchoutCustomSmall")
+    await componentCreator.createCustomComponent(input, name, "PunchoutCustomSmall")
 
 @punchout.group()
 async def chit():
@@ -24,81 +25,94 @@ async def chit():
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def ringLarge(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def ringLarge(name, input):
     """Create a Large Ring"""
-    await componentCreator.createCustomComponent(name, "LargeRingChit")
+    await componentCreator.createCustomComponent(input, name, "LargeRingChit")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def ringMedium(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def ringMedium(name, input):
     """Create a Medium Ring"""
-    await componentCreator.createCustomComponent(name, "MediumRingChit")
+    await componentCreator.createCustomComponent(input, name, "MediumRingChit")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def ringSmall(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def ringSmall(name, input):
     """Create a Small Ring"""
-    await componentCreator.createCustomComponent(name, "SmallRingChit")
+    await componentCreator.createCustomComponent(input, name, "SmallRingChit")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def squareLarge(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def squareLarge(name, input):
     """Create a Large Square"""
-    await componentCreator.createCustomComponent(name, "LargeSquareChit")
+    await componentCreator.createCustomComponent(input, name, "LargeSquareChit")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def squareMedium(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def squareMedium(name, input):
     """Create a Medium Square"""
-    await componentCreator.createCustomComponent(name, "MediumSquareChit")
+    await componentCreator.createCustomComponent(input, name, "MediumSquareChit")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def squareSmall(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def squareSmall(name, input):
     """Create a Small Square"""
-    await componentCreator.createCustomComponent(name, "SmallSquareChit")
+    await componentCreator.createCustomComponent(input, name, "SmallSquareChit")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def circleLarge(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def circleLarge(name, input):
     """Create a Large Circle"""
-    await componentCreator.createCustomComponent(name, "LargeCircleChit")
+    await componentCreator.createCustomComponent(input, name, "LargeCircleChit")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def circleMedium(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def circleMedium(name, input):
     """Create a Medium Circle"""
-    await componentCreator.createCustomComponent(name, "MediumCircleChit")
+    await componentCreator.createCustomComponent(input, name, "MediumCircleChit")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def circleSmall(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def circleSmall(name, input):
     """Create a Small Circle"""
-    await componentCreator.createCustomComponent(name, "SmallCircleChit")
+    await componentCreator.createCustomComponent(input, name, "SmallCircleChit")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def hexLarge(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def hexLarge(name, input):
     """Create a Large Hex"""
-    await componentCreator.createCustomComponent(name, "LargeHexTile")
+    await componentCreator.createCustomComponent(input, name, "LargeHexTile")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def hexMedium(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def hexMedium(name, input):
     """Create a Medium Hex"""
-    await componentCreator.createCustomComponent(name, "MediumHexTile")
+    await componentCreator.createCustomComponent(input, name, "MediumHexTile")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def hexSmall(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def hexSmall(name, input):
     """Create a Small Hex"""
-    await componentCreator.createCustomComponent(name, "SmallHexTile")
+    await componentCreator.createCustomComponent(input, name, "SmallHexTile")
 
 @chit.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def hexMini(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def hexMini(name, input):
     """Create a Mini Hex"""
-    await componentCreator.createCustomComponent(name, "MiniHexTile")
+    await componentCreator.createCustomComponent(input, name, "MiniHexTile")
 
 @punchout.group()
 async def shard():
@@ -107,18 +121,21 @@ async def shard():
 
 @shard.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def hex(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def hex(name, input):
     """Create a Hex Shard"""
-    await componentCreator.createCustomComponent(name, "HexShard")
+    await componentCreator.createCustomComponent(input, name, "HexShard")
 
 @shard.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def circle(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def circle(name, input):
     """Create a Circle Shard"""
-    await componentCreator.createCustomComponent(name, "CircleShard")
+    await componentCreator.createCustomComponent(input, name, "CircleShard")
 
 @shard.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def square(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def square(name, input):
     """Create a Square Shard"""
-    await componentCreator.createCustomComponent(name, "SquareShard")
+    await componentCreator.createCustomComponent(input, name, "SquareShard")

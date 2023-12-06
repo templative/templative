@@ -8,42 +8,49 @@ async def deck():
 
 @deck.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def poker(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def poker(name, input):
     """Poker Deck"""
-    await componentCreator.createCustomComponent(name, "PokerDeck")
+    await componentCreator.createCustomComponent(input, name, "PokerDeck")
 
 @deck.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def jumbo(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def jumbo(name, input):
     """Jumbo Deck"""
-    await componentCreator.createCustomComponent(name, "JumboDeck")
+    await componentCreator.createCustomComponent(input, name, "JumboDeck")
 
 @deck.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def business(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def business(name, input):
     """Business Deck"""
-    await componentCreator.createCustomComponent(name, "BusinessDeck")
+    await componentCreator.createCustomComponent(input, name, "BusinessDeck")
 
 @deck.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def mint(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def mint(name, input):
     """Mint Tin Deck"""
-    await componentCreator.createCustomComponent(name, "MintTinDeck")
+    await componentCreator.createCustomComponent(input, name, "MintTinDeck")
 
 @deck.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def hex(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def hex(name, input):
     """Hex Deck"""
-    await componentCreator.createCustomComponent(name, "HexDeck")
+    await componentCreator.createCustomComponent(input, name, "HexDeck")
 
 @deck.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def micro(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def micro(name, input):
     """Micro Deck"""
-    await componentCreator.createCustomComponent(name, "MicroDeck")
+    await componentCreator.createCustomComponent(input, name, "MicroDeck")
 
 @deck.command()
 @click.option("-n", "--name", default=None, help="The name of the new component.")
-async def mini(name):
+@click.option("-i", "--input", default="./", help="The path to the Templative Project.")
+async def mini(name, input):
     """Mini Deck"""
-    await componentCreator.createCustomComponent(name, "MiniDeck")
+    await componentCreator.createCustomComponent(input, name, "MiniDeck")
