@@ -7,7 +7,6 @@ setup(
     author_email = "oliverbarnum32@gmail.com",
     description = "Create GameCrafter games based on art templates, json, and csvs.",
     url = "",
-    packages=find_packages(),
     install_requires=[
         "aiofile",
         "aiohttp",
@@ -28,6 +27,8 @@ setup(
             "templative=templative:cli"
         ]
     },
+    packages=["templative"],
+    package_data={"": ["create/componentTemplates/*.svg", "produce/*.css"]},
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",

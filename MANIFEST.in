@@ -1,2 +1,2 @@
-include templative/lib/manage/templative/*
-include templative/lib/manage/pdfStyles.css
+recursive-include templative/create/componentTemplates *
+recursive-include templative/produce *
