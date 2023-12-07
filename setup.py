@@ -28,7 +28,16 @@ setup(
         ]
     },
     packages=["templative"],
-    package_data={"": ["create/componentTemplates/*.svg", "produce/*.css"]},
+    package_data={"": [
+        "create/componentTemplates/*.svg", 
+        "create/template/**/*.svg", 
+        "create/template/**/*.json", 
+        "create/template/**/*.png", 
+        "create/template/**/*.md", 
+        "create/template/.gitignore", 
+        "create/template/output/.last", 
+        "produce/*.css"
+    ]},
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",

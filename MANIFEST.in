@@ -1,2 +1,5 @@
 recursive-include templative/create/componentTemplates *
 recursive-include templative/produce *
+recursive-include templative/create/template *
+recursive-include templative/create/template/output/.last
+recursive-include templative/create/template/.gitignore
