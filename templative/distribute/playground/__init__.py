@@ -3,7 +3,7 @@ from json import dump, load
 from shutil import copyfile
 from templative.manage import instructionsLoader
 from . import templateMaker
-from templative.distribute.playground.templates import stockModel
+from templative.distribute.playground.playgroundTemplates import stockModel
 from .gameStateMaker import createGameStateVts
 from PIL import Image
 from hashlib import md5

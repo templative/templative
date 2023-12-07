@@ -1,5 +1,5 @@
 import math, uuid, os, json, random
-from templative.distribute.playground.templates import table, gameState, deck, cardHolder
+from templative.distribute.playground.playgroundTemplates import table, gameState, deck, cardHolder
 
 playerColors = []
 for i in range(20):
