@@ -9,9 +9,19 @@ setup(
     url = "",
     packages=find_packages(),
     install_requires=[
-        "asyncio", "aiofile", "click", "markdown2", "WeasyPrint", "ensure", 
-        "svgutils", "wand", "mpmath", "tabulate", "aiohttp", "svgmanip", "idna-ssl", 
-        "asynctest", "typing-extensions", "asyncclick", "anyio", "fpdf2", "defusedxml"
+        "aiofile",
+        "aiohttp",
+        "asyncclick",
+        "fpdf",
+        "fpdf2",
+        "GitPython",
+        "markdown2",
+        "Pillow",
+        "svgmanip",
+        "svgutils",
+        "tabulate",
+        "Wand",
+        "weasyprint"
     ],
     entry_points = {
         "console_scripts": [

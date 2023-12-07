@@ -2,12 +2,12 @@ from os import path, makedirs
 import csv
 from hashlib import md5
 
-from googletrans import Translator
-translator = Translator()
+# from googletrans import Translator
+# translator = Translator()
 
 def translateText(text, destinationLanguageCode):
-    response = translator.translate(text, src="en", dest=destinationLanguageCode)
-    return response.text
+    # response = translator.translate(text, src="en", dest=destinationLanguageCode)
+    return text # response.text
 
 def getTranslation(gameRootDirectory, text, destinationLanguageCode):
     if not hasExistingLanguageTranslationCache(gameRootDirectory, destinationLanguageCode):
