@@ -4,7 +4,6 @@ from aiofile import AIOFile
 import svgmanip
 import svgutils
 import git
-from cairosvg import svg2png
 
 from templative.componentInfo import COMPONENT_INFO
 from templative.manage.models.produceProperties import ProduceProperties
@@ -275,18 +274,18 @@ async def exportSvgToImage(filepath, imageSizePixels, name, outputDirectory):
     absoluteSvgFilepath = os.path.abspath(filepath)
     absoluteOutputDirectory = os.path.abspath(outputDirectory)
     pngFilepath = os.path.join(absoluteOutputDirectory, "%s.png" % (name))
-    svg2png(url=absoluteSvgFilepath, write_to=pngFilepath, dpi=300)
-    # createPngCommands = [
-    #     "inkscape", 
-    #     absoluteSvgFilepath,
-    #     '--export-filename=%s' % pngFilepath, 
-    #     # "--with-gui",
-    #     "--export-dpi=%s" % 300, 
-    #     # "--export-width=%s" % imageSizePixels[0], 
-    #     # "--export-height=%s" % imageSizePixels[1],
-    #     "--export-background-opacity=0" ]
     
-    # runCommands(createPngCommands)
+    createPngCommands = [
+        "inkscape", 
+        absoluteSvgFilepath,
+        '--export-filename=%s' % pngFilepath, 
+        # "--with-gui",
+        "--export-dpi=%s" % 300, 
+        # "--export-width=%s" % imageSizePixels[0], 
+        # "--export-height=%s" % imageSizePixels[1],
+        "--export-background-opacity=0" ]
+    
+    runCommands(createPngCommands)
     # jpgFilepath = os.path.join(absoluteOutputDirectory, "%s.jpg" % (name))
     # convertCommands = [ 
     #     "magick convert", 

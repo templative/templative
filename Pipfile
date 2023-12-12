@@ -17,7 +17,6 @@ Pillow = "*"
 svgmanip = "*"
 svgutils = "*"
 tabulate = "*"
-Wand = "*"
 weasyprint = "*"
 
 [requires]
