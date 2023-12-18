@@ -9,7 +9,6 @@ verify_ssl = true
 aiofile = "*"
 aiohttp = "*"
 asyncclick = "*"
-fpdf = "*"
 fpdf2 = "*"
 GitPython = "*"
 markdown2 = "*"

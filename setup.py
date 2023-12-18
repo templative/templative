@@ -11,7 +11,6 @@ setup(
         "aiofile",
         "aiohttp",
         "asyncclick",
-        "fpdf",
         "fpdf2",
         "GitPython",
         "markdown2",
