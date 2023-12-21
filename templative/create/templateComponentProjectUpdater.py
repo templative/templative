@@ -43,10 +43,13 @@ async def addStockComponentToComponentCompose(name, stockPartId, gameRootDirecto
     with open(path.join(gameRootDirectoryPath, 'component-compose.json'), 'w') as componentComposeFile:
         dump(componentComposeData, componentComposeFile, indent=4)
 
-async def createPiecesCsv(piecesDirectoryPath, name, hasPieceQuantity):
-    piecesCsvData = """name,displayName,quantity\n%s,%s,1""" % (name, name) if hasPieceQuantity else """name,displayName\n%s,%s""" % (name, name)
-    with open(path.join(piecesDirectoryPath, '%s.csv' % name), 'w') as piecesCsvFile:
-        piecesCsvFile.write(piecesCsvData)
+async def createPiecesJson(piecesDirectoryPath, name, hasPieceQuantity):
+    piecesJsonData = """[
+    { "name": "%s", "displayName": "%s"%s }   
+]""" % (name, name, """, "quantity": 1""" if hasPieceQuantity else "")
+    
+    with open(path.join(piecesDirectoryPath, '%s.json' % name), 'w') as piecesJsonFile:
+        piecesJsonFile.write(piecesJsonData)
 
 async def createComponentJson(componentDirectoryPath, name):
     componentJsonData = {
