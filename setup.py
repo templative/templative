@@ -26,7 +26,7 @@ setup(
             "templative=templative:cli"
         ]
     },
-    packages=["templative"],
+    packages=find_packages(),
     package_data={"": [
         "create/componentTemplates/*.svg", 
         "create/template/**/*.svg", 
