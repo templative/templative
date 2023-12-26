@@ -119,5 +119,5 @@ async def loadRules(gameRootDirectoryPath):
 
     filepath = os.path.join(gameRootDirectoryPath, "rules.md")
 
-    async with AIOFile(filepath, "rb") as rules:
+    async with AIOFile(filepath, "rt") as rules:
         return await rules.read()

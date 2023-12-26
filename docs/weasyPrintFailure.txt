@@ -1,0 +1,110 @@
+Last login: Wed Dec 20 12:44:30 on console
+/Users/sula/Downloads/templative-frontend.app/Contents/MacOS/templative-frontend ; exit;
+sula@Sulas-Mac-mini ~ % /Users/sula/Downloads/templative-frontend.app/Contents/MacOS/templative-frontend ; exit;
+2023-12-21 23:03:45.455 templative-frontend[26268:811398] WARNING: Secure coding is not enabled for restorable state! Enable secure coding by implementing NSApplicationDelegate.applicationSupportsSecureRestorableState: and returning YES.
+/Users/sula/Downloads/templative-frontend.app/Contents/Resources/python/dist/app
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 2 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 3 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 4 of 20
+
+-----
+
+WeasyPrint could not import some external libraries. Please carefully follow the installation steps before reporting an issue:
+https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation
+https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#troubleshooting 
+ß
+-----
+
+Traceback (most recent call last):
+  File "app.py", line 5, in <module>
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "PyInstaller/loader/pyimod02_importers.py", line 419, in exec_module
+  File "templative/__init__.py", line 2, in <module>
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "PyInstaller/loader/pyimod02_importers.py", line 419, in exec_module
+  File "templative/produce/__init__.py", line 2, in <module>
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "PyInstaller/loader/pyimod02_importers.py", line 419, in exec_module
+  File "templative/produce/gameProducer.py", line 4, in <module>
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "PyInstaller/loader/pyimod02_importers.py", line 419, in exec_module
+  File "templative/produce/rulesMarkdownProcessor.py", line 2, in <module>
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "PyInstaller/loader/pyimod02_importers.py", line 419, in exec_module
+  File "weasyprint/__init__.py", line 387, in <module>
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "PyInstaller/loader/pyimod02_importers.py", line 419, in exec_module
+  File "weasyprint/css/__init__.py", line 25, in <module>
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "PyInstaller/loader/pyimod02_importers.py", line 419, in exec_module
+  File "weasyprint/css/computed_values.py", line 11, in <module>
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "PyInstaller/loader/pyimod02_importers.py", line 419, in exec_module
+  File "weasyprint/text/ffi.py", line 428, in <module>
+  File "weasyprint/text/ffi.py", line 417, in _dlopen
+  File "cffi/api.py", line 150, in dlopen
+  File "cffi/api.py", line 832, in _make_ffi_library
+  File "cffi/api.py", line 827, in _load_backend_lib
+OSError: cannot load library 'gobject-2.0-0': dlopen(gobject-2.0-0, 0x0002): tried: 'gobject-2.0-0' (no such file), '/System/Volumes/Preboot/Cryptexes/OSgobject-2.0-0' (no such file), '/usr/lib/gobject-2.0-0' (no such file, not in dyld cache), 'gobject-2.0-0' (no such file), '/usr/local/lib/gobject-2.0-0' (no such file), '/usr/lib/gobject-2.0-0' (no such file, not in dyld cache).  Additionally, ctypes.util.find_library() did not manage to locate a library called 'gobject-2.0-0'
+[26284] Failed to execute script 'app' due to unhandled exception!
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 5 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 6 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 7 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 8 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 9 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 10 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 11 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 12 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 13 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 14 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 15 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 16 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 17 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 18 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 19 of 20
+TypeError: fetch failed
+http://localhost:8080/status failed. Trying 20 of 20
+Error: http://localhost:8080/status is down: 20 attempts tried
+    at /Users/sula/Downloads/templative-frontend.app/Contents/Resources/app.asar/public/main.js:58:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Failure!
+(node:26268) UnhandledPromiseRejectionWarning: TypeError: Cannot read properties of undefined (reading 'pid')
+    at shutdown (/Users/sula/Downloads/templative-frontend.app/Contents/Resources/app.asar/public/main.js:100:23)
+    at /Users/sula/Downloads/templative-frontend.app/Contents/Resources/app.asar/public/main.js:90:5
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+(Use templative-frontend --trace-warnings ... to show where the warning was created)
+(node:26268) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag --unhandled-rejections=strict (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)

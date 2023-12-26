@@ -1,7 +1,11 @@
 from templative.manage import defineLoader
-
+from templative.produce import rulesMarkdownProcessor
 from markdown2 import markdown
 from os import path
+
+async def convertRulesToPdf(gameRootDirectoryPath):
+    rules = await defineLoader.loadRules(gameRootDirectoryPath)
+    await rulesMarkdownProcessor.produceRulebook(rules, "./")
 
 async def convertRulesMdToHtml(gameRootDirectoryPath):
     rules = await defineLoader.loadRules(gameRootDirectoryPath)

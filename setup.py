@@ -19,7 +19,7 @@ setup(
         "svgutils",
         "tabulate",
         "Wand",
-        "weasyprint"
+        "md2pdf"
     ],
     entry_points = {
         "console_scripts": [

@@ -8,6 +8,12 @@ async def rules():
 
 @rules.command()
 @click.option('-i', '--input', default="./", help='The directory of the produced game. Defaults to last produced directory.')
+async def toPdf(input):
+    """Convert the rules markdown to pdf"""
+    await rulesMdToViewsProcessor.convertRulesToPdf(input)
+
+@rules.command()
+@click.option('-i', '--input', default="./", help='The directory of the produced game. Defaults to last produced directory.')
 async def toHtml(input):
     """Convert the rules markdown to html"""
     await rulesMdToViewsProcessor.convertRulesMdToHtml(input)

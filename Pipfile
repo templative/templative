@@ -16,7 +16,7 @@ Pillow = "*"
 svgmanip = "*"
 svgutils = "*"
 tabulate = "*"
-weasyprint = "*"
+md2pdf = "*"
 
 [requires]
 python_version = "3"
