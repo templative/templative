@@ -4,19 +4,23 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+templative = {file = ".", editable = true}
 
 [packages]
-aiofile = "*"
-aiohttp = "*"
 asyncclick = "*"
-fpdf2 = "*"
-GitPython = "*"
-markdown2 = "*"
-Pillow = "*"
-svgmanip = "*"
-svgutils = "*"
+anyio = "*"
+aiofile = "*"
+wand = "*"
+aiohttp = "*"
 tabulate = "*"
-md2pdf = "*"
+pillow = "*"
+fpdf = "*"
+markdown2 = "*"
+svgmanip = "*"
+setuptools = "*"
+gitpython = "*"
+aiohttp-cors = "*"
+python-socketio = "*"
 
 [requires]
 python_version = "3"

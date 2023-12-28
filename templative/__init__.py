@@ -1,30 +1,40 @@
 import asyncclick as click
-from templative import manage, produce, create
-from templative.distribute import playground, zettelkasten, printout, gameCrafter, animation 
 import distutils.spawn
+
+from templative.cli import create
+from templative.cli.distribute import zettelkastenCommands 
+from templative.cli.distribute import animationCommands
+from templative.cli.distribute import gameCrafterCommands
+from templative.cli.distribute import playgroundCommands
+from templative.cli.distribute import printoutCommands
+from templative.cli.manage import componentAnalysisCommands
+from templative.cli.manage import rulesCommands
+from templative.cli import produce
+from templative.cli import server
 
 if distutils.spawn.find_executable("inkscape") == None:
     print("Missing inkscape.")
-    exit() 
+    exit()
 
 @click.group()
 async def cli():
     """Templative CLI"""
     pass
 
-cli.add_command(gameCrafter.upload)
-cli.add_command(gameCrafter.list)
-cli.add_command(gameCrafter.deletegames)
+cli.add_command(gameCrafterCommands.upload)
+cli.add_command(gameCrafterCommands.list)
+cli.add_command(gameCrafterCommands.deletegames)
 
-cli.add_command(animation.animation)
+cli.add_command(animationCommands.animation)
 
 cli.add_command(create.init)
+cli.add_command(server.serve)
 cli.add_command(produce.produce)
-cli.add_command(manage.depth)
-cli.add_command(manage.components)
+cli.add_command(componentAnalysisCommands.depth)
+cli.add_command(componentAnalysisCommands.components)
 
-cli.add_command(manage.rules)
+cli.add_command(rulesCommands.rules)
 cli.add_command(create.create)
-cli.add_command(zettelkasten.zk)
-cli.add_command(printout.printout)
-cli.add_command(playground.playground)
+cli.add_command(zettelkastenCommands.zk)
+cli.add_command(printoutCommands.printout)
+cli.add_command(playgroundCommands.playground)

@@ -4,8 +4,8 @@ setup(
     name = "templative",
     version = "0.3.10",
     author = "Oliver Barnum",
-    author_email = "oliverbarnum32@gmail.com",
-    description = "Create GameCrafter games based on art templates, json, and csvs.",
+    author_email = "obarnum@nextday.games",
+    description = "Create board games based on art templates, json, and csvs.",
     url = "",
     install_requires=[
         "aiofile",
@@ -18,8 +18,7 @@ setup(
         "svgmanip",
         "svgutils",
         "tabulate",
-        "Wand",
-        "md2pdf"
+        "Wand"
     ],
     entry_points = {
         "console_scripts": [
