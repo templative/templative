@@ -1,4 +1,5 @@
 import asyncclick as click
+import distutils.spawn
 from templative.lib.produce import gameProducer
 
 @click.command()
@@ -9,4 +10,7 @@ from templative.lib.produce import gameProducer
 @click.option('--input', default="./", required=False, help='The directory of the templative project.')
 async def produce(name, simple, publish, language, input):
     """Produce the game in the current directory"""
+    if distutils.spawn.find_executable("inkscape") == None:
+        print("Inkscape must be installed to produce art.")
+        return
     return await gameProducer.produceGame(input, name, simple, publish, language)

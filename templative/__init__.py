@@ -1,6 +1,4 @@
 import asyncclick as click
-import distutils.spawn
-
 from templative.cli import create
 from templative.cli.distribute import zettelkastenCommands 
 from templative.cli.distribute import animationCommands
@@ -11,10 +9,6 @@ from templative.cli.manage import componentAnalysisCommands
 from templative.cli.manage import rulesCommands
 from templative.cli import produce
 from templative.cli import server
-
-if distutils.spawn.find_executable("inkscape") == None:
-    print("Missing inkscape.")
-    exit()
 
 @click.group()
 async def cli():
