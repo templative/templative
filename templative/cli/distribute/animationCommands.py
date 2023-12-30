@@ -4,7 +4,6 @@ import asyncclick as click
 from templative.lib.manage.instructionsLoader import getLastOutputFileDirectory
 from templative.lib.distribute.animation import packageBuilder, getAnimationDirectory, writeAnimationFile
 import json
-from wand.image import Image
 
 @click.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')

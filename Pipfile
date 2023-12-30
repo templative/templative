@@ -10,7 +10,6 @@ templative = {file = ".", editable = true}
 asyncclick = "*"
 anyio = "*"
 aiofile = "*"
-wand = "*"
 aiohttp = "*"
 tabulate = "*"
 pillow = "*"
