@@ -46,6 +46,7 @@ async def convertToTabletopPlayground(producedDirectoryPath, playgroundPackagesD
     print("!!! Using default player count 2.")
     defaultPlayerCount = 2
     gameStateJson = await createGameStateVts(game["name"], packageGuid, templates, defaultPlayerCount, packageDirectoryPath)
+    return 1
 
 async def createPackageDirectories(gameName, packagesDirectoryPath):
     packageDirectoryPath = path.join(packagesDirectoryPath, gameName)

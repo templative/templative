@@ -23,6 +23,7 @@ async def createPdfForPrinting(producedDirectoryPath, isBackIncluded, size, areM
     pdf = FPDF("P", "in", fpdfSizes[size])
 
     componentTypeFilepathAndQuantity = {}
+    print(producedDirectoryPath)
     for directoryPath in next(walk(producedDirectoryPath))[1]:
         await loadFilepathsForComponent(componentTypeFilepathAndQuantity, producedDirectoryPath, directoryPath)
     
@@ -40,8 +41,11 @@ async def createPdfForPrinting(producedDirectoryPath, isBackIncluded, size, areM
     for componentType in componentTypeFilepathAndQuantity.keys():
         createdPageImages = await createPageImagesForComponentTypeImages(componentType, componentTypeFilepathAndQuantity[componentType], isBackIncluded, printoutPlayAreaChoice, areMarginsIncluded)
         await addPageImagesToPdf(pdf, componentType, createdPageImages, printoutPlayAreaChoice)
-
-    pdf.output("./printout.pdf", "F")
+    
+    outputPath = path.abspath(path.join(producedDirectoryPath, "printout.pdf"))
+    print("Writing to", outputPath)
+    pdf.output(outputPath, "F")
+    return 1
 
 async def loadFilepathsForComponent(componentTypeFilepathAndQuantity, producedDirectoryPath, directoryPath):
     componentDirectoryPath = "%s/%s" % (producedDirectoryPath, directoryPath)
