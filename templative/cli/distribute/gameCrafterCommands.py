@@ -1,3 +1,4 @@
+import os
 import asyncclick as click
 from templative.lib.distribute.gameCrafter.client import uploadGame
 from templative.lib.distribute.gameCrafter.accountManagement import listGames, deletePageOfGames
@@ -5,6 +6,20 @@ from templative.lib.distribute.gameCrafter.util.gameCrafterSession import login,
 from templative.lib.manage.instructionsLoader import getLastOutputFileDirectory
 
 baseUrl = "https://www.thegamecrafter.com"
+
+def getCredentialsFromEnv():
+    publicApiKey = os.environ.get('THEGAMECRAFTER_PUBLIC_KEY')
+    if not publicApiKey:
+        raise Exception('Could not log in. You need to set the env variable THEGAMECRAFTER_PUBLIC_KEY. Value is %s' % publicApiKey)
+
+    userName = os.environ.get('THEGAMECRAFTER_USER')
+    if not userName:
+        raise Exception('Could not log in. You need to set the env variable THEGAMECRAFTER_USER. Value is %s' % userName)
+
+    userPassword = os.environ.get('THEGAMECRAFTER_PASSWORD')
+    if not userPassword:
+        raise Exception('Could not log in. You need to set the env variable THEGAMECRAFTER_PASSWORD. Value is %s' % userPassword)
+    return publicApiKey, userName, userPassword
 
 @click.command()
 @click.option('-i', '--input', default=None, help='The directory of the produced game. Defaults to last produced directory.')
@@ -14,7 +29,8 @@ baseUrl = "https://www.thegamecrafter.com"
 @click.option('-u/-o', '--proofed/--proof', default=True, required=False, type=bool, help='Whether images are considered proofed already -u or not -o.')
 async def upload(input, publish, stock, asynchronous, proofed):
     """Upload a produced game in a directory"""
-    session = await login()
+    publicApiKey, userName, userPassword = getCredentialsFromEnv()
+    session = await login(publicApiKey, userName, userPassword)
 
     if session is None:
         raise Exception("You must provide a Game Crafter session.")
@@ -28,7 +44,8 @@ async def upload(input, publish, stock, asynchronous, proofed):
 @click.command()
 async def list():
     """List uploaded games"""
-    session = await login()
+    publicApiKey, userName, userPassword = getCredentialsFromEnv()
+    session = await login(publicApiKey, userName, userPassword)
 
     if session is None:
         raise Exception("You must provide a Game Crafter session.")
@@ -39,7 +56,8 @@ async def list():
 @click.command()
 async def deletegames():
     """Delete a page of games"""
-    session = await login()
+    publicApiKey, userName, userPassword = getCredentialsFromEnv()
+    session = await login(publicApiKey, userName, userPassword)
 
     if session is None:
         raise Exception("You must provide a Game Crafter session.")
