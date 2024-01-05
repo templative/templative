@@ -18,7 +18,10 @@ class EmitPrintStatements():
         self.oldStdOutWrite = sys.stdout.write
         def printAndPushToArray(message):
             self.oldStdOutWrite(message)
-            asyncio.run_coroutine_threadsafe(emit(self.sio, self.emitTarget, message), loop=asyncio.get_event_loop())
+            try:
+                asyncio.run_coroutine_threadsafe(emit(self.sio, self.emitTarget, message), loop=asyncio.get_event_loop())
+            except ConnectionResetError as e:
+                pass
         sys.stdout.write = printAndPushToArray
 
     def __exit__(self, *args):
