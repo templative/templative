@@ -16,10 +16,19 @@ from templative.lib.componentInfo import COMPONENT_INFO
 class BackProducer(Producer):
     @staticmethod
     async def createComponent(produceProperties:ProduceProperties, componentComposition:ComponentComposition, componentData:ComponentData, componentArtdata:ComponentArtdata):
-        piecesDataBlob = await defineLoader.loadPiecesGamedata(produceProperties.inputDirectoryPath, componentComposition.gameCompose, componentComposition.componentCompose["piecesGamedataFilename"])
-        if not piecesDataBlob or piecesDataBlob == {}:
-            print("Skipping %s component due to missing pieces gamedata." % componentComposition.componentCompose["name"])
-            return
+        componentTypeInfo = COMPONENT_INFO[componentComposition.componentCompose["type"]]
+        defaultPieceGamedataBlob = [{ 
+            "name": componentComposition.componentCompose["name"], 
+            "displayName": componentComposition.componentCompose["name"], 
+            "quantity": 1, 
+        }]
+        piecesDataBlob = defaultPieceGamedataBlob
+        if componentTypeInfo["HasPieceData"]:
+            piecesDataBlob = await defineLoader.loadPiecesGamedata(produceProperties.inputDirectoryPath, componentComposition.gameCompose, componentComposition.componentCompose["piecesGamedataFilename"])
+            if not piecesDataBlob or piecesDataBlob == {}:
+                print("Skipping %s component due to missing pieces gamedata." % componentComposition.componentCompose["name"])
+                return
+
 
         sourcedVariableNamesSpecificToPieceOnBackArtData = BackProducer.getSourcedVariableNamesSpecificToPieceOnBackArtdata(componentArtdata.artDataBlobDictionary["Back"])
         
