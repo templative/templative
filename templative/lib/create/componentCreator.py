@@ -57,6 +57,5 @@ async def createStockComponent(gameRootDirectoryPath, name, stockPartId):
     gameCompose = await defineLoader.loadGameCompose(gameRootDirectoryPath)
     componentComposeData = await defineLoader.loadComponentCompose(gameRootDirectoryPath)
     await templateComponentProjectUpdater.addStockComponentToComponentCompose(name, stockPartId, gameRootDirectoryPath, componentComposeData)
-    await templateComponentProjectUpdater.createComponentJson(gameCompose["componentGamedataDirectory"], name)
 
 
