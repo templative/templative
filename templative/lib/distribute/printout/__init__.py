@@ -71,7 +71,7 @@ async def collectFilepathQuantitiesForComponent(componentTypeFilepathAndQuantity
         frontBack = {
             "filepath": instruction["filepath"],
             "backFilepath": componentInstructions["backInstructions"]["filepath"],
-            "quantity":  int(instruction["quantity"]),
+            "quantity":  int(instruction["quantity"]) * int(componentInstructions["quantity"]),
 
         }
         componentTypeFilepathAndQuantity[componentInstructions["type"]].append(frontBack)
