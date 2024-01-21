@@ -11,7 +11,7 @@ async def stock():
 @click.option("-n", "--name", default=None, help="The name of the new component.")
 @click.option("-i", "--id", default=None, help="The ID of the stockpart.")
 @click.option("-i", "--input", default="./", help="The path to the Templative Project.")
-async def part(name, id):
+async def part(name, id, input):
     """Create a Stock Part by ID"""
 
     if name == None:
@@ -22,7 +22,7 @@ async def part(name, id):
         print("Missing --id or -i defining the stock part id.")
         return
 
-    await componentCreator.createStockComponent(name, id)
+    await componentCreator.createStockComponent(input, name, id)
 
 @stock.command()
 async def options():

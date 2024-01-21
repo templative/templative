@@ -59,6 +59,5 @@ async def createComponent(request):
   if data["directoryPath"] == None:
     return "Missing directoryPath", 400
   
-  await componentCreator.createCustomComponent(data["directoryPath"], data["componentName"], data["componentType"])
-
+  await componentCreator.createComponentByType(data["directoryPath"], data["componentName"], data["componentType"])
   return web.Response(status=200)
