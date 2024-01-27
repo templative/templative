@@ -19,6 +19,8 @@ async def produceGame(gameRootDirectoryPath, componentFilter, isSimple, isPublis
 
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     uniqueGameName = ("%s_%s_%s_%s" % (gameDataBlob["name"], gameDataBlob["version"], gameDataBlob["versionName"], timestamp)).replace(" ", "")
+    if (componentFilter != None):
+        uniqueGameName = "%s_%s" % (uniqueGameName, componentFilter)
     gameDataBlob["name"] = uniqueGameName
 
     gameCompose = await defineLoader.loadGameCompose(gameRootDirectoryPath)
