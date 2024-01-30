@@ -17,7 +17,6 @@ fpdf = "*"
 markdown2 = "*"
 svgmanip = "*"
 setuptools = "*"
-gitpython = "*"
 aiohttp-cors = "*"
 python-socketio = "*"
 

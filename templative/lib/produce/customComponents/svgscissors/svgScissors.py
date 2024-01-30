@@ -3,7 +3,6 @@ from xml.etree import ElementTree
 from aiofile import AIOFile
 import svgmanip
 import svgutils
-import git
 
 from templative.lib.componentInfo import COMPONENT_INFO
 from templative.lib.manage.models.produceProperties import ProduceProperties
@@ -249,7 +248,7 @@ async def getScopedValue(scopedValue, pieceGameData: PieceData|ComponentBackData
     
     if scope == "utility":
         utilityFunctions = {
-            "git-sha": getCurrentGitSha
+            # "git-sha": getCurrentGitSha
         }
         if not source in utilityFunctions:
             print("Missing function %s not found in %s scope." % (source, scope))
@@ -295,6 +294,6 @@ async def exportSvgToImage(filepath, imageSizePixels, name, outputDirectory):
 
     # os.remove(pngFilepath)
 
-def getCurrentGitSha():
-    repo = git.Repo(search_parent_directories=True)
-    return repo.head.object.hexsha
+# def getCurrentGitSha():
+#     repo = git.Repo(search_parent_directories=True)
+#     return repo.head.object.hexsha

@@ -12,7 +12,6 @@ setup(
         "aiohttp",
         "asyncclick",
         "fpdf2",
-        "GitPython",
         "markdown2",
         "Pillow",
         "svgmanip",
