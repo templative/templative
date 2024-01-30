@@ -112,8 +112,9 @@ async def addOverlays(artFile, overlays, compositions:ComponentComposition, piec
         if overlayName == None or overlayName == "":
             continue
     
+        overlaysFilepath = os.path.abspath(os.path.join(produceProperties.inputDirectoryPath, overlayFilesDirectory))
         overlayFilename = "%s.svg" % (overlayName)
-        overlayFilepath = os.path.join(produceProperties.inputDirectoryPath, overlayFilesDirectory, overlayFilename)
+        overlayFilepath = os.path.join(overlaysFilepath, overlayFilename)
 
         if not os.path.exists(overlayFilepath):
             print("!!! Overlay %s does not exist." % overlayFilepath)
