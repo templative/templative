@@ -349,3 +349,15 @@ async def postCustomD8(gameCrafterSession, name, gameId, quantity, color, sideFi
         has_proofed_side7 = isProofed,
         has_proofed_side8 = isProofed,
     )
+
+async def getCustomPartInfo(gameCrafterSession):
+    url = "%s/tgc/products" % (gameCrafterBaseUrl)
+    return await httpClient.get(gameCrafterSession, url,
+        session_id = gameCrafterSession.sessionId
+    )
+
+async def getStockPartInfo(gameCrafterSession, pageNumber=1):
+    url = "%s/part?_page_number=%s" % (gameCrafterBaseUrl, pageNumber)
+    return await httpClient.get(gameCrafterSession, url, 
+        session_id = gameCrafterSession.sessionId,
+    )

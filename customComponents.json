@@ -1,0 +1,3499 @@
+{
+    "AccordionBoard": {
+        "DimensionsPixels": [
+            2475,
+            4875
+        ],
+        "DimensionsInches": [
+            8.0,
+            16.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "AcrylicShape125": {
+        "DimensionsPixels": [
+            2400,
+            1200
+        ],
+        "DimensionsInches": [
+            8.0,
+            4.0
+        ],
+        "GameCrafterUploadTask": "acrylicshape",
+        "GameCrafterPackagingDepthMillimeters": 3.175,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Side1",
+            "Side2"
+        ]
+    },
+    "AcrylicShape250": {
+        "DimensionsPixels": [
+            2400,
+            1200
+        ],
+        "DimensionsInches": [
+            8.0,
+            4.0
+        ],
+        "GameCrafterUploadTask": "acrylicshape",
+        "GameCrafterPackagingDepthMillimeters": 6.35,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Side1",
+            "Side2"
+        ]
+    },
+    "ArrowChit": {
+        "DimensionsPixels": [
+            150,
+            300
+        ],
+        "DimensionsInches": [
+            0.25,
+            0.75
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "BiFoldBoard": {
+        "DimensionsPixels": [
+            2775,
+            5475
+        ],
+        "DimensionsInches": [
+            9.0,
+            18.0
+        ],
+        "GameCrafterUploadTask": "onesidedgloss",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "BiFoldMat": {
+        "DimensionsPixels": [
+            2475,
+            2475
+        ],
+        "DimensionsInches": [
+            8.0,
+            8.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "BigMat": {
+        "DimensionsPixels": [
+            3075,
+            4875
+        ],
+        "DimensionsInches": [
+            10.0,
+            16.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "BridgeDeck": {
+        "DimensionsPixels": [
+            750,
+            1125
+        ],
+        "DimensionsInches": [
+            2.25,
+            3.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "BridgeFolio": {
+        "DimensionsPixels": [
+            2775,
+            1125
+        ],
+        "DimensionsInches": [
+            9.0,
+            3.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.6096,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "BridgeHookBox108": {
+        "DimensionsPixels": [
+            3000,
+            3750
+        ],
+        "DimensionsInches": [
+            2.28,
+            3.57
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 39.878,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "BridgeHookBox54": {
+        "DimensionsPixels": [
+            2625,
+            3300
+        ],
+        "DimensionsInches": [
+            2.3,
+            3.57
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 22.86,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "BridgeTuckBox108": {
+        "DimensionsPixels": [
+            2925,
+            2250
+        ],
+        "DimensionsInches": [
+            2.35,
+            3.6
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 43.687999999999995,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "BridgeTuckBox54": {
+        "DimensionsPixels": [
+            2175,
+            1800
+        ],
+        "DimensionsInches": [
+            2.35,
+            3.6
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 23.114,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "BullseyeChit": {
+        "DimensionsPixels": [
+            375,
+            900
+        ],
+        "DimensionsInches": [
+            1.0,
+            1.0
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "BusinessDeck": {
+        "DimensionsPixels": [
+            675,
+            1125
+        ],
+        "DimensionsInches": [
+            2.0,
+            3.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CardCraftingDeck": {
+        "DimensionsPixels": [
+            900,
+            1500
+        ],
+        "DimensionsInches": [
+            2.657,
+            4.704
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.33781999999999995,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CircleDeck": {
+        "DimensionsPixels": [
+            1125,
+            1125
+        ],
+        "DimensionsInches": [
+            3.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CircleShard": {
+        "DimensionsPixels": [
+            300,
+            300
+        ],
+        "DimensionsInches": [
+            0.75,
+            0.75
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "ClearCardCraftingDeck": {
+        "DimensionsPixels": [
+            900,
+            1500
+        ],
+        "DimensionsInches": [
+            2.657,
+            4.704
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.33781999999999995,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Face(Exposed)",
+            "Back(Reflected)"
+        ]
+    },
+    "ClearEuroPokerDeck": {
+        "DimensionsPixels": [
+            825,
+            1125
+        ],
+        "DimensionsInches": [
+            2.48031496062992,
+            3.46456692913386
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.33781999999999995,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Face(Exposed)",
+            "Back(Reflected)"
+        ]
+    },
+    "CustomColorD4": {
+        "DimensionsPixels": [
+            300,
+            300
+        ],
+        "DimensionsInches": [
+            0.76,
+            0.68
+        ],
+        "GameCrafterUploadTask": "customcolord4",
+        "GameCrafterPackagingDepthMillimeters": 17.272000000000002,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Side 1",
+            "Side 2",
+            "Side 3",
+            "Side 4"
+        ]
+    },
+    "CustomColorD6": {
+        "DimensionsPixels": [
+            180,
+            180
+        ],
+        "DimensionsInches": [
+            0.63,
+            0.63
+        ],
+        "GameCrafterUploadTask": "customcolord6",
+        "GameCrafterPackagingDepthMillimeters": 16.002,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Side 1",
+            "Side 2",
+            "Side 3",
+            "Side 4",
+            "Side 5",
+            "Side 6"
+        ]
+    },
+    "CustomColorD8": {
+        "DimensionsPixels": [
+            300,
+            300
+        ],
+        "DimensionsInches": [
+            0.917,
+            0.688
+        ],
+        "GameCrafterUploadTask": "customcolord8",
+        "GameCrafterPackagingDepthMillimeters": 17.475199999999997,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Side 1",
+            "Side 2",
+            "Side 3",
+            "Side 4",
+            "Side 5",
+            "Side 6",
+            "Side 7",
+            "Side 8"
+        ]
+    },
+    "CustomLargeCardstock": {
+        "DimensionsPixels": [
+            2475,
+            3150
+        ],
+        "DimensionsInches": [
+            8.25,
+            10.5
+        ],
+        "GameCrafterUploadTask": "customcuttwosidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CustomLargePunchout": {
+        "DimensionsPixels": [
+            2475,
+            3150
+        ],
+        "DimensionsInches": [
+            8.25,
+            10.5
+        ],
+        "GameCrafterUploadTask": "customcuttwosidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CustomLargeSticker": {
+        "DimensionsPixels": [
+            2475,
+            3150
+        ],
+        "DimensionsInches": [
+            8.25,
+            10.5
+        ],
+        "GameCrafterUploadTask": "customcutonesidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 0.2794,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "CustomMediumCardstock": {
+        "DimensionsPixels": [
+            2400,
+            1350
+        ],
+        "DimensionsInches": [
+            8.0,
+            4.5
+        ],
+        "GameCrafterUploadTask": "customcuttwosidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CustomMediumPunchout": {
+        "DimensionsPixels": [
+            2400,
+            1350
+        ],
+        "DimensionsInches": [
+            8.0,
+            4.5
+        ],
+        "GameCrafterUploadTask": "customcuttwosidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CustomMediumSticker": {
+        "DimensionsPixels": [
+            2400,
+            1350
+        ],
+        "DimensionsInches": [
+            8.0,
+            4.5
+        ],
+        "GameCrafterUploadTask": "customcutonesidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 0.2794,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "CustomMiniCardstock": {
+        "DimensionsPixels": [
+            750,
+            1050
+        ],
+        "DimensionsInches": [
+            2.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "customcuttwosidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CustomMiniSticker": {
+        "DimensionsPixels": [
+            750,
+            1050
+        ],
+        "DimensionsInches": [
+            2.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "customcutonesidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 0.2794,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "CustomPrintedMeeple": {
+        "DimensionsPixels": [
+            300,
+            300
+        ],
+        "DimensionsInches": [
+            0.67,
+            0.635
+        ],
+        "GameCrafterUploadTask": "customprintedmeeple",
+        "GameCrafterPackagingDepthMillimeters": 10.16,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CustomSmallCardstock": {
+        "DimensionsPixels": [
+            975,
+            1575
+        ],
+        "DimensionsInches": [
+            3.25,
+            5.25
+        ],
+        "GameCrafterUploadTask": "customcuttwosidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CustomSmallPunchout": {
+        "DimensionsPixels": [
+            975,
+            1575
+        ],
+        "DimensionsInches": [
+            3.25,
+            5.25
+        ],
+        "GameCrafterUploadTask": "customcuttwosidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "CustomSmallSticker": {
+        "DimensionsPixels": [
+            975,
+            1575
+        ],
+        "DimensionsInches": [
+            3.25,
+            5.25
+        ],
+        "GameCrafterUploadTask": "customcutonesidedslugged",
+        "GameCrafterPackagingDepthMillimeters": 0.2794,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "CustomWoodD6": {
+        "DimensionsPixels": [
+            180,
+            180
+        ],
+        "DimensionsInches": [
+            0.62992125984252,
+            0.62992125984252
+        ],
+        "GameCrafterUploadTask": "customwoodd6",
+        "GameCrafterPackagingDepthMillimeters": 16.000000000000007,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Side 1",
+            "Side 2",
+            "Side 3",
+            "Side 4",
+            "Side 5",
+            "Side 6"
+        ]
+    },
+    "DeckBox": {
+        "DimensionsPixels": [
+            3675,
+            4950
+        ],
+        "DimensionsInches": [
+            4.17,
+            8.45
+        ],
+        "GameCrafterUploadTask": "twosidedbox",
+        "GameCrafterPackagingDepthMillimeters": 80.772,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top",
+            "Bottom"
+        ]
+    },
+    "DeckBoxTopAndSide": {
+        "DimensionsPixels": [
+            3675,
+            4950
+        ],
+        "DimensionsInches": [
+            4.17,
+            8.45
+        ],
+        "GameCrafterUploadTask": "boxtop",
+        "GameCrafterPackagingDepthMillimeters": 80.772,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top"
+        ]
+    },
+    "DiceSticker": {
+        "DimensionsPixels": [
+            188,
+            188
+        ],
+        "DimensionsInches": [
+            0.5,
+            0.5
+        ],
+        "GameCrafterUploadTask": "onesidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 0.2794,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "DigestPerfectBoundBook": {
+        "DimensionsPixels": [
+            1725,
+            2625
+        ],
+        "DimensionsInches": [
+            5.375,
+            8.375
+        ],
+        "GameCrafterUploadTask": "perfectboundbook",
+        "GameCrafterPackagingDepthMillimeters": 0.13055599999999998,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "DividerDeck": {
+        "DimensionsPixels": [
+            975,
+            1125
+        ],
+        "DimensionsInches": [
+            3.0,
+            3.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "Document": {
+        "DimensionsPixels": [
+            2550,
+            3300
+        ],
+        "DimensionsInches": [
+            8.5,
+            11.0
+        ],
+        "GameCrafterUploadTask": "document",
+        "GameCrafterPackagingDepthMillimeters": 0.2794,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "DominoBoard": {
+        "DimensionsPixels": [
+            1275,
+            2475
+        ],
+        "DimensionsInches": [
+            4.0,
+            8.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "DominoChit": {
+        "DimensionsPixels": [
+            375,
+            675
+        ],
+        "DimensionsInches": [
+            1.0,
+            2.0
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "DominoDeck": {
+        "DimensionsPixels": [
+            600,
+            1125
+        ],
+        "DimensionsInches": [
+            1.75,
+            3.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "DominoMat": {
+        "DimensionsPixels": [
+            1275,
+            2475
+        ],
+        "DimensionsInches": [
+            4.0,
+            8.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "DominoTile": {
+        "DimensionsPixels": [
+            675,
+            1275
+        ],
+        "DimensionsInches": [
+            2.0,
+            4.0
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "DualDial": {
+        "DimensionsPixels": [
+            2550,
+            1650
+        ],
+        "DimensionsInches": [
+            2.5,
+            5.25
+        ],
+        "GameCrafterUploadTask": "dial",
+        "GameCrafterPackagingDepthMillimeters": 1.5239999999999998,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "EuroPokerDeck": {
+        "DimensionsPixels": [
+            825,
+            1125
+        ],
+        "DimensionsInches": [
+            2.48031496062992,
+            3.46456692913386
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "EuroSquareDeck": {
+        "DimensionsPixels": [
+            900,
+            900
+        ],
+        "DimensionsInches": [
+            2.75590551181102,
+            2.75590551181102
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "FlowerMat": {
+        "DimensionsPixels": [
+            825,
+            900
+        ],
+        "DimensionsInches": [
+            2.5,
+            2.75
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "FoilEuroPokerDeck": {
+        "DimensionsPixels": [
+            825,
+            1125
+        ],
+        "DimensionsInches": [
+            2.48031496062992,
+            3.46456692913386
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "FoilPokerDeck": {
+        "DimensionsPixels": [
+            825,
+            1125
+        ],
+        "DimensionsInches": [
+            2.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "FoilTarotDeck": {
+        "DimensionsPixels": [
+            900,
+            1500
+        ],
+        "DimensionsInches": [
+            2.75,
+            4.75
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "HalfBoard": {
+        "DimensionsPixels": [
+            1575,
+            3075
+        ],
+        "DimensionsInches": [
+            5.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "HalfMat": {
+        "DimensionsPixels": [
+            1575,
+            3075
+        ],
+        "DimensionsInches": [
+            5.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "HexDeck": {
+        "DimensionsPixels": [
+            1200,
+            1050
+        ],
+        "DimensionsInches": [
+            3.75,
+            3.25
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "HexMat": {
+        "DimensionsPixels": [
+            1650,
+            1425
+        ],
+        "DimensionsInches": [
+            5.25,
+            4.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "HexShard": {
+        "DimensionsPixels": [
+            300,
+            300
+        ],
+        "DimensionsInches": [
+            0.75,
+            0.66
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "InvaderMat": {
+        "DimensionsPixels": [
+            1275,
+            1125
+        ],
+        "DimensionsInches": [
+            4.0,
+            3.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "JumboBooklet": {
+        "DimensionsPixels": [
+            2475,
+            3075
+        ],
+        "DimensionsInches": [
+            8.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "booklet",
+        "GameCrafterPackagingDepthMillimeters": 0.0762,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Image"
+        ]
+    },
+    "JumboCoilBook": {
+        "DimensionsPixels": [
+            2550,
+            3075
+        ],
+        "DimensionsInches": [
+            8.25,
+            10.0
+        ],
+        "GameCrafterUploadTask": "coilbook",
+        "GameCrafterPackagingDepthMillimeters": 0.0762,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "JumboDeck": {
+        "DimensionsPixels": [
+            1125,
+            1725
+        ],
+        "DimensionsInches": [
+            3.5,
+            5.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "JumboHookBox36": {
+        "DimensionsPixels": [
+            3075,
+            4725
+        ],
+        "DimensionsInches": [
+            3.6,
+            5.6
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 15.341599999999998,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "JumboHookBox90": {
+        "DimensionsPixels": [
+            3450,
+            5100
+        ],
+        "DimensionsInches": [
+            3.58,
+            5.57
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 34.798,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "JumboTuckBox90": {
+        "DimensionsPixels": [
+            3450,
+            2700
+        ],
+        "DimensionsInches": [
+            3.6,
+            5.6
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 36.83,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "LargeAcrylicShape125": {
+        "DimensionsPixels": [
+            3150,
+            2700
+        ],
+        "DimensionsInches": [
+            10.5,
+            9.0
+        ],
+        "GameCrafterUploadTask": "acrylicshape",
+        "GameCrafterPackagingDepthMillimeters": 3.175,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Side1",
+            "Side2"
+        ]
+    },
+    "LargeBooklet": {
+        "DimensionsPixels": [
+            1575,
+            2475
+        ],
+        "DimensionsInches": [
+            5.0,
+            8.0
+        ],
+        "GameCrafterUploadTask": "booklet",
+        "GameCrafterPackagingDepthMillimeters": 0.0762,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Image"
+        ]
+    },
+    "LargeCircleChit": {
+        "DimensionsPixels": [
+            375,
+            375
+        ],
+        "DimensionsInches": [
+            1.0,
+            1.0
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargeHexMat": {
+        "DimensionsPixels": [
+            2925,
+            2550
+        ],
+        "DimensionsInches": [
+            9.5,
+            8.25
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargeHexTile": {
+        "DimensionsPixels": [
+            1200,
+            1050
+        ],
+        "DimensionsInches": [
+            3.75,
+            3.25
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargePrototypeBox": {
+        "DimensionsPixels": [
+            7650,
+            5925
+        ],
+        "DimensionsInches": [
+            10.625,
+            9.375
+        ],
+        "GameCrafterUploadTask": "boxtop",
+        "GameCrafterPackagingDepthMillimeters": 57.15,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top"
+        ]
+    },
+    "LargeRetailBox": {
+        "DimensionsPixels": [
+            3975,
+            4725
+        ],
+        "DimensionsInches": [
+            11.875,
+            9.4375
+        ],
+        "GameCrafterUploadTask": "twosidedbox",
+        "GameCrafterPackagingDepthMillimeters": 55.626,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top",
+            "Bottom"
+        ]
+    },
+    "LargeRing": {
+        "DimensionsPixels": [
+            450,
+            450
+        ],
+        "DimensionsInches": [
+            1.25,
+            1.25
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargeScorePadColor": {
+        "DimensionsPixels": [
+            2475,
+            3075
+        ],
+        "DimensionsInches": [
+            8.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "scorepad",
+        "GameCrafterPackagingDepthMillimeters": 0.127,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargeScreen": {
+        "DimensionsPixels": [
+            4875,
+            3075
+        ],
+        "DimensionsInches": [
+            16.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.7619999999999999,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargeSquareBoard": {
+        "DimensionsPixels": [
+            3075,
+            3075
+        ],
+        "DimensionsInches": [
+            10.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargeSquareChit": {
+        "DimensionsPixels": [
+            375,
+            375
+        ],
+        "DimensionsInches": [
+            1.0,
+            1.0
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargeSquareMat": {
+        "DimensionsPixels": [
+            3075,
+            3075
+        ],
+        "DimensionsInches": [
+            10.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargeSquareTile": {
+        "DimensionsPixels": [
+            1125,
+            1125
+        ],
+        "DimensionsInches": [
+            3.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargeStandee": {
+        "DimensionsPixels": [
+            375,
+            975
+        ],
+        "DimensionsInches": [
+            1.0,
+            2.25
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "LargeStoutBox": {
+        "DimensionsPixels": [
+            5925,
+            5925
+        ],
+        "DimensionsInches": [
+            11.0,
+            11.0
+        ],
+        "GameCrafterUploadTask": "twosidedboxgloss",
+        "GameCrafterPackagingDepthMillimeters": 82.042,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top",
+            "Bottom"
+        ]
+    },
+    "LargeStoutBoxTop": {
+        "DimensionsPixels": [
+            3450,
+            3450
+        ],
+        "DimensionsInches": [
+            11.0,
+            11.0
+        ],
+        "GameCrafterUploadTask": "boxtop",
+        "GameCrafterPackagingDepthMillimeters": 82.042,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top"
+        ]
+    },
+    "LargeStoutBoxTopAndSide": {
+        "DimensionsPixels": [
+            5925,
+            5925
+        ],
+        "DimensionsInches": [
+            11.0,
+            11.0
+        ],
+        "GameCrafterUploadTask": "boxtopgloss",
+        "GameCrafterPackagingDepthMillimeters": 82.042,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top"
+        ]
+    },
+    "LetterPerfectBoundBook": {
+        "DimensionsPixels": [
+            2625,
+            3375
+        ],
+        "DimensionsInches": [
+            8.5,
+            11.0
+        ],
+        "GameCrafterUploadTask": "perfectboundbook",
+        "GameCrafterPackagingDepthMillimeters": 0.13055599999999998,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumBooklet": {
+        "DimensionsPixels": [
+            1125,
+            1575
+        ],
+        "DimensionsInches": [
+            3.5,
+            5.0
+        ],
+        "GameCrafterUploadTask": "booklet",
+        "GameCrafterPackagingDepthMillimeters": 0.0762,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Image"
+        ]
+    },
+    "MediumCircleChit": {
+        "DimensionsPixels": [
+            300,
+            300
+        ],
+        "DimensionsInches": [
+            0.75,
+            0.75
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumCoilBook": {
+        "DimensionsPixels": [
+            1575,
+            2325
+        ],
+        "DimensionsInches": [
+            5.0,
+            7.5
+        ],
+        "GameCrafterUploadTask": "coilbook",
+        "GameCrafterPackagingDepthMillimeters": 18.034,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumFolio": {
+        "DimensionsPixels": [
+            4875,
+            2475
+        ],
+        "DimensionsInches": [
+            16.0,
+            8.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.6096,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumGameMat": {
+        "DimensionsPixels": [
+            7275,
+            4275
+        ],
+        "DimensionsInches": [
+            24.0,
+            14.0
+        ],
+        "GameCrafterUploadTask": "onesided",
+        "GameCrafterPackagingDepthMillimeters": 4.444999999999999,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "MediumHexTile": {
+        "DimensionsPixels": [
+            825,
+            750
+        ],
+        "DimensionsInches": [
+            2.5,
+            2.2
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumMatBook": {
+        "DimensionsPixels": [
+            1575,
+            2325
+        ],
+        "DimensionsInches": [
+            5.0,
+            7.5
+        ],
+        "GameCrafterUploadTask": "coilbook",
+        "GameCrafterPackagingDepthMillimeters": 18.034,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumProBox": {
+        "DimensionsPixels": [
+            3300,
+            4350
+        ],
+        "DimensionsInches": [
+            8.5,
+            4.94
+        ],
+        "GameCrafterUploadTask": "twosidedbox",
+        "GameCrafterPackagingDepthMillimeters": 38.099999999999994,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top",
+            "Bottom"
+        ]
+    },
+    "MediumPrototypeBox": {
+        "DimensionsPixels": [
+            5850,
+            5400
+        ],
+        "DimensionsInches": [
+            9.625,
+            6.875
+        ],
+        "GameCrafterUploadTask": "boxtop",
+        "GameCrafterPackagingDepthMillimeters": 49.2125,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top"
+        ]
+    },
+    "MediumRing": {
+        "DimensionsPixels": [
+            375,
+            375
+        ],
+        "DimensionsInches": [
+            1.0,
+            1.0
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumScorePadColor": {
+        "DimensionsPixels": [
+            1425,
+            2475
+        ],
+        "DimensionsInches": [
+            4.5,
+            8.0
+        ],
+        "GameCrafterUploadTask": "scorepad",
+        "GameCrafterPackagingDepthMillimeters": 0.127,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumScreen": {
+        "DimensionsPixels": [
+            4875,
+            1425
+        ],
+        "DimensionsInches": [
+            16.0,
+            4.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.7619999999999999,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumSixFoldBoard": {
+        "DimensionsPixels": [
+            4875,
+            4875
+        ],
+        "DimensionsInches": [
+            16.0,
+            16.0
+        ],
+        "GameCrafterUploadTask": "onesidedgloss",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "MediumSquareChit": {
+        "DimensionsPixels": [
+            300,
+            300
+        ],
+        "DimensionsInches": [
+            0.75,
+            0.75
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumSquareTile": {
+        "DimensionsPixels": [
+            825,
+            825
+        ],
+        "DimensionsInches": [
+            2.5,
+            2.5
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumStandee": {
+        "DimensionsPixels": [
+            300,
+            750
+        ],
+        "DimensionsInches": [
+            0.75,
+            1.675
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MediumStoutBox": {
+        "DimensionsPixels": [
+            3675,
+            4575
+        ],
+        "DimensionsInches": [
+            6.125,
+            9.0
+        ],
+        "GameCrafterUploadTask": "twosidedbox",
+        "GameCrafterPackagingDepthMillimeters": 57.15,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top",
+            "Bottom"
+        ]
+    },
+    "MediumStoutBoxTopAndSide": {
+        "DimensionsPixels": [
+            3675,
+            4575
+        ],
+        "DimensionsInches": [
+            6.125,
+            9.0
+        ],
+        "GameCrafterUploadTask": "boxtop",
+        "GameCrafterPackagingDepthMillimeters": 57.15,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top"
+        ]
+    },
+    "MediumTriangleChit": {
+        "DimensionsPixels": [
+            300,
+            300
+        ],
+        "DimensionsInches": [
+            0.75,
+            0.65
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MeepleSticker": {
+        "DimensionsPixels": [
+            225,
+            225
+        ],
+        "DimensionsInches": [
+            0.5,
+            0.56
+        ],
+        "GameCrafterUploadTask": "onesidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 0.2794,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "MicroDeck": {
+        "DimensionsPixels": [
+            450,
+            600
+        ],
+        "DimensionsInches": [
+            1.25,
+            1.75
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.2794,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MiniCircleTile": {
+        "DimensionsPixels": [
+            450,
+            450
+        ],
+        "DimensionsInches": [
+            1.25,
+            1.25
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MiniDeck": {
+        "DimensionsPixels": [
+            600,
+            825
+        ],
+        "DimensionsInches": [
+            1.75,
+            2.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MiniHexTile": {
+        "DimensionsPixels": [
+            450,
+            450
+        ],
+        "DimensionsInches": [
+            1.25,
+            1.08
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MiniSquareTile": {
+        "DimensionsPixels": [
+            450,
+            450
+        ],
+        "DimensionsInches": [
+            1.25,
+            1.25
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MintTin": {
+        "DimensionsPixels": [
+            750,
+            1125
+        ],
+        "DimensionsInches": [
+            2.46,
+            3.88
+        ],
+        "GameCrafterUploadTask": "twosidedbox",
+        "GameCrafterPackagingDepthMillimeters": 21.59,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MintTinAccordion4": {
+        "DimensionsPixels": [
+            2550,
+            1125
+        ],
+        "DimensionsInches": [
+            8.18897637795276,
+            3.4251968503937
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MintTinAccordion6": {
+        "DimensionsPixels": [
+            3825,
+            1125
+        ],
+        "DimensionsInches": [
+            12.2834645669291,
+            3.4251968503937
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MintTinAccordion8": {
+        "DimensionsPixels": [
+            5025,
+            1125
+        ],
+        "DimensionsInches": [
+            16.3779527559055,
+            3.4251968503937
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MintTinDeck": {
+        "DimensionsPixels": [
+            750,
+            1125
+        ],
+        "DimensionsInches": [
+            2.04724409448819,
+            3.4251968503937
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MintTinFolio": {
+        "DimensionsPixels": [
+            2625,
+            1050
+        ],
+        "DimensionsInches": [
+            8.5,
+            3.13
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.6096,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "MintTinSticker": {
+        "DimensionsPixels": [
+            750,
+            1125
+        ],
+        "DimensionsInches": [
+            2.04724409448819,
+            3.4251968503937
+        ],
+        "GameCrafterUploadTask": "onesidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "PawnSticker": {
+        "DimensionsPixels": [
+            300,
+            525
+        ],
+        "DimensionsInches": [
+            0.65,
+            1.35
+        ],
+        "GameCrafterUploadTask": "onesidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 0.2794,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "PlacardMat": {
+        "DimensionsPixels": [
+            1275,
+            975
+        ],
+        "DimensionsInches": [
+            4.0,
+            3.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "PlayMoney": {
+        "DimensionsPixels": [
+            675,
+            1125
+        ],
+        "DimensionsInches": [
+            2.0,
+            3.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.17779999999999999,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "PokerBooster": {
+        "DimensionsPixels": [
+            975,
+            1350
+        ],
+        "DimensionsInches": [
+            2.87,
+            5.15
+        ],
+        "GameCrafterUploadTask": "boxface",
+        "GameCrafterPackagingDepthMillimeters": 5.9436,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "PokerBoosterBox": {
+        "DimensionsPixels": [
+            3450,
+            4875
+        ],
+        "DimensionsInches": [
+            5.21,
+            5.78
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 60.198,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "PokerDeck": {
+        "DimensionsPixels": [
+            825,
+            1125
+        ],
+        "DimensionsInches": [
+            2.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "PokerEnvelope": {
+        "DimensionsPixels": [
+            975,
+            1425
+        ],
+        "DimensionsInches": [
+            2.95,
+            4.75
+        ],
+        "GameCrafterUploadTask": "boxface",
+        "GameCrafterPackagingDepthMillimeters": 6.35,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "PokerFolio": {
+        "DimensionsPixels": [
+            3075,
+            1125
+        ],
+        "DimensionsInches": [
+            10.0,
+            3.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.6096,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "PokerHookBox108": {
+        "DimensionsPixels": [
+            3225,
+            3750
+        ],
+        "DimensionsInches": [
+            2.58,
+            3.62
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 40.386,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "PokerHookBox18": {
+        "DimensionsPixels": [
+            2475,
+            3000
+        ],
+        "DimensionsInches": [
+            2.6,
+            3.6
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 9.398,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "PokerHookBox36": {
+        "DimensionsPixels": [
+            2700,
+            3150
+        ],
+        "DimensionsInches": [
+            2.57,
+            3.59
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 15.5194,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "PokerHookBox54": {
+        "DimensionsPixels": [
+            2850,
+            3375
+        ],
+        "DimensionsInches": [
+            2.6,
+            3.6
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 20.32,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "PokerHookBox72": {
+        "DimensionsPixels": [
+            3000,
+            3450
+        ],
+        "DimensionsInches": [
+            2.6,
+            3.6
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 25.4,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "PokerHookBox90": {
+        "DimensionsPixels": [
+            3075,
+            3600
+        ],
+        "DimensionsInches": [
+            2.56,
+            3.62
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 34.29,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "PokerTuckBox108": {
+        "DimensionsPixels": [
+            3075,
+            2250
+        ],
+        "DimensionsInches": [
+            2.6,
+            3.6
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 43.687999999999995,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "PokerTuckBox36": {
+        "DimensionsPixels": [
+            2100,
+            1800
+        ],
+        "DimensionsInches": [
+            2.6,
+            3.6
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 16.509999999999998,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "PokerTuckBox54": {
+        "DimensionsPixels": [
+            2325,
+            1950
+        ],
+        "DimensionsInches": [
+            2.6,
+            3.6
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 23.114,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "PokerTuckBox72": {
+        "DimensionsPixels": [
+            2550,
+            1950
+        ],
+        "DimensionsInches": [
+            2.6,
+            3.6
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 29.971999999999998,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "PokerTuckBox90": {
+        "DimensionsPixels": [
+            2775,
+            2100
+        ],
+        "DimensionsInches": [
+            2.6,
+            3.6
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 36.83,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "PostcardMat": {
+        "DimensionsPixels": [
+            1875,
+            1275
+        ],
+        "DimensionsInches": [
+            6.0,
+            4.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "QuadFoldBoard": {
+        "DimensionsPixels": [
+            5475,
+            5475
+        ],
+        "DimensionsInches": [
+            18.0,
+            18.0
+        ],
+        "GameCrafterUploadTask": "onesidedgloss",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "QuadFoldMat": {
+        "DimensionsPixels": [
+            3375,
+            5175
+        ],
+        "DimensionsInches": [
+            11.0,
+            17.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "QuarterBoard": {
+        "DimensionsPixels": [
+            1575,
+            1575
+        ],
+        "DimensionsInches": [
+            5.0,
+            5.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "QuarterMat": {
+        "DimensionsPixels": [
+            1575,
+            1575
+        ],
+        "DimensionsInches": [
+            5.0,
+            5.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SixFoldBoard": {
+        "DimensionsPixels": [
+            8175,
+            5475
+        ],
+        "DimensionsInches": [
+            27.0,
+            18.0
+        ],
+        "GameCrafterUploadTask": "onesidedgloss",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "SkinnyBoard": {
+        "DimensionsPixels": [
+            1275,
+            3075
+        ],
+        "DimensionsInches": [
+            4.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SkinnyMat": {
+        "DimensionsPixels": [
+            1275,
+            3075
+        ],
+        "DimensionsInches": [
+            4.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SliverBoard": {
+        "DimensionsPixels": [
+            675,
+            2475
+        ],
+        "DimensionsInches": [
+            2.0,
+            8.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SliverMat": {
+        "DimensionsPixels": [
+            675,
+            2475
+        ],
+        "DimensionsInches": [
+            2.0,
+            8.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SlopesideBiFoldMat": {
+        "DimensionsPixels": [
+            2175,
+            1125
+        ],
+        "DimensionsInches": [
+            7.0,
+            3.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallBiFoldMat": {
+        "DimensionsPixels": [
+            1725,
+            2175
+        ],
+        "DimensionsInches": [
+            5.5,
+            7.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallBooklet": {
+        "DimensionsPixels": [
+            825,
+            1125
+        ],
+        "DimensionsInches": [
+            2.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "booklet",
+        "GameCrafterPackagingDepthMillimeters": 0.0762,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Image"
+        ]
+    },
+    "SmallCircleChit": {
+        "DimensionsPixels": [
+            225,
+            225
+        ],
+        "DimensionsInches": [
+            0.5,
+            0.5
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallDial": {
+        "DimensionsPixels": [
+            825,
+            2400
+        ],
+        "DimensionsInches": [
+            2.5,
+            2.5
+        ],
+        "GameCrafterUploadTask": "dial",
+        "GameCrafterPackagingDepthMillimeters": 1.5239999999999998,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "SmallFolio": {
+        "DimensionsPixels": [
+            4275,
+            1725
+        ],
+        "DimensionsInches": [
+            14.0,
+            5.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.6096,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallGameMat": {
+        "DimensionsPixels": [
+            3075,
+            4875
+        ],
+        "DimensionsInches": [
+            10.0,
+            16.0
+        ],
+        "GameCrafterUploadTask": "onesided",
+        "GameCrafterPackagingDepthMillimeters": 4.444999999999999,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "SmallHexTile": {
+        "DimensionsPixels": [
+            675,
+            600
+        ],
+        "DimensionsInches": [
+            2.0,
+            1.75
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallProBox": {
+        "DimensionsPixels": [
+            3450,
+            2700
+        ],
+        "DimensionsInches": [
+            5.85,
+            3.85
+        ],
+        "GameCrafterUploadTask": "twosidedbox",
+        "GameCrafterPackagingDepthMillimeters": 29.209999999999997,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top",
+            "Bottom"
+        ]
+    },
+    "SmallProTarotInsert": {
+        "DimensionsPixels": [
+            2400,
+            4575
+        ],
+        "DimensionsInches": [
+            5.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 25.4,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "SmallPrototypeBox": {
+        "DimensionsPixels": [
+            4350,
+            4500
+        ],
+        "DimensionsInches": [
+            5.9375,
+            4.0
+        ],
+        "GameCrafterUploadTask": "boxtop",
+        "GameCrafterPackagingDepthMillimeters": 58.419999999999995,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top"
+        ]
+    },
+    "SmallQuadFoldMat": {
+        "DimensionsPixels": [
+            2175,
+            3375
+        ],
+        "DimensionsInches": [
+            7.0,
+            11.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallRing": {
+        "DimensionsPixels": [
+            300,
+            300
+        ],
+        "DimensionsInches": [
+            0.75,
+            0.75
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallScorePadColor": {
+        "DimensionsPixels": [
+            1125,
+            1725
+        ],
+        "DimensionsInches": [
+            3.5,
+            5.5
+        ],
+        "GameCrafterUploadTask": "scorepad",
+        "GameCrafterPackagingDepthMillimeters": 0.127,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallScreen": {
+        "DimensionsPixels": [
+            3075,
+            1200
+        ],
+        "DimensionsInches": [
+            10.0,
+            3.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.7619999999999999,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallSquareBoard": {
+        "DimensionsPixels": [
+            1275,
+            1275
+        ],
+        "DimensionsInches": [
+            4.0,
+            4.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallSquareChit": {
+        "DimensionsPixels": [
+            225,
+            225
+        ],
+        "DimensionsInches": [
+            0.5,
+            0.5
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallSquareDeck": {
+        "DimensionsPixels": [
+            825,
+            825
+        ],
+        "DimensionsInches": [
+            2.5,
+            2.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallSquareMat": {
+        "DimensionsPixels": [
+            1275,
+            1275
+        ],
+        "DimensionsInches": [
+            4.0,
+            4.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallSquareTile": {
+        "DimensionsPixels": [
+            675,
+            675
+        ],
+        "DimensionsInches": [
+            2.0,
+            2.0
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallStandee": {
+        "DimensionsPixels": [
+            225,
+            525
+        ],
+        "DimensionsInches": [
+            0.5,
+            1.125
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SmallStoutBox": {
+        "DimensionsPixels": [
+            3600,
+            3000
+        ],
+        "DimensionsInches": [
+            4.0,
+            6.0
+        ],
+        "GameCrafterUploadTask": "twosidedbox",
+        "GameCrafterPackagingDepthMillimeters": 57.15,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Top",
+            "Bottom"
+        ]
+    },
+    "SmallStoutTarotInsert": {
+        "DimensionsPixels": [
+            3525,
+            4725
+        ],
+        "DimensionsInches": [
+            5.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 50.8,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "SpinnerMat": {
+        "DimensionsPixels": [
+            2475,
+            2475
+        ],
+        "DimensionsInches": [
+            8.0,
+            8.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SquareBoard": {
+        "DimensionsPixels": [
+            2475,
+            2475
+        ],
+        "DimensionsInches": [
+            8.0,
+            8.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SquareDeck": {
+        "DimensionsPixels": [
+            1125,
+            1125
+        ],
+        "DimensionsInches": [
+            3.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SquareFolio": {
+        "DimensionsPixels": [
+            4275,
+            1125
+        ],
+        "DimensionsInches": [
+            14.0,
+            3.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.6096,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SquareHookBox48": {
+        "DimensionsPixels": [
+            3450,
+            3450
+        ],
+        "DimensionsInches": [
+            3.58,
+            3.78
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 21.081999999999997,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "SquareHookBox96": {
+        "DimensionsPixels": [
+            3525,
+            3900
+        ],
+        "DimensionsInches": [
+            3.57,
+            3.84
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 37.592,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "SquareMat": {
+        "DimensionsPixels": [
+            2475,
+            2475
+        ],
+        "DimensionsInches": [
+            8.0,
+            8.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SquareShard": {
+        "DimensionsPixels": [
+            300,
+            300
+        ],
+        "DimensionsInches": [
+            0.75,
+            0.75
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "SquareTuckBox48": {
+        "DimensionsPixels": [
+            2850,
+            1800
+        ],
+        "DimensionsInches": [
+            3.6,
+            3.85
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 20.827999999999996,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "SquareTuckBox96": {
+        "DimensionsPixels": [
+            3525,
+            2250
+        ],
+        "DimensionsInches": [
+            3.6,
+            3.85
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 39.116,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "StripBoard": {
+        "DimensionsPixels": [
+            675,
+            3075
+        ],
+        "DimensionsInches": [
+            2.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "StripChit": {
+        "DimensionsPixels": [
+            375,
+            975
+        ],
+        "DimensionsInches": [
+            3.0,
+            1.0
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "StripMat": {
+        "DimensionsPixels": [
+            675,
+            3075
+        ],
+        "DimensionsInches": [
+            2.0,
+            10.0
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "TallBooklet": {
+        "DimensionsPixels": [
+            1425,
+            2475
+        ],
+        "DimensionsInches": [
+            4.5,
+            8.0
+        ],
+        "GameCrafterUploadTask": "booklet",
+        "GameCrafterPackagingDepthMillimeters": 0.0762,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Image"
+        ]
+    },
+    "TarotBooklet": {
+        "DimensionsPixels": [
+            900,
+            1500
+        ],
+        "DimensionsInches": [
+            2.75,
+            4.75
+        ],
+        "GameCrafterUploadTask": "booklet",
+        "GameCrafterPackagingDepthMillimeters": 0.0762,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Image"
+        ]
+    },
+    "TarotDeck": {
+        "DimensionsPixels": [
+            900,
+            1500
+        ],
+        "DimensionsInches": [
+            2.75,
+            4.75
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "TarotFolio": {
+        "DimensionsPixels": [
+            3375,
+            1500
+        ],
+        "DimensionsInches": [
+            11.0,
+            4.75
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.6096,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "TarotHookBox40": {
+        "DimensionsPixels": [
+            2925,
+            4125
+        ],
+        "DimensionsInches": [
+            2.79,
+            4.79
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 16.002,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "TarotHookBox90": {
+        "DimensionsPixels": [
+            3300,
+            4500
+        ],
+        "DimensionsInches": [
+            2.79,
+            4.79
+        ],
+        "GameCrafterUploadTask": "hookbox",
+        "GameCrafterPackagingDepthMillimeters": 33.019999999999996,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Inside",
+            "Outside"
+        ]
+    },
+    "TarotTuckBox40": {
+        "DimensionsPixels": [
+            2325,
+            2025
+        ],
+        "DimensionsInches": [
+            2.85,
+            4.85
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 17.779999999999998,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "TarotTuckBox90": {
+        "DimensionsPixels": [
+            3000,
+            2475
+        ],
+        "DimensionsInches": [
+            2.85,
+            4.85
+        ],
+        "GameCrafterUploadTask": "tuckbox",
+        "GameCrafterPackagingDepthMillimeters": 36.83,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Outside"
+        ]
+    },
+    "TokenSticker": {
+        "DimensionsPixels": [
+            338,
+            338
+        ],
+        "DimensionsInches": [
+            1.0,
+            1.0
+        ],
+        "GameCrafterUploadTask": "onesidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 0.2794,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front"
+        ]
+    },
+    "TombstoneShard": {
+        "DimensionsPixels": [
+            300,
+            450
+        ],
+        "DimensionsInches": [
+            0.75,
+            1.25
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "TradingDeck": {
+        "DimensionsPixels": [
+            825,
+            1125
+        ],
+        "DimensionsInches": [
+            2.5,
+            3.5
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "TriangleTile": {
+        "DimensionsPixels": [
+            675,
+            600
+        ],
+        "DimensionsInches": [
+            2.0,
+            1.75
+        ],
+        "GameCrafterUploadTask": "twosidedsluggedset",
+        "GameCrafterPackagingDepthMillimeters": 1.651,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "USGameDeck": {
+        "DimensionsPixels": [
+            750,
+            1125
+        ],
+        "DimensionsInches": [
+            2.20472440944882,
+            3.4251968503937
+        ],
+        "GameCrafterUploadTask": "deck",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    },
+    "USGameMat": {
+        "DimensionsPixels": [
+            1050,
+            1425
+        ],
+        "DimensionsInches": [
+            3.25,
+            4.5
+        ],
+        "GameCrafterUploadTask": "twosidedset",
+        "GameCrafterPackagingDepthMillimeters": 0.3302,
+        "HasPieceData": true,
+        "HasPieceQuantity": false,
+        "ArtDataTypeNames": [
+            "Front",
+            "Back"
+        ]
+    }
+}

@@ -2,6 +2,7 @@ import os
 import asyncclick as click
 from templative.lib.distribute.gameCrafter.client import uploadGame
 from templative.lib.distribute.gameCrafter.accountManagement import listGames, deletePageOfGames
+from templative.lib.distribute.gameCrafter.tgcParser import parseStockStuff, parseCustomStuff
 from templative.lib.distribute.gameCrafter.util.gameCrafterSession import login, logout
 from templative.lib.manage.instructionsLoader import getLastOutputFileDirectory
 
@@ -51,6 +52,30 @@ async def list():
         raise Exception("You must provide a Game Crafter session.")
 
     await listGames(session)
+    await logout(session)
+
+@click.command()
+async def stocklist():
+    """Save stock components information"""
+    publicApiKey, userName, userPassword = getCredentialsFromEnv()
+    session = await login(publicApiKey, userName, userPassword)
+
+    if session is None:
+        raise Exception("You must provide a Game Crafter session.")
+
+    await parseStockStuff(session)
+    await logout(session)
+
+@click.command()
+async def customlist():
+    """Save custom components information"""
+    publicApiKey, userName, userPassword = getCredentialsFromEnv()
+    session = await login(publicApiKey, userName, userPassword)
+
+    if session is None:
+        raise Exception("You must provide a Game Crafter session.")
+
+    await parseCustomStuff(session)
     await logout(session)
 
 @click.command()

@@ -18,6 +18,8 @@ async def cli():
 cli.add_command(gameCrafterCommands.upload)
 cli.add_command(gameCrafterCommands.list)
 cli.add_command(gameCrafterCommands.deletegames)
+cli.add_command(gameCrafterCommands.stocklist)
+cli.add_command(gameCrafterCommands.customlist)
 
 cli.add_command(animationCommands.animation)
 
