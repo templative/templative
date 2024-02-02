@@ -72,17 +72,34 @@ async def createCustomComponent(gameCrafterSession, componentType, componentFile
     createCustomPlasticDieTask = createCustomPlasticDie
     createHookboxTask = createHookbox
     createBoxFaceTask = createBoxface
-    componentTasks = {        
-        "DECK": createDeckTask,
-        "TWOSIDEDBOX": createTwoSidedBoxTask,
-        "TWOSIDEDSLUG": createTwoSidedSluggedTask,
-        "TUCKBOX": createTuckBoxTask,
-        "TWOSIDED": createTwoSidedTask,
-        "HOOKBOX": createHookboxTask,
-        "BOXFACE": createBoxFaceTask,
-        "CustomColorD6": createCustomPlasticDieTask,
-        "CustomColorD4": createCustomPlasticDieTask,
-        "CustomColorD8": createCustomPlasticDieTask,
+    componentTasks : {        
+        "deck": createDeckTask,
+        "twosidedbox": createTwoSidedBoxTask,
+        "twosidedsluggedset": createTwoSidedSluggedTask,
+        "tuckbox": createTuckBoxTask,
+        "twosidedset": createTwoSidedTask,
+        "hookbox": createHookboxTask,
+        "boxface": createBoxFaceTask,
+        "customcolord6": createCustomPlasticDieTask,
+        "customcolord4": createCustomPlasticDieTask,
+        "customcolord8": createCustomPlasticDieTask,
+        # "acrylicshape" : createDeckTask,
+        # "customcuttwosidedslugged" : createDeckTask,
+        # "customcutonesidedslugged" : createDeckTask,
+        # "customprintedmeeple" : createDeckTask,
+        # "customwoodd6" : createDeckTask,
+        # "boxtop" : createDeckTask,
+        # "boxtopgloss" : createDeckTask,
+        # "onesidedgloss" : createDeckTask,
+        # "twosidedboxgloss" : createDeckTask,
+        # "onesided" : createDeckTask,
+        # "onesidedsluggedset" : createDeckTask,
+        # "document" : createDeckTask,
+        # "booklet" : createDeckTask,
+        # "perfectboundbook" : createDeckTask,
+        # "coilbook" : createDeckTask,
+        # "dial" : createDeckTask,
+        # "scorepad" : createDeckTask,
     }
 
     if not "GameCrafterUploadTask" in component:

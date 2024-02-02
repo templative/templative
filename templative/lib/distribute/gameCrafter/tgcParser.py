@@ -1,42 +1,57 @@
 import json
 from os import path
 from templative.lib.distribute.gameCrafter.util import httpOperations
+from templative.lib.componentInfo import COMPONENT_INFO
 import time
 
 INCH_TO_MILLIMETERS = 25.4
+
 async def parseCustomStuff (gameCrafterSession):
     productInfo = await httpOperations.getCustomPartInfo(gameCrafterSession)
         
     componentInfo = {}
+    uploadTasks = set()
+    allArtdataTypes = set()
     for component in productInfo:
         widthInches = float(component["size"]["finished_inches"][0])
         heightInches = float(component["size"]["finished_inches"][1])
         widthPixels = component["size"]["pixels"][0]
         heightPixels = component["size"]["pixels"][1]
-        ardataTypes = []
+        ardataTypes = set()
         for side in component["sides"]:
             ardataType = side["label"]
-            if ardataType == "Face":
+            isFront = ardataType == "Face" or ardataType == "Top" or ardataType == "Image" or ardataType == "Face(Exposed)" or ardataType == "Outside" or ardataType.startswith("Side")
+            if isFront:
                 ardataType = "Front"
-            ardataTypes.append(ardataType)
-        
+            if ardataType == "Bottom" or ardataType == "Back(Reflected)" or ardataType == "Inside":
+                ardataType = "Back"
+            ardataTypes.add(ardataType)
+            allArtdataTypes.add(ardataType)
+
         uploadTokens = path.split(component["create_api"])
         uploadTask = uploadTokens[len(uploadTokens)-1]
+        uploadTasks.add(uploadTask)
         millimeterDepth = 0
         if len(component["size"]["finished_inches"]) == 3:
             millimeterDepth = float(component["size"]["finished_inches"][2])*INCH_TO_MILLIMETERS
+        isDie = component["sides"][0]["label"].startswith("Side")
         componentInfo[component["identity"]] = {
             "DimensionsPixels": [widthPixels, heightPixels],
             "DimensionsInches": [widthInches, heightInches],
             "GameCrafterUploadTask": uploadTask,
             "GameCrafterPackagingDepthMillimeters": millimeterDepth,
             "HasPieceData": True,
-            "HasPieceQuantity": False,
-            "ArtDataTypeNames": ardataTypes,
+            "HasPieceQuantity": not isDie,
+            "ArtDataTypeNames": list(ardataTypes),
+            "Tags": []
         }
-
-    with open('./customComponents.json', 'w') as f:
-        json.dump(componentInfo, f, indent=4)
+    
+    for componentKey in COMPONENT_INFO:
+        if componentKey in componentInfo:
+            continue
+        print("%s is missing"%componentKey)
+    # with open('./customComponents.json', 'w') as f:
+        # json.dump(componentInfo, f, indent=4)
 
 def tagListHasColor(tagList, possibleColor): 
     for tag in tagList:
