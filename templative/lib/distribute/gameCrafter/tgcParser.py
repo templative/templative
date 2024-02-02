@@ -1,22 +1,41 @@
 import json
 from os import path
 from templative.lib.distribute.gameCrafter.util import httpOperations
+from templative.lib.stockComponentInfo import STOCK_COMPONENT_INFO
 from templative.lib.componentInfo import COMPONENT_INFO
 import time
+
+blankSvgFileContents = '<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg version="1.1" id="template" x="0px" y="0px" width="%s" height="%s" viewBox="0 0 1125 1725" enable-background="new 0 0 270 414" xml:space="preserve" sodipodi:docname="blank.svg" inkscape:version="1.2.2 (b0a8486, 2022-12-01)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs728" /> <sodipodi:namedview id="namedview726" pagecolor="#ffffff" bordercolor="#999999" borderopacity="1" showgrid="false" /></svg>'
+componentsDirectoryPath = "/Users/oliverbarnum/Documents/git/templative/templative/lib/create/componentTemplates"
+
+taggedComponentsFilepath = "/Users/oliverbarnum/Documents/git/templative-electron/src/components/Create/componentInfo.json"
+taggedComponents = {}
+with open(taggedComponentsFilepath) as f:
+    taggedComponents = json.load(f)
 
 INCH_TO_MILLIMETERS = 25.4
 
 async def parseCustomStuff (gameCrafterSession):
     productInfo = await httpOperations.getCustomPartInfo(gameCrafterSession)
         
-    componentInfo = {}
+    componentInfo = COMPONENT_INFO
     uploadTasks = set()
     allArtdataTypes = set()
+
+    componentInfo = COMPONENT_INFO
     for component in productInfo:
+        varname = component["identity"]
         widthInches = float(component["size"]["finished_inches"][0])
         heightInches = float(component["size"]["finished_inches"][1])
         widthPixels = component["size"]["pixels"][0]
         heightPixels = component["size"]["pixels"][1]
+
+        templateFileContents = blankSvgFileContents % (widthPixels, heightPixels)
+        templateFilepath = path.join(componentsDirectoryPath, "%s.svg" % varname)
+        if not path.exists(templateFilepath):
+            with open(templateFilepath, "a") as f:
+                f.write(templateFileContents)
+
         ardataTypes = set()
         for side in component["sides"]:
             ardataType = side["label"]
@@ -31,27 +50,41 @@ async def parseCustomStuff (gameCrafterSession):
         uploadTokens = path.split(component["create_api"])
         uploadTask = uploadTokens[len(uploadTokens)-1]
         uploadTasks.add(uploadTask)
+        
         millimeterDepth = 0
         if len(component["size"]["finished_inches"]) == 3:
             millimeterDepth = float(component["size"]["finished_inches"][2])*INCH_TO_MILLIMETERS
+                
+        tags = []
+        if varname in COMPONENT_INFO and "Tags" in COMPONENT_INFO[varname]:
+            tags = COMPONENT_INFO[varname]["Tags"]
+
         isDie = component["sides"][0]["label"].startswith("Side")
-        componentInfo[component["identity"]] = {
-            "DimensionsPixels": [widthPixels, heightPixels],
-            "DimensionsInches": [widthInches, heightInches],
-            "GameCrafterUploadTask": uploadTask,
-            "GameCrafterPackagingDepthMillimeters": millimeterDepth,
-            "HasPieceData": True,
-            "HasPieceQuantity": not isDie,
-            "ArtDataTypeNames": list(ardataTypes),
-            "Tags": []
-        }
-    
+            
+        componentInfo[varname] = COMPONENT_INFO[varname] if varname in COMPONENT_INFO else {}
+        componentInfo[varname]["DisplayName"] = varname
+        componentInfo[varname]["DimensionsPixels"] = [widthPixels, heightPixels]
+        componentInfo[varname]["DimensionsInches"] = [widthInches, heightInches]
+        componentInfo[varname]["GameCrafterUploadTask"] = uploadTask
+        componentInfo[varname]["GameCrafterPackagingDepthMillimeters"] = millimeterDepth
+        componentInfo[varname]["HasPieceData"] = True
+        componentInfo[varname]["HasPieceQuantity"] = not isDie
+        componentInfo[varname]["ArtDataTypeNames"] = list(ardataTypes)
+        # TODO things without tags probably have duplicates
+        componentInfo[varname]["Tags"] = tags
+            
+    for key in componentInfo:
+        if not "DisplayName" in componentInfo[key]:
+            componentInfo[key]["DisplayName"] = key
+        if not "Tags" in componentInfo[key]:
+            componentInfo[key]["Tags"] = []
     for componentKey in COMPONENT_INFO:
         if componentKey in componentInfo:
             continue
         print("%s is missing"%componentKey)
-    # with open('./customComponents.json', 'w') as f:
-        # json.dump(componentInfo, f, indent=4)
+    with open('./customComponents.json', 'w') as f:
+        json.dump(componentInfo, f, indent=4)
+
 
 def tagListHasColor(tagList, possibleColor): 
     for tag in tagList:
@@ -61,7 +94,7 @@ def tagListHasColor(tagList, possibleColor):
 
 async def parseStockStuff(gameCrafterSession):
     pageNumber = 1
-    stockInfo = {}
+    stockInfo = STOCK_COMPONENT_INFO
     while True:
         stockPartInfoPage = await httpOperations.getStockPartInfo(gameCrafterSession, pageNumber=pageNumber)
         print("Reading page %s of %s." % (stockPartInfoPage["paging"]["page_number"], stockPartInfoPage["paging"]["total_pages"]))
@@ -74,20 +107,32 @@ async def parseStockStuff(gameCrafterSession):
 
             for index, item in enumerate(tags):
                 tags[index] = item.lower()
+                if item == "":
+                    del tags[index]
             if "color" in component and component["color"] != None:
                 color = component["color"].lower()
                 if not tagListHasColor(tags, color):
                     tags.append(color)
-            stockInfo[varname] = {
-                "DisplayName": component["name"],
-                "Description": component["description"],
-                "GameCrafterId": component["id"],
-                "GameCrafterSkuId": component["sku_id"],
-                "Tags": tags
-            }
+            stockInfo[varname] = STOCK_COMPONENT_INFO[varname] if varname in STOCK_COMPONENT_INFO else {}
+            description = component["description"] if ("description" in component and component["description"] != None) else ""
+            stockInfo[varname]["DisplayName"] = component["name"]
+            stockInfo[varname]["Description"] = description
+            stockInfo[varname]["GameCrafterGuid"] = component["id"]
+            stockInfo[varname]["GameCrafterSkuId"] = component["sku_id"]
+            stockInfo[varname]["Tags"] = tags
+            
         if int(stockPartInfoPage["paging"]["page_number"]) >= int(stockPartInfoPage["paging"]["total_pages"]):
             break
         pageNumber = pageNumber + 1
         time.sleep(1/4)
+
+    gameCrafterIds = {}
+    for key in stockInfo:
+        if not "DisplayName" in stockInfo[key]:
+            stockInfo[key]["DisplayName"] = key
+        if stockInfo[key]["GameCrafterGuid"] in gameCrafterIds:
+            print("Duplicate part: %s" % key)
+        gameCrafterIds[stockInfo[key]["GameCrafterGuid"]] = True
+
     with open('./stockComponents.json', 'w') as f:
-        json.dump(stockInfo, f, indent=4)
+        json.dump(stockInfo, f, indent=2)

@@ -2,6 +2,8 @@ from aiohttp import web
 from templative.lib.create import projectCreator, componentCreator
 from templative.lib.distribute.printout import createPdfForPrinting
 from templative.lib.distribute.playground import convertToTabletopPlayground
+from templative.lib.componentInfo import COMPONENT_INFO
+from templative.lib.stockComponentInfo import STOCK_COMPONENT_INFO
 
 routes = web.RouteTableDef()
 
@@ -61,3 +63,11 @@ async def createComponent(request):
   
   await componentCreator.createComponentByType(data["directoryPath"], data["componentName"], data["componentType"])
   return web.Response(status=200)
+
+@routes.get("/component-info")
+async def getComponentInfo():
+  return 200, COMPONENT_INFO
+
+@routes.get("/stock-info")
+async def getStockInfo():
+  return 200, STOCK_COMPONENT_INFO
