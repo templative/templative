@@ -65,9 +65,9 @@ async def createComponent(request):
   return web.Response(status=200)
 
 @routes.get("/component-info")
-async def getComponentInfo():
-  return 200, COMPONENT_INFO
+async def getComponentInfo(request):
+  return web.json_response(COMPONENT_INFO)
 
 @routes.get("/stock-info")
-async def getStockInfo():
-  return 200, STOCK_COMPONENT_INFO
+async def getStockInfo(request):
+  return web.json_response(STOCK_COMPONENT_INFO)
