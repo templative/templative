@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['windows-latest', 'ubuntu-latest', 'macos-latest']
+        os: ['windows-latest', 'macos-latest'] # 'ubuntu-latest',
 
     steps:
     - uses: actions/checkout@v2
@@ -30,7 +30,20 @@ jobs:
     - name: Create Templative App/Exe
       run: pyinstaller --distpath ./dist -y -n templative --onefile ./templative/__main__.py --hidden-import engineio.async_drivers.aiohttp --hidden-import engineio.async_aiohttp --collect-all templative
 
+    - name: Release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ steps.version.outputs.version }}
+        tag_name: ${{ github.ref }}
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         path: dist/*
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+    
