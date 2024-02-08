@@ -62,4 +62,5 @@ jobs:
         upload_url: ${{needs.release.outputs.upload_url}}
         asset_path: ./dist/templative.exe
         asset_name: templative_{{ github.run_number }}.exe
+        asset_content_type: application/vnd.microsoft.portable-executable
     
