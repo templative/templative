@@ -59,7 +59,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-release-asset@v1
       with:
-        upload-url: ${{needs.release.outputs.upload_url}}
+        upload_url: ${{needs.release.outputs.upload_url}}
         asset_path: ./dist/templative.exe
         asset_name: templative_{{ github.run_number }}.exe
     
