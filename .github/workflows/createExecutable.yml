@@ -5,30 +5,30 @@ permissions:
   contents: write
 
 jobs:
-  # release:
-  #   outputs:
-  #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-  #   runs-on: "ubuntu-latest"
-  #   steps: 
-  #   - name: Release
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       tag: ${{ github.ref_name }}
-  #     uses: actions/create-release@v1
-  #     id: create_release
-  #     with:
-  #       draft: false
-  #       prerelease: false
-  #       release_name: Release ${{ github.run_number }}
-  #       tag_name: ${{ github.run_number }}
-  #   - name: Output Upload Url
-  #     run: |
-  #       upload_url=[${{steps.create_release.outputs.upload_url}}]
-  #       echo "upload_url=$upload_url"
-  #       echo "upload_url=$upload_url" >> "$GITHUB_OUTPUT"
+  release:
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    runs-on: "ubuntu-latest"
+    steps: 
+    - name: Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: Release ${{ github.run_number }}
+        tag_name: ${{ github.run_number }}
+    - name: Output Upload Url
+      run: |
+        upload_url=[${{steps.create_release.outputs.upload_url}}]
+        echo "upload_url=$upload_url"
+        echo "upload_url=$upload_url" >> "$GITHUB_OUTPUT"
 
   build:
-    # needs: release
+    needs: release
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -36,47 +36,45 @@ jobs:
         os: ['windows-latest', 'macos-latest']
 
     steps:
-    - name: runner
-      run: |
-        echo "[${{runner.os}}}]"
-    # - uses: actions/checkout@v2
-    # - uses: actions/setup-python@v2
-    #   with:
-    #     python-version: 3.11
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
         
-    # - name: Install pipenv
-    #   run: pip install pipenv pyinstaller
+    - name: Install pipenv
+      run: pip install pipenv pyinstaller
       
-    # - name: Install Python Dependencies
-    #   run: pipenv install
+    - name: Install Python Dependencies
+      run: pipenv install
 
-    # - name: Create requirements.txt
-    #   run: pipenv requirements > req.txt
+    - name: Create requirements.txt
+      run: pipenv requirements > req.txt
 
-    # - name: Install requirements locally
-    #   run: pip install -r req.txt
+    - name: Install requirements locally
+      run: pip install -r req.txt
       
-    # - name: Create Templative App/Exe
-    #   run: pyinstaller --distpath ./dist -y -n templative --onefile ./templative/__main__.py --hidden-import engineio.async_drivers.aiohttp --hidden-import engineio.async_aiohttp --collect-all templative
+    - name: Create Templative App/Exe
+      run: pyinstaller --distpath ./dist -y -n templative --onefile ./templative/__main__.py --hidden-import engineio.async_drivers.aiohttp --hidden-import engineio.async_aiohttp --collect-all templative
 
-    # - name: Upload Windows Artifact
-    #   uses: actions/upload-release-asset@v1
-    #   if: runner.os == 'Windows'
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   with:
-    #     upload_url: ${{needs.release.outputs.upload_url}}
-    #     asset_path: ./dist/templative.exe
-    #     asset_name: templative.exe
-    #     asset_content_type: application/vnd.microsoft.portable-executable
-    # - name: Upload MacOS Artifact
-    #   uses: actions/upload-release-asset@v1
-    #   if: runner.os == 'Windows'
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   with:
-    #     upload_url: ${{needs.release.outputs.upload_url}}
-    #     asset_path: ./dist/templative
-    #     asset_name: templative
-    #     asset_content_type: application/vnd.microsoft.portable-executable
+    - name: Upload Windows Artifact
+      uses: actions/upload-release-asset@v1
+      if: runner.os == 'Windows'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{needs.release.outputs.upload_url}}
+        asset_path: ./dist/templative.exe
+        asset_name: templative.exe
+        asset_content_type: application/vnd.microsoft.portable-executable
+        
+    - name: Upload MacOS Artifact
+      uses: actions/upload-release-asset@v1
+      if: runner.os == 'macOS'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{needs.release.outputs.upload_url}}
+        asset_path: ./dist/templative
+        asset_name: templative
+        asset_content_type: application/mac-binhex40
     
