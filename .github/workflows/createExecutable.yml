@@ -23,7 +23,7 @@ jobs:
         tag_name: ${{ github.run_number }}
     - name: Echo Upload Url
       run: |
-        upload_url=${{steps.create_release.upload_url}}
+        upload_url=steps.create_release.upload_url
         echo "upload_url=$upload_url"
         echo "upload_url=[$upload_url]"
     - name: Output Upload Url
@@ -31,39 +31,39 @@ jobs:
         upload_url=${{steps.create_release.upload_url}}
         echo "upload_url=$upload_url" >> "$GITHUB_OUTPUT"
     
-  build:
-    needs: release
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: ['windows-latest'] #, 'macos-latest'
+  # build:
+  #   needs: release
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os: ['windows-latest'] #, 'macos-latest'
 
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: 3.11
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: actions/setup-python@v2
+  #     with:
+  #       python-version: 3.11
         
-    - name: Install pipenv
-      run: pip install pipenv pyinstaller
+  #   - name: Install pipenv
+  #     run: pip install pipenv pyinstaller
       
-    - name: Install Python Dependencies
-      run: pipenv install
+  #   - name: Install Python Dependencies
+  #     run: pipenv install
 
-    - name: Create requirements.txt
-      run: pipenv requirements > req.txt
+  #   - name: Create requirements.txt
+  #     run: pipenv requirements > req.txt
 
-    - name: Install requirements locally
-      run: pip install -r req.txt
+  #   - name: Install requirements locally
+  #     run: pip install -r req.txt
       
-    - name: Create Templative App/Exe
-      run: pyinstaller --distpath ./dist -y -n templative --onefile ./templative/__main__.py --hidden-import engineio.async_drivers.aiohttp --hidden-import engineio.async_aiohttp --collect-all templative
+  #   - name: Create Templative App/Exe
+  #     run: pyinstaller --distpath ./dist -y -n templative --onefile ./templative/__main__.py --hidden-import engineio.async_drivers.aiohttp --hidden-import engineio.async_aiohttp --collect-all templative
 
-    - name: Upload Artifact
-      uses: actions/upload-release-asset@v1
-      with:
-        upload-url: ${{needs.release.outputs.upload_url}}
-        asset_path: ./dist/templative.exe
-        asset_name: templative_{{ github.run_number }}.exe
+  #   - name: Upload Artifact
+  #     uses: actions/upload-release-asset@v1
+  #     with:
+  #       upload-url: ${{needs.release.outputs.upload_url}}
+  #       asset_path: ./dist/templative.exe
+  #       asset_name: templative_{{ github.run_number }}.exe
     
