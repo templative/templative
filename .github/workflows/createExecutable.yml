@@ -5,12 +5,28 @@ permissions:
   contents: write
 
 jobs:
+  release:
+    runs-on: "ubuntu-latest"
+    steps: 
+    - name: Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: Release ${{ github.run_number }}
+        tag_name: ${{ github.run_number }}
+    
   build:
+    needs: release
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: ['windows-latest', 'macos-latest'] # 'ubuntu-latest',
+        os: ['windows-latest', 'macos-latest']
 
     steps:
     - uses: actions/checkout@v2
@@ -33,21 +49,10 @@ jobs:
     - name: Create Templative App/Exe
       run: pyinstaller --distpath ./dist -y -n templative --onefile ./templative/__main__.py --hidden-import engineio.async_drivers.aiohttp --hidden-import engineio.async_aiohttp --collect-all templative
 
-    - name: Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ github.ref_name }}
-      uses: actions/create-release@v1
-      id: create_release
-      with:
-        draft: false
-        prerelease: false
-        release_name: Release ${{ matrix.os }} ${{ github.run_number }}
-        tag_name: ${{ matrix.os }}_${{ github.run_number }}
-        
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         path: dist/*
         upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_name: templative_${{ matrix.os }}.zip
     
