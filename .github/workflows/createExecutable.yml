@@ -6,6 +6,8 @@ permissions:
 
 jobs:
   release:
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
     runs-on: "ubuntu-latest"
     steps: 
     - name: Release
@@ -19,6 +21,10 @@ jobs:
         prerelease: false
         release_name: Release ${{ github.run_number }}
         tag_name: ${{ github.run_number }}
+    - name: Echo Upload Url
+      run: echo "upload_url="${{steps.create_release.upload_url}}
+    - name: Output Upload Url
+      run: echo "upload_url="${{steps.create_release.upload_url}} >> "$GITHUB_OUTPUT"
     
   build:
     needs: release
@@ -52,7 +58,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-release-asset@v1
       with:
-        upload-url: ${{jobs.release.steps.create_release.upload_url}}
+        upload-url: ${{needs.release.outputs.upload_url}}
         asset_path: ./dist/templative.exe
         asset_name: templative_{{ github.run_number }}.exe
     
