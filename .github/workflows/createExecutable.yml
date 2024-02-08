@@ -1,6 +1,9 @@
 on:
   push:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -31,6 +34,9 @@ jobs:
       run: pyinstaller --distpath ./dist -y -n templative --onefile ./templative/__main__.py --hidden-import engineio.async_drivers.aiohttp --hidden-import engineio.async_aiohttp --collect-all templative
 
     - name: Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
       uses: actions/create-release@v1
       id: create_release
       with:
@@ -38,8 +44,6 @@ jobs:
         prerelease: false
         release_name: ${{ steps.version.outputs.version }}
         tag_name: ${{ github.ref }}
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
         
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
