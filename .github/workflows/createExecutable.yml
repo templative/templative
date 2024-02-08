@@ -20,6 +20,12 @@ jobs:
       
     - name: Install Python Dependencies
       run: pipenv install
+
+    - name: Create requirements.txt
+      run: pipenv requirements > req.txt
+
+    - name: Install requirements locally
+      run: pip install -r req.txt
       
     - name: Create Templative App/Exe
       run: pyinstaller --distpath ./dist -y -n templative --onefile ./templative/__main__.py --hidden-import engineio.async_drivers.aiohttp --hidden-import engineio.async_aiohttp --collect-all templative
