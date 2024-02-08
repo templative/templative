@@ -22,9 +22,14 @@ jobs:
         release_name: Release ${{ github.run_number }}
         tag_name: ${{ github.run_number }}
     - name: Echo Upload Url
-      run: echo "upload_url="${{steps.create_release.upload_url}}
+      run: |
+        upload_url=${{steps.create_release.upload_url}}
+        echo "upload_url=$upload_url"
+        echo "upload_url=[$upload_url]"
     - name: Output Upload Url
-      run: echo "upload_url="${{steps.create_release.upload_url}} >> "$GITHUB_OUTPUT"
+      run: |
+        upload_url=${{steps.create_release.upload_url}}
+        echo "upload_url=$upload_url" >> "$GITHUB_OUTPUT"
     
   build:
     needs: release
