@@ -1,0 +1,30 @@
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['windows-latest', 'ubuntu-latest', 'macos-latest']
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+        
+    - name: Install pipenv
+      run: pip install pipenv pyinstaller
+      
+    - name: Install Python Dependencies
+      run: pipenv install
+      
+    - name: Create Templative App/Exe
+      run: pyinstaller --distpath ./dist -y -n templative --onefile ./templative/__main__.py --hidden-import engineio.async_drivers.aiohttp --hidden-import engineio.async_aiohttp --collect-all templative
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        path: dist/*
